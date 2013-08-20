@@ -1,20 +1,20 @@
 describe('unexpected.sinon', function () {
-    describe('was called assertion', function () {
-        it('asserts that a spy was called', function () {
+    describe('was called', function () {
+        it('passes if spy was called at least once', function () {
             var spy = sinon.spy();
             spy();
             expect(spy, "was called");
         });
 
-        it('fails if spy was not called', function () {
+        it('fails if spy was never called', function () {
             expect(function () {
                 expect(sinon.spy(), "was called");
             }, "to throw exception", "expected spy to have been called at least once but was never called");
         });
     });
 
-    describe('was not called assertion', function () {
-        it('asserts that a spy was not called', function () {
+    describe('was not called', function () {
+        it('passes if spy was never called', function () {
             expect(sinon.spy(), "was not called");
         });
 
@@ -27,21 +27,19 @@ describe('unexpected.sinon', function () {
         });
     });
 
-    describe('was called once assertion', function () {
-        it('asserts that a spy was called once', function () {
+    describe('was called once', function () {
+        it('passes if spy was called once and only once', function () {
             var spy = sinon.spy();
             spy();
             expect(spy, "was called once");
         });
 
-        it('fails if spy was not called', function () {
+        it('fails if spy was not called exactly once', function () {
             expect(function () {
                 var spy = sinon.spy();
                 expect(spy, "was called once");
             }, "to throw exception", 'expected spy to be called once but was called 0 times');
-        });
 
-        it('fails if spy was called more than once', function () {
             expect(function () {
                 var spy = sinon.spy();
                 spy();
@@ -49,5 +47,75 @@ describe('unexpected.sinon', function () {
                 expect(spy, "was called once");
             }, "to throw exception", /expected spy to be called once but was called twice/);
         });
+    });
+
+    describe('was called twice', function () {
+        it('passes if spy was called exactly twice');
+        it('fails if spy was not called exactly twice');
+    });
+
+    describe('was called thrice', function () {
+        it('passes if spy was called exactly three times');
+        it('fails if spy was not called exactly three times');
+    });
+
+    describe('was called times', function () {
+        it('passes if the spy was called exactly number of times');
+        it('fails if the spy was not called exactly number of times');
+    });
+
+    describe('given call order', function () {
+        it('passes if the provided spies where called in the given order');
+        it('fails if the provided spies where not called in the given order');
+    });
+
+    describe('was called on', function () {
+        it('passes if the spy was ever called with obj as its this value');
+        it('fails if the spy was never called with obj as its this value');
+    });
+
+    describe('was always called on', function () {
+        it('passes if the spy was always called with obj as its this value');
+        it('fails if the spy was called with another obj as its this value');
+    });
+
+    describe('was called with', function () {
+        // TODO test with matchers
+        it('passes if the spy was called with the provided arguments');
+        it('fails if the spy was not called with the provided arguments');
+    });
+
+    describe('was always called with', function () {
+        // TODO test with matchers
+        it('passes if the spy was always called with the provided arguments');
+        it('fails if the spy was called once with other arguments then the provided');
+    });
+
+    describe('was never called with', function () {
+        // TODO test with matchers
+        it('passes if the spy was never called with the provided arguments');
+        it('fails if the spy was called with the provided arguments');
+    });
+
+    describe('was called with exactly', function () {
+        it('passes if the spy was called with the provided arguments and no others');
+        it('fails if the spy was never called with the provided arguments and no others');
+    });
+
+    describe('was always called with exactly', function () {
+        it('passes if the spy was always called with the provided arguments and no others');
+        it('fails if the spy was ever called with anything else than the provided arguments');
+    });
+
+    describe('threw', function () {
+        // TODO test with type string and object
+        it('passes if the spy threw the given exception');
+        it('fails if the spy never threw the given exception');
+    });
+
+    describe('always threw', function () {
+        // TODO test with type string and object
+        it('passes if the spy always threw the given exception');
+        it('fails if the spy did not always threw the given exception');
     });
 });
