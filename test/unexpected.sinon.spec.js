@@ -26,4 +26,28 @@ describe('unexpected.sinon', function () {
             }, "to throw exception", /expected spy to not have been called but was called once/);
         });
     });
+
+    describe('was called once assertion', function () {
+        it('asserts that a spy was called once', function () {
+            var spy = sinon.spy();
+            spy();
+            expect(spy, "was called once");
+        });
+
+        it('fails if spy was not called', function () {
+            expect(function () {
+                var spy = sinon.spy();
+                expect(spy, "was called once");
+            }, "to throw exception", 'expected spy to be called once but was called 0 times');
+        });
+
+        it('fails if spy was called more than once', function () {
+            expect(function () {
+                var spy = sinon.spy();
+                spy();
+                spy();
+                expect(spy, "was called once");
+            }, "to throw exception", /expected spy to be called once but was called twice/);
+        });
+    });
 });
