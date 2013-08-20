@@ -1,0 +1,31 @@
+{
+  "name": "unexpected-sinon",
+  "version": "0.0.1",
+  "author": "Sune Sloth Simonsen <sune@we-knowhow.dk>",
+  "keywords": [
+    "assertion",
+    "test",
+    "assert",
+    "mocks",
+    "spies",
+    "stubs"
+  ],
+  "license": "MIT",
+  "bugs": "https://github.com/sunesimonsen/unexpected-sinon/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunesimonsen/unexpected-sinon"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "main": "./lib/unexpected.sinon.js",
+  "dependencies": {
+      "unexpected": "*"
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0",
+    "mocha-slow-reporter": "*",
+    "serve": "*"
+  }
+}
