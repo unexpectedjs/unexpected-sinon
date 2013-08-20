@@ -21,6 +21,7 @@
   },
   "main": "./lib/unexpected.sinon.js",
   "dependencies": {
+      "sinon": "*",
       "unexpected": "*"
   },
   "devDependencies": {
