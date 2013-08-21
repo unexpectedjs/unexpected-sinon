@@ -49,8 +49,31 @@ describe('unexpected.sinon', function () {
     });
 
     describe('was called twice', function () {
-        it('passes if spy was called exactly twice');
-        it('fails if spy was not called exactly twice');
+        it('passes if spy was called exactly twice', function () {
+            spy();
+            spy();
+            expect(spy, "was called twice");
+        });
+
+        it('fails if spy was not called exactly twice', function () {
+            expect(function () {
+                expect(spy, "was called twice");
+            }, "to throw exception", /expected spy to be called twice but was called 0 times/);
+
+            expect(function () {
+                var spy = sinon.spy();
+                spy();
+                expect(spy, "was called twice");
+            }, "to throw exception", /expected spy to be called twice but was called once/);
+
+            expect(function () {
+                var spy = sinon.spy();
+                spy();
+                spy();
+                spy();
+                expect(spy, "was called twice");
+            }, "to throw exception", /expected spy to be called twice but was called thrice/);
+        });
     });
 
     describe('was called thrice', function () {
