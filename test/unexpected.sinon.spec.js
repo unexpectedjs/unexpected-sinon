@@ -1,26 +1,28 @@
 describe('unexpected.sinon', function () {
+    var spy;
+    beforeEach(function () {
+        spy = sinon.spy();
+    });
     describe('was called', function () {
         it('passes if spy was called at least once', function () {
-            var spy = sinon.spy();
             spy();
             expect(spy, "was called");
         });
 
         it('fails if spy was never called', function () {
             expect(function () {
-                expect(sinon.spy(), "was called");
+                expect(spy, "was called");
             }, "to throw exception", "expected spy to have been called at least once but was never called");
         });
     });
 
     describe('was not called', function () {
         it('passes if spy was never called', function () {
-            expect(sinon.spy(), "was not called");
+            expect(spy, "was not called");
         });
 
         it('fails if spy was called', function () {
             expect(function () {
-                var spy = sinon.spy();
                 spy();
                 expect(spy, "was not called");
             }, "to throw exception", /expected spy to not have been called but was called once/);
@@ -29,19 +31,16 @@ describe('unexpected.sinon', function () {
 
     describe('was called once', function () {
         it('passes if spy was called once and only once', function () {
-            var spy = sinon.spy();
             spy();
             expect(spy, "was called once");
         });
 
         it('fails if spy was not called exactly once', function () {
             expect(function () {
-                var spy = sinon.spy();
                 expect(spy, "was called once");
             }, "to throw exception", 'expected spy to be called once but was called 0 times');
 
             expect(function () {
-                var spy = sinon.spy();
                 spy();
                 spy();
                 expect(spy, "was called once");
