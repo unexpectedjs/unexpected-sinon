@@ -41,8 +41,7 @@ describe('unexpected.sinon', function () {
             }, "to throw exception", 'expected spy to be called once but was called 0 times');
 
             expect(function () {
-                spy();
-                spy();
+                spy(); spy();
                 expect(spy, "was called once");
             }, "to throw exception", /expected spy to be called once but was called twice/);
         });
@@ -50,8 +49,7 @@ describe('unexpected.sinon', function () {
 
     describe('was called twice', function () {
         it('passes if spy was called exactly twice', function () {
-            spy();
-            spy();
+            spy(); spy();
             expect(spy, "was called twice");
         });
 
@@ -68,9 +66,7 @@ describe('unexpected.sinon', function () {
 
             expect(function () {
                 var spy = sinon.spy();
-                spy();
-                spy();
-                spy();
+                spy(); spy(); spy();
                 expect(spy, "was called twice");
             }, "to throw exception", /expected spy to be called twice but was called thrice/);
         });
@@ -78,33 +74,43 @@ describe('unexpected.sinon', function () {
 
     describe('was called thrice', function () {
         it('passes if spy was called exactly three times', function () {
-            spy();
-            spy();
-            spy();
+            spy(); spy(); spy();
             expect(spy, "was called thrice");
         });
         it('fails if spy was not called exactly three times', function () {
             expect(function () {
                 var spy = sinon.spy();
-                spy();
-                spy();
+                spy(); spy();
                 expect(spy, "was called thrice");
             }, "to throw exception", /expected spy to be called thrice but was called twice/);
 
             expect(function () {
                 var spy = sinon.spy();
-                spy();
-                spy();
-                spy();
-                spy();
+                spy(); spy(); spy(); spy();
                 expect(spy, "was called thrice");
             }, "to throw exception", /expected spy to be called thrice but was called 4 times/);
         });
     });
 
     describe('was called times', function () {
-        it('passes if the spy was called exactly number of times');
-        it('fails if the spy was not called exactly number of times');
+        it('passes if the spy was called exactly number of times', function () {
+            var spy = sinon.spy();
+            spy(); spy(); spy(); spy(); spy();
+            expect(spy, "was called times", 5);
+        });
+        it('fails if the spy was not called exactly number of times', function () {
+            expect(function () {
+                var spy = sinon.spy();
+                spy(); spy();
+                expect(spy, "was called times", 3);
+            }, "to throw exception", /expected spy to be called thrice but was called twice/);
+
+            expect(function () {
+                var spy = sinon.spy();
+                spy(); spy(); spy(); spy();
+                expect(spy, "was called times", 3);
+            }, "to throw exception", /expected spy to be called thrice but was called 4 times/);
+        });
     });
 
     describe('given call order', function () {
