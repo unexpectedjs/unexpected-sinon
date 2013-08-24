@@ -146,8 +146,19 @@ describe('unexpected.sinon', function () {
     });
 
     describe('was called on', function () {
-        it('passes if the spy was ever called with obj as its this value');
-        it('fails if the spy was never called with obj as its this value');
+        it('passes if the spy was ever called with obj as its this value', function () {
+            var obj = {
+                spy: sinon.spy()
+            };
+            obj.spy();
+            expect(obj.spy, 'was called on', obj);
+        });
+
+        it('fails if the spy was never called with obj as its this value', function () {
+            expect(function () {
+                expect(spy, 'was called on', { other: true });
+            }, 'to throw exception', /expected spy to be called with \{ other: true \} as this/);
+        });
     });
 
     describe('was always called on', function () {
