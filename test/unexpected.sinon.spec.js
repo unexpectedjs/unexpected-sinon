@@ -151,6 +151,7 @@ describe('unexpected.sinon', function () {
                 spy: sinon.spy()
             };
             obj.spy();
+            obj.spy.call(null);
             expect(obj.spy, 'was called on', obj);
         });
 
@@ -162,8 +163,24 @@ describe('unexpected.sinon', function () {
     });
 
     describe('was always called on', function () {
-        it('passes if the spy was always called with obj as its this value');
-        it('fails if the spy was called with another obj as its this value');
+        it('passes if the spy was always called with obj as its this value', function () {
+            var obj = {
+                spy: sinon.spy()
+            };
+            obj.spy();
+            obj.spy();
+            expect(obj.spy, 'was always called on', obj);
+        });
+        it('fails if the spy was called with another obj as its this value', function () {
+            expect(function () {
+                var obj = {
+                    spy: sinon.spy()
+                };
+                obj.spy();
+                obj.spy.call(null);
+                expect(obj.spy, 'was always called on', obj);
+            }, 'to throw exception', /expected spy to always be called with/);
+        });
     });
 
     describe('was called with', function () {
