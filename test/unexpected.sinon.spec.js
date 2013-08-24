@@ -114,8 +114,35 @@ describe('unexpected.sinon', function () {
     });
 
     describe('given call order', function () {
-        it('passes if the provided spies where called in the given order');
-        it('fails if the provided spies where not called in the given order');
+        it('passes if the provided spies where called in the given order', function () {
+            var agent005 = sinon.spy();
+            var agent006 = sinon.spy();
+            var agent007 = sinon.spy();
+            agent005();
+            agent006();
+            agent007();
+            expect([agent005, agent006, agent007], 'given call order');
+        });
+        it('fails if the provided spies where not called in the given order', function () {
+            expect(function () {
+                var agent005 = sinon.spy();
+                var agent006 = sinon.spy();
+                var agent007 = sinon.spy();
+                agent005();
+                agent007();
+                agent006();
+                expect([agent005, agent006, agent007], 'given call order');
+            }, 'to throw exception', /to be called in order/);
+
+            expect(function () {
+                var agent005 = sinon.spy();
+                var agent006 = sinon.spy();
+                var agent007 = sinon.spy();
+                agent005();
+                agent006();
+                expect([agent005, agent006, agent007], 'given call order');
+            }, 'to throw exception', /to be called in order/);
+        });
     });
 
     describe('was called on', function () {
