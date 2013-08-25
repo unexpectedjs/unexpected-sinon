@@ -1,6 +1,6 @@
 {
   "name": "unexpected-sinon",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Sune Sloth Simonsen <sune@we-knowhow.dk>",
   "keywords": [
     "assertion",
@@ -21,8 +21,8 @@
   },
   "main": "./lib/unexpected.sinon.js",
   "dependencies": {
-      "sinon": "*",
-      "unexpected": "*"
+    "sinon": "*",
+    "unexpected": "*"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
