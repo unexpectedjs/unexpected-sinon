@@ -214,7 +214,6 @@ describe('unexpected.sinon', function () {
     });
 
     describe('was never called with', function () {
-        // TODO test with matchers
         it('passes if the spy was never called with the provided arguments');
         it('fails if the spy was called with the provided arguments');
     });
