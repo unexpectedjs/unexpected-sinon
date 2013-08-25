@@ -199,9 +199,18 @@ describe('unexpected.sinon', function () {
     });
 
     describe('was always called with', function () {
-        // TODO test with matchers
-        it('passes if the spy was always called with the provided arguments');
-        it('fails if the spy was called once with other arguments then the provided');
+        it('passes if the spy was always called with the provided arguments', function () {
+            spy({ foo: 'bar' }, 'baz', true, false);
+            spy({ foo: 'bar' }, 'baz', true, false);
+            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+        });
+        it('fails if the spy was called once with other arguments then the provided', function () {
+            expect(function () {
+                spy('something else');
+                spy({ foo: 'bar' }, 'baz', true, false);
+                expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            }, 'to throw exception', /spy\(something else\)/);
+        });
     });
 
     describe('was never called with', function () {
