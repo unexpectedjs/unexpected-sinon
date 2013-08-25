@@ -158,7 +158,7 @@ describe('unexpected.sinon', function () {
         it('fails if the spy was never called with obj as its this value', function () {
             expect(function () {
                 expect(spy, 'was called on', { other: true });
-            }, 'to throw exception', /expected spy to be called with \{ other: true \} as this/);
+            }, 'to throw exception', /expected spy to be called with/);
         });
     });
 
