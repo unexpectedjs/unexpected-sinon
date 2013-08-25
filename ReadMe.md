@@ -35,6 +35,19 @@ Include the `unexpected.js` found at the lib directory of this
 repository.
 
 ```html
+<!-- SinonJS -->
+<script src="sinon.js"></script>
+<script src="sinon/spy.js"></script>
+<script src="sinon/stub.js"></script>
+<script src="sinon/mock.js"></script>
+<script src="sinon/collection.js"></script>
+<script src="sinon/assert.js"></script>
+<script src="sinon/sandbox.js"></script>
+<script src="sinon/test.js"></script>
+<script src="sinon/test_case.js"></script>
+<script src="sinon/assert.js"></script>
+<script src="sinon/match.js"></script>
+<!-- Unexpected -->
 <script src="unexpected.js"></script>
 <script src="unexpected.sinon.js"></script>
 ```
