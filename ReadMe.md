@@ -161,15 +161,23 @@ Passes if the spy was always called with the provided arguments.
 expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
 ```
 
-## TODO
-
 ### was never called with
 
 Passes if the spy was never called with the provided arguments.
 
+```js
+expect(spy, 'was never called with', 'bar', sinon.match.truthy);
+```
+
 ### was called with exactly
 
 Passes if the spy was called with the provided arguments and no others.
+
+```js
+expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
+```
+
+## TODO
 
 ### was always called with exactly
 
