@@ -171,6 +171,7 @@ describe('unexpected.sinon', function () {
             obj.spy();
             expect(obj.spy, 'was always called on', obj);
         });
+
         it('fails if the spy was called with another obj as its this value', function () {
             expect(function () {
                 var obj = {
@@ -184,9 +185,17 @@ describe('unexpected.sinon', function () {
     });
 
     describe('was called with', function () {
-        // TODO test with matchers
-        it('passes if the spy was called with the provided arguments');
-        it('fails if the spy was not called with the provided arguments');
+        it('passes if the spy was called with the provided arguments', function () {
+            spy('something else');
+            spy({ foo: 'bar' }, 'baz', true, false);
+            expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+        });
+        it('fails if the spy was not called with the provided arguments', function () {
+            expect(function () {
+                spy({ foo: 'baa' }, 'baz', true, false);
+                expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            }, 'to throw exception', /expected spy to be called with arguments/);
+        });
     });
 
     describe('was always called with', function () {
