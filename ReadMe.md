@@ -11,6 +11,8 @@ expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
 expect(obj.spy, 'was always called on', obj);
 ```
 
+[![Build Status](https://travis-ci.org/sunesimonsen/unexpected-sinon.png?branch=master)](https://travis-ci.org/sunesimonsen/unexpected-sinon)
+
 [Run the test in the browser](http://sunesimonsen.github.io/unexpected-sinon/test/tests.html)
 
 ## How to use

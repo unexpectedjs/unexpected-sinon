@@ -214,13 +214,30 @@ describe('unexpected.sinon', function () {
     });
 
     describe('was never called with', function () {
-        it('passes if the spy was never called with the provided arguments');
-        it('fails if the spy was called with the provided arguments');
+        it('passes if the spy was never called with the provided arguments', function () {
+            spy('foo', 'true');
+            expect(spy, 'was never called with', 'bar', sinon.match.truthy);
+        });
+        it('fails if the spy was called with the provided arguments', function () {
+            expect(function () {
+                spy('bar', 'true');
+                expect(spy, 'was never called with', 'bar', sinon.match.truthy);
+            }, 'to throw exception', /spy\(bar, true\)/);
+        });
     });
 
     describe('was called with exactly', function () {
-        it('passes if the spy was called with the provided arguments and no others');
-        it('fails if the spy was never called with the provided arguments and no others');
+        it('passes if the spy was called with the provided arguments and no others', function () {
+            spy('foo', 'bar', 'baz');
+            expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
+        });
+
+        it('fails if the spy was never called with the provided arguments and no others', function () {
+            expect(function () {
+                spy('foo', 'bar', 'baz', 'qux');
+                expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
+            }, 'to throw exception', /spy\(foo, bar, baz, qux\)/);
+        });
     });
 
     describe('was always called with exactly', function () {
