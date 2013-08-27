@@ -258,14 +258,14 @@ describe('unexpected.sinon', function () {
 
     describe('threw', function () {
         describe('without arguments', function () {
-            it('passes if the spy threw the given exception', function () {
+            it('passes if the spy threw an exception', function () {
                 var stub = sinon.stub();
                 stub.throws();
                 try { stub(); } catch (e) {}
                 expect(stub, 'threw');
             });
 
-            it('fails if the spy never threw the given exception', function () {
+            it('fails if the spy never threw an exception', function () {
                 expect(function () {
                     expect(spy, 'threw');
                 }, 'to throw exception', /spy did not throw exception/);
@@ -273,14 +273,14 @@ describe('unexpected.sinon', function () {
         });
 
         describe('given a string as argument', function () {
-            it('passes if the spy threw the given exception', function () {
+            it('passes if the spy threw an exception of the given type', function () {
                 var stub = sinon.stub();
                 stub.throws('TypeError');
                 try { stub(); } catch (e) {}
                 expect(stub, 'threw', 'TypeError');
             });
 
-            it('fails if the spy never threw the given exception', function () {
+            it('fails if the spy never threw an exception of the given type', function () {
                 expect(function () {
                     var stub = sinon.stub();
                     stub.throws('Error');
@@ -311,8 +311,19 @@ describe('unexpected.sinon', function () {
     });
 
     describe('always threw', function () {
-        // TODO test with type string and object
-        it('passes if the spy always threw the given exception');
-        it('fails if the spy did not always threw the given exception');
+        describe('without arguments', function () {
+            it('passes if the spy always threw an exception');
+            it('fails if the spy did not always threw an exception');
+        });
+
+        describe('given a string as argument', function () {
+            it('passes if the spy always threw an exception of the given type');
+            it('fails if the spy did not always threw an exception of the given type');
+        });
+
+        describe('given a object as argument', function () {
+            it('passes if the spy always threw the given exception');
+            it('fails if the spy did not always threw the given exception');
+        });
     });
 });
