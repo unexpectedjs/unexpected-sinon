@@ -257,9 +257,57 @@ describe('unexpected.sinon', function () {
     });
 
     describe('threw', function () {
-        // TODO test with type string and object
-        it('passes if the spy threw the given exception');
-        it('fails if the spy never threw the given exception');
+        describe('without arguments', function () {
+            it('passes if the spy threw the given exception', function () {
+                var stub = sinon.stub();
+                stub.throws();
+                try { stub(); } catch (e) {}
+                expect(stub, 'threw');
+            });
+
+            it('fails if the spy never threw the given exception', function () {
+                expect(function () {
+                    expect(spy, 'threw');
+                }, 'to throw exception', /spy did not throw exception/);
+            });
+        });
+
+        describe('given a string as argument', function () {
+            it('passes if the spy threw the given exception', function () {
+                var stub = sinon.stub();
+                stub.throws('TypeError');
+                try { stub(); } catch (e) {}
+                expect(stub, 'threw', 'TypeError');
+            });
+
+            it('fails if the spy never threw the given exception', function () {
+                expect(function () {
+                    var stub = sinon.stub();
+                    stub.throws('Error');
+                    try { stub(); } catch (e) {}
+                    expect(stub, 'threw', 'TypeError');
+                }, 'to throw exception', /!Error/);
+            });
+        });
+
+        describe('given a object as argument', function () {
+            it('passes if the spy threw the given exception', function () {
+                var stub = sinon.stub();
+                var error = new Error();
+                stub.throws(error);
+                try { stub(); } catch (e) {}
+                expect(stub, 'threw', error);
+            });
+
+            it('fails if the spy never threw the given exception', function () {
+                expect(function () {
+                    var stub = sinon.stub();
+                    stub.throws(new TypeError());
+                    try { stub(); } catch (e) {}
+                    expect(stub, 'threw', new Error());
+                }, 'to throw exception', /!TypeError/);
+            });
+        });
     });
 
     describe('always threw', function () {
