@@ -177,11 +177,13 @@ Passes if the spy was called with the provided arguments and no others.
 expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
 ```
 
-## TODO
-
 ### was always called with exactly
 
 Passes if the spy was always called with the provided arguments and no others.
+
+```js
+expect(spy, 'was always called with exactly', 'foo', 'bar', sinon.match.truthy);
+```
 
 ### threw
 
@@ -189,6 +191,18 @@ Passes if the spy threw the given exception. The exception can be a
 string denoting its type, or an actual object. If only one argument is
 provided, the assertion passes if the spy ever threw any exception.
 
+```js
+expect(spy, 'threw');
+expect(spy, 'threw', 'TypeError');
+expect(spy, 'threw', error);
+```
+
 ### always threw
 
 Like above, only required for all calls to the spy.
+
+```js
+expect(spy, 'always threw');
+expect(spy, 'always threw', 'TypeError');
+expect(spy, 'always threw', error);
+```
