@@ -77,6 +77,7 @@ describe('unexpected.sinon', function () {
             spy(); spy(); spy();
             expect(spy, "was called thrice");
         });
+
         it('fails if spy was not called exactly three times', function () {
             expect(function () {
                 var spy = sinon.spy();
@@ -98,6 +99,7 @@ describe('unexpected.sinon', function () {
             spy(); spy(); spy(); spy(); spy();
             expect(spy, "was called times", 5);
         });
+
         it('fails if the spy was not called exactly number of times', function () {
             expect(function () {
                 var spy = sinon.spy();
@@ -123,6 +125,7 @@ describe('unexpected.sinon', function () {
             agent007();
             expect([agent005, agent006, agent007], 'given call order');
         });
+
         it('fails if the provided spies where not called in the given order', function () {
             expect(function () {
                 var agent005 = sinon.spy();
@@ -190,6 +193,7 @@ describe('unexpected.sinon', function () {
             spy({ foo: 'bar' }, 'baz', true, false);
             expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
         });
+
         it('fails if the spy was not called with the provided arguments', function () {
             expect(function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
@@ -204,6 +208,7 @@ describe('unexpected.sinon', function () {
             spy({ foo: 'bar' }, 'baz', true, false);
             expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
         });
+
         it('fails if the spy was called once with other arguments then the provided', function () {
             expect(function () {
                 spy('something else');
@@ -218,6 +223,7 @@ describe('unexpected.sinon', function () {
             spy('foo', 'true');
             expect(spy, 'was never called with', 'bar', sinon.match.truthy);
         });
+
         it('fails if the spy was called with the provided arguments', function () {
             expect(function () {
                 spy('bar', 'true');
@@ -247,6 +253,7 @@ describe('unexpected.sinon', function () {
             spy('foo', 'bar', 'baz');
             expect(spy, 'was always called with exactly', 'foo', 'bar', sinon.match.truthy);
         });
+
         it('fails if the spy was ever called with anything else than the provided arguments', function () {
             expect(function () {
                 spy('foo', 'bar', 'baz');
@@ -312,18 +319,72 @@ describe('unexpected.sinon', function () {
 
     describe('always threw', function () {
         describe('without arguments', function () {
-            it('passes if the spy always threw an exception');
-            it('fails if the spy did not always threw an exception');
+            it('passes if the spy always threw an exception', function () {
+                var stub = sinon.stub();
+                stub.throws();
+                try { stub(); } catch (e) {}
+                try { stub(); } catch (e) {}
+                expect(stub, 'always threw');
+            });
+
+            it('fails if the spy did not always threw an exception', function () {
+                expect(function () {
+                    var hasThrown = false;
+                    var spy = sinon.spy(function () {
+                        if (!hasThrown) {
+                            hasThrown = true;
+                            throw Error();
+                        }
+                    });
+                    try { spy(); } catch (e) {}
+                    spy();
+                    expect(spy, 'always threw');
+                }, 'to throw exception', /spy did not always throw exception/);
+            });
         });
 
         describe('given a string as argument', function () {
-            it('passes if the spy always threw an exception of the given type');
-            it('fails if the spy did not always threw an exception of the given type');
+            it('passes if the spy always threw an exception of the given type', function () {
+                var stub = sinon.stub();
+                stub.throws('Error');
+                try { stub(); } catch (e) {}
+                try { stub(); } catch (e) {}
+                expect(stub, 'always threw', 'Error');
+            });
+
+            it('fails if the spy did not always threw an exception of the given type', function () {
+                expect(function () {
+                    var stub = sinon.stub();
+                    stub.throws('Error');
+                    try { stub(); } catch (e) {}
+                    stub.throws('TypeError');
+                    try { stub(); } catch (e) {}
+                    expect(stub, 'always threw', 'Error');
+                }, 'to throw exception', /!TypeError/);
+            });
         });
 
         describe('given a object as argument', function () {
-            it('passes if the spy always threw the given exception');
-            it('fails if the spy did not always threw the given exception');
+            it('passes if the spy always threw the given exception', function () {
+                var stub = sinon.stub();
+                var error = new Error();
+                stub.throws(error);
+                try { stub(); } catch (e) {}
+                try { stub(); } catch (e) {}
+                expect(stub, 'always threw', error);
+            });
+
+            it('fails if the spy did not always threw the given exception', function () {
+                expect(function () {
+                    var stub = sinon.stub();
+                    var error = new Error();
+                    stub.throws(error);
+                    try { stub(); } catch (e) {}
+                    stub.throws(new TypeError());
+                    try { stub(); } catch (e) {}
+                    expect(stub, 'always threw', error);
+                }, 'to throw exception', /!TypeError/);
+            });
         });
     });
 });
