@@ -51,7 +51,7 @@ repository.
 <script src="sinon/match.js"></script>
 <!-- Unexpected -->
 <script src="unexpected.js"></script>
-<script src="unexpected.sinon.js"></script>
+<script src="unexpected-sinon.js"></script>
 ```
 
 this will expose the expect function under the following namespace:
@@ -65,7 +65,7 @@ var expect = weknowhow.expect;
 Include the library with RequireJS the following way:
 
 ```js
-define(['unexpected-sinon/lib/unexpected.sinon.js'], funtion (expect) {
+define(['unexpected-sinon/lib/unexpected-sinon.js'], funtion (expect) {
    // Your code
 });
 ```
