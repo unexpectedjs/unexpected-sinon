@@ -4,7 +4,7 @@ test:
 	@./node_modules/.bin/mocha \
 		--require ./test/common \
 		--reporter $(REPORTER) \
-		test/unexpected.sinon.spec.js
+		test/unexpected-sinon.spec.js
 
 .PHONY: test
 

@@ -1,4 +1,4 @@
-describe('unexpected.sinon', function () {
+describe('unexpected-sinon', function () {
     var spy;
     beforeEach(function () {
         spy = sinon.spy();
