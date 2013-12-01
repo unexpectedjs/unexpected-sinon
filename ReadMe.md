@@ -72,20 +72,20 @@ define(['unexpected-sinon/lib/unexpected-sinon.js'], funtion (expect) {
 
 ## API
 
-### was not called
+### was called
 
 Passes if spy was called at least once.
 
 ```js
-expect(spy, 'was not called');
+expect(spy, 'was called');
 ```
 
-### was called
+### was not called called
 
 Passes if spy was never called.
 
 ```js
-expect(spy, 'was called');
+expect(spy, 'was not called');
 ```
 
 ### was called once
