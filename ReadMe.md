@@ -80,7 +80,7 @@ Passes if spy was called at least once.
 expect(spy, 'was called');
 ```
 
-### was not called called
+### was not called
 
 Passes if spy was never called.
 
