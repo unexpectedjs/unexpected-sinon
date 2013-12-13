@@ -1,4 +1,7 @@
-describe('unexpected.sinon', function () {
+/*global describe, it, beforeEach, sinon, expect, unexpectedSinon*/
+expect.installPlugin(unexpectedSinon);
+
+describe('unexpected-sinon', function () {
     var spy;
     beforeEach(function () {
         spy = sinon.spy();

@@ -22,13 +22,14 @@ expect(obj.spy, 'was always called on', obj);
 Install it with NPM or add it to your `package.json`:
 
 ```
-$ npm install unexpected
+$ npm install unexpected unexpected-sinon
 ```
 
 Then:
 
 ```js
-var expect = require('unexpected-sinon');
+var expect = require('unexpected').clone();
+expect.installPlugin(require('unexpected-sinon'));
 ```
 
 ### Browser
@@ -51,13 +52,14 @@ repository.
 <script src="sinon/match.js"></script>
 <!-- Unexpected -->
 <script src="unexpected.js"></script>
-<script src="unexpected.sinon.js"></script>
+<script src="unexpected-sinon.js"></script>
 ```
 
 this will expose the expect function under the following namespace:
 
 ```js
-var expect = weknowhow.expect;
+var expect = weknowhow.expect.clone();
+expect.installPlugin(weknowhow.unexpectedSinon);
 ```
 
 ### RequireJS
@@ -65,27 +67,29 @@ var expect = weknowhow.expect;
 Include the library with RequireJS the following way:
 
 ```js
-define(['unexpected-sinon/lib/unexpected.sinon.js'], funtion (expect) {
+define(['unexpected', 'unexpected-sinon'], funtion (unexpected, unexpectedSinon) {
+   var expect = unexpected.clone();
+   expect.installPlugin(unexpectedSinon);
    // Your code
 });
 ```
 
 ## API
 
-### was not called
+### was called
 
 Passes if spy was called at least once.
 
 ```js
-expect(spy, 'was not called');
+expect(spy, 'was called');
 ```
 
-### was called
+### was not called
 
 Passes if spy was never called.
 
 ```js
-expect(spy, 'was called');
+expect(spy, 'was not called');
 ```
 
 ### was called once

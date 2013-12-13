@@ -1,6 +1,6 @@
 {
   "name": "unexpected-sinon",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Sune Sloth Simonsen <sune@we-knowhow.dk>",
   "keywords": [
     "assertion",
@@ -19,12 +19,12 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
-  "main": "./lib/unexpected.sinon.js",
+  "main": "./lib/unexpected-sinon.js",
   "dependencies": {
-    "sinon": "*",
-    "unexpected": "*"
+    "sinon": "*"
   },
   "devDependencies": {
+    "unexpected": ">=1.1.2",
     "mocha": "~1.9.0",
     "mocha-slow-reporter": "*",
     "serve": "*"
