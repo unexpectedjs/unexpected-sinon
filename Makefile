@@ -10,7 +10,7 @@ test:
 
 coverage:
 	@rm -rf lib-cov
-	@jscoverage lib lib-cov
+	@jscoverage --no-highlight lib lib-cov
 	@COVERAGE=1 ./node_modules/.bin/mocha \
         --require ./test/common \
         --reporter html-cov > lib-cov/index.html
