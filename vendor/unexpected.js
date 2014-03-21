@@ -1,1 +1,1 @@
-../node_modules/unexpected/lib/unexpected.js
+../node_modules/unexpected/unexpected.js
