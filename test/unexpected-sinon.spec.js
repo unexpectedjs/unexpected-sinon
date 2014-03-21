@@ -205,6 +205,21 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('was called with match', function () {
+        it('passes if the spy was called with the matching arguments and possible others', function () {
+            spy('something else');
+            spy({ foo: 'bar' }, 'baz', true, false);
+            expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+        });
+
+        it('fails if the spy was not called with the provided arguments', function () {
+            expect(function () {
+                spy({ foo: 'baa' }, 'baz', true, false);
+                expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            }, 'to throw exception', /expected spy to be called with arguments/);
+        });
+    });
+
     describe('was always called with', function () {
         it('passes if the spy was always called with the provided arguments', function () {
             spy({ foo: 'bar' }, 'baz', true, false);
