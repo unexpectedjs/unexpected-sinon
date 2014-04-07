@@ -20,11 +20,12 @@
     "test": "./node_modules/.bin/mocha"
   },
   "main": "./lib/unexpected-sinon.js",
-  "dependencies": {
+  "peerDependencies": {
     "sinon": "*"
   },
   "devDependencies": {
-    "unexpected": ">=1.1.2",
+    "sinon": "=1.9.1",
+    "unexpected": ">=3.0.0",
     "mocha": "~1.9.0",
     "mocha-slow-reporter": "*",
     "serve": "*"
