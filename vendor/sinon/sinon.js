@@ -10,7 +10,7 @@
  */
 "use strict";
 
-var sinon = (function (buster) {
+var sinon = (function (formatio) {
     var div = typeof document != "undefined" && document.createElement("div");
     var hasOwn = Object.prototype.hasOwnProperty;
 
@@ -41,6 +41,10 @@ var sinon = (function (buster) {
         return typeof obj === "function" || !!(obj && obj.constructor && obj.call && obj.apply);
     }
 
+    function isReallyNaN(val) {
+        return typeof val === 'number' && isNaN(val);
+    }
+
     function mirrorProperties(target, source) {
         for (var prop in source) {
             if (!hasOwn.call(target, prop)) {
@@ -63,26 +67,38 @@ var sinon = (function (buster) {
                 throw new TypeError("Method wrapper should be function");
             }
 
-            var wrappedMethod = object[property];
+            var wrappedMethod = object[property],
+                error;
 
             if (!isFunction(wrappedMethod)) {
-                throw new TypeError("Attempted to wrap " + (typeof wrappedMethod) + " property " +
+                error = new TypeError("Attempted to wrap " + (typeof wrappedMethod) + " property " +
                                     property + " as function");
             }
 
             if (wrappedMethod.restore && wrappedMethod.restore.sinon) {
-                throw new TypeError("Attempted to wrap " + property + " which is already wrapped");
+                error = new TypeError("Attempted to wrap " + property + " which is already wrapped");
             }
 
             if (wrappedMethod.calledBefore) {
                 var verb = !!wrappedMethod.returns ? "stubbed" : "spied on";
-                throw new TypeError("Attempted to wrap " + property + " which is already " + verb);
+                error = new TypeError("Attempted to wrap " + property + " which is already " + verb);
             }
 
-            // IE 8 does not support hasOwnProperty on the window object.
-            var owned = hasOwn.call(object, property);
+            if (error) {
+                if (wrappedMethod._stack) {
+                    error.stack += '\n--------------\n' + wrappedMethod._stack;
+                }
+                throw error;
+            }
+
+            // IE 8 does not support hasOwnProperty on the window object and Firefox has a problem
+            // when using hasOwn.call on objects from other frames.
+            var owned = object.hasOwnProperty ? object.hasOwnProperty(property) : hasOwn.call(object, property);
             object[property] = method;
             method.displayName = property;
+            // Set up a stack trace which can be used later to find what line of
+            // code the original method was created on.
+            method._stack = (new Error('Stack Trace for original')).stack;
 
             method.restore = function () {
                 // For prototype properties try to reset by delete first.
@@ -130,8 +146,13 @@ var sinon = (function (buster) {
             if (sinon.match && sinon.match.isMatcher(a)) {
                 return a.test(b);
             }
-            if (typeof a != "object" || typeof b != "object") {
-                return a === b;
+
+            if (typeof a != 'object' || typeof b != 'object') {
+                if (isReallyNaN(a) && isReallyNaN(b)) {
+                    return true;
+                } else {
+                    return a === b;
+                }
             }
 
             if (isElement(a) || isElement(b)) {
@@ -146,23 +167,14 @@ var sinon = (function (buster) {
                 return false;
             }
 
+            if (a instanceof RegExp && b instanceof RegExp) {
+              return (a.source === b.source) && (a.global === b.global) &&
+                (a.ignoreCase === b.ignoreCase) && (a.multiline === b.multiline);
+            }
+
             var aString = Object.prototype.toString.call(a);
             if (aString != Object.prototype.toString.call(b)) {
                 return false;
-            }
-
-            if (aString == "[object Array]") {
-                if (a.length !== b.length) {
-                    return false;
-                }
-
-                for (var i = 0, l = a.length; i < l; i += 1) {
-                    if (!deepEqual(a[i], b[i])) {
-                        return false;
-                    }
-                }
-
-                return true;
             }
 
             if (aString == "[object Date]") {
@@ -170,6 +182,10 @@ var sinon = (function (buster) {
             }
 
             var prop, aLength = 0, bLength = 0;
+
+            if (aString == "[object Array]" && a.length !== b.length) {
+                return false;
+            }
 
             for (prop in a) {
                 aLength += 1;
@@ -277,7 +293,7 @@ var sinon = (function (buster) {
         log: function () {},
 
         logError: function (label, err) {
-            var msg = label + " threw exception: "
+            var msg = label + " threw exception: ";
             sinon.log(msg + "[" + err.name + "] " + err.message);
             if (err.stack) { sinon.log(err.stack); }
 
@@ -319,14 +335,21 @@ var sinon = (function (buster) {
         }
     };
 
-    var isNode = typeof module == "object" && typeof require == "function";
+    var isNode = typeof module !== "undefined" && module.exports;
+    var isAMD = typeof define === 'function' && typeof define.amd === 'object' && define.amd;
 
-    if (isNode) {
+    if (isAMD) {
+        define(function(){
+            return sinon;
+        });
+    } else if (isNode) {
         try {
-            buster = { format: require("buster-format") };
+            formatio = require("formatio");
         } catch (e) {}
         module.exports = sinon;
         module.exports.spy = require("./sinon/spy");
+        module.exports.spyCall = require("./sinon/call");
+        module.exports.behavior = require("./sinon/behavior");
         module.exports.stub = require("./sinon/stub");
         module.exports.mock = require("./sinon/mock");
         module.exports.collection = require("./sinon/collection");
@@ -338,9 +361,8 @@ var sinon = (function (buster) {
         module.exports.match = require("./sinon/match");
     }
 
-    if (buster) {
-        var formatter = sinon.create(buster.format);
-        formatter.quoteStrings = false;
+    if (formatio) {
+        var formatter = formatio.configure({ quoteStrings: false });
         sinon.format = function () {
             return formatter.ascii.apply(formatter, arguments);
         };
@@ -357,4 +379,4 @@ var sinon = (function (buster) {
     }
 
     return sinon;
-}(typeof buster == "object" && buster));
+}(typeof formatio == "object" && formatio));

@@ -24,11 +24,22 @@ if (typeof sinon == "undefined") {
 }
 
 (function (global) {
+    // node expects setTimeout/setInterval to return a fn object w/ .ref()/.unref()
+    // browsers, a number.
+    // see https://github.com/cjohansen/Sinon.JS/pull/436
+    var timeoutResult = setTimeout(function() {}, 0);
+    var addTimerReturnsObject = typeof timeoutResult === 'object';
+    clearTimeout(timeoutResult);
+
     var id = 1;
 
     function addTimer(args, recurring) {
         if (args.length === 0) {
             throw new Error("Function requires at least 1 parameter");
+        }
+
+        if (typeof args[0] === "undefined") {
+            throw new Error("Callback must be provided to timer calls");
         }
 
         var toId = id++;
@@ -49,7 +60,16 @@ if (typeof sinon == "undefined") {
             this.timeouts[toId].interval = delay;
         }
 
-        return toId;
+        if (addTimerReturnsObject) {
+            return {
+                id: toId,
+                ref: function() {},
+                unref: function() {}
+            };
+        }
+        else {
+            return toId;
+        }
     }
 
     function parseTime(str) {
@@ -132,6 +152,16 @@ if (typeof sinon == "undefined") {
             this.clearTimeout(timerId);
         },
 
+        setImmediate: function setImmediate(callback) {
+            var passThruArgs = Array.prototype.slice.call(arguments, 1);
+
+            return addTimer.call(this, [callback, 0].concat(passThruArgs), false);
+        },
+
+        clearImmediate: function clearImmediate(timerId) {
+            this.clearTimeout(timerId);
+        },
+
         tick: function tick(ms) {
             ms = typeof ms == "number" ? ms : parseTime(ms);
             var tickFrom = this.now, tickTo = this.now + ms, previous = this.now;
@@ -162,7 +192,7 @@ if (typeof sinon == "undefined") {
         },
 
         firstTimerInRange: function (from, to) {
-            var timer, smallest, originalTimer;
+            var timer, smallest = null, originalTimer;
 
             for (var id in this.timeouts) {
                 if (this.timeouts.hasOwnProperty(id)) {
@@ -170,7 +200,7 @@ if (typeof sinon == "undefined") {
                         continue;
                     }
 
-                    if (!smallest || this.timeouts[id].callAt < smallest) {
+                    if (smallest === null || this.timeouts[id].callAt < smallest) {
                         originalTimer = this.timeouts[id];
                         smallest = this.timeouts[id].callAt;
 
@@ -276,21 +306,39 @@ if (typeof sinon == "undefined") {
         target.parse = source.parse;
         target.UTC = source.UTC;
         target.prototype.toUTCString = source.prototype.toUTCString;
+
+        for (var prop in source) {
+            if (source.hasOwnProperty(prop)) {
+                target[prop] = source[prop];
+            }
+        }
+
         return target;
     }
 
     var methods = ["Date", "setTimeout", "setInterval",
                    "clearTimeout", "clearInterval"];
 
+    if (typeof global.setImmediate !== "undefined") {
+        methods.push("setImmediate");
+    }
+
+    if (typeof global.clearImmediate !== "undefined") {
+        methods.push("clearImmediate");
+    }
+
     function restore() {
         var method;
 
         for (var i = 0, l = this.methods.length; i < l; i++) {
             method = this.methods[i];
+
             if (global[method].hadOwnProperty) {
                 global[method] = this["_" + method];
             } else {
-                delete global[method];
+                try {
+                    delete global[method];
+                } catch (e) {}
             }
         }
 
@@ -341,11 +389,13 @@ if (typeof sinon == "undefined") {
 sinon.timers = {
     setTimeout: setTimeout,
     clearTimeout: clearTimeout,
+    setImmediate: (typeof setImmediate !== "undefined" ? setImmediate : undefined),
+    clearImmediate: (typeof clearImmediate !== "undefined" ? clearImmediate: undefined),
     setInterval: setInterval,
     clearInterval: clearInterval,
     Date: Date
 };
 
-if (typeof module == "object" && typeof require == "function") {
+if (typeof module !== 'undefined' && module.exports) {
     module.exports = sinon;
 }
