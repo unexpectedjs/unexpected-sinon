@@ -198,3 +198,24 @@ expect(spy, 'always threw');
 expect(spy, 'always threw', 'TypeError');
 expect(spy, 'always threw', error);
 ```
+
+## Expectations on arguments of individual calls
+
+```js
+spy({ foo: 'bar' }, 'baz');
+spy('qux');
+spy('quux');
+
+expect(spy.args, 'to equal', [
+    [{ foo: 'bar' }, 'baz'],
+    ['qux'],
+    ['quux']
+]);
+
+expect(spy.args[1], 'to equal', ['qux']);
+
+expect(spy.args, 'to have properties, {
+    0: [{ foo: 'bar' }, 'baz'],
+    2: ['quux']
+});
+```
