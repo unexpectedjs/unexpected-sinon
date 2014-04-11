@@ -214,7 +214,7 @@ expect(spy.args, 'to equal', [
 
 expect(spy.args[1], 'to equal', ['qux']);
 
-expect(spy.args, 'to have properties, {
+expect(spy.args, 'to have properties', {
     0: [{ foo: 'bar' }, 'baz'],
     2: ['quux']
 });
