@@ -201,7 +201,7 @@ describe('unexpected-sinon', function () {
             expect(function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
                 expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            }, 'to throw exception', /expected spy to be called with arguments/);
+            }, 'to throw exception', /expected spy to be called with arguments { foo: "bar" }, baz, truthy/);
         });
     });
 
@@ -209,14 +209,14 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was called with the matching arguments and possible others', function () {
             spy('something else');
             spy({ foo: 'bar' }, 'baz', true, false);
-            expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            expect(spy, 'was called with match', { foo: 'bar' }, 'baz', sinon.match.truthy);
         });
 
         it('fails if the spy was not called with the provided arguments', function () {
             expect(function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
-                expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            }, 'to throw exception', /expected spy to be called with arguments/);
+                expect(spy, 'was called with match', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            }, 'to throw exception', /expected spy to be called with match { foo: "bar" }, baz, truthy/);
         });
     });
 
