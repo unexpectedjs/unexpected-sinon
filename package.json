@@ -25,10 +25,9 @@
     "unexpected": "^5.0.0-beta35"
   },
   "devDependencies": {
-    "sinon": "=1.9.1",
-    "unexpected": "5.0.0-beta35",
-    "mocha": "~1.9.0",
-    "mocha-slow-reporter": "*",
-    "serve": "*"
+    "mocha": "^2.0.1",
+    "serve": "*",
+    "sinon": "1.9.1",
+    "unexpected": "5.0.0-beta35"
   }
 }
