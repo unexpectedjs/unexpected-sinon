@@ -1,6 +1,6 @@
 {
   "name": "unexpected-sinon",
-  "version": "3.0.3",
+  "version": "5.0.0",
   "author": "Sune Sloth Simonsen <sune@we-knowhow.dk>",
   "keywords": [
     "assertion",
@@ -22,12 +22,12 @@
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
     "sinon": "*",
-    "unexpected": "^5.0.0-beta35"
+    "unexpected": "^5.0.0"
   },
   "devDependencies": {
     "mocha": "^2.0.1",
     "serve": "*",
     "sinon": "1.9.1",
-    "unexpected": "5.0.0-beta35"
+    "unexpected": "=5.0.0"
   }
 }
