@@ -62,6 +62,22 @@ define(['unexpected', 'unexpected-sinon'], funtion (unexpected, unexpectedSinon)
 });
 ```
 
+Because Sinon is currently not AMD compatible you will need this RequireJS configuration to make things work:
+
+```js
+requirejs.config({
+   paths: {
+      'sinon': 'path/to/sinon'
+   },
+   shim: {
+      'sinon': {
+         deps: ['sinon'],
+         exports: 'sinon'
+      }
+   }
+});
+```
+
 ## API
 
 ### was called
