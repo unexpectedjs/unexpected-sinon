@@ -18,7 +18,7 @@
     "expect",
     "assert"
   ],
-  "homepage": "https://github.com/sunesimonsen/unexpected-sinon",
+  "homepage": "https://github.com/unexpectedjs/unexpected-sinon",
   "ignore": [
     "**/.*",
     "node_modules",
