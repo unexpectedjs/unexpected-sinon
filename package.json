@@ -22,12 +22,12 @@
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
     "sinon": "*",
-    "unexpected": "^5.0.0"
+    "unexpected": "^5.0.0 || ^6.0.0"
   },
   "devDependencies": {
     "mocha": "^2.0.1",
     "serve": "*",
     "sinon": "1.9.1",
-    "unexpected": "=5.0.0"
+    "unexpected": "=6.0.3"
   }
 }
