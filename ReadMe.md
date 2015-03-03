@@ -1,7 +1,7 @@
 # Unexpected-sinon
 
 This module extends the
-[Unexpected](https://github.com/sunesimonsen/unexpected) assertion
+[Unexpected](https://github.com/unexpectedjs/unexpected) assertion
 library with integration for the [Sinonjs](http://sinonjs.org/)
 mocking library.
 
@@ -11,9 +11,7 @@ expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
 expect(obj.spy, 'was always called on', obj);
 ```
 
-[![Build Status](https://travis-ci.org/sunesimonsen/unexpected-sinon.png?branch=master)](https://travis-ci.org/sunesimonsen/unexpected-sinon)
-
-[Run the test in the browser](http://sunesimonsen.github.io/unexpected-sinon/test/tests.html)
+[![Build Status](https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=v5.1.1)](https://travis-ci.org/unexpectedjs/unexpected-sinon)
 
 ## How to use
 
