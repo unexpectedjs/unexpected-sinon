@@ -118,6 +118,20 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('was called the new operator', function () {
+        it('passes if spy was called the new operator', function () {
+            new spy();
+            expect(spy,"was called with new");
+        });
+        it('fails if spy was never called with new operator', function () {
+            expect(function () {
+                var spy = sinon.spy();
+                spy();
+                expect(spy, "was called with new");
+            }, "to throw exception", 'expected spy to be called with new');
+        });
+    });
+
     describe('given call order', function () {
         it('passes if the provided spies where called in the given order', function () {
             var agent005 = sinon.spy();
