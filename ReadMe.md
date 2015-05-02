@@ -228,8 +228,11 @@ expect(spy.args, 'to equal', [
 
 expect(spy.args[1], 'to equal', ['qux']);
 
-expect(spy.args, 'to have properties', {
-    0: [{ foo: 'bar' }, 'baz'],
+expect(spy.args, 'to satisfy', {
+    0: [
+      { foo: 'bar' },
+      expect.it('to be a string').and('to have length', 3)
+    ],
     2: ['quux']
 });
 ```
