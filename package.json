@@ -17,7 +17,9 @@
     "url": "https://github.com/unexpectedjs/unexpected-sinon"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require ./test/common"
+    "test": "./node_modules/.bin/mocha --require ./test/common",
+    "generate-site": "node ./generate-site.js",
+    "update-examples": "node ./generate-site.js --update-examples"
   },
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
@@ -28,6 +30,7 @@
     "mocha": "^2.0.1",
     "serve": "*",
     "sinon": "1.9.1",
-    "unexpected": "=6.0.3"
+    "unexpected": "7.0.5",
+    "unexpected-documentation-site-generator": "2.2.3"
   }
 }

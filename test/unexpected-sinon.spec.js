@@ -1,11 +1,11 @@
-/*global describe, it, beforeEach, sinon, expect, unexpectedSinon*/
-expect.installPlugin(unexpectedSinon);
-
+/*global describe, it, beforeEach, sinon, unexpected*/
 describe('unexpected-sinon', function () {
-    var spy;
+    var expect, spy;
     beforeEach(function () {
+        expect = unexpected.clone();
         spy = sinon.spy();
     });
+
     describe('was called', function () {
         it('passes if spy was called at least once', function () {
             spy();
