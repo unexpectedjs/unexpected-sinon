@@ -26,3 +26,16 @@ expected spy to be called twice but was called 4 times
     spy(41, 44)
     spy(41, 45)
 ```
+
+You have the following convinient aliases available:
+
+
+```js
+var spy = sinon.spy();
+spy(1);
+expect(spy, 'was called once');
+spy(2);
+expect(spy, 'was called twice');
+spy(3);
+expect(spy, 'was called thrice');
+```

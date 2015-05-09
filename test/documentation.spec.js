@@ -46,8 +46,30 @@ describe("documentation tests", function () {
         return expect.promise.all(testPromises);
     });
 
-    it("assertions/spy/always-threw.md contains correct examples", function () {
+    it("assertions/spy/threw.md contains correct examples", function () {
         var testPromises = [];
+        var stub = sinon.stub();
+        var error = new TypeError('wat');
+        stub.throws(error);
+        try { stub(); } catch (e) {}
+
+        expect(stub, 'threw');
+        expect(stub, 'threw', 'TypeError');
+        expect(stub, 'threw', error);
+
+        try {
+            expect(sinon.spy(), 'threw', 'SyntaxError');
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("expect(sinon.spy(), 'threw', 'SyntaxError');").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "spy did not throw exception"
+            );
+        }
+
         var stub = sinon.stub();
         var error = new TypeError('wat');
         stub.throws(error);
@@ -75,86 +97,6 @@ describe("documentation tests", function () {
                 "stub did not always throw exception\n" +
                 "    stub() !TypeError(wat)\n" +
                 "    stub() !SyntaxError(waat)"
-            );
-        }
-        return expect.promise.all(testPromises);
-    });
-
-    it("assertions/spy/threw.md contains correct examples", function () {
-        var testPromises = [];
-        var stub = sinon.stub();
-        var error = new TypeError('wat');
-        stub.throws(error);
-        try { stub(); } catch (e) {}
-
-        expect(stub, 'threw');
-        expect(stub, 'threw', 'TypeError');
-        expect(stub, 'threw', error);
-
-        try {
-            expect(sinon.spy(), 'threw', 'SyntaxError');
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("expect(sinon.spy(), 'threw', 'SyntaxError');").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "spy did not throw exception"
-            );
-        }
-        return expect.promise.all(testPromises);
-    });
-
-    it("assertions/spy/was-always-called-with-exactly.md contains correct examples", function () {
-        var testPromises = [];
-        var spy = sinon.spy();
-        spy({ foo: 'bar' }, 'baz', 'qux');
-        spy({ foo: 'bar' }, 'baz', 'qux');
-        expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
-
-        try {
-            spy({ foo: 'bar' }, 'baz');
-            expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("spy({ foo: 'bar' }, 'baz');").nl();
-                output.code("expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected spy to always be called with exact arguments { foo: \"bar\" }, baz, truthy\n" +
-                "    spy({ foo: \"bar\" }, baz, qux)\n" +
-                "    spy({ foo: \"bar\" }, baz, qux)\n" +
-                "    spy({ foo: \"bar\" }, baz)"
-            );
-        }
-        return expect.promise.all(testPromises);
-    });
-
-    it("assertions/spy/was-always-called-with.md contains correct examples", function () {
-        var testPromises = [];
-        var spy = sinon.spy();
-        spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
-
-        try {
-            spy({ foo: 'bar' }, 'baz');
-            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("spy({ foo: 'bar' }, 'baz');").nl();
-                output.code("expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected spy to always be called with arguments { foo: \"bar\" }, baz, truthy\n" +
-                "    spy({ foo: \"bar\" }, baz, qux, quux)\n" +
-                "    spy({ foo: \"bar\" }, baz, qux, quux)\n" +
-                "    spy({ foo: \"bar\" }, baz)"
             );
         }
         return expect.promise.all(testPromises);
@@ -200,64 +142,6 @@ describe("documentation tests", function () {
         return expect.promise.all(testPromises);
     });
 
-    it("assertions/spy/was-called-once.md contains correct examples", function () {
-        var testPromises = [];
-        var increment = sinon.spy();
-        increment(42);
-        expect(increment, 'was called once');
-
-        try {
-            expect(sinon.spy(), 'was called once');
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("expect(sinon.spy(), 'was called once');").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected spy to be called once but was called 0 times"
-            );
-        }
-        return expect.promise.all(testPromises);
-    });
-
-    it("assertions/spy/was-called-thrice.md contains correct examples", function () {
-        var testPromises = [];
-        var increment = sinon.spy();
-        increment(41);
-        increment(42);
-        increment(43);
-        expect(increment, 'was called thrice');
-
-        try {
-            var add = sinon.spy();
-            add(41, 42);
-            add(41, 43);
-            add(41, 44);
-            add(41, 45);
-            expect(add, 'was called thrice');
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("var add = sinon.spy();").nl();
-                output.code("add(41, 42);").nl();
-                output.code("add(41, 43);").nl();
-                output.code("add(41, 44);").nl();
-                output.code("add(41, 45);").nl();
-                output.code("expect(add, 'was called thrice');").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected spy to be called thrice but was called 4 times\n" +
-                "    spy(41, 42)\n" +
-                "    spy(41, 43)\n" +
-                "    spy(41, 44)\n" +
-                "    spy(41, 45)"
-            );
-        }
-        return expect.promise.all(testPromises);
-    });
-
     it("assertions/spy/was-called-times.md contains correct examples", function () {
         var testPromises = [];
         var increment = sinon.spy();
@@ -292,55 +176,14 @@ describe("documentation tests", function () {
                 "    spy(41, 45)"
             );
         }
-        return expect.promise.all(testPromises);
-    });
 
-    it("assertions/spy/was-called-twice.md contains correct examples", function () {
-        var testPromises = [];
-        var increment = sinon.spy();
-        increment(41);
-        increment(42);
-        expect(increment, 'was called twice');
-
-        try {
-            var add = sinon.spy();
-            add(41, 42);
-            expect(add, 'was called twice');
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("var add = sinon.spy();").nl();
-                output.code("add(41, 42);").nl();
-                output.code("expect(add, 'was called twice');").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected spy to be called twice but was called once\n" +
-                "    spy(41, 42)"
-            );
-        }
-        return expect.promise.all(testPromises);
-    });
-
-    it("assertions/spy/was-called-with-exactly.md contains correct examples", function () {
-        var testPromises = [];
         var spy = sinon.spy();
-        spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy, 'quux');
-
-        try {
-            expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected spy to be called with exact arguments { foo: \"bar\" }, baz, truthy\n" +
-                "    spy({ foo: \"bar\" }, baz, qux, quux)"
-            );
-        }
+        spy(1);
+        expect(spy, 'was called once');
+        spy(2);
+        expect(spy, 'was called twice');
+        spy(3);
+        expect(spy, 'was called thrice');
         return expect.promise.all(testPromises);
     });
 
@@ -361,6 +204,70 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected spy to be called with arguments baz, { foo: \"bar\" }\n" +
                 "    spy({ foo: \"bar\" }, baz, qux, quux)"
+            );
+        }
+
+        var spy = sinon.spy();
+        spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
+        spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
+        expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+
+        try {
+            spy({ foo: 'bar' }, 'baz');
+            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("spy({ foo: 'bar' }, 'baz');").nl();
+                output.code("expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected spy to always be called with arguments { foo: \"bar\" }, baz, truthy\n" +
+                "    spy({ foo: \"bar\" }, baz, qux, quux)\n" +
+                "    spy({ foo: \"bar\" }, baz, qux, quux)\n" +
+                "    spy({ foo: \"bar\" }, baz)"
+            );
+        }
+
+        var spy = sinon.spy();
+        spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
+        expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy, 'quux');
+
+        try {
+            expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected spy to be called with exact arguments { foo: \"bar\" }, baz, truthy\n" +
+                "    spy({ foo: \"bar\" }, baz, qux, quux)"
+            );
+        }
+
+        var spy = sinon.spy();
+        spy({ foo: 'bar' }, 'baz', 'qux');
+        spy({ foo: 'bar' }, 'baz', 'qux');
+        expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
+
+        try {
+            spy({ foo: 'bar' }, 'baz');
+            expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("spy({ foo: 'bar' }, 'baz');").nl();
+                output.code("expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected spy to always be called with exact arguments { foo: \"bar\" }, baz, truthy\n" +
+                "    spy({ foo: \"bar\" }, baz, qux)\n" +
+                "    spy({ foo: \"bar\" }, baz, qux)\n" +
+                "    spy({ foo: \"bar\" }, baz)"
             );
         }
         return expect.promise.all(testPromises);
@@ -384,11 +291,7 @@ describe("documentation tests", function () {
                 "expected spy to have been called at least once but was never called"
             );
         }
-        return expect.promise.all(testPromises);
-    });
 
-    it("assertions/spy/was-not-called.md contains correct examples", function () {
-        var testPromises = [];
         expect(sinon.spy(), 'was not called');
 
         try {
