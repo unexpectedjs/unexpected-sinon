@@ -21,7 +21,7 @@
                 <li class=""><a href="../../..">unexpected-sinon</a></li>
                 
                 
-                <li class="active"><a href="../always-threw">Assertions</a></li>
+                <li class="active"><a href="../threw">Assertions</a></li>
                 
                 
             </ul>
@@ -43,19 +43,7 @@
             <ul>
                 
                 <li class="">
-                    <a href="../always-threw">always threw</a>
-                </li>
-                
-                <li class="">
                     <a href="../threw">threw</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-always-called-with">was always called with</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-always-called-with-exactly">was always called with exactly</a>
                 </li>
                 
                 <li class="">
@@ -66,32 +54,12 @@
                     <a href="../was-called-on">was called on</a>
                 </li>
                 
-                <li class="">
-                    <a href="../was-called-once">was called once</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called-thrice">was called thrice</a>
-                </li>
-                
                 <li class="active">
                     <a href="">was called times</a>
                 </li>
                 
                 <li class="">
-                    <a href="../was-called-twice">was called twice</a>
-                </li>
-                
-                <li class="">
                     <a href="../was-called-with">was called with</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called-with-exactly">was called with exactly</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-not-called">was not called</a>
                 </li>
                 
             </ul>
@@ -134,6 +102,15 @@
   <div><span style="color: red; font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;spy(41,&nbsp;43)</span></div>
   <div><span style="color: red; font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;spy(41,&nbsp;44)</span></div>
   <div><span style="color: red; font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;spy(41,&nbsp;45)</span></div>
+</div><p>You have the following convinient aliases available:</p>
+<div class="code lang-javascript">
+  <div><span style="color: #a71d5d">var</span>&nbsp;spy&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">();</span></div>
+  <div><span style="color: #000000">spy</span><span style="color: #000000">(</span><span style="color: #0086b3">1</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>spy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;once'</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">spy</span><span style="color: #000000">(</span><span style="color: #0086b3">2</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>spy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;twice'</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">spy</span><span style="color: #000000">(</span><span style="color: #0086b3">3</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>spy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;thrice'</span><span style="color: #000000">);</span></div>
 </div>
         </div>
     </div>

@@ -1,9 +1,5 @@
 [
   {
-    "label": "was called thrice (spy)",
-    "url": "/assertions/spy/was-called-thrice/"
-  },
-  {
     "label": "given call order (array-like)",
     "url": "/assertions/array-like/given-call-order/"
   },
@@ -12,36 +8,12 @@
     "url": "/assertions/spy/threw/"
   },
   {
-    "label": "was always called with exactly (spy)",
-    "url": "/assertions/spy/was-always-called-with-exactly/"
-  },
-  {
-    "label": "was always called with (spy)",
-    "url": "/assertions/spy/was-always-called-with/"
-  },
-  {
     "label": "was called on (spy)",
     "url": "/assertions/spy/was-called-on/"
   },
   {
-    "label": "was called once (spy)",
-    "url": "/assertions/spy/was-called-once/"
-  },
-  {
-    "label": "always threw (spy)",
-    "url": "/assertions/spy/always-threw/"
-  },
-  {
     "label": "was called times (spy)",
     "url": "/assertions/spy/was-called-times/"
-  },
-  {
-    "label": "was called twice (spy)",
-    "url": "/assertions/spy/was-called-twice/"
-  },
-  {
-    "label": "was called with exactly (spy)",
-    "url": "/assertions/spy/was-called-with-exactly/"
   },
   {
     "label": "was called with (spy)",
@@ -50,9 +22,5 @@
   {
     "label": "was called (spy)",
     "url": "/assertions/spy/was-called/"
-  },
-  {
-    "label": "was not called (spy)",
-    "url": "/assertions/spy/was-not-called/"
   }
 ]
