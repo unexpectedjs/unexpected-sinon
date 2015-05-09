@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../../static/normalize.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../static/main.css" type="text/css" media="screen" />
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../../../static/bug-icon-black.ico">
+    <title>spy - was not called</title>
+</head>
+<body class="sidebar-hidden has-sidebar">
+    <header>
+        <div class="logo-icon"></div>
+        <nav>
+            <ul>
+                <li class="menu-toggle-item">
+                    <button class="menu-toggle" onclick="toggleSidebar()"></button>
+                </li>
+                
+                <li class=""><a href="../../..">unexpected-sinon</a></li>
+                
+                
+                <li class="active"><a href="../always-threw">Assertions</a></li>
+                
+                
+            </ul>
+        </nav>
+        <div class="search" style="visibility: hidden">
+            <input id="search" placeholder="Search..." value="">
+            <div id="searchDropDown" class="dropDown">
+                <ul id="searchResults"></ul>
+            </div>
+        </div>
+    </header>
+
+<section id="assertions">
+    <nav id="assertion-menu" class="sidebar js-remember-scroll-position">
+    <ul>
+        
+        <li>
+            <h3>spy</h3>
+            <ul>
+                
+                <li class="">
+                    <a href="../always-threw">always threw</a>
+                </li>
+                
+                <li class="">
+                    <a href="../threw">threw</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-always-called-with">was always called with</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-always-called-with-exactly">was always called with exactly</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called">was called</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called-on">was called on</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called-once">was called once</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called-thrice">was called thrice</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called-times">was called times</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called-twice">was called twice</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called-with">was called with</a>
+                </li>
+                
+                <li class="">
+                    <a href="../was-called-with-exactly">was called with exactly</a>
+                </li>
+                
+                <li class="active">
+                    <a href="">was not called</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        <li>
+            <h3>array-like</h3>
+            <ul>
+                
+                <li class="">
+                    <a href="../../array-like/given-call-order">given call order</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+    </ul>
+</nav>
+
+    <div class="main" tabindex="-1">
+        <div class="content">
+            <p>Passes if spy was never called.</p>
+<div class="code lang-javascript">
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'was&nbsp;not&nbsp;called'</span><span style="color: #000000">);</span></div>
+</div><p>In case of a failing expectation you get the following output:</p>
+<div class="code lang-javascript">
+  <div><span style="color: #a71d5d">var</span>&nbsp;add&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">();</span></div>
+  <div><span style="color: #000000">add</span><span style="color: #000000">(</span><span style="color: #0086b3">42</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">42</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>add<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;not&nbsp;called'</span><span style="color: #000000">);</span></div>
+</div><div class="output">
+  <div><span style="color: red; font-weight: bold">expected&nbsp;spy&nbsp;to&nbsp;not&nbsp;have&nbsp;been&nbsp;called&nbsp;but&nbsp;was&nbsp;called&nbsp;once</span></div>
+  <div><span style="color: red; font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;spy(42,&nbsp;42)</span></div>
+</div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    baseUrl = '../../..';
+</script>
+<script type="text/javascript" src="../../../static/toggleSidebar.js"></script>
+<script type="text/javascript" src="../../../static/rememberScrollPosition.js"></script>
+<script type="text/javascript" src="../../../static/focusMain.js"></script>
+<script type="text/javascript" src="../../../static/search.js"></script>
+</body>
+</html>
+
