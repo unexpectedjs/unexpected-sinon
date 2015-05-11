@@ -15,7 +15,7 @@ describe('unexpected-sinon', function () {
         it('fails if spy was never called', function () {
             expect(function () {
                 expect(spy, "was called");
-            }, "to throw exception", "expected spy to have been called at least once but was never called");
+            }, "to throw exception", "expected spy was called");
         });
     });
 
@@ -26,9 +26,12 @@ describe('unexpected-sinon', function () {
 
         it('fails if spy was called', function () {
             expect(function () {
-                spy();
+                spy(42, { foo: 'bar' });
+                spy('baz');
                 expect(spy, "was not called");
-            }, "to throw exception", /expected spy to not have been called but was called once/);
+            }, "to throw exception",
+                   "expected spy was not called\n" +
+                   "  expected invocations( spy( 42, { foo: \'bar\' } ), spy( \'baz\' ) ) to be empty");
         });
     });
 
@@ -41,12 +44,16 @@ describe('unexpected-sinon', function () {
         it('fails if spy was not called exactly once', function () {
             expect(function () {
                 expect(spy, "was called once");
-            }, "to throw exception", 'expected spy to be called once but was called 0 times');
+            }, "to throw exception", 'expected spy was called once');
 
             expect(function () {
-                spy(); spy();
+                spy(42, { foo: 'bar' });
+                spy('baz');
                 expect(spy, "was called once");
-            }, "to throw exception", /expected spy to be called once but was called twice/);
+            }, "to throw exception",
+                   "expected spy was called once\n" +
+                   "  expected invocations( spy( 42, { foo: \'bar\' } ), spy( \'baz\' ) ) to have length 1\n" +
+                   "    expected 2 to be 1");
         });
     });
 
@@ -59,19 +66,24 @@ describe('unexpected-sinon', function () {
         it('fails if spy was not called exactly twice', function () {
             expect(function () {
                 expect(spy, "was called twice");
-            }, "to throw exception", /expected spy to be called twice but was called 0 times/);
+            }, "to throw exception", "expected spy was called twice");
 
             expect(function () {
                 var spy = sinon.spy();
                 spy();
                 expect(spy, "was called twice");
-            }, "to throw exception", /expected spy to be called twice but was called once/);
+            }, "to throw exception", "expected spy was called twice\n" +
+                   "  expected invocations( spy() ) to have length 2\n" +
+                   "    expected 1 to be 2");
 
             expect(function () {
                 var spy = sinon.spy();
-                spy(); spy(); spy();
+                spy(); spy(42); spy();
                 expect(spy, "was called twice");
-            }, "to throw exception", /expected spy to be called twice but was called thrice/);
+            }, "to throw exception",
+                   "expected spy was called twice\n" +
+                   "  expected invocations( spy(), spy( 42 ), spy() ) to have length 2\n" +
+                   "    expected 3 to be 2");
         });
     });
 
@@ -86,13 +98,19 @@ describe('unexpected-sinon', function () {
                 var spy = sinon.spy();
                 spy(); spy();
                 expect(spy, "was called thrice");
-            }, "to throw exception", /expected spy to be called thrice but was called twice/);
+            }, "to throw exception",
+                   "expected spy was called thrice\n" +
+                   "  expected invocations( spy(), spy() ) to have length 3\n" +
+                   "    expected 2 to be 3");
 
             expect(function () {
                 var spy = sinon.spy();
                 spy(); spy(); spy(); spy();
                 expect(spy, "was called thrice");
-            }, "to throw exception", /expected spy to be called thrice but was called 4 times/);
+            }, "to throw exception",
+                   "expected spy was called thrice\n" +
+                   "  expected invocations( spy(), spy(), spy(), spy() ) to have length 3\n" +
+                   "    expected 4 to be 3");
         });
     });
 
@@ -108,13 +126,19 @@ describe('unexpected-sinon', function () {
                 var spy = sinon.spy();
                 spy(); spy();
                 expect(spy, "was called times", 3);
-            }, "to throw exception", /expected spy to be called thrice but was called twice/);
+            }, "to throw exception",
+                   "expected spy was called times 3\n" +
+                   "  expected invocations( spy(), spy() ) to have length 3\n" +
+                   "    expected 2 to be 3");
 
             expect(function () {
                 var spy = sinon.spy();
                 spy(); spy(); spy(); spy();
                 expect(spy, "was called times", 3);
-            }, "to throw exception", /expected spy to be called thrice but was called 4 times/);
+            }, "to throw exception",
+                   "expected spy was called times 3\n" +
+                   "  expected invocations( spy(), spy(), spy(), spy() ) to have length 3\n" +
+                   "    expected 4 to be 3");
         });
     });
 
