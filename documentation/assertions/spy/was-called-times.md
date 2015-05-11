@@ -20,11 +20,9 @@ expect(add, 'was called times', 2);
 ```
 
 ```output
-expected spy to be called twice but was called 4 times
-    spy(41, 42)
-    spy(41, 43)
-    spy(41, 44)
-    spy(41, 45)
+expected spy was called times 2
+  expected invocations( spy( 41, 42 ), spy( 41, 43 ), spy( 41, 44 ), spy( 41, 45 ) ) to have length 2
+    expected 4 to be 2
 ```
 
 You have the following convinient aliases available:

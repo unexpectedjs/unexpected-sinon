@@ -24,21 +24,25 @@ passes if the spy was always called with the provided arguments.
 var spy = sinon.spy();
 spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
 spy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 ```
 
 In case of a failing expectation you get the following output:
 
 ```js
 spy({ foo: 'bar' }, 'baz');
-expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 ```
 
 ```output
-expected spy to always be called with arguments { foo: "bar" }, baz, truthy
-    spy({ foo: "bar" }, baz, qux, quux)
-    spy({ foo: "bar" }, baz, qux, quux)
-    spy({ foo: "bar" }, baz)
+expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
+  failed expectation in
+  invocations(
+    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
+    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
+    spy( { foo: 'bar' }, 'baz' )
+  ):
+    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }
 ```
 
 I case you want to ensure that the spy was called with the provided
@@ -53,11 +57,11 @@ expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy
 In case of a failing expectation you get the following output:
 
 ```js
-expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
+expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 ```
 
 ```output
-expected spy to be called with exact arguments { foo: "bar" }, baz, truthy
+expected spy to be called with exact arguments { foo: "bar" }, baz, function expectIt() {}
     spy({ foo: "bar" }, baz, qux, quux)
 ```
 
@@ -69,19 +73,25 @@ others.
 var spy = sinon.spy();
 spy({ foo: 'bar' }, 'baz', 'qux');
 spy({ foo: 'bar' }, 'baz', 'qux');
-expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
+expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 ```
 
 In case of a failing expectation you get the following output:
 
 ```js
 spy({ foo: 'bar' }, 'baz');
-expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy);
+expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 ```
 
 ```output
-expected spy to always be called with exact arguments { foo: "bar" }, baz, truthy
-    spy({ foo: "bar" }, baz, qux)
-    spy({ foo: "bar" }, baz, qux)
-    spy({ foo: "bar" }, baz)
+expected spy was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
+  failed expectation in
+  invocations(
+    spy( { foo: 'bar' }, 'baz', 'qux' ),
+    spy( { foo: 'bar' }, 'baz', 'qux' ),
+    spy( { foo: 'bar' }, 'baz' )
+  ):
+    0: expected spy( { foo: 'bar' }, 'baz', 'qux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
+    1: expected spy( { foo: 'bar' }, 'baz', 'qux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
+    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
 ```

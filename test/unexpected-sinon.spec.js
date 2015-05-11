@@ -262,15 +262,18 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was always called with the provided arguments', function () {
             spy({ foo: 'bar' }, 'baz', true, false);
             spy({ foo: 'bar' }, 'baz', true, false);
-            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
         });
 
         it('fails if the spy was called once with other arguments then the provided', function () {
             expect(function () {
                 spy('something else');
                 spy({ foo: 'bar' }, 'baz', true, false);
-                expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            }, 'to throw exception', /spy\(something else\)/);
+                expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+            }, 'to throw exception',
+                   "expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
+                   "  failed expectation in invocations( spy( 'something else' ), spy( { foo: 'bar' }, 'baz', true, false ) ):\n" +
+                   "    0: expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }");
         });
     });
 
@@ -307,7 +310,7 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was always called with the provided arguments and no others', function () {
             spy('foo', 'bar', 'baz');
             spy('foo', 'bar', 'baz');
-            expect(spy, 'was always called with exactly', 'foo', 'bar', sinon.match.truthy);
+            expect(spy, 'was always called with exactly', 'foo', 'bar', expect.it('to be truthy'));
         });
 
         it('fails if the spy was ever called with anything else than the provided arguments', function () {
