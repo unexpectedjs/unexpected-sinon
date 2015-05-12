@@ -246,21 +246,6 @@ describe('unexpected-sinon', function () {
         });
     });
 
-    describe('was called with match', function () {
-        it('passes if the spy was called with the matching arguments and possible others', function () {
-            spy('something else');
-            spy({ foo: 'bar' }, 'baz', true, false);
-            expect(spy, 'was called with match', { foo: 'bar' }, 'baz', sinon.match.truthy);
-        });
-
-        it('fails if the spy was not called with the provided arguments', function () {
-            expect(function () {
-                spy({ foo: 'baa' }, 'baz', true, false);
-                expect(spy, 'was called with match', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            }, 'to throw exception', /expected spy to be called with match { foo: "bar" }, baz, truthy/);
-        });
-    });
-
     describe('was always called with', function () {
         it('passes if the spy was always called with the provided arguments', function () {
             spy({ foo: 'bar' }, 'baz', true, false);
@@ -356,7 +341,7 @@ describe('unexpected-sinon', function () {
                 var stub = sinon.stub();
                 stub.throws('TypeError');
                 try { stub(); } catch (e) {}
-                expect(stub, 'threw', 'TypeError');
+                expect(stub, 'threw', { name: 'TypeError' });
             });
 
             it('fails if the spy never threw an exception of the given type', function () {
@@ -364,8 +349,15 @@ describe('unexpected-sinon', function () {
                     var stub = sinon.stub();
                     stub.throws('Error');
                     try { stub(); } catch (e) {}
-                    expect(stub, 'threw', 'TypeError');
-                }, 'to throw exception', /!Error/);
+                    expect(stub, 'threw', { name: 'TypeError' });
+                }, 'to throw exception',
+                       "expected stub threw { name: 'TypeError' }\n" +
+                       "  failed expectation in invocations( stub() ):\n" +
+                       "    0: expected stub() threw { name: 'TypeError' }\n" +
+                       "         expected Error({ message: '' }) to satisfy { name: 'TypeError' }\n" +
+                       "\n" +
+                       "         -Error\n" +
+                       "         +TypeError");
             });
         });
 
@@ -384,7 +376,11 @@ describe('unexpected-sinon', function () {
                     stub.throws(new TypeError());
                     try { stub(); } catch (e) {}
                     expect(stub, 'threw', new Error());
-                }, 'to throw exception', /!TypeError/);
+                }, 'to throw exception',
+                       "expected stub threw Error({ message: '' })\n" +
+                       "  failed expectation in invocations( stub() ):\n" +
+                       "    0: expected stub() threw Error({ message: '' })\n" +
+                       "         expected TypeError({ message: '' }) to satisfy Error({ message: '' })");
             });
         });
     });
@@ -411,7 +407,10 @@ describe('unexpected-sinon', function () {
                     try { spy(); } catch (e) {}
                     spy();
                     expect(spy, 'always threw');
-                }, 'to throw exception', /spy did not always throw exception/);
+                }, 'to throw exception',
+                       "expected spy always threw\n" +
+                       "  failed expectation in invocations( spy(), spy() ):\n" +
+                       "    1: expected spy() threw");
             });
         });
 
@@ -421,7 +420,7 @@ describe('unexpected-sinon', function () {
                 stub.throws('Error');
                 try { stub(); } catch (e) {}
                 try { stub(); } catch (e) {}
-                expect(stub, 'always threw', 'Error');
+                expect(stub, 'always threw', { name: 'Error' });
             });
 
             it('fails if the spy did not always threw an exception of the given type', function () {
@@ -431,8 +430,15 @@ describe('unexpected-sinon', function () {
                     try { stub(); } catch (e) {}
                     stub.throws('TypeError');
                     try { stub(); } catch (e) {}
-                    expect(stub, 'always threw', 'Error');
-                }, 'to throw exception', /!TypeError/);
+                    expect(stub, 'always threw', { name: 'Error' });
+                }, 'to throw exception',
+                       "expected stub always threw { name: 'Error' }\n" +
+                       "  failed expectation in invocations( stub(), stub() ):\n" +
+                       "    1: expected stub() threw { name: 'Error' }\n" +
+                       "         expected TypeError({ message: '' }) to satisfy { name: 'Error' }\n" +
+                       "\n" +
+                       "         -TypeError\n" +
+                       "         +Error");
             });
         });
 
@@ -455,7 +461,11 @@ describe('unexpected-sinon', function () {
                     stub.throws(new TypeError());
                     try { stub(); } catch (e) {}
                     expect(stub, 'always threw', error);
-                }, 'to throw exception', /!TypeError/);
+                }, 'to throw exception',
+                       "expected stub always threw Error({ message: '' })\n" +
+                       "  failed expectation in invocations( stub(), stub() ):\n" +
+                       "    1: expected stub() threw Error({ message: '' })\n" +
+                       "         expected TypeError({ message: '' }) to satisfy Error({ message: '' })");
             });
         });
     });

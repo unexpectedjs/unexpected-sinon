@@ -54,49 +54,48 @@ describe("documentation tests", function () {
         try { stub(); } catch (e) {}
 
         expect(stub, 'threw');
-        expect(stub, 'threw', 'TypeError');
+        expect(stub, 'threw', 'wat');
         expect(stub, 'threw', error);
+        expect(stub, 'threw', { name: 'TypeError' });
 
         try {
-            expect(sinon.spy(), 'threw', 'SyntaxError');
+            expect(sinon.spy(), 'threw', new SyntaxError());
             expect.fail(function (output) {
                 output.error("expected:").nl();
-                output.code("expect(sinon.spy(), 'threw', 'SyntaxError');").nl();
+                output.code("expect(sinon.spy(), 'threw', new SyntaxError());").nl();
                 output.error("to throw");
             });
         } catch (e) {
             expect(e, "to have message",
-                "spy did not throw exception"
+                "expected spy threw SyntaxError({ message: '' })\n" +
+                "  spy did not throw exception"
             );
         }
 
-        var stub = sinon.stub();
-        var error = new TypeError('wat');
-        stub.throws(error);
-        try { stub(); } catch (e) {}
-
         expect(stub, 'always threw');
-        expect(stub, 'always threw', 'TypeError');
+        expect(stub, 'always threw', 'wat');
         expect(stub, 'always threw', error);
+        expect(stub, 'always threw', { name: 'TypeError' });
 
         try {
             stub.throws(new SyntaxError('waat'));
             try { stub(); } catch (e) {}
 
-            expect(stub, 'always threw', 'TypeError');
+            expect(stub, 'always threw', /waat/);
             expect.fail(function (output) {
                 output.error("expected:").nl();
                 output.code("stub.throws(new SyntaxError('waat'));").nl();
                 output.code("try { stub(); } catch (e) {}").nl();
                 output.code("").nl();
-                output.code("expect(stub, 'always threw', 'TypeError');").nl();
+                output.code("expect(stub, 'always threw', /waat/);").nl();
                 output.error("to throw");
             });
         } catch (e) {
             expect(e, "to have message",
-                "stub did not always throw exception\n" +
-                "    stub() !TypeError(wat)\n" +
-                "    stub() !SyntaxError(waat)"
+                "expected stub always threw /waat/\n" +
+                "  failed expectation in invocations( stub(), stub() ):\n" +
+                "    0: expected stub() threw /waat/\n" +
+                "         expected TypeError({ message: 'wat' }) to satisfy /waat/"
             );
         }
         return expect.promise.all(testPromises);
