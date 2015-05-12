@@ -42,7 +42,7 @@ expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be trut
     spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
     spy( { foo: 'bar' }, 'baz' )
   ):
-    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }
+    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
 ```
 
 I case you want to ensure that the spy was called with the provided
@@ -91,7 +91,5 @@ expected spy was always called with exactly { foo: 'bar' }, 'baz', expect.it('to
     spy( { foo: 'bar' }, 'baz', 'qux' ),
     spy( { foo: 'bar' }, 'baz' )
   ):
-    0: expected spy( { foo: 'bar' }, 'baz', 'qux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
-    1: expected spy( { foo: 'bar' }, 'baz', 'qux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
-    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
+    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }
 ```

@@ -228,7 +228,7 @@ describe("documentation tests", function () {
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz' )\n" +
                 "  ):\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }"
+                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]"
             );
         }
 
@@ -273,9 +273,7 @@ describe("documentation tests", function () {
                 "    spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz' )\n" +
                 "  ):\n" +
-                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
-                "    1: expected spy( { foo: 'bar' }, 'baz', 'qux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]"
+                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }"
             );
         }
         return expect.promise.all(testPromises);

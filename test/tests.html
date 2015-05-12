@@ -8,13 +8,14 @@
     <div id="mocha"></div>
     <script src="../vendor/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
-    <script src="../vendor/unexpected.js"></script>
+    <script src="../node_modules/unexpected/unexpected.js"></script>
     <script src="../node_modules/sinon/pkg/sinon.js"></script>
     <script src="../lib/unexpected-sinon.js"></script>
     <script>
-      expect = weknowhow.expect;
-      unexpectedSinon = weknowhow.unexpectedSinon;
+      unexpected = weknowhow.expect.clone();
+      unexpected.installPlugin(weknowhow.unexpectedSinon);
     </script>
+    <script src="documentation.spec.js"></script>
     <script src="unexpected-sinon.spec.js"></script>
     <script>
       mocha.run();
