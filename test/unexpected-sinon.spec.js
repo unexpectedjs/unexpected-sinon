@@ -291,7 +291,10 @@ describe('unexpected-sinon', function () {
             expect(function () {
                 spy('bar', 'true');
                 expect(spy, 'was never called with', 'bar', sinon.match.truthy);
-            }, 'to throw exception', /spy\(bar, true\)/);
+            }, 'to throw exception',
+                   "expected spy was never called with 'bar', match(truthy)\n" +
+                   "  failed expectation in invocations( spy( 'bar', 'true' ) ):\n" +
+                   "    0: expected spy( 'bar', 'true' ) not to satisfy { 0: 'bar', 1: match(truthy) }");
         });
     });
 
