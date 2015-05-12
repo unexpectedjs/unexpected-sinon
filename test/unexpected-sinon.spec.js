@@ -152,7 +152,7 @@ describe('unexpected-sinon', function () {
                 var spy = sinon.spy();
                 spy();
                 expect(spy, "was called with new");
-            }, "to throw exception", 'expected spy to be called with new');
+            }, "to throw exception", 'expected spy was called with new');
         });
     });
 
