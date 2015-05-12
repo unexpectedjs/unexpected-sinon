@@ -202,7 +202,9 @@ describe('unexpected-sinon', function () {
         it('fails if the spy was never called with obj as its this value', function () {
             expect(function () {
                 expect(spy, 'was called on', { other: true });
-            }, 'to throw exception', /expected spy to be called with/);
+            }, 'to throw exception',
+                   "expected spy was called on { other: true }\n" +
+                   "  spy was never called");
         });
     });
 
@@ -224,7 +226,11 @@ describe('unexpected-sinon', function () {
                 obj.spy();
                 obj.spy.call(null);
                 expect(obj.spy, 'was always called on', obj);
-            }, 'to throw exception', /expected spy to always be called with/);
+            }, 'to throw exception',
+                   "expected spy was always called on { spy: spy }\n" +
+                   "  failed expectation in invocations( spy(), spy() ):\n" +
+                   "    1: expected spy() was called on { spy: spy }\n" +
+                   "         expected spy to be called with { spy: spy } as this but was called with null");
         });
     });
 

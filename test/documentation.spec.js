@@ -118,7 +118,10 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy to be called with {  } as this but was called with { spy: function spy() {} }"
+                "expected spy was called on {}\n" +
+                "  failed expectation in invocations( spy() ):\n" +
+                "    0: expected spy() was called on {}\n" +
+                "         expected spy to be called with {} as this but was called with { spy: spy }"
             );
         }
 
@@ -135,7 +138,10 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy to always be called with { spy: function spy() {} } as this but was called with { spy: function spy() {} }, {  }"
+                "expected spy was always called on { spy: spy }\n" +
+                "  failed expectation in invocations( spy(), spy() ):\n" +
+                "    1: expected spy() was called on { spy: spy }\n" +
+                "         expected spy to be called with { spy: spy } as this but was called with {}"
             );
         }
         return expect.promise.all(testPromises);
