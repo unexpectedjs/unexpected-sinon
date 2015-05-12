@@ -239,7 +239,10 @@ describe('unexpected-sinon', function () {
             expect(function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
                 expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
-            }, 'to throw exception', /expected spy to be called with arguments { foo: "bar" }, baz, truthy/);
+            }, 'to throw exception',
+                   "expected spy was called with { foo: \'bar\' }, \'baz\', match(truthy)\n" +
+                   "  failed expectation in invocations( spy( { foo: \'baa\' }, \'baz\', true, false ) ):\n" +
+                   "    0: expected spy( { foo: \'baa\' }, \'baz\', true, false ) to satisfy { 0: { foo: \'bar\' }, 1: \'baz\', 2: match(truthy) }");
         });
     });
 
@@ -273,7 +276,8 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                    "expected spy was always called with { foo: 'bar' }, 'baz', match(truthy)\n" +
                    "  failed expectation in invocations( spy( 'something else' ), spy( { foo: 'bar' }, 'baz', true, false ) ):\n" +
-                   "    0: expected spy( 'something else' ) to satisfy [ { foo: 'bar' }, 'baz', match(truthy) ]");
+                   "    0: expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }");
+
         });
     });
 
@@ -302,7 +306,10 @@ describe('unexpected-sinon', function () {
             expect(function () {
                 spy('foo', 'bar', 'baz', 'qux');
                 expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
-            }, 'to throw exception', /spy\(foo, bar, baz, qux\)/);
+            }, 'to throw exception',
+                   "expected spy was called with exactly 'foo', 'bar', match(truthy)\n" +
+                   "  failed expectation in invocations( spy( 'foo', 'bar', 'baz', 'qux' ) ):\n" +
+                   "    0: expected spy( 'foo', 'bar', 'baz', 'qux' ) to satisfy [ 'foo', 'bar', match(truthy) ]");
         });
     });
 
@@ -321,7 +328,7 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                    "expected spy was always called with exactly 'foo', 'bar', match(truthy)\n" +
                    "  failed expectation in invocations( spy( 'foo', 'bar', 'baz' ), spy( 'foo', 'bar', 'baz', 'qux' ) ):\n" +
-                   "    1: expected spy( 'foo', 'bar', 'baz', 'qux' ) to satisfy { 0: 'foo', 1: 'bar', 2: match(truthy) }");
+                   "    1: expected spy( 'foo', 'bar', 'baz', 'qux' ) to satisfy [ 'foo', 'bar', match(truthy) ]");
         });
     });
 

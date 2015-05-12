@@ -200,8 +200,9 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy to be called with arguments baz, { foo: \"bar\" }\n" +
-                "    spy({ foo: \"bar\" }, baz, qux, quux)"
+                "expected spy was called with 'baz', { foo: 'bar' }\n" +
+                "  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):\n" +
+                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy { 0: 'baz', 1: { foo: 'bar' } }"
             );
         }
 
@@ -228,7 +229,7 @@ describe("documentation tests", function () {
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz' )\n" +
                 "  ):\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]"
+                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }"
             );
         }
 
@@ -245,8 +246,9 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy to be called with exact arguments { foo: \"bar\" }, baz, function expectIt() {}\n" +
-                "    spy({ foo: \"bar\" }, baz, qux, quux)"
+                "expected spy was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
+                "  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):\n" +
+                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]"
             );
         }
 
@@ -273,7 +275,7 @@ describe("documentation tests", function () {
                 "    spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz' )\n" +
                 "  ):\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }"
+                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]"
             );
         }
         return expect.promise.all(testPromises);
