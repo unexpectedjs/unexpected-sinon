@@ -23,7 +23,7 @@ expect(sinon.spy(), 'threw', new SyntaxError());
 ```
 
 ```output
-expected spy threw SyntaxError({ message: '' })
+expected spy threw SyntaxError()
   spy did not throw exception
 ```
 
@@ -50,5 +50,5 @@ expect(stub, 'always threw', /waat/);
 expected stub always threw /waat/
   failed expectation in invocations( stub(), stub() ):
     0: expected stub() threw /waat/
-         expected TypeError({ message: 'wat' }) to satisfy /waat/
+         expected TypeError('wat') to satisfy /waat/
 ```

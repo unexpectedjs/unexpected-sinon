@@ -67,7 +67,7 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy threw SyntaxError({ message: '' })\n" +
+                "expected spy threw SyntaxError()\n" +
                 "  spy did not throw exception"
             );
         }
@@ -95,7 +95,7 @@ describe("documentation tests", function () {
                 "expected stub always threw /waat/\n" +
                 "  failed expectation in invocations( stub(), stub() ):\n" +
                 "    0: expected stub() threw /waat/\n" +
-                "         expected TypeError({ message: 'wat' }) to satisfy /waat/"
+                "         expected TypeError('wat') to satisfy /waat/"
             );
         }
         return expect.promise.all(testPromises);
