@@ -91,7 +91,18 @@
   <div><span style="color: #a71d5d">var</span>&nbsp;another&nbsp;<span style="color: #a71d5d">=</span>&nbsp;<span style="color: #000000">{};</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>obj<span style="color: #000000">.</span>spy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;on'</span><span style="color: #000000">,</span>&nbsp;another<span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected&nbsp;spy&nbsp;to&nbsp;be&nbsp;called&nbsp;with&nbsp;{&nbsp;&nbsp;}&nbsp;as&nbsp;this&nbsp;but&nbsp;was&nbsp;called&nbsp;with&nbsp;{&nbsp;spy:&nbsp;function&nbsp;spy()&nbsp;{}&nbsp;}</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;on</span>&nbsp;{}</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">failed&nbsp;expectation&nbsp;in</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">invocations</span>(&nbsp;<span style="color: #795da3">spy</span>()&nbsp;)<span style="color: red; font-weight: bold">:</span></div>
+</div></div>
+  <div>&nbsp;&nbsp;0:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>()&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;on</span>&nbsp;{}</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected&nbsp;</span><span style="color: #795da3">spy</span><span style="color: red; font-weight: bold">&nbsp;to&nbsp;be&nbsp;called&nbsp;with&nbsp;</span>{}<span style="color: red; font-weight: bold">&nbsp;as&nbsp;this&nbsp;but&nbsp;was&nbsp;called&nbsp;with&nbsp;</span>{&nbsp;<span style="color: #555">spy</span>:&nbsp;<span style="color: #795da3">spy</span>&nbsp;}</div>
+</div></div>
+</div></div>
+</div></div>
 </div><p>You can make this assertion more strict by using the <code>always</code>
 flag. Then it passes if the spy was always called with obj as its this
 value.</p>
@@ -102,7 +113,18 @@ value.</p>
   <div>obj<span style="color: #000000">.</span>spy<span style="color: #000000">.</span><span style="color: #000000">call</span><span style="color: #000000">({});</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>obj<span style="color: #000000">.</span>spy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;always&nbsp;called&nbsp;on'</span><span style="color: #000000">,</span>&nbsp;obj<span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected&nbsp;spy&nbsp;to&nbsp;always&nbsp;be&nbsp;called&nbsp;with&nbsp;{&nbsp;spy:&nbsp;function&nbsp;spy()&nbsp;{}&nbsp;}&nbsp;as&nbsp;this&nbsp;but&nbsp;was&nbsp;called&nbsp;with&nbsp;{&nbsp;spy:&nbsp;function&nbsp;spy()&nbsp;{}&nbsp;},&nbsp;{&nbsp;&nbsp;}</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;always&nbsp;called&nbsp;on</span>&nbsp;{&nbsp;<span style="color: #555">spy</span>:&nbsp;<span style="color: #795da3">spy</span>&nbsp;}</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">failed&nbsp;expectation&nbsp;in</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">invocations</span>(&nbsp;<span style="color: #795da3">spy</span>(),&nbsp;<span style="color: #795da3">spy</span>()&nbsp;)<span style="color: red; font-weight: bold">:</span></div>
+</div></div>
+  <div>&nbsp;&nbsp;1:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>()&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;on</span>&nbsp;{&nbsp;<span style="color: #555">spy</span>:&nbsp;<span style="color: #795da3">spy</span>&nbsp;}</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected&nbsp;</span><span style="color: #795da3">spy</span><span style="color: red; font-weight: bold">&nbsp;to&nbsp;be&nbsp;called&nbsp;with&nbsp;</span>{&nbsp;<span style="color: #555">spy</span>:&nbsp;<span style="color: #795da3">spy</span>&nbsp;}<span style="color: red; font-weight: bold">&nbsp;as&nbsp;this&nbsp;but&nbsp;was&nbsp;called&nbsp;with&nbsp;</span>{}</div>
+</div></div>
+</div></div>
+</div></div>
 </div>
         </div>
     </div>

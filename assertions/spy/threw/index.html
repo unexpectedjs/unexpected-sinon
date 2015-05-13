@@ -92,34 +92,43 @@ spy ever threw any exception.</p>
   <div><span style="color: #a71d5d">try</span>&nbsp;<span style="color: #000000">{</span>&nbsp;<span style="color: #000000">stub</span><span style="color: #000000">();</span>&nbsp;<span style="color: #000000">}</span>&nbsp;<span style="color: #a71d5d">catch</span>&nbsp;<span style="color: #000000">(</span>e<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{}</span></div>
   <div>&nbsp;</div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">);</span></div>
-  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'TypeError'</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'wat'</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;error<span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;name<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'TypeError'</span>&nbsp;<span style="color: #000000">});</span></div>
 </div><p>In case of a failing expectation you get the following output:</p>
 <div class="code lang-javascript">
-  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'SyntaxError'</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #a71d5d">new</span>&nbsp;SyntaxError<span style="color: #000000">());</span></div>
 </div><div class="output">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">threw</span>&nbsp;SyntaxError({&nbsp;<span style="color: #555">message</span>:&nbsp;<span style="color: #df5000">''</span>&nbsp;})</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy&nbsp;did&nbsp;not&nbsp;throw&nbsp;exception</span></div>
+</div></div>
 </div><p>You can make this assertion more strict using the <code>always</code> flag. Then
 it passes if the spy always threw the given exception.</p>
 <div class="code lang-javascript">
-  <div><span style="color: #a71d5d">var</span>&nbsp;stub&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">stub</span><span style="color: #000000">();</span></div>
-  <div><span style="color: #a71d5d">var</span>&nbsp;error&nbsp;<span style="color: #a71d5d">=</span>&nbsp;<span style="color: #a71d5d">new</span>&nbsp;TypeError<span style="color: #000000">(</span><span style="color: #df5000">'wat'</span><span style="color: #000000">);</span></div>
-  <div>stub<span style="color: #000000">.</span><span style="color: #000000">throws</span><span style="color: #000000">(</span>error<span style="color: #000000">);</span></div>
-  <div><span style="color: #a71d5d">try</span>&nbsp;<span style="color: #000000">{</span>&nbsp;<span style="color: #000000">stub</span><span style="color: #000000">();</span>&nbsp;<span style="color: #000000">}</span>&nbsp;<span style="color: #a71d5d">catch</span>&nbsp;<span style="color: #000000">(</span>e<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{}</span></div>
-  <div>&nbsp;</div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">);</span></div>
-  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'TypeError'</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'wat'</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">,</span>&nbsp;error<span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;name<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'TypeError'</span>&nbsp;<span style="color: #000000">});</span></div>
 </div><p>In case of a failing expectation you get the following output:</p>
 <div class="code lang-javascript">
   <div>stub<span style="color: #000000">.</span><span style="color: #000000">throws</span><span style="color: #000000">(</span><span style="color: #a71d5d">new</span>&nbsp;SyntaxError<span style="color: #000000">(</span><span style="color: #df5000">'waat'</span><span style="color: #000000">));</span></div>
   <div><span style="color: #a71d5d">try</span>&nbsp;<span style="color: #000000">{</span>&nbsp;<span style="color: #000000">stub</span><span style="color: #000000">();</span>&nbsp;<span style="color: #000000">}</span>&nbsp;<span style="color: #a71d5d">catch</span>&nbsp;<span style="color: #000000">(</span>e<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{}</span></div>
   <div>&nbsp;</div>
-  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'TypeError'</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #183691">/waat/</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">stub&nbsp;did&nbsp;not&nbsp;always&nbsp;throw&nbsp;exception</span></div>
-  <div><span style="color: red; font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;stub()&nbsp;!TypeError(wat)</span></div>
-  <div><span style="color: red; font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;stub()&nbsp;!SyntaxError(waat)</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">stub</span>&nbsp;<span style="color: red; font-weight: bold">always&nbsp;threw</span>&nbsp;<span style="color: #183691">/waat/</span></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">failed&nbsp;expectation&nbsp;in</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">invocations</span>(&nbsp;<span style="color: #795da3">stub</span>(),&nbsp;<span style="color: #795da3">stub</span>()&nbsp;)<span style="color: red; font-weight: bold">:</span></div>
+</div></div>
+  <div>&nbsp;&nbsp;0:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">stub</span>()&nbsp;<span style="color: red; font-weight: bold">threw</span>&nbsp;<span style="color: #183691">/waat/</span></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;TypeError({&nbsp;<span style="color: #555">message</span>:&nbsp;<span style="color: #df5000">'wat'</span>&nbsp;})&nbsp;<span style="color: red; font-weight: bold">to&nbsp;satisfy</span>&nbsp;<span style="color: #183691">/waat/</span></div>
+</div></div>
+</div></div>
+</div></div>
 </div>
         </div>
     </div>

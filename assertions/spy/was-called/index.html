@@ -90,7 +90,7 @@
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'was&nbsp;called'</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected&nbsp;spy&nbsp;to&nbsp;have&nbsp;been&nbsp;called&nbsp;at&nbsp;least&nbsp;once&nbsp;but&nbsp;was&nbsp;never&nbsp;called</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called</span></div>
 </div><p>This assertion can be negated using the <code>not</code> flag:</p>
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'was&nbsp;not&nbsp;called'</span><span style="color: #000000">);</span></div>
@@ -100,8 +100,10 @@
   <div><span style="color: #000000">add</span><span style="color: #000000">(</span><span style="color: #0086b3">42</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">42</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>add<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;not&nbsp;called'</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected&nbsp;spy&nbsp;to&nbsp;not&nbsp;have&nbsp;been&nbsp;called&nbsp;but&nbsp;was&nbsp;called&nbsp;once</span></div>
-  <div><span style="color: red; font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;spy(42,&nbsp;42)</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;not&nbsp;called</span></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">invocations</span>(&nbsp;<span style="color: #795da3">spy</span>(&nbsp;<span style="color: #0086b3">42</span>,&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;)&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be&nbsp;empty</span></div>
+</div></div>
 </div>
         </div>
     </div>
