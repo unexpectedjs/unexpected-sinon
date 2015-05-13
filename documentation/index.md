@@ -110,3 +110,46 @@ expect(spy.args, 'to satisfy', {
     2: ['quux']
 });
 ```
+
+## Source
+
+The source for Unexpected can be found on
+[Github](https://github.com/unexpectedjs/unexpected-sinon).
+
+## Release
+
+### 6.0.0
+
+* Introduced
+  [to satisfy](http://unexpectedjs.github.io/assertions/any/to-satisfy/)
+  samantics for
+  [was called with](./assertions/spy/was-called-with/)
+  and
+  [threw](./assertions/spy/was-called-with/). Notice
+  that matching on types by providing the type name no longer works,
+  now it matches on the error message like
+  [to throw](http://unexpectedjs.github.io/assertions/function/to-throw/).
+* Improved the output for failing assertions a lot.
+
+## MIT License
+
+Copyright (c) 2013 Sune Simonsen <sune@we-knowhow.dk>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
