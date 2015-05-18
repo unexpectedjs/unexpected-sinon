@@ -241,6 +241,13 @@ describe('unexpected-sinon', function () {
             expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
         });
 
+        it('considers arguments to be satisfied if they satisfy Object.is', function () {
+            var circular = {};
+            circular.loop = circular;
+            spy(circular);
+            expect(spy, 'was called with', circular);
+        });
+
         it('fails if the spy was not called with the provided arguments', function () {
             expect(function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
