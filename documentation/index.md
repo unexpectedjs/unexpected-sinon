@@ -7,6 +7,8 @@ repository: https://github.com/unexpectedjs/unexpected-sinon
 
 # Unexpected-sinon
 
+![Unexpected spy :)](unexpectedSpy.png)
+
 This module extends the
 [Unexpected](https://github.com/unexpectedjs/unexpected) assertion
 library with integration for the [Sinonjs](http://sinonjs.org/)
