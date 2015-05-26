@@ -99,7 +99,7 @@ spy ever threw any exception.</p>
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #a71d5d">new</span>&nbsp;SyntaxError<span style="color: #000000">());</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">threw</span>&nbsp;SyntaxError({&nbsp;<span style="color: #555">message</span>:&nbsp;<span style="color: #df5000">''</span>&nbsp;})</div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">threw</span>&nbsp;SyntaxError()</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy&nbsp;did&nbsp;not&nbsp;throw&nbsp;exception</span></div>
 </div></div>
@@ -125,7 +125,7 @@ it passes if the spy always threw the given exception.</p>
   <div>&nbsp;&nbsp;0:&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">stub</span>()&nbsp;<span style="color: red; font-weight: bold">threw</span>&nbsp;<span style="color: #183691">/waat/</span></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;TypeError({&nbsp;<span style="color: #555">message</span>:&nbsp;<span style="color: #df5000">'wat'</span>&nbsp;})&nbsp;<span style="color: red; font-weight: bold">to&nbsp;satisfy</span>&nbsp;<span style="color: #183691">/waat/</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;TypeError(<span style="color: #df5000">'wat'</span>)&nbsp;<span style="color: red; font-weight: bold">to&nbsp;satisfy</span>&nbsp;<span style="color: #183691">/waat/</span></div>
 </div></div>
 </div></div>
 </div></div>
