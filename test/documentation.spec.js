@@ -207,7 +207,14 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected spy was called with 'baz', { foo: 'bar' }\n" +
                 "  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):\n" +
-                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy { 0: 'baz', 1: { foo: 'bar' } }"
+                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy { 0: 'baz', 1: { foo: 'bar' } }\n" +
+                "\n" +
+                "       Array(spy{\n" +
+                "         0: { foo: 'bar' }, // should equal 'baz'\n" +
+                "         1: 'baz', // should equal { foo: 'bar' }\n" +
+                "         2: 'qux',\n" +
+                "         3: 'quux'\n" +
+                "       })"
             );
         }
 
@@ -234,7 +241,13 @@ describe("documentation tests", function () {
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz' )\n" +
                 "  ):\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }"
+                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }\n" +
+                "\n" +
+                "       Array(spy{\n" +
+                "         0: { foo: 'bar' },\n" +
+                "         1: 'baz',\n" +
+                "         2: undefined // expected undefined to be truthy\n" +
+                "       })"
             );
         }
 
@@ -253,7 +266,14 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected spy was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):\n" +
-                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]"
+                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
+                "\n" +
+                "       spy[\n" +
+                "         { foo: 'bar' },\n" +
+                "         'baz',\n" +
+                "         'qux',\n" +
+                "         'quux' // should be removed\n" +
+                "       ]"
             );
         }
 
@@ -280,7 +300,13 @@ describe("documentation tests", function () {
                 "    spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz' )\n" +
                 "  ):\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]"
+                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
+                "\n" +
+                "       spy[\n" +
+                "         { foo: 'bar' },\n" +
+                "         'baz',\n" +
+                "         // expected undefined to be truthy\n" +
+                "       ]"
             );
         }
         return expect.promise.all(testPromises);

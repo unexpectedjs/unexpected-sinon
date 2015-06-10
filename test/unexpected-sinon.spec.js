@@ -255,7 +255,18 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                    "expected spy was called with { foo: \'bar\' }, \'baz\', match(truthy)\n" +
                    "  failed expectation in invocations( spy( { foo: \'baa\' }, \'baz\', true, false ) ):\n" +
-                   "    0: expected spy( { foo: \'baa\' }, \'baz\', true, false ) to satisfy { 0: { foo: \'bar\' }, 1: \'baz\', 2: match(truthy) }");
+                   "    0: expected spy( { foo: \'baa\' }, \'baz\', true, false ) to satisfy { 0: { foo: \'bar\' }, 1: \'baz\', 2: match(truthy) }\n" +
+                   "\n" +
+                   "       Array(spy{\n" +
+                   "         0: {\n" +
+                   "           foo: 'baa' // should equal 'bar'\n" +
+                   "                      // -baa\n" +
+                   "                      // +bar\n" +
+                   "         },\n" +
+                   "         1: 'baz',\n" +
+                   "         2: true,\n" +
+                   "         3: false\n" +
+                   "       })");
         });
     });
 
@@ -274,8 +285,13 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                    "expected spy was always called with { foo: 'bar' }, 'baz', match(truthy)\n" +
                    "  failed expectation in invocations( spy( 'something else' ), spy( { foo: 'bar' }, 'baz', true, false ) ):\n" +
-                   "    0: expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }");
-
+                   "    0: expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
+                   "\n" +
+                   "       Array(spy{\n"+
+                   "         0: 'something else', // should equal { foo: 'bar' }\n"+
+                   "         1: undefined, // should equal 'baz'\n"+
+                   "         2: undefined // expected ( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n"+
+                   "       })");
         });
     });
 
@@ -310,7 +326,14 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                    "expected spy was called with exactly 'foo', 'bar', match(truthy)\n" +
                    "  failed expectation in invocations( spy( 'foo', 'bar', 'baz', 'qux' ) ):\n" +
-                   "    0: expected spy( 'foo', 'bar', 'baz', 'qux' ) to satisfy [ 'foo', 'bar', match(truthy) ]");
+                   "    0: expected spy( 'foo', 'bar', 'baz', 'qux' ) to satisfy [ 'foo', 'bar', match(truthy) ]\n" +
+                   "\n" +
+                   "       spy[\n" +
+                   "         'foo',\n" +
+                   "         'bar',\n" +
+                   "         'baz',\n" +
+                   "         'qux' // should be removed\n" +
+                   "       ]");
         });
     });
 
@@ -329,7 +352,14 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                    "expected spy was always called with exactly 'foo', 'bar', match(truthy)\n" +
                    "  failed expectation in invocations( spy( 'foo', 'bar', 'baz' ), spy( 'foo', 'bar', 'baz', 'qux' ) ):\n" +
-                   "    1: expected spy( 'foo', 'bar', 'baz', 'qux' ) to satisfy [ 'foo', 'bar', match(truthy) ]");
+                   "    1: expected spy( 'foo', 'bar', 'baz', 'qux' ) to satisfy [ 'foo', 'bar', match(truthy) ]\n" +
+                   "\n" +
+                   "       spy[\n" +
+                   "         'foo',\n" +
+                   "         'bar',\n" +
+                   "         'baz',\n" +
+                   "         'qux' // should be removed\n" +
+                   "       ]");
         });
     });
 
@@ -369,8 +399,12 @@ describe('unexpected-sinon', function () {
                        "    0: expected stub() threw { name: 'TypeError' }\n" +
                        "         expected Error() to satisfy { name: 'TypeError' }\n" +
                        "\n" +
-                       "         -Error\n" +
-                       "         +TypeError");
+                       "         {\n" +
+                       "           message: '',\n" +
+                       "           name: 'Error' // should equal 'TypeError'\n" +
+                       "                         // -Error\n" +
+                       "                         // +TypeError\n" +
+                       "         }");
             });
         });
 
@@ -450,8 +484,12 @@ describe('unexpected-sinon', function () {
                        "    1: expected stub() threw { name: 'Error' }\n" +
                        "         expected TypeError() to satisfy { name: 'Error' }\n" +
                        "\n" +
-                       "         -TypeError\n" +
-                       "         +Error");
+                       "         {\n" +
+                       "           message: '',\n" +
+                       "           name: 'TypeError' // should equal 'Error'\n" +
+                       "                             // -TypeError\n" +
+                       "                             // +Error\n" +
+                       "         }");
             });
         });
 
