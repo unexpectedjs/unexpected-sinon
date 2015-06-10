@@ -24,7 +24,7 @@
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
     "sinon": "*",
-    "unexpected": "^7.1.2"
+    "unexpected": "^7.1.2 || 8"
   },
   "devDependencies": {
     "mocha": "^2.0.1",
