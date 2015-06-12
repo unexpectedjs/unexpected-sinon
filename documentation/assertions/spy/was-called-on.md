@@ -15,9 +15,12 @@ expect(obj.spy, 'was called on', another);
 
 ```output
 expected spy was called on {}
-  failed expectation in invocations( spy() ):
-    0: expected spy() was called on {}
-         expected spy to be called with {} as this but was called with { spy: spy }
+  expected invocations( spy() ) to have values satisfying 'was called on', {}
+
+  spyCalls[
+    spy() // expected spy() was called on {}
+          //   expected spy to be called with {} as this but was called with { spy: spy }
+  ]
 ```
 
 You can make this assertion more strict by using the `always`
@@ -37,7 +40,11 @@ expect(obj.spy, 'was always called on', obj);
 
 ```output
 expected spy was always called on { spy: spy }
-  failed expectation in invocations( spy(), spy() ):
-    1: expected spy() was called on { spy: spy }
-         expected spy to be called with { spy: spy } as this but was called with {}
+  expected invocations( spy(), spy() ) to have values satisfying 'was called on', { spy: spy }
+
+  spyCalls[
+    spy(),
+    spy() // expected spy() was called on { spy: spy }
+          //   expected spy to be called with { spy: spy } as this but was called with {}
+  ]
 ```
