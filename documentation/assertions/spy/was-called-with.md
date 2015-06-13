@@ -14,15 +14,17 @@ expect(spy, 'was called with', 'baz', { foo: 'bar' });
 
 ```output
 expected spy was called with 'baz', { foo: 'bar' }
-  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):
-    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy { 0: 'baz', 1: { foo: 'bar' } }
+  expected invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) )
+  to have values satisfying { 0: 'baz', 1: { foo: 'bar' } }
 
-       Array(spy{
-         0: { foo: 'bar' }, // should equal 'baz'
-         1: 'baz', // should equal { foo: 'bar' }
-         2: 'qux',
-         3: 'quux'
-       })
+  invocations(
+    spy([
+      0: { foo: 'bar' }, // should equal 'baz'
+      1: 'baz', // should equal { foo: 'bar' }
+      2: 'qux',
+      3: 'quux'
+    ])
+  )
 ```
 
 You can make this assertion more strict using the `always` flag. Then
@@ -44,19 +46,17 @@ expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be tr
 
 ```output
 expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
-  failed expectation in
+  expected spyCalls to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }
+
   invocations(
     spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
     spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
-    spy( { foo: 'bar' }, 'baz' )
-  ):
-    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }
-
-       Array(spy{
-         0: { foo: 'bar' },
-         1: 'baz',
-         2: undefined // expected undefined to be truthy
-       })
+    spy([
+      0: { foo: 'bar' },
+      1: 'baz',
+      2: undefined // expected undefined to be truthy
+    ])
+  )
 ```
 
 I case you want to ensure that the spy was called with the provided
@@ -76,15 +76,17 @@ expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be t
 
 ```output
 expected spy was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
-  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):
-    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
+  expected invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) )
+  to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
 
-       spy[
-         { foo: 'bar' },
-         'baz',
-         'qux',
-         'quux' // should be removed
-       ]
+  invocations(
+    spy([
+      { foo: 'bar' },
+      'baz',
+      'qux',
+      'quux' // should be removed
+    ])
+  )
 ```
 
 It is of cause also possible to combine the two flags, that will then
@@ -107,17 +109,15 @@ expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it('
 
 ```output
 expected spy was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
-  failed expectation in
+  expected spyCalls to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
+
   invocations(
     spy( { foo: 'bar' }, 'baz', 'qux' ),
     spy( { foo: 'bar' }, 'baz', 'qux' ),
-    spy( { foo: 'bar' }, 'baz' )
-  ):
-    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
-
-       spy[
-         { foo: 'bar' },
-         'baz',
-         // expected undefined to be truthy
-       ]
+    spy([
+      { foo: 'bar' },
+      'baz',
+      // expected undefined to be truthy
+    ])
+  )
 ```

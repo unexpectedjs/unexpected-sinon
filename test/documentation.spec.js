@@ -93,9 +93,13 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected stub always threw /waat/\n" +
-                "  failed expectation in invocations( stub(), stub() ):\n" +
-                "    0: expected stub() threw /waat/\n" +
-                "         expected TypeError('wat') to satisfy /waat/"
+                "  expected invocations( stub(), stub() ) to have values satisfying 'threw', /waat/\n" +
+                "\n" +
+                "  invocations(\n" +
+                "    stub(), // expected stub() threw /waat/\n" +
+                "            //   expected TypeError('wat') to satisfy /waat/\n" +
+                "    stub()\n" +
+                "  )"
             );
         }
         return expect.promise.all(testPromises);
@@ -119,9 +123,12 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was called on {}\n" +
-                "  failed expectation in invocations( spy() ):\n" +
-                "    0: expected spy() was called on {}\n" +
-                "         expected spy to be called with {} as this but was called with { spy: spy }"
+                "  expected invocations( spy() ) to have values satisfying 'was called on', {}\n" +
+                "\n" +
+                "  invocations(\n" +
+                "    spy() // expected spy() was called on {}\n" +
+                "          //   expected spy to be called with {} as this but was called with { spy: spy }\n" +
+                "  )"
             );
         }
 
@@ -139,9 +146,13 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was always called on { spy: spy }\n" +
-                "  failed expectation in invocations( spy(), spy() ):\n" +
-                "    1: expected spy() was called on { spy: spy }\n" +
-                "         expected spy to be called with { spy: spy } as this but was called with {}"
+                "  expected invocations( spy(), spy() ) to have values satisfying 'was called on', { spy: spy }\n" +
+                "\n" +
+                "  invocations(\n" +
+                "    spy(),\n" +
+                "    spy() // expected spy() was called on { spy: spy }\n" +
+                "          //   expected spy to be called with { spy: spy } as this but was called with {}\n" +
+                "  )"
             );
         }
         return expect.promise.all(testPromises);
@@ -206,15 +217,17 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was called with 'baz', { foo: 'bar' }\n" +
-                "  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):\n" +
-                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy { 0: 'baz', 1: { foo: 'bar' } }\n" +
+                "  expected invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) )\n" +
+                "  to have values satisfying { 0: 'baz', 1: { foo: 'bar' } }\n" +
                 "\n" +
-                "       Array(spy{\n" +
-                "         0: { foo: 'bar' }, // should equal 'baz'\n" +
-                "         1: 'baz', // should equal { foo: 'bar' }\n" +
-                "         2: 'qux',\n" +
-                "         3: 'quux'\n" +
-                "       })"
+                "  invocations(\n" +
+                "    spy([\n" +
+                "      0: { foo: 'bar' }, // should equal 'baz'\n" +
+                "      1: 'baz', // should equal { foo: 'bar' }\n" +
+                "      2: 'qux',\n" +
+                "      3: 'quux'\n" +
+                "    ])\n" +
+                "  )"
             );
         }
 
@@ -235,19 +248,17 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
-                "  failed expectation in\n" +
+                "  expected spyCalls to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }\n" +
+                "\n" +
                 "  invocations(\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
-                "    spy( { foo: 'bar' }, 'baz' )\n" +
-                "  ):\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }\n" +
-                "\n" +
-                "       Array(spy{\n" +
-                "         0: { foo: 'bar' },\n" +
-                "         1: 'baz',\n" +
-                "         2: undefined // expected undefined to be truthy\n" +
-                "       })"
+                "    spy([\n" +
+                "      0: { foo: 'bar' },\n" +
+                "      1: 'baz',\n" +
+                "      2: undefined // expected undefined to be truthy\n" +
+                "    ])\n" +
+                "  )"
             );
         }
 
@@ -265,15 +276,17 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
-                "  failed expectation in invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) ):\n" +
-                "    0: expected spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
+                "  expected invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) )\n" +
+                "  to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
                 "\n" +
-                "       spy[\n" +
-                "         { foo: 'bar' },\n" +
-                "         'baz',\n" +
-                "         'qux',\n" +
-                "         'quux' // should be removed\n" +
-                "       ]"
+                "  invocations(\n" +
+                "    spy([\n" +
+                "      { foo: 'bar' },\n" +
+                "      'baz',\n" +
+                "      'qux',\n" +
+                "      'quux' // should be removed\n" +
+                "    ])\n" +
+                "  )"
             );
         }
 
@@ -294,19 +307,17 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
-                "  failed expectation in\n" +
+                "  expected spyCalls to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
+                "\n" +
                 "  invocations(\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
-                "    spy( { foo: 'bar' }, 'baz' )\n" +
-                "  ):\n" +
-                "    2: expected spy( { foo: 'bar' }, 'baz' ) to satisfy [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
-                "\n" +
-                "       spy[\n" +
-                "         { foo: 'bar' },\n" +
-                "         'baz',\n" +
-                "         // expected undefined to be truthy\n" +
-                "       ]"
+                "    spy([\n" +
+                "      { foo: 'bar' },\n" +
+                "      'baz',\n" +
+                "      // expected undefined to be truthy\n" +
+                "    ])\n" +
+                "  )"
             );
         }
         return expect.promise.all(testPromises);
