@@ -12,12 +12,12 @@
     "url": "/assertions/spy/was-called-on/"
   },
   {
-    "label": "was called times (spy)",
-    "url": "/assertions/spy/was-called-times/"
-  },
-  {
     "label": "was called with (spy)",
     "url": "/assertions/spy/was-called-with/"
+  },
+  {
+    "label": "was called times (spy)",
+    "url": "/assertions/spy/was-called-times/"
   },
   {
     "label": "was called (spy)",
