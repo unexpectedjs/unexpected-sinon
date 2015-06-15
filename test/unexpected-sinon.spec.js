@@ -262,7 +262,7 @@ describe('unexpected-sinon', function () {
                    "  to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
                    "\n" +
                    "  invocations(\n" +
-                   "    spy([\n" +
+                   "    spy(\n" +
                    "      {\n" +
                    "        foo: 'baa' // should equal 'bar'\n" +
                    "                   // -baa\n" +
@@ -271,7 +271,7 @@ describe('unexpected-sinon', function () {
                    "      'baz',\n" +
                    "      true,\n" +
                    "      false\n" +
-                   "    ])\n" +
+                   "    )\n" +
                    "  )");
         });
     });
@@ -294,11 +294,11 @@ describe('unexpected-sinon', function () {
                    "  to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
                    "\n" +
                    "  invocations(\n" +
-                   "    spy([\n" +
+                   "    spy(\n" +
                    "      'something else', // should equal { foo: 'bar' }\n" +
                    "      undefined, // should equal 'baz'\n" +
                    "      undefined // expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
-                   "    ]),\n" +
+                   "    ),\n" +
                    "    spy( { foo: 'bar' }, 'baz', true, false )\n" +
                    "  )");
         });
@@ -326,7 +326,7 @@ describe('unexpected-sinon', function () {
 
     describe('was called with exactly', function () {
         it('passes if the spy was called with the provided arguments and no others', function () {
-            spy('foo', 'baz', 'baz');
+            spy('foo', 'bar', 'baz');
             spy('foo', 'bar', 'baz');
             expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
         });
@@ -340,12 +340,12 @@ describe('unexpected-sinon', function () {
                    "  expected invocations( spy( 'foo', 'bar', 'baz', 'qux' ) ) to have values satisfying [ 'foo', 'bar', match(truthy) ]\n" +
                    "\n" +
                    "  invocations(\n" +
-                   "    spy([\n" +
+                   "    spy(\n" +
                    "      'foo',\n" +
                    "      'bar',\n" +
                    "      'baz',\n" +
                    "      'qux' // should be removed\n" +
-                   "    ])\n" +
+                   "    )\n" +
                    "  )");
         });
     });
@@ -369,12 +369,12 @@ describe('unexpected-sinon', function () {
                    "\n" +
                    "  invocations(\n" +
                    "    spy( 'foo', 'bar', 'baz' ),\n" +
-                   "    spy([\n" +
+                   "    spy(\n" +
                    "      'foo',\n" +
                    "      'bar',\n" +
                    "      'baz',\n" +
                    "      'qux' // should be removed\n" +
-                   "    ])\n" +
+                   "    )\n" +
                    "  )");
         });
     });

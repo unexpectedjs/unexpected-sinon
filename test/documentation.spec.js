@@ -221,12 +221,12 @@ describe("documentation tests", function () {
                 "  to have values satisfying { 0: 'baz', 1: { foo: 'bar' } }\n" +
                 "\n" +
                 "  invocations(\n" +
-                "    spy([\n" +
+                "    spy(\n" +
                 "      { foo: 'bar' }, // should equal 'baz'\n" +
                 "      'baz', // should equal { foo: 'bar' }\n" +
                 "      'qux',\n" +
                 "      'quux'\n" +
-                "    ])\n" +
+                "    )\n" +
                 "  )"
             );
         }
@@ -253,11 +253,11 @@ describe("documentation tests", function () {
                 "  invocations(\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
-                "    spy([\n" +
+                "    spy(\n" +
                 "      { foo: 'bar' },\n" +
                 "      'baz',\n" +
                 "      undefined // expected undefined to be truthy\n" +
-                "    ])\n" +
+                "    )\n" +
                 "  )"
             );
         }
@@ -280,12 +280,12 @@ describe("documentation tests", function () {
                 "  to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
                 "\n" +
                 "  invocations(\n" +
-                "    spy([\n" +
+                "    spy(\n" +
                 "      { foo: 'bar' },\n" +
                 "      'baz',\n" +
                 "      'qux',\n" +
                 "      'quux' // should be removed\n" +
-                "    ])\n" +
+                "    )\n" +
                 "  )"
             );
         }
@@ -312,11 +312,11 @@ describe("documentation tests", function () {
                 "  invocations(\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
-                "    spy([\n" +
+                "    spy(\n" +
                 "      { foo: 'bar' },\n" +
                 "      'baz',\n" +
                 "      // expected undefined to be truthy\n" +
-                "    ])\n" +
+                "    )\n" +
                 "  )"
             );
         }
