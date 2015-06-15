@@ -263,14 +263,14 @@ describe('unexpected-sinon', function () {
                    "\n" +
                    "  invocations(\n" +
                    "    spy([\n" +
-                   "      0: {\n" +
+                   "      {\n" +
                    "        foo: 'baa' // should equal 'bar'\n" +
                    "                   // -baa\n" +
                    "                   // +bar\n" +
                    "      },\n" +
-                   "      1: 'baz',\n" +
-                   "      2: true,\n" +
-                   "      3: false\n" +
+                   "      'baz',\n" +
+                   "      true,\n" +
+                   "      false\n" +
                    "    ])\n" +
                    "  )");
         });
@@ -295,9 +295,9 @@ describe('unexpected-sinon', function () {
                    "\n" +
                    "  invocations(\n" +
                    "    spy([\n" +
-                   "      0: 'something else', // should equal { foo: 'bar' }\n" +
-                   "      1: undefined, // should equal 'baz'\n" +
-                   "      2: undefined // expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
+                   "      'something else', // should equal { foo: 'bar' }\n" +
+                   "      undefined, // should equal 'baz'\n" +
+                   "      undefined // expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
                    "    ]),\n" +
                    "    spy( { foo: 'bar' }, 'baz', true, false )\n" +
                    "  )");

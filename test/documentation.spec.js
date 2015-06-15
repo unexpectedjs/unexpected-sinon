@@ -222,10 +222,10 @@ describe("documentation tests", function () {
                 "\n" +
                 "  invocations(\n" +
                 "    spy([\n" +
-                "      0: { foo: 'bar' }, // should equal 'baz'\n" +
-                "      1: 'baz', // should equal { foo: 'bar' }\n" +
-                "      2: 'qux',\n" +
-                "      3: 'quux'\n" +
+                "      { foo: 'bar' }, // should equal 'baz'\n" +
+                "      'baz', // should equal { foo: 'bar' }\n" +
+                "      'qux',\n" +
+                "      'quux'\n" +
                 "    ])\n" +
                 "  )"
             );
@@ -254,9 +254,9 @@ describe("documentation tests", function () {
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
                 "    spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
                 "    spy([\n" +
-                "      0: { foo: 'bar' },\n" +
-                "      1: 'baz',\n" +
-                "      2: undefined // expected undefined to be truthy\n" +
+                "      { foo: 'bar' },\n" +
+                "      'baz',\n" +
+                "      undefined // expected undefined to be truthy\n" +
                 "    ])\n" +
                 "  )"
             );

@@ -19,10 +19,10 @@ expected spy was called with 'baz', { foo: 'bar' }
 
   invocations(
     spy([
-      0: { foo: 'bar' }, // should equal 'baz'
-      1: 'baz', // should equal { foo: 'bar' }
-      2: 'qux',
-      3: 'quux'
+      { foo: 'bar' }, // should equal 'baz'
+      'baz', // should equal { foo: 'bar' }
+      'qux',
+      'quux'
     ])
   )
 ```
@@ -52,9 +52,9 @@ expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be trut
     spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
     spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
     spy([
-      0: { foo: 'bar' },
-      1: 'baz',
-      2: undefined // expected undefined to be truthy
+      { foo: 'bar' },
+      'baz',
+      undefined // expected undefined to be truthy
     ])
   )
 ```
