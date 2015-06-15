@@ -97,9 +97,9 @@
   <div>&nbsp;</div>
   <div><span style="color: #795da3">invocations</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">spy</span>([</div>
+  <div><span style="color: #795da3">spy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">0</span>:&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -108,7 +108,7 @@
 </div></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">1</span>:&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #df5000">'baz'</span>,&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -117,12 +117,12 @@
 </div></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">2</span>:&nbsp;<span style="color: #df5000">'qux'</span>,</div>
+  <div><span style="color: #df5000">'qux'</span>,</div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">3</span>:&nbsp;<span style="color: #df5000">'quux'</span></div>
+  <div><span style="color: #df5000">'quux'</span></div>
 </div></div>
-  <div>])</div>
+  <div>)</div>
 </div></div>
   <div>)</div>
 </div></div>
@@ -152,15 +152,15 @@ passes if the spy was always called with the provided arguments.</p>
   <div><span style="color: #795da3">spy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>,&nbsp;<span style="color: #df5000">'quux'</span>&nbsp;),</div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">spy</span>([</div>
+  <div><span style="color: #795da3">spy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">0</span>:&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
+  <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">1</span>:&nbsp;<span style="color: #df5000">'baz'</span>,</div>
+  <div><span style="color: #df5000">'baz'</span>,</div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">2</span>:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #0086b3">undefined</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
@@ -170,7 +170,7 @@ passes if the spy was always called with the provided arguments.</p>
 </div></div>
 </div></div>
 </div></div>
-  <div>])</div>
+  <div>)</div>
 </div></div>
   <div>)</div>
 </div></div>
@@ -191,7 +191,7 @@ arguments and no others, you can use the <code>exactly</code> flag.</p>
   <div>&nbsp;</div>
   <div><span style="color: #795da3">invocations</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">spy</span>([</div>
+  <div><span style="color: #795da3">spy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>
@@ -208,7 +208,7 @@ arguments and no others, you can use the <code>exactly</code> flag.</p>
   <div><span style="color: red; font-weight: bold">should&nbsp;be&nbsp;removed</span></div>
 </div></div>
 </div></div>
-  <div>])</div>
+  <div>)</div>
 </div></div>
   <div>)</div>
 </div></div>
@@ -237,7 +237,7 @@ others.</p>
   <div><span style="color: #795da3">spy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>&nbsp;),</div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">spy</span>([</div>
+  <div><span style="color: #795da3">spy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>
@@ -255,7 +255,7 @@ others.</p>
 </div></div>
 </div></div>
 </div></div>
-  <div>])</div>
+  <div>)</div>
 </div></div>
   <div>)</div>
 </div></div>
