@@ -24,13 +24,13 @@
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
     "sinon": "*",
-    "unexpected": "^7.1.2 || 8"
+    "unexpected": "^8.5.1"
   },
   "devDependencies": {
     "mocha": "^2.0.1",
     "serve": "*",
     "sinon": "1.9.1",
-    "unexpected": "8.5.0",
+    "unexpected": "8.5.1",
     "unexpected-documentation-site-generator": "2.5.1"
   }
 }
