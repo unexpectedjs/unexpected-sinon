@@ -31,6 +31,6 @@
     "serve": "*",
     "sinon": "1.9.1",
     "unexpected": "8.5.0",
-    "unexpected-documentation-site-generator": "2.2.3"
+    "unexpected-documentation-site-generator": "2.5.1"
   }
 }
