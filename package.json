@@ -37,7 +37,7 @@
     "jshint": "2.8.0",
     "mocha": "2.2.5",
     "serve": "*",
-    "sinon": "1.9.1",
+    "sinon": "1.15.4",
     "unexpected": "9.3.0",
     "unexpected-documentation-site-generator": "2.5.2"
   }
