@@ -322,6 +322,21 @@ describe('unexpected-sinon', function () {
                    "    spy( 'bar', 'true' ) // expected spy( 'bar', 'true' ) not to satisfy { 0: 'bar', 1: match(truthy) }\n" +
                    "  )");
         });
+
+        it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
+            expect(function () {
+                spy('foo');
+                spy('bar', {});
+                expect(spy, 'was never called with', 'bar');
+            }, 'to throw exception',
+                   "expected spy was never called with 'bar'\n" +
+                   "  expected invocations( spy( 'foo' ), spy( 'bar', {} ) ) to have values satisfying 'not to satisfy', { 0: 'bar' }\n" +
+                   "\n" +
+                   "  invocations(\n" +
+                   "    spy( 'foo' ),\n" +
+                   "    spy( 'bar', {} ) // expected spy( 'bar', {} ) not to satisfy { 0: 'bar' }\n" +
+                   "  )");
+        });
     });
 
     describe('was called with exactly', function () {
