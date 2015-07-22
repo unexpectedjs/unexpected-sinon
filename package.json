@@ -19,7 +19,8 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --require ./test/common",
     "generate-site": "node ./generate-site.js",
-    "update-examples": "node ./generate-site.js --update-examples"
+    "update-examples": "node ./generate-site.js --update-examples",
+    "deploy-site": "deploy-site"
   },
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
