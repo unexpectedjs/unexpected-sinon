@@ -144,7 +144,9 @@ describe('unexpected-sinon', function () {
 
     describe('was called the new operator', function () {
         it('passes if spy was called the new operator', function () {
+            /*jshint -W055 */
             new spy();
+            /*jshint +W055 */
             expect(spy,"was called with new");
         });
         it('fails if spy was never called with new operator', function () {
