@@ -17,7 +17,11 @@
     "url": "https://github.com/unexpectedjs/unexpected-sinon"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require ./test/common",
+    "lint": "jshint .",
+    "test": "mocha --require ./test/common && npm run lint",
+    "travis": "npm test && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run generate-site",
+    "test-browser": "serve .",
+    "coverage": "NODE_ENV=development istanbul cover _mocha -- --reporter dot",
     "generate-site": "node ./generate-site.js",
     "update-examples": "node ./generate-site.js --update-examples",
     "deploy-site": "deploy-site"
@@ -28,7 +32,10 @@
     "unexpected": "^8.5.1 || 9"
   },
   "devDependencies": {
-    "mocha": "^2.0.1",
+    "coveralls": "2.11.3",
+    "istanbul": "0.3.17",
+    "jshint": "2.8.0",
+    "mocha": "2.2.5",
     "serve": "*",
     "sinon": "1.9.1",
     "unexpected": "8.5.1",

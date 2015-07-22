@@ -1,0 +1,5 @@
+node_modules
+coverage
+vendor
+test/documentation.spec.js
+site-build
