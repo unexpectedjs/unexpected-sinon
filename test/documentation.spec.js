@@ -146,7 +146,8 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was always called on { spy: spy }\n" +
-                "  expected invocations( spy(), spy() ) to have values satisfying 'was called on', { spy: spy }\n" +
+                "  expected invocations( spy(), spy() )\n" +
+                "  to have values satisfying 'was called on', { spy: spy }\n" +
                 "\n" +
                 "  invocations(\n" +
                 "    spy(),\n" +
@@ -186,7 +187,8 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was called times 2\n" +
-                "  expected invocations( spy( 41, 42 ), spy( 41, 43 ), spy( 41, 44 ), spy( 41, 45 ) ) to have length 2\n" +
+                "  expected invocations( spy( 41, 42 ), spy( 41, 43 ), spy( 41, 44 ), spy( 41, 45 ) )\n" +
+                "  to have length 2\n" +
                 "    expected 4 to be 2"
             );
         }
@@ -247,7 +249,8 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
+                "expected spy\n" +
+                "was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "  expected spyCalls to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }\n" +
                 "\n" +
                 "  invocations(\n" +
@@ -275,7 +278,8 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
+                "expected spy\n" +
+                "was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "  expected invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) )\n" +
                 "  to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
                 "\n" +
@@ -306,7 +310,8 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected spy was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
+                "expected spy\n" +
+                "was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "  expected spyCalls to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
                 "\n" +
                 "  invocations(\n" +

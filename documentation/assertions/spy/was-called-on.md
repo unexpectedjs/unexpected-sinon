@@ -40,7 +40,8 @@ expect(obj.spy, 'was always called on', obj);
 
 ```output
 expected spy was always called on { spy: spy }
-  expected invocations( spy(), spy() ) to have values satisfying 'was called on', { spy: spy }
+  expected invocations( spy(), spy() )
+  to have values satisfying 'was called on', { spy: spy }
 
   invocations(
     spy(),

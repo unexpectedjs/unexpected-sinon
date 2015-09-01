@@ -45,7 +45,8 @@ expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be tr
 ```
 
 ```output
-expected spy was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
+expected spy
+was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
   expected spyCalls to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: expect.it('to be truthy') }
 
   invocations(
@@ -75,7 +76,8 @@ expect(spy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be t
 ```
 
 ```output
-expected spy was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
+expected spy
+was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
   expected invocations( spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) )
   to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
 
@@ -108,7 +110,8 @@ expect(spy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it('
 ```
 
 ```output
-expected spy was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
+expected spy
+was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
   expected spyCalls to have values satisfying [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]
 
   invocations(

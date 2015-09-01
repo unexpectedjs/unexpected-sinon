@@ -21,7 +21,8 @@ expect(add, 'was called times', 2);
 
 ```output
 expected spy was called times 2
-  expected invocations( spy( 41, 42 ), spy( 41, 43 ), spy( 41, 44 ), spy( 41, 45 ) ) to have length 2
+  expected invocations( spy( 41, 42 ), spy( 41, 43 ), spy( 41, 44 ), spy( 41, 45 ) )
+  to have length 2
     expected 4 to be 2
 ```
 

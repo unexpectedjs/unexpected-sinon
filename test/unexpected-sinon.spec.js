@@ -3,8 +3,10 @@ describe('unexpected-sinon', function () {
     var expect, spy;
     beforeEach(function () {
         expect = unexpected.clone();
+        expect.output.preferredWidth = 120;
         spy = sinon.spy();
     });
+
 
     describe('was called', function () {
         it('passes if spy was called at least once', function () {
