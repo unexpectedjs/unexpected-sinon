@@ -34,6 +34,6 @@ expect(add, 'was not called');
 expected spy was not called
 
 invocations(
-  spy( 42, 42 ) // should be removed
+  spy( 42, 42 ) at theFunction (theFileName:xx:yy) // should be removed
 )
 ```
