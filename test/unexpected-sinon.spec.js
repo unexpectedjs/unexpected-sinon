@@ -543,8 +543,7 @@ describe('unexpected-sinon', function () {
                        "\n" +
                        "invocations(\n" +
                        "  stub() at theFunction (theFileName:xx:yy),\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw { name: 'Error' }\n" +
-                       "                                            //   expected TypeError() to satisfy { name: 'Error' }\n" +
+                       "  stub() at theFunction (theFileName:xx:yy) // expected stub() at theFunction (theFileName:xx:yy) threw { name: 'Error' }\n" +                       "                                            //   expected TypeError() to satisfy { name: 'Error' }\n" +
                        "                                            //\n" +
                        "                                            //   {\n" +
                        "                                            //     message: '',\n" +
