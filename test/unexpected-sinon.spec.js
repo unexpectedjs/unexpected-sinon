@@ -237,13 +237,12 @@ describe('unexpected-sinon', function () {
                 expect(obj.spy, 'was always called on', obj);
             }, 'to throw exception',
                    "expected spy was always called on { spy: spy }\n" +
-                   "  expected invocations( spy(), spy() ) to have values satisfying 'was called on', { spy: spy }\n" +
                    "\n" +
-                   "  invocations(\n" +
-                   "    spy(),\n" +
-                   "    spy() // expected spy() was called on { spy: spy }\n" +
-                   "          //   expected spy to be called with { spy: spy } as this but was called with null\n" +
-                   "  )");
+                   "invocations(\n" +
+                   "  spy(),\n" +
+                   "  spy() // expected spy() was called on { spy: spy }\n" +
+                   "        //   expected spy to be called with { spy: spy } as this but was called with null\n" +
+                   ")");
         });
     });
 
@@ -267,21 +266,19 @@ describe('unexpected-sinon', function () {
                 expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
             }, 'to throw exception',
                    "expected spy was called with { foo: \'bar\' }, \'baz\', match(truthy)\n" +
-                   "  expected invocations( spy( { foo: 'baa' }, 'baz', true, false ) )\n" +
-                   "  to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
                    "\n" +
-                   "  invocations(\n" +
-                   "    spy(\n" +
-                   "      {\n" +
-                   "        foo: 'baa' // should equal 'bar'\n" +
-                   "                   // -baa\n" +
-                   "                   // +bar\n" +
-                   "      },\n" +
-                   "      'baz',\n" +
-                   "      true,\n" +
-                   "      false\n" +
-                   "    )\n" +
-                   "  )");
+                   "invocations(\n" +
+                   "  spy(\n" +
+                   "    {\n" +
+                   "      foo: 'baa' // should equal 'bar'\n" +
+                   "                 // -baa\n" +
+                   "                 // +bar\n" +
+                   "    },\n" +
+                   "    'baz',\n" +
+                   "    true,\n" +
+                   "    false\n" +
+                   "  )\n" +
+                   ")");
         });
     });
 
@@ -299,17 +296,15 @@ describe('unexpected-sinon', function () {
                 expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
             }, 'to throw exception',
                    "expected spy was always called with { foo: 'bar' }, 'baz', match(truthy)\n" +
-                   "  expected invocations( spy( 'something else' ), spy( { foo: 'bar' }, 'baz', true, false ) )\n" +
-                   "  to have values satisfying { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
                    "\n" +
-                   "  invocations(\n" +
-                   "    spy(\n" +
-                   "      'something else', // should equal { foo: 'bar' }\n" +
-                   "      undefined, // should equal 'baz'\n" +
-                   "      undefined // expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
-                   "    ),\n" +
-                   "    spy( { foo: 'bar' }, 'baz', true, false )\n" +
-                   "  )");
+                   "invocations(\n" +
+                   "  spy(\n" +
+                   "    'something else', // should equal { foo: 'bar' }\n" +
+                   "    undefined, // should equal 'baz'\n" +
+                   "    undefined // expected spy( 'something else' ) to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
+                   "  ),\n" +
+                   "  spy( { foo: 'bar' }, 'baz', true, false )\n" +
+                   ")");
         });
     });
 
@@ -325,11 +320,10 @@ describe('unexpected-sinon', function () {
                 expect(spy, 'was never called with', 'bar', sinon.match.truthy);
             }, 'to throw exception',
                    "expected spy was never called with 'bar', match(truthy)\n" +
-                   "  expected invocations( spy( 'bar', 'true' ) ) to have values satisfying 'not to satisfy', { 0: 'bar', 1: match(truthy) }\n" +
                    "\n" +
-                   "  invocations(\n" +
-                   "    spy( 'bar', 'true' ) // expected spy( 'bar', 'true' ) not to satisfy { 0: 'bar', 1: match(truthy) }\n" +
-                   "  )");
+                   "invocations(\n" +
+                   "  spy( 'bar', 'true' ) // expected spy( 'bar', 'true' ) not to satisfy { 0: 'bar', 1: match(truthy) }\n" +
+                   ")");
         });
 
         it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
@@ -339,12 +333,11 @@ describe('unexpected-sinon', function () {
                 expect(spy, 'was never called with', 'bar');
             }, 'to throw exception',
                    "expected spy was never called with 'bar'\n" +
-                   "  expected invocations( spy( 'foo' ), spy( 'bar', {} ) ) to have values satisfying 'not to satisfy', { 0: 'bar' }\n" +
                    "\n" +
-                   "  invocations(\n" +
-                   "    spy( 'foo' ),\n" +
-                   "    spy( 'bar', {} ) // expected spy( 'bar', {} ) not to satisfy { 0: 'bar' }\n" +
-                   "  )");
+                   "invocations(\n" +
+                   "  spy( 'foo' ),\n" +
+                   "  spy( 'bar', {} ) // expected spy( 'bar', {} ) not to satisfy { 0: 'bar' }\n" +
+                   ")");
         });
     });
 
@@ -361,16 +354,15 @@ describe('unexpected-sinon', function () {
                 expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
             }, 'to throw exception',
                    "expected spy was called with exactly 'foo', 'bar', match(truthy)\n" +
-                   "  expected invocations( spy( 'foo', 'bar', 'baz', 'qux' ) ) to have values satisfying [ 'foo', 'bar', match(truthy) ]\n" +
                    "\n" +
-                   "  invocations(\n" +
-                   "    spy(\n" +
-                   "      'foo',\n" +
-                   "      'bar',\n" +
-                   "      'baz',\n" +
-                   "      'qux' // should be removed\n" +
-                   "    )\n" +
-                   "  )");
+                   "invocations(\n" +
+                   "  spy(\n" +
+                   "    'foo',\n" +
+                   "    'bar',\n" +
+                   "    'baz',\n" +
+                   "    'qux' // should be removed\n" +
+                   "  )\n" +
+                   ")");
         });
     });
 
@@ -388,18 +380,16 @@ describe('unexpected-sinon', function () {
                 expect(spy, 'was always called with exactly', 'foo', 'bar', sinon.match.truthy);
             }, 'to throw exception',
                    "expected spy was always called with exactly 'foo', 'bar', match(truthy)\n" +
-                   "  expected invocations( spy( 'foo', 'bar', 'baz' ), spy( 'foo', 'bar', 'baz', 'qux' ) )\n" +
-                   "  to have values satisfying [ 'foo', 'bar', match(truthy) ]\n" +
                    "\n" +
-                   "  invocations(\n" +
-                   "    spy( 'foo', 'bar', 'baz' ),\n" +
-                   "    spy(\n" +
-                   "      'foo',\n" +
-                   "      'bar',\n" +
-                   "      'baz',\n" +
-                   "      'qux' // should be removed\n" +
-                   "    )\n" +
-                   "  )");
+                   "invocations(\n" +
+                   "  spy( 'foo', 'bar', 'baz' ),\n" +
+                   "  spy(\n" +
+                   "    'foo',\n" +
+                   "    'bar',\n" +
+                   "    'baz',\n" +
+                   "    'qux' // should be removed\n" +
+                   "  )\n" +
+                   ")");
         });
     });
 
@@ -435,19 +425,18 @@ describe('unexpected-sinon', function () {
                     expect(stub, 'threw', { name: 'TypeError' });
                 }, 'to throw exception',
                        "expected stub threw { name: 'TypeError' }\n" +
-                       "  expected invocations( stub() ) to have values satisfying 'threw', { name: 'TypeError' }\n" +
                        "\n" +
-                       "  invocations(\n" +
-                       "    stub() // expected stub() threw { name: 'TypeError' }\n" +
-                       "           //   expected Error() to satisfy { name: 'TypeError' }\n" +
-                       "           //\n" +
-                       "           //   {\n" +
-                       "           //     message: '',\n" +
-                       "           //     name: 'Error' // should equal 'TypeError'\n" +
-                       "           //                   // -Error\n" +
-                       "           //                   // +TypeError\n" +
-                       "           //   }\n" +
-                       "  )");
+                       "invocations(\n" +
+                       "  stub() // expected stub() threw { name: 'TypeError' }\n" +
+                       "         //   expected Error() to satisfy { name: 'TypeError' }\n" +
+                       "         //\n" +
+                       "         //   {\n" +
+                       "         //     message: '',\n" +
+                       "         //     name: 'Error' // should equal 'TypeError'\n" +
+                       "         //                   // -Error\n" +
+                       "         //                   // +TypeError\n" +
+                       "         //   }\n" +
+                       ")");
             });
         });
 
@@ -468,12 +457,11 @@ describe('unexpected-sinon', function () {
                     expect(stub, 'threw', new Error());
                 }, 'to throw exception',
                        "expected stub threw Error()\n" +
-                       "  expected invocations( stub() ) to have values satisfying 'threw', Error()\n" +
                        "\n" +
-                       "  invocations(\n" +
-                       "    stub() // expected stub() threw Error()\n" +
-                       "           //   expected TypeError() to satisfy Error()\n" +
-                       "  )");
+                       "invocations(\n" +
+                       "  stub() // expected stub() threw Error()\n" +
+                       "         //   expected TypeError() to satisfy Error()\n" +
+                       ")");
             });
         });
     });
@@ -502,12 +490,11 @@ describe('unexpected-sinon', function () {
                     expect(spy, 'always threw');
                 }, 'to throw exception',
                        "expected spy always threw\n" +
-                       "  expected invocations( spy(), spy() ) to have values satisfying 'threw'\n" +
                        "\n" +
-                       "  invocations(\n" +
-                       "    spy(),\n" +
-                       "    spy() // expected spy() threw\n" +
-                       "  )");
+                       "invocations(\n" +
+                       "  spy(),\n" +
+                       "  spy() // expected spy() threw\n" +
+                       ")");
             });
         });
 
@@ -530,20 +517,19 @@ describe('unexpected-sinon', function () {
                     expect(stub, 'always threw', { name: 'Error' });
                 }, 'to throw exception',
                        "expected stub always threw { name: 'Error' }\n" +
-                       "  expected invocations( stub(), stub() ) to have values satisfying 'threw', { name: 'Error' }\n" +
                        "\n" +
-                       "  invocations(\n" +
-                       "    stub(),\n" +
-                       "    stub() // expected stub() threw { name: 'Error' }\n" +
-                       "           //   expected TypeError() to satisfy { name: 'Error' }\n" +
-                       "           //\n" +
-                       "           //   {\n" +
-                       "           //     message: '',\n" +
-                       "           //     name: 'TypeError' // should equal 'Error'\n" +
-                       "           //                       // -TypeError\n" +
-                       "           //                       // +Error\n" +
-                       "           //   }\n" +
-                       "  )");
+                       "invocations(\n" +
+                       "  stub(),\n" +
+                       "  stub() // expected stub() threw { name: 'Error' }\n" +
+                       "         //   expected TypeError() to satisfy { name: 'Error' }\n" +
+                       "         //\n" +
+                       "         //   {\n" +
+                       "         //     message: '',\n" +
+                       "         //     name: 'TypeError' // should equal 'Error'\n" +
+                       "         //                       // -TypeError\n" +
+                       "         //                       // +Error\n" +
+                       "         //   }\n" +
+                       ")");
             });
         });
 
@@ -568,13 +554,12 @@ describe('unexpected-sinon', function () {
                     expect(stub, 'always threw', error);
                 }, 'to throw exception',
                        "expected stub always threw Error()\n" +
-                       "  expected invocations( stub(), stub() ) to have values satisfying 'threw', Error()\n" +
                        "\n" +
-                       "  invocations(\n" +
-                       "    stub(),\n" +
-                       "    stub() // expected stub() threw Error()\n" +
-                       "           //   expected TypeError() to satisfy Error()\n" +
-                       "  )");
+                       "invocations(\n" +
+                       "  stub(),\n" +
+                       "  stub() // expected stub() threw Error()\n" +
+                       "         //   expected TypeError() to satisfy Error()\n" +
+                       ")");
             });
         });
     });

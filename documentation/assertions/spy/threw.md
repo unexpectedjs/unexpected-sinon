@@ -48,11 +48,10 @@ expect(stub, 'always threw', /waat/);
 
 ```output
 expected stub always threw /waat/
-  expected invocations( stub(), stub() ) to have values satisfying 'threw', /waat/
 
-  invocations(
-    stub(), // expected stub() threw /waat/
-            //   expected TypeError('wat') to satisfy /waat/
-    stub()
-  )
+invocations(
+  stub(), // expected stub() threw /waat/
+          //   expected TypeError('wat') to satisfy /waat/
+  stub()
+)
 ```
