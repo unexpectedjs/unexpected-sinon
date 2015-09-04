@@ -17,8 +17,8 @@ expect(obj.spy, 'was called on', another);
 expected spy was called on {}
 
 invocations(
-  spy() // expected spy() was called on {}
-        //   expected spy to be called with {} as this but was called with { spy: spy }
+  spy() at theFunction (theFileName:xx:yy) // expected: was called on {}
+                                           //   expected spy to be called with {} as this but was called with { spy: spy }
 )
 ```
 
@@ -41,8 +41,8 @@ expect(obj.spy, 'was always called on', obj);
 expected spy was always called on { spy: spy }
 
 invocations(
-  spy(),
-  spy() // expected spy() was called on { spy: spy }
-        //   expected spy to be called with { spy: spy } as this but was called with {}
+  spy() at theFunction (theFileName:xx:yy),
+  spy() at theFunction (theFileName:xx:yy) // expected: was called on { spy: spy }
+                                           //   expected spy to be called with { spy: spy } as this but was called with {}
 )
 ```

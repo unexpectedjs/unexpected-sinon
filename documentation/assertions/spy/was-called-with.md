@@ -21,7 +21,7 @@ invocations(
     'baz', // should equal { foo: 'bar' }
     'qux',
     'quux'
-  )
+  ) at theFunction (theFileName:xx:yy)
 )
 ```
 
@@ -47,13 +47,13 @@ expected spy
 was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
 invocations(
-  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
-  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),
+  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),
+  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),
   spy(
     { foo: 'bar' },
     'baz',
     undefined // expected undefined to be truthy
-  )
+  ) at theFunction (theFileName:xx:yy)
 )
 ```
 
@@ -82,7 +82,7 @@ invocations(
     'baz',
     'qux',
     'quux' // should be removed
-  )
+  ) at theFunction (theFileName:xx:yy)
 )
 ```
 
@@ -109,12 +109,12 @@ expected spy
 was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
 invocations(
-  spy( { foo: 'bar' }, 'baz', 'qux' ),
-  spy( { foo: 'bar' }, 'baz', 'qux' ),
+  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),
+  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),
   spy(
     { foo: 'bar' },
     'baz',
     // expected undefined to be truthy
-  )
+  ) at theFunction (theFileName:xx:yy)
 )
 ```

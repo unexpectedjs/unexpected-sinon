@@ -95,9 +95,9 @@ describe("documentation tests", function () {
                 "expected stub always threw /waat/\n" +
                 "\n" +
                 "invocations(\n" +
-                "  stub(), // expected stub() threw /waat/\n" +
-                "          //   expected TypeError('wat') to satisfy /waat/\n" +
-                "  stub()\n" +
+                "  stub() at theFunction (theFileName:xx:yy), // expected: threw /waat/\n" +
+                "                                             //   expected TypeError('wat') to satisfy /waat/\n" +
+                "  stub() at theFunction (theFileName:xx:yy)\n" +
                 ")"
             );
         }
@@ -124,8 +124,8 @@ describe("documentation tests", function () {
                 "expected spy was called on {}\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy() // expected spy() was called on {}\n" +
-                "        //   expected spy to be called with {} as this but was called with { spy: spy }\n" +
+                "  spy() at theFunction (theFileName:xx:yy) // expected: was called on {}\n" +
+                "                                           //   expected spy to be called with {} as this but was called with { spy: spy }\n" +
                 ")"
             );
         }
@@ -146,9 +146,9 @@ describe("documentation tests", function () {
                 "expected spy was always called on { spy: spy }\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy(),\n" +
-                "  spy() // expected spy() was called on { spy: spy }\n" +
-                "        //   expected spy to be called with { spy: spy } as this but was called with {}\n" +
+                "  spy() at theFunction (theFileName:xx:yy),\n" +
+                "  spy() at theFunction (theFileName:xx:yy) // expected: was called on { spy: spy }\n" +
+                "                                           //   expected spy to be called with { spy: spy } as this but was called with {}\n" +
                 ")"
             );
         }
@@ -183,7 +183,13 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was called times 2\n" +
-                "  expected invocations( spy( 41, 42 ), spy( 41, 43 ), spy( 41, 44 ), spy( 41, 45 ) )\n" +
+                "  expected\n" +
+                "  invocations(\n" +
+                "    spy( 41, 42 ) at theFunction (theFileName:xx:yy),\n" +
+                "    spy( 41, 43 ) at theFunction (theFileName:xx:yy),\n" +
+                "    spy( 41, 44 ) at theFunction (theFileName:xx:yy),\n" +
+                "    spy( 41, 45 ) at theFunction (theFileName:xx:yy)\n" +
+                "  )\n" +
                 "  to have length 2\n" +
                 "    expected 4 to be 2"
             );
@@ -222,7 +228,7 @@ describe("documentation tests", function () {
                 "    'baz', // should equal { foo: 'bar' }\n" +
                 "    'qux',\n" +
                 "    'quux'\n" +
-                "  )\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
                 ")"
             );
         }
@@ -247,13 +253,13 @@ describe("documentation tests", function () {
                 "was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ),\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),\n" +
                 "  spy(\n" +
                 "    { foo: 'bar' },\n" +
                 "    'baz',\n" +
                 "    undefined // expected undefined to be truthy\n" +
-                "  )\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
                 ")"
             );
         }
@@ -280,7 +286,7 @@ describe("documentation tests", function () {
                 "    'baz',\n" +
                 "    'qux',\n" +
                 "    'quux' // should be removed\n" +
-                "  )\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
                 ")"
             );
         }
@@ -305,13 +311,13 @@ describe("documentation tests", function () {
                 "was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux' ),\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),\n" +
                 "  spy(\n" +
                 "    { foo: 'bar' },\n" +
                 "    'baz',\n" +
                 "    // expected undefined to be truthy\n" +
-                "  )\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
                 ")"
             );
         }
@@ -355,7 +361,7 @@ describe("documentation tests", function () {
                 "expected spy was not called\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy( 42, 42 ) // should be removed\n" +
+                "  spy( 42, 42 ) at theFunction (theFileName:xx:yy) // should be removed\n" +
                 ")"
             );
         }
