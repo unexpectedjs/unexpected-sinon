@@ -32,8 +32,13 @@ describe('unexpected-sinon', function () {
                 spy('baz');
                 expect(spy, "was not called");
             }, "to throw exception",
-                   "expected spy was not called\n" +
-                   "  expected invocations( spy( 42, { foo: \'bar\' } ), spy( \'baz\' ) ) to be empty");
+                "expected spy was not called\n" +
+                "\n" +
+                "invocations(\n" +
+                "  spy( 42, { foo: 'bar' } ), // should be removed\n" +
+                "  spy( 'baz' ) // should be removed\n" +
+                ")"
+            );
         });
     });
 

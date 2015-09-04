@@ -32,5 +32,8 @@ expect(add, 'was not called');
 
 ```output
 expected spy was not called
-  expected invocations( spy( 42, 42 ) ) to be empty
+
+invocations(
+  spy( 42, 42 ) // should be removed
+)
 ```

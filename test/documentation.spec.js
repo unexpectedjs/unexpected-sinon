@@ -363,7 +363,10 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected spy was not called\n" +
-                "  expected invocations( spy( 42, 42 ) ) to be empty"
+                "\n" +
+                "invocations(\n" +
+                "  spy( 42, 42 ) // should be removed\n" +
+                ")"
             );
         }
         return expect.promise.all(testPromises);
