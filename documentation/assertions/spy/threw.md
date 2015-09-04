@@ -50,7 +50,7 @@ expect(stub, 'always threw', /waat/);
 expected stub always threw /waat/
 
 invocations(
-  stub() at theFunction (theFileName:xx:yy), // expected stub() at theFunction (theFileName:xx:yy) threw /waat/
+  stub() at theFunction (theFileName:xx:yy), // expected: threw /waat/
                                              //   expected TypeError('wat') to satisfy /waat/
   stub() at theFunction (theFileName:xx:yy)
 )

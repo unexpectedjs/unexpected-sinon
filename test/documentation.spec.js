@@ -95,7 +95,7 @@ describe("documentation tests", function () {
                 "expected stub always threw /waat/\n" +
                 "\n" +
                 "invocations(\n" +
-                "  stub() at theFunction (theFileName:xx:yy), // expected stub() at theFunction (theFileName:xx:yy) threw /waat/\n" +
+                "  stub() at theFunction (theFileName:xx:yy), // expected: threw /waat/\n" +
                 "                                             //   expected TypeError('wat') to satisfy /waat/\n" +
                 "  stub() at theFunction (theFileName:xx:yy)\n" +
                 ")"
@@ -124,7 +124,7 @@ describe("documentation tests", function () {
                 "expected spy was called on {}\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy() at theFunction (theFileName:xx:yy) // expected spy() at theFunction (theFileName:xx:yy) was called on {}\n" +
+                "  spy() at theFunction (theFileName:xx:yy) // expected: was called on {}\n" +
                 "                                           //   expected spy to be called with {} as this but was called with { spy: spy }\n" +
                 ")"
             );
@@ -147,7 +147,7 @@ describe("documentation tests", function () {
                 "\n" +
                 "invocations(\n" +
                 "  spy() at theFunction (theFileName:xx:yy),\n" +
-                "  spy() at theFunction (theFileName:xx:yy) // expected spy() at theFunction (theFileName:xx:yy) was called on { spy: spy }\n" +
+                "  spy() at theFunction (theFileName:xx:yy) // expected: was called on { spy: spy }\n" +
                 "                                           //   expected spy to be called with { spy: spy } as this but was called with {}\n" +
                 ")"
             );

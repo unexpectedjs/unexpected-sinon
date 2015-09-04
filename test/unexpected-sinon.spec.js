@@ -262,7 +262,7 @@ describe('unexpected-sinon', function () {
                    "\n" +
                    "invocations(\n" +
                    "  spy() at theFunction (theFileName:xx:yy),\n" +
-                   "  spy() at theFunction (theFileName:xx:yy) // expected spy() at theFunction (theFileName:xx:yy) was called on { spy: spy }\n" +
+                   "  spy() at theFunction (theFileName:xx:yy) // expected: was called on { spy: spy }\n" +
                    "                                           //   expected spy to be called with { spy: spy } as this but was called with null\n" +
                    ")");
         });
@@ -482,7 +482,7 @@ describe('unexpected-sinon', function () {
                        "expected stub threw Error()\n" +
                        "\n" +
                        "invocations(\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected stub() at theFunction (theFileName:xx:yy) threw Error()\n" +
+                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw Error()\n" +
                        "                                            //   expected TypeError() to satisfy Error()\n" +
                        ")");
             });
@@ -516,7 +516,7 @@ describe('unexpected-sinon', function () {
                        "\n" +
                        "invocations(\n" +
                        "  spy() at theFunction (theFileName:xx:yy),\n" +
-                       "  spy() at theFunction (theFileName:xx:yy) // expected spy() at theFunction (theFileName:xx:yy) threw\n" +
+                       "  spy() at theFunction (theFileName:xx:yy) // expected: threw\n" +
                        ")");
             });
         });
@@ -543,7 +543,7 @@ describe('unexpected-sinon', function () {
                        "\n" +
                        "invocations(\n" +
                        "  stub() at theFunction (theFileName:xx:yy),\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected stub() at theFunction (theFileName:xx:yy) threw { name: 'Error' }\n" +
+                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw { name: 'Error' }\n" +
                        "                                            //   expected TypeError() to satisfy { name: 'Error' }\n" +
                        "                                            //\n" +
                        "                                            //   {\n" +
@@ -580,7 +580,7 @@ describe('unexpected-sinon', function () {
                        "\n" +
                        "invocations(\n" +
                        "  stub() at theFunction (theFileName:xx:yy),\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected stub() at theFunction (theFileName:xx:yy) threw Error()\n" +
+                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw Error()\n" +
                        "                                            //   expected TypeError() to satisfy Error()\n" +
                        ")");
             });
