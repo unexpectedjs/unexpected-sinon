@@ -345,7 +345,7 @@ describe('unexpected-sinon', function () {
                    "expected spy was never called with 'bar', match(truthy)\n" +
                    "\n" +
                    "invocations(\n" +
-                   "  spy( 'bar', 'true' ) at theFunction (theFileName:xx:yy) // expected spy( 'bar', 'true' ) at theFunction (theFileName:xx:yy) not to satisfy { 0: 'bar', 1: match(truthy) }\n" +
+                   "  spy( 'bar', 'true' ) at theFunction (theFileName:xx:yy) // should not satisfy { 0: 'bar', 1: match(truthy) }\n" +
                    ")");
         });
 
@@ -359,7 +359,7 @@ describe('unexpected-sinon', function () {
                    "\n" +
                    "invocations(\n" +
                    "  spy( 'foo' ) at theFunction (theFileName:xx:yy),\n" +
-                   "  spy( 'bar', {} ) at theFunction (theFileName:xx:yy) // expected spy( 'bar', {} ) at theFunction (theFileName:xx:yy) not to satisfy { 0: 'bar' }\n" +
+                   "  spy( 'bar', {} ) at theFunction (theFileName:xx:yy) // should not satisfy { 0: 'bar' }\n" +
                    ")");
         });
     });
