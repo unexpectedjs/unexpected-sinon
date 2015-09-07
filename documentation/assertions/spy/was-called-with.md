@@ -51,8 +51,8 @@ invocations(
   spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),
   spy(
     { foo: 'bar' },
-    'baz',
-    undefined // expected undefined to be truthy
+    'baz'
+    // missing: should be truthy
   ) at theFunction (theFileName:xx:yy)
 )
 ```
@@ -113,8 +113,8 @@ invocations(
   spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),
   spy(
     { foo: 'bar' },
-    'baz',
-    // expected undefined to be truthy
+    'baz'
+    // missing: should be truthy
   ) at theFunction (theFileName:xx:yy)
 )
 ```

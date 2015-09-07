@@ -257,8 +257,8 @@ describe("documentation tests", function () {
                 "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),\n" +
                 "  spy(\n" +
                 "    { foo: 'bar' },\n" +
-                "    'baz',\n" +
-                "    undefined // expected undefined to be truthy\n" +
+                "    'baz'\n" +
+                "    // missing: should be truthy\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
                 ")"
             );
@@ -315,8 +315,8 @@ describe("documentation tests", function () {
                 "  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),\n" +
                 "  spy(\n" +
                 "    { foo: 'bar' },\n" +
-                "    'baz',\n" +
-                "    // expected undefined to be truthy\n" +
+                "    'baz'\n" +
+                "    // missing: should be truthy\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
                 ")"
             );
