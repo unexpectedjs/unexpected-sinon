@@ -60,7 +60,11 @@ describe('unexpected-sinon', function () {
                 expect(spy, "was called once");
             }, "to throw exception",
                    "expected spy was called once\n" +
-                   "  expected invocations( spy( 42, { foo: \'bar\' } ) at theFunction (theFileName:xx:yy), spy( \'baz\' ) at theFunction (theFileName:xx:yy) )\n" +
+                   "  expected\n" +
+                   "  invocations(\n" +
+                   "    spy( 42, { foo: 'bar' } ) at theFunction (theFileName:xx:yy),\n" +
+                   "    spy( 'baz' ) at theFunction (theFileName:xx:yy)\n" +
+                   "  )\n" +
                    "  to have length 1\n" +
                    "    expected 2 to be 1");
         });

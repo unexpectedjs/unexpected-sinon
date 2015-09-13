@@ -38,7 +38,7 @@
     "mocha": "2.2.5",
     "serve": "*",
     "sinon": "1.16.1",
-    "unexpected": "9.10.0",
+    "unexpected": "9.11.1",
     "unexpected-documentation-site-generator": "2.5.2"
   }
 }
