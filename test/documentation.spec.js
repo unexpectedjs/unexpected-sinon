@@ -46,6 +46,96 @@ describe("documentation tests", function () {
         return expect.promise.all(testPromises);
     });
 
+    it("assertions/array-like/to-have-calls-satisfying.md contains correct examples", function () {
+        var testPromises = [];
+        var obj = {
+            increment: function (n) {
+                if (n === 666) {
+                    throw new Error("No, I won't do that");
+                }
+                return n + 1;
+            },
+            decrement: function (n) {
+                return n - 1;
+            }
+        };
+        sinon.spy(obj, 'increment');
+        sinon.spy(obj, 'decrement');
+
+        obj.increment(456);
+        obj.decrement(987);
+        obj.increment(123);
+        obj.decrement(555);
+        try {
+            obj.increment(666);
+        } catch (e) {}
+
+        expect([obj.increment, obj.decrement], 'to have calls satisfying', [
+            { spy: obj.increment, args: [ 456 ] },
+            obj.decrement,
+            obj.increment,
+            { spy: obj.decrement, returned: 554 },
+            { spy: obj.increment, args: [ 666 ], threw: /^No/ }
+        ]);
+
+        try {
+            expect([obj.increment, obj.decrement], 'to have calls satisfying', [
+                { spy: obj.increment, args: [ 123 ] },
+                obj.decrement,
+                { spy: obj.increment, returned: 557 },
+                obj.decrement,
+                { spy: obj.increment, args: [ 666 ], threw: { message: expect.it('not to match', /^No/) } }
+            ]);
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("expect([obj.increment, obj.decrement], 'to have calls satisfying', [").nl();
+                output.code("    { spy: obj.increment, args: [ 123 ] },").nl();
+                output.code("    obj.decrement,").nl();
+                output.code("    { spy: obj.increment, returned: 557 },").nl();
+                output.code("    obj.decrement,").nl();
+                output.code("    { spy: obj.increment, args: [ 666 ], threw: { message: expect.it('not to match', /^No/) } }").nl();
+                output.code("]);").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected [ increment, decrement ] to have calls satisfying\n" +
+                "[\n" +
+                "  { spy: increment, args: [ 123 ] },\n" +
+                "  decrement,\n" +
+                "  { spy: increment, returned: 557 },\n" +
+                "  decrement,\n" +
+                "  {\n" +
+                "    spy: increment,\n" +
+                "    args: [ 666 ],\n" +
+                "    threw: { message: expect.it('not to match', /^No/) }\n" +
+                "  }\n" +
+                "]\n" +
+                "\n" +
+                "[\n" +
+                "  increment(\n" +
+                "    456 // should equal 123\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "  decrement( 987 ) at theFunction (theFileName:xx:yy)\n" +
+                "  increment( 123 ) at theFunction (theFileName:xx:yy)\n" +
+                "    // returned: expected 124 to equal 557\n" +
+                "  decrement( 555 ) at theFunction (theFileName:xx:yy)\n" +
+                "  increment( 666 ) at theFunction (theFileName:xx:yy)\n" +
+                "    // threw: expected Error('No, I won\\'t do that')\n" +
+                "    //        to satisfy { message: expect.it('not to match', /^No/) }\n" +
+                "    //\n" +
+                "    //        {\n" +
+                "    //          message: 'No, I won\\'t do that' // should not match /^No/\n" +
+                "    //                                          //\n" +
+                "    //                                          // No, I won't do that\n" +
+                "    //                                          // ^^\n" +
+                "    //        }\n" +
+                "]"
+            );
+        }
+        return expect.promise.all(testPromises);
+    });
+
     it("assertions/spy/threw.md contains correct examples", function () {
         var testPromises = [];
         var stub = sinon.stub();
@@ -99,6 +189,55 @@ describe("documentation tests", function () {
                 "  // expected: threw /waat/\n" +
                 "  //   expected TypeError('wat') to satisfy /waat/\n" +
                 "  stub() at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        }
+        return expect.promise.all(testPromises);
+    });
+
+    it("assertions/spy/to-have-calls-satisfying.md contains correct examples", function () {
+        var testPromises = [];
+        var increment = sinon.spy(function (n) {
+            return n + 1;
+        });
+        increment(42);
+        increment(46);
+        expect(increment, 'to have calls satisfying', [
+            { args: [ 42 ] },
+            { args: [ 46 ], returned: 47 }
+        ]);
+
+        try {
+            var increment = sinon.spy();
+            increment(42);
+            increment(46, 'yadda');
+
+            expect(increment, 'to have calls satisfying', [
+                { args: [ 42 ] },
+                { args: [ 20 ] }
+            ]);
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("var increment = sinon.spy();").nl();
+                output.code("increment(42);").nl();
+                output.code("increment(46, 'yadda');").nl();
+                output.code("").nl();
+                output.code("expect(increment, 'to have calls satisfying', [").nl();
+                output.code("    { args: [ 42 ] },").nl();
+                output.code("    { args: [ 20 ] }").nl();
+                output.code("]);").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected spy to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] } ]\n" +
+                "\n" +
+                "[\n" +
+                "  spy( 42 ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy(\n" +
+                "    46, // should equal 20\n" +
+                "    'yadda' // should be removed\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
                 "]"
             );
         }
