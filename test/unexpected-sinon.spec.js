@@ -86,7 +86,11 @@ describe('unexpected-sinon', function () {
                 spy();
                 expect(spy, "was called twice");
             }, "to throw exception", "expected spy was called twice\n" +
-                   "  expected invocations( spy() at theFunction (theFileName:xx:yy) ) to have length 2\n" +
+                   "  expected\n" +
+                   "  invocations(\n" +
+                   "    spy() at theFunction (theFileName:xx:yy)\n" +
+                   "  )\n" +
+                   "  to have length 2\n" +
                    "    expected 1 to be 2");
 
             expect(function () {
@@ -119,7 +123,12 @@ describe('unexpected-sinon', function () {
                 expect(spy, "was called thrice");
             }, "to throw exception",
                    "expected spy was called thrice\n" +
-                   "  expected invocations( spy() at theFunction (theFileName:xx:yy) spy() at theFunction (theFileName:xx:yy) ) to have length 3\n" +
+                   "  expected\n" +
+                   "  invocations(\n" +
+                   "    spy() at theFunction (theFileName:xx:yy)\n" +
+                   "    spy() at theFunction (theFileName:xx:yy)\n" +
+                   "  )\n" +
+                   "  to have length 3\n" +
                    "    expected 2 to be 3");
 
             expect(function () {
@@ -154,7 +163,12 @@ describe('unexpected-sinon', function () {
                 expect(spy, "was called times", 3);
             }, "to throw exception",
                    "expected spy was called times 3\n" +
-                   "  expected invocations( spy() at theFunction (theFileName:xx:yy) spy() at theFunction (theFileName:xx:yy) ) to have length 3\n" +
+                   "  expected\n" +
+                   "  invocations(\n" +
+                   "    spy() at theFunction (theFileName:xx:yy)\n" +
+                   "    spy() at theFunction (theFileName:xx:yy)\n" +
+                   "  )\n" +
+                   "  to have length 3\n" +
                    "    expected 2 to be 3");
 
             expect(function () {
