@@ -712,5 +712,38 @@ describe('unexpected-sinon', function () {
                 "  expected [ spy ] to contain spy2"
             );
         });
+
+        describe('when asserting whether a call was invoked with the new operator', function () {
+            it('should succeed', function () {
+                /*jshint newcap: false */
+                new spy();
+                /*jshint newcap: true */
+                spy();
+                expect(spy, 'to have calls satisfying', [
+                    { calledWithNew: true },
+                    { calledWithNew: false }
+                ]);
+            });
+
+            it('should fail with a diff', function () {
+                /*jshint newcap: false */
+                new spy();
+                /*jshint newcap: true */
+                spy();
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', [
+                        { calledWithNew: false },
+                        { calledWithNew: true }
+                    ]);
+                }, 'to throw',
+                    "expected spy to have calls satisfying [ { calledWithNew: false }, { calledWithNew: true } ]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy() at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
+                    "  spy() at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
+                    "]"
+                );
+            });
+        });
     });
 });
