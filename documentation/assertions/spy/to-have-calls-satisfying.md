@@ -1,7 +1,7 @@
 Passes if all the calls of a spy satisfy a given spec:
 
 ```js
-var increment = sinon.spy(function (n) {
+var increment = sinon.spy(function increment(n) {
     return n + 1;
 });
 increment(42);

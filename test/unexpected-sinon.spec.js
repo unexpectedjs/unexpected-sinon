@@ -642,10 +642,9 @@ describe('unexpected-sinon', function () {
 
     describe('to have calls satisfying', function () {
         it('should satisfy against a list of all calls to the specified spies', function () {
-            var spy2 = sinon.spy(function () {
+            var spy2 = sinon.spy(function spy2() {
                 return 'blah';
             });
-            spy2.displayName = 'spy2';
 
             var obj = {
                 die: function () {
@@ -701,7 +700,7 @@ describe('unexpected-sinon', function () {
         });
 
         it('should complain if the spy list does not contain a spy that is contained by the spec', function () {
-            var spy2 = sinon.spy(function () {
+            var spy2 = sinon.spy(function spy2() {
                 return 'blah';
             });
             spy2.displayName = 'spy2';
