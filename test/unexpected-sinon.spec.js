@@ -328,7 +328,7 @@ describe('unexpected-sinon', function () {
                    "    'something else' // should equal { foo: 'bar' }\n" +
                    "    // missing: should equal 'baz'\n" +
                    "    // missing: expected spy( 'something else' ) at theFunction (theFileName:xx:yy)\n" +
-                   "    //          to satisfy { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) }\n" +
+                   "    //          to satisfy { args: { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) } }\n" +
                    "  ) at theFunction (theFileName:xx:yy)\n" +
                    "  spy( { foo: 'bar' }, 'baz', true, false ) at theFunction (theFileName:xx:yy)\n" +
                    ")");
@@ -349,7 +349,7 @@ describe('unexpected-sinon', function () {
                    "expected spy was never called with 'bar', match(truthy)\n" +
                    "\n" +
                    "invocations(\n" +
-                   "  spy( 'bar', 'true' ) at theFunction (theFileName:xx:yy) // should not satisfy { 0: 'bar', 1: match(truthy) }\n" +
+                   "  spy( 'bar', 'true' ) at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar', 1: match(truthy) } }\n" +
                    ")");
         });
 
@@ -363,7 +363,7 @@ describe('unexpected-sinon', function () {
                    "\n" +
                    "invocations(\n" +
                    "  spy( 'foo' ) at theFunction (theFileName:xx:yy)\n" +
-                   "  spy( 'bar', {} ) at theFunction (theFileName:xx:yy) // should not satisfy { 0: 'bar' }\n" +
+                   "  spy( 'bar', {} ) at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar' } }\n" +
                    ")");
         });
     });
@@ -583,11 +583,85 @@ describe('unexpected-sinon', function () {
                        "expected stub always threw Error()\n" +
                        "\n" +
                        "invocations(\n" +
-                       "  stub() at theFunction (theFileName:xx:yy),\n" +
+                       "  stub() at theFunction (theFileName:xx:yy)\n" +
                        "  stub() at theFunction (theFileName:xx:yy) // expected: threw Error()\n" +
                        "                                            //   expected TypeError() to satisfy Error()\n" +
                        ")");
             });
+        });
+    });
+
+    describe('to have calls satisfying', function () {
+        it('should satisfy against a list of all calls to the specified spies', function () {
+            var spy2 = sinon.spy(function () {
+                return 'blah';
+            });
+            spy2.displayName = 'spy2';
+
+            var obj = {
+                die: function () {
+                    throw new Error('say what');
+                }
+            };
+            sinon.spy(obj, 'die');
+
+            spy('foo', 'bar');
+            spy2('quux');
+            try {
+                obj.die();
+            } catch (err) {}
+            spy('baz');
+            spy2('yadda');
+            spy('baz');
+            expect(function () {
+                expect([spy, spy2, obj.die], 'to have calls satisfying', [
+                    spy,
+                    { spy: spy2, args: [ 'quux' ], returned: 'yadda' },
+                    { spy: obj.die, threw: /cqwecqw/ },
+                    { spy: spy, args: [ 'yadda' ] },
+                    spy,
+                    spy
+                ]);
+            }, 'to throw',
+                "expected [ spy, spy2, die ] to have calls satisfying\n" +
+                "[\n" +
+                "  spy,\n" +
+                "  { spy: spy2, args: [ 'quux' ], returned: 'yadda' },\n" +
+                "  { spy: die, threw: /cqwecqw/ },\n" +
+                "  { spy: spy, args: [ 'yadda' ] },\n" +
+                "  spy,\n" +
+                "  spy\n" +
+                "]\n" +
+                "\n" +
+                "invocations(\n" +
+                "  spy( 'foo', 'bar' ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy2( 'quux' ) at theFunction (theFileName:xx:yy) // returned: expected 'blah' to equal 'yadda'\n" +
+                "                                                    //\n" +
+                "                                                    //           -blah\n" +
+                "                                                    //           +yadda\n" +
+                "  die() at theFunction (theFileName:xx:yy) // threw: expected Error('say what') to satisfy /cqwecqw/\n" +
+                "  spy(\n" +
+                "    'baz' // should equal 'yadda'\n" +
+                "          // -baz\n" +
+                "          // +yadda\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy2( 'yadda' ) at theFunction (theFileName:xx:yy) // spy: expected spy2 to be spy\n" +
+                "  spy( 'baz' ) at theFunction (theFileName:xx:yy)\n" +
+                ")"
+            );
+        });
+
+        it('should complain if the spy list does not contain a spy that is contained by the spec', function () {
+            var spy2 = sinon.spy(function () {
+                return 'blah';
+            });
+            spy2.displayName = 'spy2';
+            expect(function () {
+                expect([spy], 'to have calls satisfying', [ spy, spy2 ]);
+            }, 'to throw',
+                "expected [ spy ] to have calls satisfying [ spy, spy2 ]\n" +
+                "  expected [ spy ] to contain spy2"
+            );
         });
     });
 });
