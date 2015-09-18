@@ -22,12 +22,12 @@ expect(add, 'was called times', 2);
 ```output
 expected spy was called times 2
   expected
-  invocations(
+  [
     spy( 41, 42 ) at theFunction (theFileName:xx:yy)
     spy( 41, 43 ) at theFunction (theFileName:xx:yy)
     spy( 41, 44 ) at theFunction (theFileName:xx:yy)
     spy( 41, 45 ) at theFunction (theFileName:xx:yy)
-  )
+  ]
   to have length 2
     expected 4 to be 2
 ```

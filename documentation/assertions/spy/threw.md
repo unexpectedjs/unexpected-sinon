@@ -49,10 +49,10 @@ expect(stub, 'always threw', /waat/);
 ```output
 expected stub always threw /waat/
 
-invocations(
+[
   stub() at theFunction (theFileName:xx:yy)
   // expected: threw /waat/
   //   expected TypeError('wat') to satisfy /waat/
   stub() at theFunction (theFileName:xx:yy)
-)
+]
 ```
