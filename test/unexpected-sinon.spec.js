@@ -605,6 +605,17 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('spyCall to satisfy', function () {
+        it('should throw if an unsupported key is used', function () {
+            expect(function () {
+                spy(123);
+                expect(spy, 'to have calls satisfying', [
+                    { foobar: 123 }
+                ]);
+            }, 'to throw', 'spyCall to satisfy: Unsupported keys: foobar');
+        });
+    });
+
     describe('to have calls satisfying', function () {
         it('should satisfy against a list of all calls to the specified spies', function () {
             var spy2 = sinon.spy(function () {
