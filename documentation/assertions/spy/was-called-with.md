@@ -47,8 +47,8 @@ expected spy
 was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
 invocations(
-  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),
-  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),
+  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)
+  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)
   spy(
     { foo: 'bar' },
     'baz'
@@ -109,8 +109,8 @@ expected spy
 was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
 invocations(
-  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),
-  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),
+  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)
+  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)
   spy(
     { foo: 'bar' },
     'baz'

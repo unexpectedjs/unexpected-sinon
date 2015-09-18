@@ -95,7 +95,7 @@ describe("documentation tests", function () {
                 "expected stub always threw /waat/\n" +
                 "\n" +
                 "invocations(\n" +
-                "  stub() at theFunction (theFileName:xx:yy),\n" +
+                "  stub() at theFunction (theFileName:xx:yy)\n" +
                 "  // expected: threw /waat/\n" +
                 "  //   expected TypeError('wat') to satisfy /waat/\n" +
                 "  stub() at theFunction (theFileName:xx:yy)\n" +
@@ -148,7 +148,7 @@ describe("documentation tests", function () {
                 "expected spy was always called on { spy: spy }\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy() at theFunction (theFileName:xx:yy),\n" +
+                "  spy() at theFunction (theFileName:xx:yy)\n" +
                 "  spy() at theFunction (theFileName:xx:yy)\n" +
                 "  // expected: was called on { spy: spy }\n" +
                 "  //   expected spy to be called with { spy: spy } as this but was called with {}\n" +
@@ -188,9 +188,9 @@ describe("documentation tests", function () {
                 "expected spy was called times 2\n" +
                 "  expected\n" +
                 "  invocations(\n" +
-                "    spy( 41, 42 ) at theFunction (theFileName:xx:yy),\n" +
-                "    spy( 41, 43 ) at theFunction (theFileName:xx:yy),\n" +
-                "    spy( 41, 44 ) at theFunction (theFileName:xx:yy),\n" +
+                "    spy( 41, 42 ) at theFunction (theFileName:xx:yy)\n" +
+                "    spy( 41, 43 ) at theFunction (theFileName:xx:yy)\n" +
+                "    spy( 41, 44 ) at theFunction (theFileName:xx:yy)\n" +
                 "    spy( 41, 45 ) at theFunction (theFileName:xx:yy)\n" +
                 "  )\n" +
                 "  to have length 2\n" +
@@ -256,8 +256,8 @@ describe("documentation tests", function () {
                 "was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy),\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)\n" +
                 "  spy(\n" +
                 "    { foo: 'bar' },\n" +
                 "    'baz'\n" +
@@ -314,8 +314,8 @@ describe("documentation tests", function () {
                 "was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
                 "invocations(\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),\n" +
-                "  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy),\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)\n" +
                 "  spy(\n" +
                 "    { foo: 'bar' },\n" +
                 "    'baz'\n" +
