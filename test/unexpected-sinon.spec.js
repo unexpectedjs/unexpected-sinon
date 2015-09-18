@@ -59,20 +59,22 @@ describe('unexpected-sinon', function () {
                 spy('baz');
                 expect(spy, "was called once");
             }, "to throw exception",
-                   "expected spy was called once\n" +
-                   "  expected\n" +
-                   "  [\n" +
-                   "    spy( 42, { foo: 'bar' } ) at theFunction (theFileName:xx:yy)\n" +
-                   "    spy( 'baz' ) at theFunction (theFileName:xx:yy)\n" +
-                   "  ]\n" +
-                   "  to have length 1\n" +
-                   "    expected 2 to be 1");
+                "expected spy was called once\n" +
+                "  expected\n" +
+                "  [\n" +
+                "    spy( 42, { foo: 'bar' } ) at theFunction (theFileName:xx:yy)\n" +
+                "    spy( 'baz' ) at theFunction (theFileName:xx:yy)\n" +
+                "  ]\n" +
+                "  to have length 1\n" +
+                "    expected 2 to be 1"
+            );
         });
     });
 
     describe('was called twice', function () {
         it('passes if spy was called exactly twice', function () {
-            spy(); spy();
+            spy();
+            spy();
             expect(spy, "was called twice");
         });
 
@@ -86,66 +88,73 @@ describe('unexpected-sinon', function () {
                 spy();
                 expect(spy, "was called twice");
             }, "to throw exception", "expected spy was called twice\n" +
-                   "  expected\n" +
-                   "  [\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "  ]\n" +
-                   "  to have length 2\n" +
-                   "    expected 1 to be 2");
+                "  expected\n" +
+                "  [\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "  ]\n" +
+                "  to have length 2\n" +
+                "    expected 1 to be 2"
+            );
 
             expect(function () {
                 var spy = sinon.spy();
                 spy(); spy(42); spy();
                 expect(spy, "was called twice");
             }, "to throw exception",
-                   "expected spy was called twice\n" +
-                   "  expected\n" +
-                   "  [\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy( 42 ) at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "  ]\n" +
-                   "  to have length 2\n" +
-                   "    expected 3 to be 2");
+                "expected spy was called twice\n" +
+                "  expected\n" +
+                "  [\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy( 42 ) at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "  ]\n" +
+                "  to have length 2\n" +
+                "    expected 3 to be 2"
+            );
         });
     });
 
     describe('was called thrice', function () {
         it('passes if spy was called exactly three times', function () {
-            spy(); spy(); spy();
+            spy();
+            spy();
+            spy();
             expect(spy, "was called thrice");
         });
 
         it('fails if spy was not called exactly three times', function () {
             expect(function () {
                 var spy = sinon.spy();
-                spy(); spy();
+                spy();
+                spy();
                 expect(spy, "was called thrice");
             }, "to throw exception",
-                   "expected spy was called thrice\n" +
-                   "  expected\n" +
-                   "  [\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "  ]\n" +
-                   "  to have length 3\n" +
-                   "    expected 2 to be 3");
+                "expected spy was called thrice\n" +
+                "  expected\n" +
+                "  [\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "  ]\n" +
+                "  to have length 3\n" +
+                "    expected 2 to be 3"
+            );
 
             expect(function () {
                 var spy = sinon.spy();
                 spy(); spy(); spy(); spy();
                 expect(spy, "was called thrice");
             }, "to throw exception",
-                   "expected spy was called thrice\n" +
-                   "  expected\n" +
-                   "  [\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "  ]\n" +
-                   "  to have length 3\n" +
-                   "    expected 4 to be 3");
+                "expected spy was called thrice\n" +
+                "  expected\n" +
+                "  [\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "  ]\n" +
+                "  to have length 3\n" +
+                "    expected 4 to be 3"
+            );
         });
     });
 
@@ -162,30 +171,32 @@ describe('unexpected-sinon', function () {
                 spy(); spy();
                 expect(spy, "was called times", 3);
             }, "to throw exception",
-                   "expected spy was called times 3\n" +
-                   "  expected\n" +
-                   "  [\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "  ]\n" +
-                   "  to have length 3\n" +
-                   "    expected 2 to be 3");
+                "expected spy was called times 3\n" +
+                "  expected\n" +
+                "  [\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "  ]\n" +
+                "  to have length 3\n" +
+                "    expected 2 to be 3"
+            );
 
             expect(function () {
                 var spy = sinon.spy();
                 spy(); spy(); spy(); spy();
                 expect(spy, "was called times", 3);
             }, "to throw exception",
-                   "expected spy was called times 3\n" +
-                   "  expected\n" +
-                   "  [\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "    spy() at theFunction (theFileName:xx:yy)\n" +
-                   "  ]\n" +
-                   "  to have length 3\n" +
-                   "    expected 4 to be 3");
+                "expected spy was called times 3\n" +
+                "  expected\n" +
+                "  [\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "    spy() at theFunction (theFileName:xx:yy)\n" +
+                "  ]\n" +
+                "  to have length 3\n" +
+                "    expected 4 to be 3"
+            );
         });
     });
 
@@ -194,7 +205,7 @@ describe('unexpected-sinon', function () {
             /*jshint -W055 */
             new spy();
             /*jshint +W055 */
-            expect(spy,"was called with new");
+            expect(spy, "was called with new");
         });
         it('fails if spy was never called with new operator', function () {
             expect(function () {
@@ -252,8 +263,9 @@ describe('unexpected-sinon', function () {
             expect(function () {
                 expect(spy, 'was called on', { other: true });
             }, 'to throw exception',
-                   "expected spy was called on { other: true }\n" +
-                   "  spy was never called");
+                "expected spy was called on { other: true }\n" +
+                "  spy was never called"
+            );
         });
     });
 
@@ -276,13 +288,14 @@ describe('unexpected-sinon', function () {
                 obj.spy.call(null);
                 expect(obj.spy, 'was always called on', obj);
             }, 'to throw exception',
-                   "expected spy was always called on { spy: spy }\n" +
-                   "\n" +
-                   "[\n" +
-                   "  spy() at theFunction (theFileName:xx:yy)\n" +
-                   "  spy() at theFunction (theFileName:xx:yy) // expected: was called on { spy: spy }\n" +
-                   "                                           //   expected spy to be called with { spy: spy } as this but was called with null\n" +
-                   "]");
+                "expected spy was always called on { spy: spy }\n" +
+                "\n" +
+                "[\n" +
+                "  spy() at theFunction (theFileName:xx:yy)\n" +
+                "  spy() at theFunction (theFileName:xx:yy) // expected: was called on { spy: spy }\n" +
+                "                                           //   expected spy to be called with { spy: spy } as this but was called with null\n" +
+                "]"
+            );
         });
     });
 
@@ -305,20 +318,21 @@ describe('unexpected-sinon', function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
                 expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
             }, 'to throw exception',
-                   "expected spy was called with { foo: \'bar\' }, \'baz\', match(truthy)\n" +
-                   "\n" +
-                   "[\n" +
-                   "  spy(\n" +
-                   "    {\n" +
-                   "      foo: 'baa' // should equal 'bar'\n" +
-                   "                 // -baa\n" +
-                   "                 // +bar\n" +
-                   "    },\n" +
-                   "    'baz',\n" +
-                   "    true,\n" +
-                   "    false\n" +
-                   "  ) at theFunction (theFileName:xx:yy)\n" +
-                   "]");
+                "expected spy was called with { foo: \'bar\' }, \'baz\', match(truthy)\n" +
+                "\n" +
+                "[\n" +
+                "  spy(\n" +
+                "    {\n" +
+                "      foo: 'baa' // should equal 'bar'\n" +
+                "                 // -baa\n" +
+                "                 // +bar\n" +
+                "    },\n" +
+                "    'baz',\n" +
+                "    true,\n" +
+                "    false\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
         });
     });
 
@@ -335,17 +349,18 @@ describe('unexpected-sinon', function () {
                 spy({ foo: 'bar' }, 'baz', true, false);
                 expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
             }, 'to throw exception',
-                   "expected spy was always called with { foo: 'bar' }, 'baz', match(truthy)\n" +
-                   "\n" +
-                   "[\n" +
-                   "  spy(\n" +
-                   "    'something else' // should equal { foo: 'bar' }\n" +
-                   "    // missing: should equal 'baz'\n" +
-                   "    // missing: expected spy( 'something else' ) at theFunction (theFileName:xx:yy)\n" +
-                   "    //          to satisfy { args: { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) } }\n" +
-                   "  ) at theFunction (theFileName:xx:yy)\n" +
-                   "  spy( { foo: 'bar' }, 'baz', true, false ) at theFunction (theFileName:xx:yy)\n" +
-                   "]");
+                "expected spy was always called with { foo: 'bar' }, 'baz', match(truthy)\n" +
+                "\n" +
+                "[\n" +
+                "  spy(\n" +
+                "    'something else' // should equal { foo: 'bar' }\n" +
+                "    // missing: should equal 'baz'\n" +
+                "    // missing: expected spy( 'something else' ) at theFunction (theFileName:xx:yy)\n" +
+                "    //          to satisfy { args: { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) } }\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy( { foo: 'bar' }, 'baz', true, false ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
         });
     });
 
@@ -360,11 +375,12 @@ describe('unexpected-sinon', function () {
                 spy('bar', 'true');
                 expect(spy, 'was never called with', 'bar', sinon.match.truthy);
             }, 'to throw exception',
-                   "expected spy was never called with 'bar', match(truthy)\n" +
-                   "\n" +
-                   "[\n" +
-                   "  spy( 'bar', 'true' ) at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar', 1: match(truthy) } }\n" +
-                   "]");
+                "expected spy was never called with 'bar', match(truthy)\n" +
+                "\n" +
+                "[\n" +
+                "  spy( 'bar', 'true' ) at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar', 1: match(truthy) } }\n" +
+                "]"
+            );
         });
 
         it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
@@ -373,12 +389,13 @@ describe('unexpected-sinon', function () {
                 spy('bar', {});
                 expect(spy, 'was never called with', 'bar');
             }, 'to throw exception',
-                   "expected spy was never called with 'bar'\n" +
-                   "\n" +
-                   "[\n" +
-                   "  spy( 'foo' ) at theFunction (theFileName:xx:yy)\n" +
-                   "  spy( 'bar', {} ) at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar' } }\n" +
-                   "]");
+                "expected spy was never called with 'bar'\n" +
+                "\n" +
+                "[\n" +
+                "  spy( 'foo' ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy( 'bar', {} ) at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar' } }\n" +
+                "]"
+            );
         });
     });
 
@@ -394,16 +411,17 @@ describe('unexpected-sinon', function () {
                 spy('foo', 'bar', 'baz', 'qux');
                 expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
             }, 'to throw exception',
-                   "expected spy was called with exactly 'foo', 'bar', match(truthy)\n" +
-                   "\n" +
-                   "[\n" +
-                   "  spy(\n" +
-                   "    'foo',\n" +
-                   "    'bar',\n" +
-                   "    'baz',\n" +
-                   "    'qux' // should be removed\n" +
-                   "  ) at theFunction (theFileName:xx:yy)\n" +
-                   "]");
+                "expected spy was called with exactly 'foo', 'bar', match(truthy)\n" +
+                "\n" +
+                "[\n" +
+                "  spy(\n" +
+                "    'foo',\n" +
+                "    'bar',\n" +
+                "    'baz',\n" +
+                "    'qux' // should be removed\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
         });
     });
 
@@ -420,17 +438,18 @@ describe('unexpected-sinon', function () {
                 spy('foo', 'bar', 'baz', 'qux');
                 expect(spy, 'was always called with exactly', 'foo', 'bar', sinon.match.truthy);
             }, 'to throw exception',
-                   "expected spy was always called with exactly 'foo', 'bar', match(truthy)\n" +
-                   "\n" +
-                   "[\n" +
-                   "  spy( 'foo', 'bar', 'baz' ) at theFunction (theFileName:xx:yy)\n" +
-                   "  spy(\n" +
-                   "    'foo',\n" +
-                   "    'bar',\n" +
-                   "    'baz',\n" +
-                   "    'qux' // should be removed\n" +
-                   "  ) at theFunction (theFileName:xx:yy)\n" +
-                   "]");
+                "expected spy was always called with exactly 'foo', 'bar', match(truthy)\n" +
+                "\n" +
+                "[\n" +
+                "  spy( 'foo', 'bar', 'baz' ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy(\n" +
+                "    'foo',\n" +
+                "    'bar',\n" +
+                "    'baz',\n" +
+                "    'qux' // should be removed\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
         });
     });
 
@@ -465,19 +484,20 @@ describe('unexpected-sinon', function () {
                     try { stub(); } catch (e) {}
                     expect(stub, 'threw', { name: 'TypeError' });
                 }, 'to throw exception',
-                       "expected stub threw { name: 'TypeError' }\n" +
-                       "\n" +
-                       "[\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw { name: 'TypeError' }\n" +
-                       "                                            //   expected Error() to satisfy { name: 'TypeError' }\n" +
-                       "                                            //\n" +
-                       "                                            //   {\n" +
-                       "                                            //     message: '',\n" +
-                       "                                            //     name: 'Error' // should equal 'TypeError'\n" +
-                       "                                            //                   // -Error\n" +
-                       "                                            //                   // +TypeError\n" +
-                       "                                            //   }\n" +
-                       "]");
+                    "expected stub threw { name: 'TypeError' }\n" +
+                    "\n" +
+                    "[\n" +
+                    "  stub() at theFunction (theFileName:xx:yy) // expected: threw { name: 'TypeError' }\n" +
+                    "                                            //   expected Error() to satisfy { name: 'TypeError' }\n" +
+                    "                                            //\n" +
+                    "                                            //   {\n" +
+                    "                                            //     message: '',\n" +
+                    "                                            //     name: 'Error' // should equal 'TypeError'\n" +
+                    "                                            //                   // -Error\n" +
+                    "                                            //                   // +TypeError\n" +
+                    "                                            //   }\n" +
+                    "]"
+                );
             });
         });
 
@@ -497,12 +517,13 @@ describe('unexpected-sinon', function () {
                     try { stub(); } catch (e) {}
                     expect(stub, 'threw', new Error());
                 }, 'to throw exception',
-                       "expected stub threw Error()\n" +
-                       "\n" +
-                       "[\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw Error()\n" +
-                       "                                            //   expected TypeError() to satisfy Error()\n" +
-                       "]");
+                    "expected stub threw Error()\n" +
+                    "\n" +
+                    "[\n" +
+                    "  stub() at theFunction (theFileName:xx:yy) // expected: threw Error()\n" +
+                    "                                            //   expected TypeError() to satisfy Error()\n" +
+                    "]"
+                );
             });
         });
     });
@@ -530,12 +551,13 @@ describe('unexpected-sinon', function () {
                     spy();
                     expect(spy, 'always threw');
                 }, 'to throw exception',
-                       "expected spy always threw\n" +
-                       "\n" +
-                       "[\n" +
-                       "  spy() at theFunction (theFileName:xx:yy)\n" +
-                       "  spy() at theFunction (theFileName:xx:yy) // expected: threw\n" +
-                       "]");
+                    "expected spy always threw\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy() at theFunction (theFileName:xx:yy)\n" +
+                    "  spy() at theFunction (theFileName:xx:yy) // expected: threw\n" +
+                    "]"
+                );
             });
         });
 
@@ -557,20 +579,21 @@ describe('unexpected-sinon', function () {
                     try { stub(); } catch (e) {}
                     expect(stub, 'always threw', { name: 'Error' });
                 }, 'to throw exception',
-                       "expected stub always threw { name: 'Error' }\n" +
-                       "\n" +
-                       "[\n" +
-                       "  stub() at theFunction (theFileName:xx:yy)\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw { name: 'Error' }\n" +
-                       "                                            //   expected TypeError() to satisfy { name: 'Error' }\n" +
-                       "                                            //\n" +
-                       "                                            //   {\n" +
-                       "                                            //     message: '',\n" +
-                       "                                            //     name: 'TypeError' // should equal 'Error'\n" +
-                       "                                            //                       // -TypeError\n" +
-                       "                                            //                       // +Error\n" +
-                       "                                            //   }\n" +
-                       "]");
+                    "expected stub always threw { name: 'Error' }\n" +
+                    "\n" +
+                    "[\n" +
+                    "  stub() at theFunction (theFileName:xx:yy)\n" +
+                    "  stub() at theFunction (theFileName:xx:yy) // expected: threw { name: 'Error' }\n" +
+                    "                                            //   expected TypeError() to satisfy { name: 'Error' }\n" +
+                    "                                            //\n" +
+                    "                                            //   {\n" +
+                    "                                            //     message: '',\n" +
+                    "                                            //     name: 'TypeError' // should equal 'Error'\n" +
+                    "                                            //                       // -TypeError\n" +
+                    "                                            //                       // +Error\n" +
+                    "                                            //   }\n" +
+                    "]"
+                );
             });
         });
 
@@ -594,13 +617,14 @@ describe('unexpected-sinon', function () {
                     try { stub(); } catch (e) {}
                     expect(stub, 'always threw', error);
                 }, 'to throw exception',
-                       "expected stub always threw Error()\n" +
-                       "\n" +
-                       "[\n" +
-                       "  stub() at theFunction (theFileName:xx:yy)\n" +
-                       "  stub() at theFunction (theFileName:xx:yy) // expected: threw Error()\n" +
-                       "                                            //   expected TypeError() to satisfy Error()\n" +
-                       "]");
+                    "expected stub always threw Error()\n" +
+                    "\n" +
+                    "[\n" +
+                    "  stub() at theFunction (theFileName:xx:yy)\n" +
+                    "  stub() at theFunction (theFileName:xx:yy) // expected: threw Error()\n" +
+                    "                                            //   expected TypeError() to satisfy Error()\n" +
+                    "]"
+                );
             });
         });
     });
