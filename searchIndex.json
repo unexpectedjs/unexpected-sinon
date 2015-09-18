@@ -4,8 +4,16 @@
     "url": "/assertions/array-like/given-call-order/"
   },
   {
+    "label": "to have calls satisfying (array-like)",
+    "url": "/assertions/array-like/to-have-calls-satisfying/"
+  },
+  {
     "label": "threw (spy)",
     "url": "/assertions/spy/threw/"
+  },
+  {
+    "label": "to have calls satisfying (spy)",
+    "url": "/assertions/spy/to-have-calls-satisfying/"
   },
   {
     "label": "was called on (spy)",

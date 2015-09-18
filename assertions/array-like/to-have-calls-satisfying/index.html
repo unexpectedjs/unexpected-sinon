@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../../static/normalize.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../static/main.css" type="text/css" media="screen" />
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../../../static/bug-icon-black.ico">
+    <title>array-like - to have calls satisfying</title>
+</head>
+<body class="sidebar-hidden has-sidebar">
+    <header>
+        <div class="logo-icon"></div>
+        <nav>
+            <ul>
+                <li class="menu-toggle-item">
+                    <button class="menu-toggle" onclick="toggleSidebar()"></button>
+                </li>
+                
+                <li class=""><a href="../../..">unexpected-sinon</a></li>
+                
+                
+                <li class="active"><a href="../../spy/threw">Assertions</a></li>
+                
+                
+            </ul>
+        </nav>
+        <div class="search" style="visibility: hidden">
+            <input id="search" placeholder="Search..." value="">
+            <div id="searchDropDown" class="dropDown">
+                <ul id="searchResults"></ul>
+            </div>
+        </div>
+    </header>
+
+<section id="assertions">
+    <nav id="assertion-menu" class="sidebar js-remember-scroll-position">
+    <ul>
+        
+        <li>
+            <h3>spy</h3>
+            <ul>
+                
+                <li class="">
+                    <a href="../../spy/threw">threw</a>
+                </li>
+                
+                <li class="">
+                    <a href="../../spy/to-have-calls-satisfying">to have calls satisfying</a>
+                </li>
+                
+                <li class="">
+                    <a href="../../spy/was-called">was called</a>
+                </li>
+                
+                <li class="">
+                    <a href="../../spy/was-called-on">was called on</a>
+                </li>
+                
+                <li class="">
+                    <a href="../../spy/was-called-times">was called times</a>
+                </li>
+                
+                <li class="">
+                    <a href="../../spy/was-called-with">was called with</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        <li>
+            <h3>array-like</h3>
+            <ul>
+                
+                <li class="">
+                    <a href="../given-call-order">given call order</a>
+                </li>
+                
+                <li class="active">
+                    <a href="">to have calls satisfying</a>
+                </li>
+                
+            </ul>
+        </li>
+        
+    </ul>
+</nav>
+
+    <div class="main" tabindex="-1">
+        <div class="content">
+            <p>Passes if the &quot;timeline&quot; of all the calls of a set of spies satisfy a given spec:</p>
+<div class="code lang-javascript">
+  <div><span style="color: #a71d5d">var</span>&nbsp;obj&nbsp;<span style="color: #a71d5d">=</span>&nbsp;<span style="color: #000000">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;increment<span style="color: #000000">:</span>&nbsp;<span style="color: #a71d5d">function</span>&nbsp;<span style="color: #000000">(</span>n<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a71d5d">if</span>&nbsp;<span style="color: #000000">(</span>n&nbsp;<span style="color: #a71d5d">===</span>&nbsp;<span style="color: #0086b3">666</span><span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a71d5d">throw</span>&nbsp;<span style="color: #a71d5d">new</span>&nbsp;Error<span style="color: #000000">(</span><span style="color: #df5000">&quot;No,&nbsp;I&nbsp;won't&nbsp;do&nbsp;that&quot;</span><span style="color: #000000">);</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">}</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a71d5d">return</span>&nbsp;n&nbsp;<span style="color: #a71d5d">+</span>&nbsp;<span style="color: #0086b3">1</span><span style="color: #000000">;</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">},</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;decrement<span style="color: #000000">:</span>&nbsp;<span style="color: #a71d5d">function</span>&nbsp;<span style="color: #000000">(</span>n<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a71d5d">return</span>&nbsp;n&nbsp;<span style="color: #a71d5d">-</span>&nbsp;<span style="color: #0086b3">1</span><span style="color: #000000">;</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">}</span></div>
+  <div><span style="color: #000000">};</span></div>
+  <div>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(</span>obj<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'increment'</span><span style="color: #000000">);</span></div>
+  <div>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(</span>obj<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'decrement'</span><span style="color: #000000">);</span></div>
+  <div>&nbsp;</div>
+  <div>obj<span style="color: #000000">.</span><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">456</span><span style="color: #000000">);</span></div>
+  <div>obj<span style="color: #000000">.</span><span style="color: #000000">decrement</span><span style="color: #000000">(</span><span style="color: #0086b3">987</span><span style="color: #000000">);</span></div>
+  <div>obj<span style="color: #000000">.</span><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">123</span><span style="color: #000000">);</span></div>
+  <div>obj<span style="color: #000000">.</span><span style="color: #000000">decrement</span><span style="color: #000000">(</span><span style="color: #0086b3">555</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #a71d5d">try</span>&nbsp;<span style="color: #000000">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;obj<span style="color: #000000">.</span><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">666</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #000000">}</span>&nbsp;<span style="color: #a71d5d">catch</span>&nbsp;<span style="color: #000000">(</span>e<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{}</span></div>
+  <div>&nbsp;</div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">([</span>obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span>&nbsp;obj<span style="color: #000000">.</span>decrement<span style="color: #000000">],</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">[</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">{</span>&nbsp;spy<span style="color: #000000">:</span>&nbsp;obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">456</span>&nbsp;<span style="color: #000000">]</span>&nbsp;<span style="color: #000000">},</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;obj<span style="color: #000000">.</span>decrement<span style="color: #000000">,</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">{</span>&nbsp;spy<span style="color: #000000">:</span>&nbsp;obj<span style="color: #000000">.</span>decrement<span style="color: #000000">,</span>&nbsp;returned<span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">554</span>&nbsp;<span style="color: #000000">},</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">{</span>&nbsp;spy<span style="color: #000000">:</span>&nbsp;obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">666</span>&nbsp;<span style="color: #000000">],</span>&nbsp;threw<span style="color: #000000">:</span>&nbsp;<span style="color: #183691">/^No/</span>&nbsp;<span style="color: #000000">}</span></div>
+  <div><span style="color: #000000">]);</span></div>
+</div><p>In case of a failing expectation you get the following output:</p>
+<div class="code lang-javascript">
+  <div><span style="color: #000000">expect</span><span style="color: #000000">([</span>obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span>&nbsp;obj<span style="color: #000000">.</span>decrement<span style="color: #000000">],</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">[</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">{</span>&nbsp;spy<span style="color: #000000">:</span>&nbsp;obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">123</span>&nbsp;<span style="color: #000000">]</span>&nbsp;<span style="color: #000000">},</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;obj<span style="color: #000000">.</span>decrement<span style="color: #000000">,</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">{</span>&nbsp;spy<span style="color: #000000">:</span>&nbsp;obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span>&nbsp;returned<span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">557</span>&nbsp;<span style="color: #000000">},</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;obj<span style="color: #000000">.</span>decrement<span style="color: #000000">,</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">{</span>&nbsp;spy<span style="color: #000000">:</span>&nbsp;obj<span style="color: #000000">.</span>increment<span style="color: #000000">,</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">666</span>&nbsp;<span style="color: #000000">],</span>&nbsp;threw<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">{</span>&nbsp;message<span style="color: #000000">:</span>&nbsp;expect<span style="color: #000000">.</span><span style="color: #000000">it</span><span style="color: #000000">(</span><span style="color: #df5000">'not&nbsp;to&nbsp;match'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #183691">/^No/</span><span style="color: #000000">)</span>&nbsp;<span style="color: #000000">}</span>&nbsp;<span style="color: #000000">}</span></div>
+  <div><span style="color: #000000">]);</span></div>
+</div><div class="output">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;[&nbsp;<span style="color: #795da3">increment</span>,&nbsp;<span style="color: #795da3">decrement</span>&nbsp;]&nbsp;<span style="color: red; font-weight: bold">to&nbsp;have&nbsp;calls&nbsp;satisfying</span></div>
+  <div>[</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div>{&nbsp;<span style="color: #555">spy</span>:&nbsp;<span style="color: #795da3">increment</span>,&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">123</span>&nbsp;]&nbsp;},</div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">decrement</span>,</div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div>{&nbsp;<span style="color: #555">spy</span>:&nbsp;<span style="color: #795da3">increment</span>,&nbsp;<span style="color: #555">returned</span>:&nbsp;<span style="color: #0086b3">557</span>&nbsp;},</div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">decrement</span>,</div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div>{</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #555">spy</span>:&nbsp;<span style="color: #795da3">increment</span>,</div>
+  <div><span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">666</span>&nbsp;],</div>
+  <div><span style="color: #555">threw</span>:&nbsp;{&nbsp;<span style="color: #555">message</span>:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div>expect.it(<span style="color: #df5000">'not&nbsp;to&nbsp;match'</span>,&nbsp;<span style="color: #183691">/^No/</span>)</div>
+</div>&nbsp;}</div>
+</div></div>
+  <div>}</div>
+</div></div>
+  <div>]</div>
+  <div>&nbsp;</div>
+  <div>[</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">increment</span>(</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #0086b3">456</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #0086b3">123</span></div>
+</div></div>
+</div></div>
+</div></div>
+  <div>)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">decrement</span>(&nbsp;<span style="color: #0086b3">987</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">increment</span>(&nbsp;<span style="color: #0086b3">123</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">returned:&nbsp;</span><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #0086b3">124</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;equal</span>&nbsp;<span style="color: #0086b3">557</span></div>
+</div></div>
+</div></div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">decrement</span>(&nbsp;<span style="color: #0086b3">555</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+</div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #795da3">increment</span>(&nbsp;<span style="color: #0086b3">666</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">threw:&nbsp;</span><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;Error(<span style="color: #df5000">'No,&nbsp;I&nbsp;won\'t&nbsp;do&nbsp;that'</span>)</div>
+  <div><span style="color: red; font-weight: bold">to&nbsp;satisfy</span>&nbsp;{&nbsp;<span style="color: #555">message</span>:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div>expect.it(<span style="color: #df5000">'not&nbsp;to&nbsp;match'</span>,&nbsp;<span style="color: #183691">/^No/</span>)</div>
+</div>&nbsp;}</div>
+  <div>&nbsp;</div>
+  <div>{</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #555">message</span>:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #df5000">'No,&nbsp;I&nbsp;won\'t&nbsp;do&nbsp;that'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">should&nbsp;not&nbsp;match</span>&nbsp;<span style="color: #183691">/^No/</span></div>
+  <div>&nbsp;</div>
+  <div><span style="background-color: red; color: white">No</span>,&nbsp;I&nbsp;won't&nbsp;do&nbsp;that</div>
+</div></div>
+</div></div>
+</div></div>
+</div></div>
+  <div>}</div>
+</div></div>
+</div></div>
+</div></div>
+  <div>]</div>
+</div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    baseUrl = '../../..';
+</script>
+<script type="text/javascript" src="../../../static/toggleSidebar.js"></script>
+<script type="text/javascript" src="../../../static/rememberScrollPosition.js"></script>
+<script type="text/javascript" src="../../../static/focusMain.js"></script>
+<script type="text/javascript" src="../../../static/search.js"></script>
+</body>
+</html>
+
