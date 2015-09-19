@@ -40,8 +40,5 @@
     "sinon": "1.16.1",
     "unexpected": "9.13.0",
     "unexpected-documentation-site-generator": "2.5.2"
-  },
-  "dependencies": {
-    "onecolor": "2.5.0"
   }
 }
