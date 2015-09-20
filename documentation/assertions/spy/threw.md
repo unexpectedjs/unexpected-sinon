@@ -5,7 +5,7 @@ object. If only one argument is provided, the assertion passes if the
 spy ever threw any exception.
 
 ```js
-var stub = sinon.stub();
+var stub = sinon.stub().named('myStub');
 var error = new TypeError('wat');
 stub.throws(error);
 try { stub(); } catch (e) {}
@@ -19,11 +19,11 @@ expect(stub, 'threw', { name: 'TypeError' });
 In case of a failing expectation you get the following output:
 
 ```js
-expect(sinon.spy(), 'threw', new SyntaxError());
+expect(sinon.spy().named('mySpy'), 'threw', new SyntaxError());
 ```
 
 ```output
-expected spy threw SyntaxError()
+expected mySpy threw SyntaxError()
   spy did not throw exception
 ```
 
@@ -47,12 +47,12 @@ expect(stub, 'always threw', /waat/);
 ```
 
 ```output
-expected stub always threw /waat/
+expected myStub always threw /waat/
 
 [
-  stub() at theFunction (theFileName:xx:yy)
+  myStub() at theFunction (theFileName:xx:yy)
   // expected: threw /waat/
   //   expected TypeError('wat') to satisfy /waat/
-  stub() at theFunction (theFileName:xx:yy)
+  myStub() at theFunction (theFileName:xx:yy)
 ]
 ```

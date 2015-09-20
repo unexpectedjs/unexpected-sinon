@@ -11,7 +11,7 @@ expect(increment, 'was called times', 3);
 In case of a failing expectation you get the following output:
 
 ```js
-var add = sinon.spy();
+var add = sinon.spy().named('add');
 add(41, 42);
 add(41, 43);
 add(41, 44);
@@ -20,13 +20,13 @@ expect(add, 'was called times', 2);
 ```
 
 ```output
-expected spy was called times 2
+expected add was called times 2
   expected
   [
-    spy( 41, 42 ) at theFunction (theFileName:xx:yy)
-    spy( 41, 43 ) at theFunction (theFileName:xx:yy)
-    spy( 41, 44 ) at theFunction (theFileName:xx:yy)
-    spy( 41, 45 ) at theFunction (theFileName:xx:yy)
+    add( 41, 42 ) at theFunction (theFileName:xx:yy)
+    add( 41, 43 ) at theFunction (theFileName:xx:yy)
+    add( 41, 44 ) at theFunction (theFileName:xx:yy)
+    add( 41, 45 ) at theFunction (theFileName:xx:yy)
   ]
   to have length 2
     expected 4 to be 2

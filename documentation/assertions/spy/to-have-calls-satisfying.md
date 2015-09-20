@@ -15,7 +15,7 @@ expect(increment, 'to have calls satisfying', [
 In case of a failing expectation you get the following output:
 
 ```js
-var increment = sinon.spy();
+var increment = sinon.spy().named('increment');
 increment(42);
 increment(46, 'yadda');
 
@@ -26,11 +26,11 @@ expect(increment, 'to have calls satisfying', [
 ```
 
 ```output
-expected spy to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] } ]
+expected increment to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] } ]
 
 [
-  spy( 42 ) at theFunction (theFileName:xx:yy)
-  spy(
+  increment( 42 ) at theFunction (theFileName:xx:yy)
+  increment(
     46, // should equal 20
     'yadda' // should be removed
   ) at theFunction (theFileName:xx:yy)

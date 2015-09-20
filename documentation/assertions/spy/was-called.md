@@ -9,11 +9,11 @@ expect(increment, 'was called');
 In case of a failing expectation you get the following output:
 
 ```js
-expect(sinon.spy(), 'was called');
+expect(sinon.spy().named('mySpy'), 'was called');
 ```
 
 ```output
-expected spy was called
+expected mySpy was called
 ```
 
 This assertion can be negated using the `not` flag:
@@ -25,15 +25,15 @@ expect(sinon.spy(), 'was not called');
 In case of a failing expectation you get the following output:
 
 ```js
-var add = sinon.spy();
+var add = sinon.spy().named('add');
 add(42, 42);
 expect(add, 'was not called');
 ```
 
 ```output
-expected spy was not called
+expected add was not called
 
 [
-  spy( 42, 42 ) at theFunction (theFileName:xx:yy) // should be removed
+  add( 42, 42 ) at theFunction (theFileName:xx:yy) // should be removed
 ]
 ```
