@@ -8,6 +8,61 @@ describe('unexpected-sinon', function () {
         spy = sinon.spy();
     });
 
+    // Must be the first test, or the allocated spy ids will change the chosen
+    // colors:
+    it('should inspect different spies in different colors', function () {
+        var spies = [];
+        for (var i = 0 ; i < 2 ; i += 1) {
+            var spy = sinon.spy();
+            spy('abc', i);
+            spies.push(spy);
+        }
+        expect(function () {
+            expect(spies, 'to have calls satisfying', []);
+        }, 'to throw', expect.it('to have ansi diff', function (output) {
+            this
+                .text('[').nl()
+                .text('  ')
+                .block(function () {
+                    this
+                        .white('spy')
+                        .text('( ')
+                        .jsString('\'abc\'')
+                        .text(', ')
+                        .jsNumber('0')
+                        .text(' ) ')
+                        .jsComment('at theFunction (theFileName:xx:yy)')
+                        .text(' ')
+                        .block(function () {
+                            this.error('//');
+                        })
+                        .text(' ')
+                        .block(function () {
+                            this.error('should be removed');
+                        });
+                }).nl()
+                .text('  ')
+                .block(function () {
+                    this
+                        .magenta('spy')
+                        .text('( ')
+                        .jsString('\'abc\'')
+                        .text(', ')
+                        .jsNumber('1')
+                        .text(' ) ')
+                        .jsComment('at theFunction (theFileName:xx:yy)')
+                        .text(' ')
+                        .block(function () {
+                            this.error('//');
+                        })
+                        .text(' ')
+                        .block(function () {
+                            this.error('should be removed');
+                        });
+                }).nl()
+                .text(']');
+        }));
+    });
 
     describe('was called', function () {
         it('passes if spy was called at least once', function () {
