@@ -218,34 +218,108 @@ describe('unexpected-sinon', function () {
 
     describe('given call order', function () {
         it('passes if the provided spies where called in the given order', function () {
-            var agent005 = sinon.spy();
-            var agent006 = sinon.spy();
-            var agent007 = sinon.spy();
+            var agent005 = sinon.spy().named('agent005');
+            var agent006 = sinon.spy().named('agent006');
+            var agent007 = sinon.spy().named('agent007');
             agent005();
             agent006();
             agent007();
             expect([agent005, agent006, agent007], 'given call order');
         });
 
-        it('fails if the provided spies where not called in the given order', function () {
+        it('passes if the provided spies were called multiple times in the given order', function () {
+            var agent005 = sinon.spy().named('agent005');
+            var agent006 = sinon.spy().named('agent006');
+            var agent007 = sinon.spy().named('agent007');
+            agent005();
+            agent006();
+            agent007();
+            agent005();
+            agent006();
+            agent007();
+            expect([agent005, agent006, agent007, agent005, agent006, agent007], 'given call order');
+        });
+
+        it('passes if the provided spies were called multiple times in the wrong order', function () {
+            var agent005 = sinon.spy().named('agent005');
+            var agent006 = sinon.spy().named('agent006');
+            var agent007 = sinon.spy().named('agent007');
+            agent005();
+            agent006();
+            agent007();
+            agent005();
+            agent006();
+            agent007();
             expect(function () {
-                var agent005 = sinon.spy();
-                var agent006 = sinon.spy();
-                var agent007 = sinon.spy();
+                expect([agent005, agent006, agent007, agent005, agent006, agent005], 'given call order');
+            }, 'to throw',
+                "expected [ agent005, agent006, agent007, agent005, agent006, agent005 ] given call order\n" +
+                "\n" +
+                "[\n" +
+                "  agent005() at theFunction (theFileName:xx:yy)\n" +
+                "  agent006() at theFunction (theFileName:xx:yy)\n" +
+                "  agent007() at theFunction (theFileName:xx:yy)\n" +
+                "  agent005() at theFunction (theFileName:xx:yy)\n" +
+                "  agent006() at theFunction (theFileName:xx:yy)\n" +
+                "  agent007() at theFunction (theFileName:xx:yy) // spy: expected agent007 to be agent005\n" +
+                "]"
+            );
+        });
+
+        it('fails if the provided spies were all called, but not in the given order', function () {
+            expect(function () {
+                var agent005 = sinon.spy().named('agent005');
+                var agent006 = sinon.spy().named('agent006');
+                var agent007 = sinon.spy().named('agent007');
                 agent005();
                 agent007();
                 agent006();
                 expect([agent005, agent006, agent007], 'given call order');
-            }, 'to throw exception', /to be called in order/);
+            }, 'to throw exception',
+                "expected [ agent005, agent006, agent007 ] given call order\n" +
+                "\n" +
+                "[\n" +
+                "  agent005() at theFunction (theFileName:xx:yy)\n" +
+                "  agent007() at theFunction (theFileName:xx:yy) // spy: expected agent007 to be agent006\n" +
+                "  agent006() at theFunction (theFileName:xx:yy) // spy: expected agent006 to be agent007\n" +
+                "]"
+            );
+        });
 
+        it('fails if one of the spies was never called', function () {
             expect(function () {
-                var agent005 = sinon.spy();
-                var agent006 = sinon.spy();
-                var agent007 = sinon.spy();
+                var agent005 = sinon.spy().named('agent005');
+                var agent006 = sinon.spy().named('agent006');
+                var agent007 = sinon.spy().named('agent007');
                 agent005();
                 agent006();
                 expect([agent005, agent006, agent007], 'given call order');
-            }, 'to throw exception', /to be called in order/);
+            }, 'to throw exception',
+                "expected [ agent005, agent006, agent007 ] given call order\n" +
+                "\n" +
+                "[\n" +
+                "  agent005() at theFunction (theFileName:xx:yy)\n" +
+                "  agent006() at theFunction (theFileName:xx:yy)\n" +
+                "  // missing: should equal { spy: agent007 }\n" +
+                "]"
+            );
+        });
+
+        it('fails with an intelligible error message when none of the spies were called', function () {
+            expect(function () {
+                var agent005 = sinon.spy().named('agent005');
+                var agent006 = sinon.spy().named('agent006');
+                var agent007 = sinon.spy().named('agent007');
+                expect([agent005, agent006, agent007], 'given call order');
+            }, 'to throw exception',
+                "expected [ agent005, agent006, agent007 ] given call order\n" +
+                "\n" +
+                "[\n" +
+                "  // missing: should equal { spy: agent005 }\n" +
+                "  // missing: should equal { spy: agent006 }\n" +
+                "  // missing: should equal { spy: agent007 }\n" +
+                "]"
+            );
         });
     });
 
