@@ -40,7 +40,44 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected bar, foo, baz to be called in order but were called as foo, bar, baz"
+                "expected [ bar, foo, baz ] given call order\n" +
+                "\n" +
+                "[\n" +
+                "  foo() at theFunction (theFileName:xx:yy) // spy: expected foo to be bar\n" +
+                "  bar() at theFunction (theFileName:xx:yy) // spy: expected bar to be foo\n" +
+                "  baz() at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        }
+
+        try {
+            var spy1 = sinon.spy().named('spy1');
+            var spy2 = sinon.spy().named('spy2');
+            spy1();
+            spy2();
+            spy1();
+
+            expect([spy1, spy2, spy2], 'given call order');
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("var spy1 = sinon.spy().named('spy1');").nl();
+                output.code("var spy2 = sinon.spy().named('spy2');").nl();
+                output.code("spy1();").nl();
+                output.code("spy2();").nl();
+                output.code("spy1();").nl();
+                output.code("").nl();
+                output.code("expect([spy1, spy2, spy2], 'given call order');").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected [ spy1, spy2, spy2 ] given call order\n" +
+                "\n" +
+                "[\n" +
+                "  spy1() at theFunction (theFileName:xx:yy)\n" +
+                "  spy2() at theFunction (theFileName:xx:yy)\n" +
+                "  spy1() at theFunction (theFileName:xx:yy) // spy: expected spy1 to be spy2\n" +
+                "]"
             );
         }
         return expect.promise.all(testPromises);

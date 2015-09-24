@@ -22,5 +22,39 @@ expect([obj.bar, obj.foo, obj.baz], 'given call order');
 ```
 
 ```output
-expected bar, foo, baz to be called in order but were called as foo, bar, baz
+expected [ bar, foo, baz ] given call order
+
+[
+  foo() at theFunction (theFileName:xx:yy) // spy: expected foo to be bar
+  bar() at theFunction (theFileName:xx:yy) // spy: expected bar to be foo
+  baz() at theFunction (theFileName:xx:yy)
+]
+```
+
+NOTE: This assertion has slightly different semantics from Sinon.js' own
+built-in [callOrder](http://sinonjs.org/docs/#assertions) assertion, which
+is a bit loose a when a spy/stub has been called multiple times, especially
+if the calls are interleaved with calls to the other spies.
+
+This assertion supports listing the same spy multiple times, which then
+asserts that the spy was called multiple times:
+
+```js
+var spy1 = sinon.spy().named('spy1');
+var spy2 = sinon.spy().named('spy2');
+spy1();
+spy2();
+spy1();
+
+expect([spy1, spy2, spy2], 'given call order');
+```
+
+```output
+expected [ spy1, spy2, spy2 ] given call order
+
+[
+  spy1() at theFunction (theFileName:xx:yy)
+  spy2() at theFunction (theFileName:xx:yy)
+  spy1() at theFunction (theFileName:xx:yy) // spy: expected spy1 to be spy2
+]
 ```
