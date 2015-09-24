@@ -107,7 +107,7 @@
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">([</span>obj<span style="color: #000000">.</span>bar<span style="color: #000000">,</span>&nbsp;obj<span style="color: #000000">.</span>foo<span style="color: #000000">,</span>&nbsp;obj<span style="color: #000000">.</span>baz<span style="color: #000000">],</span>&nbsp;<span style="color: #df5000">'given&nbsp;call&nbsp;order'</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;[&nbsp;<span style="color: #993366">bar</span>,&nbsp;<span style="color: #993333">foo</span>,&nbsp;<span style="color: #D17575">baz</span>&nbsp;]&nbsp;<span style="color: red; font-weight: bold">given&nbsp;call&nbsp;order</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;[&nbsp;<span style="color: #669933">bar</span>,&nbsp;<span style="color: #993333">foo</span>,&nbsp;<span style="color: #314575">baz</span>&nbsp;]&nbsp;<span style="color: red; font-weight: bold">given&nbsp;call&nbsp;order</span></div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -115,21 +115,21 @@
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy:&nbsp;</span><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #993333">foo</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be</span>&nbsp;<span style="color: #993366">bar</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #993333">foo</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be</span>&nbsp;<span style="color: #669933">bar</span></div>
 </div></div>
 </div></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #993366">bar</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #669933">bar</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy:&nbsp;</span><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #993366">bar</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be</span>&nbsp;<span style="color: #993333">foo</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #669933">bar</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be</span>&nbsp;<span style="color: #993333">foo</span></div>
 </div></div>
 </div></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #D17575">baz</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #314575">baz</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>]</div>
 </div><p>NOTE: This assertion has slightly different semantics from Sinon.js&#39; own
@@ -147,21 +147,21 @@ asserts that the spy was called multiple times:</p>
   <div>&nbsp;</div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">([</span>spy1<span style="color: #000000">,</span>&nbsp;spy2<span style="color: #000000">,</span>&nbsp;spy2<span style="color: #000000">],</span>&nbsp;<span style="color: #df5000">'given&nbsp;call&nbsp;order'</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;[&nbsp;<span style="color: #669933">spy1</span>,&nbsp;<span style="color: #339999">spy2</span>,&nbsp;<span style="color: #339999">spy2</span>&nbsp;]&nbsp;<span style="color: red; font-weight: bold">given&nbsp;call&nbsp;order</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;[&nbsp;<span style="color: #337777">spy1</span>,&nbsp;<span style="color: #710071">spy2</span>,&nbsp;<span style="color: #710071">spy2</span>&nbsp;]&nbsp;<span style="color: red; font-weight: bold">given&nbsp;call&nbsp;order</span></div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #669933">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #337777">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #339999">spy2</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #710071">spy2</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #669933">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #337777">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy:&nbsp;</span><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #669933">spy1</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be</span>&nbsp;<span style="color: #339999">spy2</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #337777">spy1</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be</span>&nbsp;<span style="color: #710071">spy2</span></div>
 </div></div>
 </div></div>
 </div></div>
