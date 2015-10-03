@@ -140,7 +140,7 @@ describe("documentation tests", function () {
                 "  {\n" +
                 "    spy: increment,\n" +
                 "    args: [ 666 ],\n" +
-                "    threw: { message: expect.it('not to match', /^No/) }\n" +
+                "    threw: { message: expect.it('not to match', ...) }\n" +
                 "  }\n" +
                 "]\n" +
                 "\n" +

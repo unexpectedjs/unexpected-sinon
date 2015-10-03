@@ -49,7 +49,7 @@ expected [ increment, noop ] to have calls satisfying
   {
     spy: increment,
     args: [ 666 ],
-    threw: { message: expect.it('not to match', /^No/) }
+    threw: { message: expect.it('not to match', ...) }
   }
 ]
 
