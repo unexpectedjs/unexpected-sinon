@@ -22,8 +22,8 @@
     "travis": "npm test && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run generate-site",
     "test-browser": "serve .",
     "coverage": "NODE_ENV=development istanbul cover _mocha -- --reporter dot",
-    "generate-site": "node ./generate-site.js",
-    "update-examples": "node ./generate-site.js --update-examples",
+    "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
+    "update-examples": "generate-site --require ./bootstrap-unexpected-markdown.js --update-examples",
     "deploy-site": "deploy-site"
   },
   "main": "./lib/unexpected-sinon.js",
