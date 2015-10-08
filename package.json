@@ -29,7 +29,7 @@
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
     "sinon": "*",
-    "unexpected": "^9.8.1"
+    "unexpected": "10"
   },
   "devDependencies": {
     "coveralls": "2.11.3",
@@ -38,7 +38,7 @@
     "mocha": "2.2.5",
     "serve": "*",
     "sinon": "1.16.1",
-    "unexpected": "9.16.0",
+    "unexpected": "10",
     "unexpected-documentation-site-generator": "2.5.2"
   }
 }
