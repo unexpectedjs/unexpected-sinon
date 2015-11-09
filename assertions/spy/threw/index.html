@@ -24,6 +24,7 @@
                 <li class="active"><a href="">Assertions</a></li>
                 
                 
+                
             </ul>
         </nav>
         <div class="search" style="visibility: hidden">
@@ -89,12 +90,20 @@
 
     <div class="main" tabindex="-1">
         <div class="content">
+            <h1>threw</h1>
+            
+                <ul class="declarations">
+                </p>
+                    <li>&lt;spy&gt; always threw &lt;any?&gt;</li>
+                
+                </ul>
+            
             <p>Passes if the spy threw the given exception.</p>
 <p>The exception can be a string denoting its type, or an actual
 object. If only one argument is provided, the assertion passes if the
 spy ever threw any exception.</p>
 <div class="code lang-javascript">
-  <div><span style="color: #a71d5d">var</span>&nbsp;stub&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">stub</span><span style="color: #000000">();</span></div>
+  <div><span style="color: #a71d5d">var</span>&nbsp;stub&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">stub</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'myStub'</span><span style="color: #000000">);</span></div>
   <div><span style="color: #a71d5d">var</span>&nbsp;error&nbsp;<span style="color: #a71d5d">=</span>&nbsp;<span style="color: #a71d5d">new</span>&nbsp;TypeError<span style="color: #000000">(</span><span style="color: #df5000">'wat'</span><span style="color: #000000">);</span></div>
   <div>stub<span style="color: #000000">.</span><span style="color: #000000">throws</span><span style="color: #000000">(</span>error<span style="color: #000000">);</span></div>
   <div><span style="color: #a71d5d">try</span>&nbsp;<span style="color: #000000">{</span>&nbsp;<span style="color: #000000">stub</span><span style="color: #000000">();</span>&nbsp;<span style="color: #000000">}</span>&nbsp;<span style="color: #a71d5d">catch</span>&nbsp;<span style="color: #000000">(</span>e<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{}</span></div>
@@ -105,9 +114,9 @@ spy ever threw any exception.</p>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;name<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'TypeError'</span>&nbsp;<span style="color: #000000">});</span></div>
 </div><p>In case of a failing expectation you get the following output:</p>
 <div class="code lang-javascript">
-  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #a71d5d">new</span>&nbsp;SyntaxError<span style="color: #000000">());</span></div>
+  <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'mySpy'</span><span style="color: #000000">),</span>&nbsp;<span style="color: #df5000">'threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #a71d5d">new</span>&nbsp;SyntaxError<span style="color: #000000">());</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">threw</span>&nbsp;SyntaxError()</div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #996633">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">threw</span>&nbsp;SyntaxError()</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy&nbsp;did&nbsp;not&nbsp;throw&nbsp;exception</span></div>
 </div></div>
@@ -125,12 +134,12 @@ it passes if the spy always threw the given exception.</p>
   <div>&nbsp;</div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>stub<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'always&nbsp;threw'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #183691">/waat/</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">stub</span>&nbsp;<span style="color: red; font-weight: bold">always&nbsp;threw</span>&nbsp;<span style="color: #183691">/waat/</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #4311C2">myStub</span>&nbsp;<span style="color: red; font-weight: bold">always&nbsp;threw</span>&nbsp;<span style="color: #183691">/waat/</span></div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">stub</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #4311C2">myStub</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
   <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
   <div><span style="color: red; font-weight: bold">//</span></div>
@@ -143,7 +152,7 @@ it passes if the spy always threw the given exception.</p>
 </div></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">stub</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #4311C2">myStub</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>]</div>
 </div>

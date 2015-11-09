@@ -24,6 +24,7 @@
                 <li class="active"><a href="../threw">Assertions</a></li>
                 
                 
+                
             </ul>
         </nav>
         <div class="search" style="visibility: hidden">
@@ -89,9 +90,17 @@
 
     <div class="main" tabindex="-1">
         <div class="content">
+            <h1>to have calls satisfying</h1>
+            
+                <ul class="declarations">
+                </p>
+                    <li>&lt;spy|array&gt; to have calls satisfying &lt;any&gt;</li>
+                
+                </ul>
+            
             <p>Passes if all the calls of a spy satisfy a given spec:</p>
 <div class="code lang-javascript">
-  <div><span style="color: #a71d5d">var</span>&nbsp;increment&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(</span><span style="color: #a71d5d">function</span>&nbsp;<span style="color: #000000">(</span>n<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{</span></div>
+  <div><span style="color: #a71d5d">var</span>&nbsp;increment&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(</span><span style="color: #a71d5d">function</span>&nbsp;<span style="color: #000000">increment</span><span style="color: #000000">(</span>n<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{</span></div>
   <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a71d5d">return</span>&nbsp;n&nbsp;<span style="color: #a71d5d">+</span>&nbsp;<span style="color: #0086b3">1</span><span style="color: #000000">;</span></div>
   <div><span style="color: #000000">});</span></div>
   <div><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">42</span><span style="color: #000000">);</span></div>
@@ -102,7 +111,7 @@
   <div><span style="color: #000000">]);</span></div>
 </div><p>In case of a failing expectation you get the following output:</p>
 <div class="code lang-javascript">
-  <div><span style="color: #a71d5d">var</span>&nbsp;increment&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">();</span></div>
+  <div><span style="color: #a71d5d">var</span>&nbsp;increment&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'increment'</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">42</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">46</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'yadda'</span><span style="color: #000000">);</span></div>
   <div>&nbsp;</div>
@@ -111,14 +120,14 @@
   <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">{</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">20</span>&nbsp;<span style="color: #000000">]</span>&nbsp;<span style="color: #000000">}</span></div>
   <div><span style="color: #000000">]);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;have&nbsp;calls&nbsp;satisfying</span>&nbsp;[&nbsp;{&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">42</span>&nbsp;]&nbsp;},&nbsp;{&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">20</span>&nbsp;]&nbsp;}&nbsp;]</div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #333399">increment</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;have&nbsp;calls&nbsp;satisfying</span>&nbsp;[&nbsp;{&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">42</span>&nbsp;]&nbsp;},&nbsp;{&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">20</span>&nbsp;]&nbsp;}&nbsp;]</div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">spy</span>(&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #333399">increment</span>(&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #795da3">spy</span>(</div>
+  <div><span style="color: #333399">increment</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: #0086b3">46</span>,&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
