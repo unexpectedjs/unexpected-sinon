@@ -24,7 +24,6 @@
                 <li class="active"><a href="../threw">Assertions</a></li>
                 
                 
-                
             </ul>
         </nav>
         <div class="search" style="visibility: hidden">
@@ -90,14 +89,6 @@
 
     <div class="main" tabindex="-1">
         <div class="content">
-            <h1>was called times</h1>
-            
-                <ul class="declarations">
-                </p>
-                    <li>&lt;spy&gt; was called times &lt;number&gt;</li>
-                
-                </ul>
-            
             <p>Passes if the spy was called exactly the specified number of times.</p>
 <div class="code lang-javascript">
   <div><span style="color: #a71d5d">var</span>&nbsp;increment&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">();</span></div>
@@ -107,22 +98,22 @@
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>increment<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;times'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">3</span><span style="color: #000000">);</span></div>
 </div><p>In case of a failing expectation you get the following output:</p>
 <div class="code lang-javascript">
-  <div><span style="color: #a71d5d">var</span>&nbsp;add&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'add'</span><span style="color: #000000">);</span></div>
+  <div><span style="color: #a71d5d">var</span>&nbsp;add&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">();</span></div>
   <div><span style="color: #000000">add</span><span style="color: #000000">(</span><span style="color: #0086b3">41</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">42</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">add</span><span style="color: #000000">(</span><span style="color: #0086b3">41</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">43</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">add</span><span style="color: #000000">(</span><span style="color: #0086b3">41</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">44</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">add</span><span style="color: #000000">(</span><span style="color: #0086b3">41</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">45</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>add<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;times'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">2</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #336699">add</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;times</span>&nbsp;<span style="color: #0086b3">2</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #795da3">spy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;times</span>&nbsp;<span style="color: #0086b3">2</span></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">expected</span></div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #336699">add</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-  <div><span style="color: #336699">add</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">43</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-  <div><span style="color: #336699">add</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">44</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-  <div><span style="color: #336699">add</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">45</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #795da3">spy</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #795da3">spy</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">43</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #795da3">spy</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">44</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #795da3">spy</span>(&nbsp;<span style="color: #0086b3">41</span>,&nbsp;<span style="color: #0086b3">45</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>]</div>
   <div><span style="color: red; font-weight: bold">to&nbsp;have&nbsp;length</span>&nbsp;<span style="color: #0086b3">2</span></div>
