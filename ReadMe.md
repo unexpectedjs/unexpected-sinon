@@ -5,6 +5,6 @@ This module extends the
 library with integration for the [Sinonjs](http://sinonjs.org/)
 mocking library.
 
-[![Build Status](https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=v5.1.1)](https://travis-ci.org/unexpectedjs/unexpected-sinon)
+[![Build Status](https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=master)](https://travis-ci.org/unexpectedjs/unexpected-sinon)
 
 Read [the documentation](https://unexpectedjs.github.io/unexpected-sinon/).

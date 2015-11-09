@@ -24,7 +24,7 @@ expect(obj.spy, 'was always called on', obj);
 ```
 
 [![NPM version](https://badge.fury.io/js/unexpected-sinon.svg)](http://badge.fury.io/js/unexpected-sinon)
-[![Build Status](https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=v5.1.1)](https://travis-ci.org/unexpectedjs/unexpected-sinon)
+[![Build Status](https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=master)](https://travis-ci.org/unexpectedjs/unexpected-sinon)
 [![Coverage Status](https://coveralls.io/repos/unexpectedjs/unexpected-sinon/badge.svg)](https://coveralls.io/r/unexpectedjs/unexpected-sinon)
 [![Dependency Status](https://david-dm.org/unexpectedjs/unexpected-sinon.svg)](https://david-dm.org/unexpectedjs/unexpected-sinon)
 
