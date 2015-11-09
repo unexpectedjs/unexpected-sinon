@@ -24,7 +24,7 @@
     "coverage": "NODE_ENV=development istanbul cover _mocha -- --reporter dot",
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
     "update-examples": "generate-site --require ./bootstrap-unexpected-markdown.js --update-examples",
-    "deploy-site": "deploy-site"
+    "deploy-site": "deploy-site.sh"
   },
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
