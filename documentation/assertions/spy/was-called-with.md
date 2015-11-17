@@ -114,7 +114,7 @@ was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
   mySpy(
     { foo: 'bar' },
     'baz'
-    // missing: should be truthy
+    // missing: should satisfy expect.it('to be truthy')
   ) at theFunction (theFileName:xx:yy)
 ]
 ```

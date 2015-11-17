@@ -43,8 +43,9 @@ describe("documentation tests", function () {
                 "expected [ bar, foo, baz ] given call order\n" +
                 "\n" +
                 "[\n" +
-                "  foo() at theFunction (theFileName:xx:yy) // spy: expected foo to be bar\n" +
-                "  bar() at theFunction (theFileName:xx:yy) // spy: expected bar to be foo\n" +
+                "  // missing bar() at theFunction (theFileName:xx:yy)\n" +
+                "  foo() at theFunction (theFileName:xx:yy)\n" +
+                "  bar() at theFunction (theFileName:xx:yy) // should be removed\n" +
                 "  baz() at theFunction (theFileName:xx:yy)\n" +
                 "]"
             );
@@ -76,7 +77,8 @@ describe("documentation tests", function () {
                 "[\n" +
                 "  spy1() at theFunction (theFileName:xx:yy)\n" +
                 "  spy2() at theFunction (theFileName:xx:yy)\n" +
-                "  spy1() at theFunction (theFileName:xx:yy) // spy: expected spy1 to be spy2\n" +
+                "  // missing { spy: spy2 }\n" +
+                "  spy1() at theFunction (theFileName:xx:yy) // should be removed\n" +
                 "]"
             );
         }
@@ -490,7 +492,7 @@ describe("documentation tests", function () {
                 "  mySpy(\n" +
                 "    { foo: 'bar' },\n" +
                 "    'baz'\n" +
-                "    // missing: should be truthy\n" +
+                "    // missing: should satisfy expect.it('to be truthy')\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
                 "]"
             );
