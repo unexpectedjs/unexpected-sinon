@@ -383,7 +383,7 @@ describe("documentation tests", function () {
         var testPromises = [];
         var mySpy = sinon.spy().named('mySpy');
         mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        expect(mySpy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+        expect(mySpy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 
         try {
             expect(mySpy, 'was called with', 'baz', { foo: 'bar' });
@@ -440,7 +440,7 @@ describe("documentation tests", function () {
 
         var mySpy = sinon.spy().named('mySpy');
         mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy, 'quux');
+        expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'), 'quux');
 
         try {
             expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
@@ -548,7 +548,7 @@ describe("documentation tests", function () {
         obj.spy(42);
         obj.spy({ foo: 'bar' }, 'baz', "qux");
         expect(obj.spy, "was called twice");
-        expect(obj.spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+        expect(obj.spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
         expect(obj.spy, 'was always called on', obj);
 
         var spy = sinon.spy();

@@ -19,7 +19,7 @@ var obj = { spy: sinon.spy() };
 obj.spy(42);
 obj.spy({ foo: 'bar' }, 'baz', "qux");
 expect(obj.spy, "was called twice");
-expect(obj.spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+expect(obj.spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 expect(obj.spy, 'was always called on', obj);
 ```
 
