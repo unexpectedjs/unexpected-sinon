@@ -790,6 +790,68 @@ describe('unexpected-sinon', function () {
             );
         });
 
+        describe('when providing the expected calls as a function', function () {
+            it('should succeed', function () {
+                var spy2 = sinon.spy().named('spy2');
+                spy2(123, 456);
+                /*jshint newcap: false */
+                new spy('abc', false);
+                /*jshint newcap: true */
+                spy(-99, Infinity);
+
+                expect([spy, spy2], 'to have calls satisfying', function () {
+                    spy2(123, 456);
+                    /*jshint newcap: false */
+                    new spy('abc', false);
+                    /*jshint newcap: true */
+                    spy(-99, Infinity);
+                });
+                expect(spy.args, 'to have length', 2);
+                expect(spy.callCount, 'to equal', 2);
+            });
+
+            it('should fail with a diff', function () {
+                var spy2 = sinon.spy().named('spy2');
+                spy2(123, 456, 99);
+                /*jshint newcap: false */
+                spy('abc', true);
+                /*jshint newcap: true */
+                spy(-99, Infinity);
+
+                expect(function () {
+                    expect([spy, spy2], 'to have calls satisfying', function () {
+                        spy2(123, 456);
+                        /*jshint newcap: false */
+                        new spy('abc', false);
+                        /*jshint newcap: true */
+                        spy(-99, Infinity);
+                    });
+                }, 'to throw',
+                    "expected [ spy1, spy2 ] to have calls satisfying\n" +
+                    "function () {\n" +
+                    "  spy2(123, 456);\n" +
+                    "  /*jshint newcap: false */\n" +
+                    "  new spy('abc', false);\n" +
+                    "  /*jshint newcap: true */\n" +
+                    "  spy(-99, Infinity);\n" +
+                    "}\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy2(\n" +
+                    "    123,\n" +
+                    "    456,\n" +
+                    "    99 // should be removed\n" +
+                    "  ) at theFunction (theFileName:xx:yy)\n" +
+                    "  spy1(\n" +
+                    "    'abc',\n" +
+                    "    true // should equal false\n" +
+                    "  ) at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
+                    "  spy1( -99, Infinity ) at theFunction (theFileName:xx:yy)\n" +
+                    "]"
+                );
+            });
+        });
+
         describe('when asserting whether a call was invoked with the new operator', function () {
             it('should succeed', function () {
                 /*jshint newcap: false */
