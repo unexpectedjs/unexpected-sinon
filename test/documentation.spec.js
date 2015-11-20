@@ -165,6 +165,60 @@ describe("documentation tests", function () {
                 "]"
             );
         }
+
+        try {
+            var spy1 = sinon.spy().named('spy1');
+            var spy2 = sinon.spy().named('spy2');
+
+            spy1(123);
+            spy2(456);
+            spy1(false);
+            spy2(789);
+
+            expect([ spy1, spy2 ], 'to have calls satisfying', function () {
+                spy1(123);
+                spy2(456);
+                spy1(expect.it('to be a string'));
+                spy2(789);
+            });
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("var spy1 = sinon.spy().named('spy1');").nl();
+                output.code("var spy2 = sinon.spy().named('spy2');").nl();
+                output.code("").nl();
+                output.code("spy1(123);").nl();
+                output.code("spy2(456);").nl();
+                output.code("spy1(false);").nl();
+                output.code("spy2(789);").nl();
+                output.code("").nl();
+                output.code("expect([ spy1, spy2 ], 'to have calls satisfying', function () {").nl();
+                output.code("    spy1(123);").nl();
+                output.code("    spy2(456);").nl();
+                output.code("    spy1(expect.it('to be a string'));").nl();
+                output.code("    spy2(789);").nl();
+                output.code("});").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected [ spy1, spy2 ] to have calls satisfying\n" +
+                "[\n" +
+                "  spy1( 123 )\n" +
+                "  spy2( 456 )\n" +
+                "  spy1( expect.it('to be a string') )\n" +
+                "  spy2( 789 )\n" +
+                "]\n" +
+                "\n" +
+                "[\n" +
+                "  spy1( 123 ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy2( 456 ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy1(\n" +
+                "    false // should be a string\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "  spy2( 789 ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        }
         return expect.promise.all(testPromises);
     });
 
@@ -270,6 +324,45 @@ describe("documentation tests", function () {
                 "    46, // should equal 20\n" +
                 "    'yadda' // should be removed\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        }
+
+        try {
+            var increment = sinon.spy().named('increment');
+            increment(1);
+            increment(2);
+            increment(3);
+
+            expect(increment, 'to have calls satisfying', function () {
+                increment(1);
+                increment(expect.it('to be a number'));
+            });
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("var increment = sinon.spy().named('increment');").nl();
+                output.code("increment(1);").nl();
+                output.code("increment(2);").nl();
+                output.code("increment(3);").nl();
+                output.code("").nl();
+                output.code("expect(increment, 'to have calls satisfying', function () {").nl();
+                output.code("    increment(1);").nl();
+                output.code("    increment(expect.it('to be a number'));").nl();
+                output.code("});").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected increment to have calls satisfying\n" +
+                "[\n" +
+                "  increment( 1 )\n" +
+                "  increment( expect.it('to be a number') )\n" +
+                "]\n" +
+                "\n" +
+                "[\n" +
+                "  increment( 1 ) at theFunction (theFileName:xx:yy)\n" +
+                "  increment( 2 ) at theFunction (theFileName:xx:yy)\n" +
+                "  increment( 3 ) at theFunction (theFileName:xx:yy) // should be removed\n" +
                 "]"
             );
         }

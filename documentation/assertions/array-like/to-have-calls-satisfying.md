@@ -73,3 +73,41 @@ expected [ increment, noop ] to have calls satisfying
     //        }
 ]
 ```
+
+You can also specify expected calls as a function that performs them:
+
+```js
+var spy1 = sinon.spy().named('spy1');
+var spy2 = sinon.spy().named('spy2');
+
+spy1(123);
+spy2(456);
+spy1(false);
+spy2(789);
+
+expect([ spy1, spy2 ], 'to have calls satisfying', function () {
+    spy1(123);
+    spy2(456);
+    spy1(expect.it('to be a string'));
+    spy2(789);
+});
+```
+
+```output
+expected [ spy1, spy2 ] to have calls satisfying
+[
+  spy1( 123 )
+  spy2( 456 )
+  spy1( expect.it('to be a string') )
+  spy2( 789 )
+]
+
+[
+  spy1( 123 ) at theFunction (theFileName:xx:yy)
+  spy2( 456 ) at theFunction (theFileName:xx:yy)
+  spy1(
+    false // should be a string
+  ) at theFunction (theFileName:xx:yy)
+  spy2( 789 ) at theFunction (theFileName:xx:yy)
+]
+```

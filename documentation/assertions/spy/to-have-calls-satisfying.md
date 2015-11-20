@@ -36,3 +36,31 @@ expected increment to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] }
   ) at theFunction (theFileName:xx:yy)
 ]
 ```
+
+You can also specify expected calls as a function that performs them:
+
+```js
+var increment = sinon.spy().named('increment');
+increment(1);
+increment(2);
+increment(3);
+
+expect(increment, 'to have calls satisfying', function () {
+    increment(1);
+    increment(expect.it('to be a number'));
+});
+```
+
+```output
+expected increment to have calls satisfying
+[
+  increment( 1 )
+  increment( expect.it('to be a number') )
+]
+
+[
+  increment( 1 ) at theFunction (theFileName:xx:yy)
+  increment( 2 ) at theFunction (theFileName:xx:yy)
+  increment( 3 ) at theFunction (theFileName:xx:yy) // should be removed
+]
+```
