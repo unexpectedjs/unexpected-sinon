@@ -828,13 +828,11 @@ describe('unexpected-sinon', function () {
                     });
                 }, 'to throw',
                     "expected [ spy1, spy2 ] to have calls satisfying\n" +
-                    "function () {\n" +
-                    "  spy2(123, 456);\n" +
-                    "  /*jshint newcap: false */\n" +
-                    "  new spy('abc', false);\n" +
-                    "  /*jshint newcap: true */\n" +
-                    "  spy(-99, Infinity);\n" +
-                    "}\n" +
+                    "[\n" +
+                    "  spy2( 123, 456 )\n" +
+                    "  new spy1( 'abc', false )\n" +
+                    "  spy1( -99, Infinity )\n" +
+                    "]\n" +
                     "\n" +
                     "[\n" +
                     "  spy2(\n" +
@@ -847,8 +845,6 @@ describe('unexpected-sinon', function () {
                     "    true // should equal false\n" +
                     "  ) at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
                     "  new spy1( -99, Infinity ) at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
-                    "                                                               //\n" +
-                    "                                                               // this: expected {} to equal undefined\n" +
                     "]"
                 );
             });
@@ -864,10 +860,15 @@ describe('unexpected-sinon', function () {
                     });
                 }, 'to throw',
                     "expected spy1 to have calls satisfying\n" +
-                    "function () {\n" +
-                    "  spy('abc', expect.it('to be true'));\n" +
-                    "  spy('abc', false, expect.it('to be a number').and('to be less than', 100));\n" +
-                    "}\n" +
+                    "[\n" +
+                    "  spy1( 'abc', expect.it('to be true') )\n" +
+                    "  spy1(\n" +
+                    "    'abc',\n" +
+                    "    false,\n" +
+                    "    expect.it('to be a number')\n" +
+                    "            .and('to be less than', 100)\n" +
+                    "  )\n" +
+                    "]\n" +
                     "\n" +
                     "[\n" +
                     "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
