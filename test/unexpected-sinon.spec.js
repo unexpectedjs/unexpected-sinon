@@ -813,10 +813,10 @@ describe('unexpected-sinon', function () {
             it('should fail with a diff', function () {
                 var spy2 = sinon.spy().named('spy2');
                 spy2(123, 456, 99);
-                /*jshint newcap: false */
                 spy('abc', true);
+                /*jshint newcap: false */
+                new spy(-99, Infinity);
                 /*jshint newcap: true */
-                spy(-99, Infinity);
 
                 expect(function () {
                     expect([spy, spy2], 'to have calls satisfying', function () {
@@ -846,7 +846,9 @@ describe('unexpected-sinon', function () {
                     "    'abc',\n" +
                     "    true // should equal false\n" +
                     "  ) at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
-                    "  spy1( -99, Infinity ) at theFunction (theFileName:xx:yy)\n" +
+                    "  new spy1( -99, Infinity ) at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
+                    "                                                               //\n" +
+                    "                                                               // this: expected {} to equal undefined\n" +
                     "]"
                 );
             });
@@ -878,7 +880,7 @@ describe('unexpected-sinon', function () {
                     "expected spy1 to have calls satisfying [ { calledWithNew: false }, { calledWithNew: true } ]\n" +
                     "\n" +
                     "[\n" +
-                    "  spy1() at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
+                    "  new spy1() at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
                     "  spy1() at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
                     "]"
                 );
