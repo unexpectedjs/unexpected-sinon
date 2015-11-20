@@ -852,6 +852,34 @@ describe('unexpected-sinon', function () {
                     "]"
                 );
             });
+
+            it('should work with expect.it', function () {
+                spy('abc', true);
+                spy('abc', false, 123);
+
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', function () {
+                        spy('abc', expect.it('to be true'));
+                        spy('abc', false, expect.it('to be a number').and('to be less than', 100));
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying\n" +
+                    "function () {\n" +
+                    "  spy('abc', expect.it('to be true'));\n" +
+                    "  spy('abc', false, expect.it('to be a number').and('to be less than', 100));\n" +
+                    "}\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
+                    "  spy1(\n" +
+                    "    'abc',\n" +
+                    "    false,\n" +
+                    "    123 // ✓ should be a number and\n" +
+                    "        // ⨯ should be less than 100\n" +
+                    "  ) at theFunction (theFileName:xx:yy)\n" +
+                    "]"
+                );
+            });
         });
 
         describe('when asserting whether a call was invoked with the new operator', function () {
