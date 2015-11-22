@@ -439,6 +439,40 @@ describe('unexpected-sinon', function () {
                 "]"
             );
         });
+
+        it('renders a nice diff for extraneous arguments', function () {
+            expect(function () {
+                spy('a', 'b', 'c');
+                expect(spy, 'was always called with exactly', 'a', 'c');
+            }, 'to throw exception',
+                "expected spy1 was always called with exactly 'a', 'c'\n" +
+                "\n" +
+                "[\n" +
+                "  spy1(\n" +
+                "    'a',\n" +
+                "    'b', // should be removed\n" +
+                "    'c'\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        });
+
+        it('renders a nice diff for missing arguments', function () {
+            expect(function () {
+                spy('a', 'c');
+                expect(spy, 'was always called with exactly', 'a', 'b', 'c');
+            }, 'to throw exception',
+                "expected spy1 was always called with exactly 'a', 'b', 'c'\n" +
+                "\n" +
+                "[\n" +
+                "  spy1(\n" +
+                "    'a',\n" +
+                "    // missing 'b'\n" +
+                "    'c'\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        });
     });
 
     describe('was never called with', function () {
