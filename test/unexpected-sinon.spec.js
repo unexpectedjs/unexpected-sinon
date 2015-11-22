@@ -849,6 +849,28 @@ describe('unexpected-sinon', function () {
                 );
             });
 
+            it.skip('should render missing spy calls nicely', function () {
+                spy('abc', true);
+
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', function () {
+                        spy('abc', true);
+                        spy('def', false);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying\n" +
+                    "[\n" +
+                    "  spy1( 'abc', true )\n" +
+                    "  spy1( 'def', false )\n" +
+                    "]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
+                    "  // missing spy1( 'def', true )\n" +
+                    "]"
+                );
+            });
+
             it('should work with expect.it', function () {
                 spy('abc', true);
                 spy('abc', false, 123);
