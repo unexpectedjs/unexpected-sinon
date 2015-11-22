@@ -303,7 +303,7 @@ describe('unexpected-sinon', function () {
                 "[\n" +
                 "  agent005() at theFunction (theFileName:xx:yy)\n" +
                 "  agent006() at theFunction (theFileName:xx:yy)\n" +
-                "  // missing: should equal { spy: agent007 }\n" +
+                "  // missing { spy: agent007 }\n" +
                 "]"
             );
         });
@@ -318,9 +318,9 @@ describe('unexpected-sinon', function () {
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
                 "[\n" +
-                "  // missing: should equal { spy: agent005 }\n" +
-                "  // missing: should equal { spy: agent006 }\n" +
-                "  // missing: should equal { spy: agent007 }\n" +
+                "  // missing { spy: agent005 }\n" +
+                "  // missing { spy: agent006 }\n" +
+                "  // missing { spy: agent007 }\n" +
                 "]"
             );
         });
@@ -432,7 +432,7 @@ describe('unexpected-sinon', function () {
                 "[\n" +
                 "  spy1(\n" +
                 "    'something else' // should equal { foo: 'bar' }\n" +
-                "    // missing: should equal 'baz'\n" +
+                "    // missing 'baz'\n" +
                 "    // missing: should be truthy\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
                 "  spy1( { foo: 'bar' }, 'baz', true, false ) at theFunction (theFileName:xx:yy)\n" +
@@ -768,6 +768,7 @@ describe('unexpected-sinon', function () {
                 "  die() at theFunction (theFileName:xx:yy) // threw: expected Error('say what') to satisfy /cqwecqw/\n" +
                 "  spy1(\n" +
                 "    'baz' // should equal 'yadda'\n" +
+                "          //\n" +
                 "          // -baz\n" +
                 "          // +yadda\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
