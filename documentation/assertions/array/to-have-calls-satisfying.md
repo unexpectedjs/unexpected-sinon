@@ -56,12 +56,12 @@ expected [ increment, noop ] to have calls satisfying
 [
   increment(
     456 // should equal 123
-  ) at theFunction (theFileName:xx:yy)
-  noop( 987 ) at theFunction (theFileName:xx:yy)
-  increment( 123 ) at theFunction (theFileName:xx:yy)
+  ); at theFunction (theFileName:xx:yy)
+  noop( 987 ); at theFunction (theFileName:xx:yy)
+  increment( 123 ); at theFunction (theFileName:xx:yy)
     // returned: expected 124 to equal 557
-  noop( 555 ) at theFunction (theFileName:xx:yy)
-  increment( 666 ) at theFunction (theFileName:xx:yy)
+  noop( 555 ); at theFunction (theFileName:xx:yy)
+  increment( 666 ); at theFunction (theFileName:xx:yy)
     // threw: expected Error('No, I won\'t do that')
     //        to satisfy { message: expect.it('not to match', /^No/) }
     //
@@ -130,18 +130,18 @@ expect([ spy1, spy2 ], 'to have calls satisfying', function () {
 ```output
 expected [ spy1, spy2 ] to have calls satisfying
 [
-  spy1( 123 )
-  spy2( 456 )
-  spy1( expect.it('to be a string') )
-  spy2( 789 )
+  spy1( 123 );
+  spy2( 456 );
+  spy1( expect.it('to be a string') );
+  spy2( 789 );
 ]
 
 [
-  spy1( 123 ) at theFunction (theFileName:xx:yy)
-  spy2( 456 ) at theFunction (theFileName:xx:yy)
+  spy1( 123 ); at theFunction (theFileName:xx:yy)
+  spy2( 456 ); at theFunction (theFileName:xx:yy)
   spy1(
     false // should be a string
-  ) at theFunction (theFileName:xx:yy)
-  spy2( 789 ) at theFunction (theFileName:xx:yy)
+  ); at theFunction (theFileName:xx:yy)
+  spy2( 789 ); at theFunction (theFileName:xx:yy)
 ]
 ```

@@ -50,9 +50,9 @@ expect(stub, 'always threw', /waat/);
 expected myStub always threw /waat/
 
 [
-  myStub() at theFunction (theFileName:xx:yy)
+  myStub(); at theFunction (theFileName:xx:yy)
   // expected: threw /waat/
   //   expected TypeError('wat') to satisfy /waat/
-  myStub() at theFunction (theFileName:xx:yy)
+  myStub(); at theFunction (theFileName:xx:yy)
 ]
 ```

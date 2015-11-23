@@ -29,11 +29,11 @@ expect(increment, 'to have calls satisfying', [
 expected increment to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] } ]
 
 [
-  increment( 42 ) at theFunction (theFileName:xx:yy)
+  increment( 42 ); at theFunction (theFileName:xx:yy)
   increment(
     46, // should equal 20
     'yadda' // should be removed
-  ) at theFunction (theFileName:xx:yy)
+  ); at theFunction (theFileName:xx:yy)
 ]
 ```
 
@@ -88,13 +88,13 @@ expect(increment, 'to have calls satisfying', function () {
 ```output
 expected increment to have calls satisfying
 [
-  increment( 1 )
-  increment( expect.it('to be a number') )
+  increment( 1 );
+  increment( expect.it('to be a number') );
 ]
 
 [
-  increment( 1 ) at theFunction (theFileName:xx:yy)
-  increment( 2 ) at theFunction (theFileName:xx:yy)
-  increment( 3 ) at theFunction (theFileName:xx:yy) // should be removed
+  increment( 1 ); at theFunction (theFileName:xx:yy)
+  increment( 2 ); at theFunction (theFileName:xx:yy)
+  increment( 3 ); at theFunction (theFileName:xx:yy) // should be removed
 ]
 ```

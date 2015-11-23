@@ -25,9 +25,9 @@ expect([obj.bar, obj.foo, obj.baz], 'given call order');
 expected [ bar, foo, baz ] given call order
 
 [
-  foo() at theFunction (theFileName:xx:yy) // spy: expected foo to be bar
-  bar() at theFunction (theFileName:xx:yy) // spy: expected bar to be foo
-  baz() at theFunction (theFileName:xx:yy)
+  foo(); at theFunction (theFileName:xx:yy) // spy: expected foo to be bar
+  bar(); at theFunction (theFileName:xx:yy) // spy: expected bar to be foo
+  baz(); at theFunction (theFileName:xx:yy)
 ]
 ```
 
@@ -53,8 +53,8 @@ expect([spy1, spy2, spy2], 'given call order');
 expected [ spy1, spy2, spy2 ] given call order
 
 [
-  spy1() at theFunction (theFileName:xx:yy)
-  spy2() at theFunction (theFileName:xx:yy)
-  spy1() at theFunction (theFileName:xx:yy) // spy: expected spy1 to be spy2
+  spy1(); at theFunction (theFileName:xx:yy)
+  spy2(); at theFunction (theFileName:xx:yy)
+  spy1(); at theFunction (theFileName:xx:yy) // spy: expected spy1 to be spy2
 ]
 ```

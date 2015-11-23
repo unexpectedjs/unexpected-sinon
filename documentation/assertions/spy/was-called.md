@@ -34,6 +34,6 @@ expect(add, 'was not called');
 expected add was not called
 
 [
-  add( 42, 42 ) at theFunction (theFileName:xx:yy) // should be removed
+  add( 42, 42 ); at theFunction (theFileName:xx:yy) // should be removed
 ]
 ```

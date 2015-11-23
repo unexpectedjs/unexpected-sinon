@@ -21,7 +21,7 @@ expected mySpy was called with 'baz', { foo: 'bar' }
     'baz', // should equal { foo: 'bar' }
     'qux',
     'quux'
-  ) at theFunction (theFileName:xx:yy)
+  ); at theFunction (theFileName:xx:yy)
 ]
 ```
 
@@ -47,13 +47,13 @@ expected mySpy
 was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
 [
-  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)
-  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)
+  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)
+  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)
   mySpy(
     { foo: 'bar' },
     'baz'
     // missing: should be truthy
-  ) at theFunction (theFileName:xx:yy)
+  ); at theFunction (theFileName:xx:yy)
 ]
 ```
 
@@ -82,7 +82,7 @@ was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
     'baz',
     'qux',
     'quux' // should be removed
-  ) at theFunction (theFileName:xx:yy)
+  ); at theFunction (theFileName:xx:yy)
 ]
 ```
 
@@ -109,12 +109,12 @@ expected mySpy
 was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
 [
-  mySpy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)
-  mySpy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)
+  mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)
+  mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)
   mySpy(
     { foo: 'bar' },
     'baz'
     // missing: should be truthy
-  ) at theFunction (theFileName:xx:yy)
+  ); at theFunction (theFileName:xx:yy)
 ]
 ```
