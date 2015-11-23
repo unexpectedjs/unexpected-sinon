@@ -938,6 +938,21 @@ describe('unexpected-sinon', function () {
                     "]"
                 );
             });
+
+            it('should not break while recording when the spied-upon function has side effects', function () {
+                var throwingSpy = sinon.spy(function () {
+                    throw new Error('Urgh');
+                });
+                expect(throwingSpy, 'to throw');
+                expect(throwingSpy, 'to throw');
+
+                return expect(throwingSpy, 'to have calls satisfying', function () {
+                    throwingSpy();
+                    throwingSpy();
+                }).then(function () {
+                    expect(throwingSpy, 'was called twice');
+                });
+            });
         });
 
         describe('when asserting whether a call was invoked with the new operator', function () {
