@@ -1,4 +1,4 @@
-Passes if all the calls of a spy satisfy a given spec:
+Passes if all the calls of a spy [satisfy](http://unexpected.js.org/assertions/any/to-satisfy/) a given spec:
 
 ```js
 var increment = sinon.spy(function increment(n) {
