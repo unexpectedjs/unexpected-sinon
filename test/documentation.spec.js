@@ -16,7 +16,7 @@ describe("documentation tests", function () {
 
     });
 
-    it("assertions/array-like/given-call-order.md contains correct examples", function () {
+    it("assertions/array/given-call-order.md contains correct examples", function () {
         var testPromises = [];
         var obj = {
             foo: function () { return 'foo'; },
@@ -83,7 +83,7 @@ describe("documentation tests", function () {
         return expect.promise.all(testPromises);
     });
 
-    it("assertions/array-like/to-have-calls-satisfying.md contains correct examples", function () {
+    it("assertions/array/to-have-calls-satisfying.md contains correct examples", function () {
         var testPromises = [];
         var noop = sinon.spy().named('noop');
 
