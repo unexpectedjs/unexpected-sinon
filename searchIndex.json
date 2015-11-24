@@ -1,13 +1,5 @@
 [
   {
-    "label": "given call order (array-like)",
-    "url": "/assertions/array-like/given-call-order/"
-  },
-  {
-    "label": "to have calls satisfying (array-like)",
-    "url": "/assertions/array-like/to-have-calls-satisfying/"
-  },
-  {
     "label": "threw (spy)",
     "url": "/assertions/spy/threw/"
   },
@@ -30,5 +22,13 @@
   {
     "label": "was called (spy)",
     "url": "/assertions/spy/was-called/"
+  },
+  {
+    "label": "given call order (array)",
+    "url": "/assertions/array/given-call-order/"
+  },
+  {
+    "label": "to have calls satisfying (array)",
+    "url": "/assertions/array/to-have-calls-satisfying/"
   }
 ]
