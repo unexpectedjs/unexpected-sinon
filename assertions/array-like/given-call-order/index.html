@@ -37,55 +37,49 @@
 
 <section id="assertions">
     <nav id="assertion-menu" class="sidebar js-remember-scroll-position">
-    <ul>
-        
-        <li>
-            <h3>spy</h3>
-            <ul>
-                
-                <li class="">
-                    <a href="../../spy/threw">threw</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/to-have-calls-satisfying">to have calls satisfying</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called">was called</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called-on">was called on</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called-times">was called times</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called-with">was called with</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-        <li>
-            <h3>array-like</h3>
-            <ul>
-                
-                <li class="active">
-                    <a href="">given call order</a>
-                </li>
-                
-                <li class="">
-                    <a href="../to-have-calls-satisfying">to have calls satisfying</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-    </ul>
+    
+        <h3 class=""><a href="../../spy">spy</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../spy/threw">threw</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called">was called</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called-on">was called on</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called-times">was called times</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called-with">was called with</a>
+            </li>
+            
+        </ul>
+    
+        <h3 class=""><a href="..">array-like</a></h3>
+        <ul>
+            
+            <li class="active">
+                <a href="">given call order</a>
+            </li>
+            
+            <li class="">
+                <a href="../to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+        </ul>
+    
 </nav>
 
     <div class="main" tabindex="-1">
@@ -93,7 +87,7 @@
             <h1>given call order</h1>
             
                 <ul class="declarations">
-                </p>
+                
                     <li>&lt;array-like&gt; given call order</li>
                 
                 </ul>
@@ -120,7 +114,6 @@
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #993333">foo</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -129,9 +122,7 @@
 </div></div>
 </div></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #669933">bar</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -140,11 +131,8 @@
 </div></div>
 </div></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #314575">baz</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-</div></div>
 </div></div>
   <div>]</div>
 </div><p>NOTE: This assertion has slightly different semantics from Sinon.js&#39; own
@@ -166,23 +154,17 @@ asserts that the spy was called multiple times:</p>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #337777">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #710071">spy2</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #337777">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy:&nbsp;</span><div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #337777">spy1</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;be</span>&nbsp;<span style="color: #710071">spy2</span></div>
-</div></div>
 </div></div>
 </div></div>
 </div></div>

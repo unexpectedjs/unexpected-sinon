@@ -37,62 +37,56 @@
 
 <section id="assertions">
     <nav id="assertion-menu" class="sidebar js-remember-scroll-position">
-    <ul>
-        
-        <li>
-            <h3>spy</h3>
-            <ul>
-                
-                <li class="">
-                    <a href="../../spy/threw">threw</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/to-have-calls-satisfying">to have calls satisfying</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called">was called</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called-on">was called on</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called-times">was called times</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../spy/was-called-with">was called with</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-        <li>
-            <h3>array-like</h3>
-            <ul>
-                
-                <li class="">
-                    <a href="../given-call-order">given call order</a>
-                </li>
-                
-                <li class="active">
-                    <a href="">to have calls satisfying</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-    </ul>
+    
+        <h3 class=""><a href="../../spy">spy</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../spy/threw">threw</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called">was called</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called-on">was called on</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called-times">was called times</a>
+            </li>
+            
+            <li class="">
+                <a href="../../spy/was-called-with">was called with</a>
+            </li>
+            
+        </ul>
+    
+        <h3 class=""><a href="..">array-like</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../given-call-order">given call order</a>
+            </li>
+            
+            <li class="active">
+                <a href="">to have calls satisfying</a>
+            </li>
+            
+        </ul>
+    
 </nav>
 
     <div class="main" tabindex="-1">
         <div class="content">
             <h1>to have calls satisfying</h1>
             
-            <p>Passes if the &quot;timeline&quot; of all the calls of a set of spies satisfy a given spec:</p>
+            <p>Passes if the &quot;timeline&quot; of all the calls of a set of spies <a href="http://unexpected.js.org/assertions/any/to-satisfy/">satisfy</a> a given spec:</p>
 <div class="code lang-javascript">
   <div><span style="color: #a71d5d">var</span>&nbsp;noop&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'noop'</span><span style="color: #000000">);</span></div>
   <div>&nbsp;</div>
@@ -157,12 +151,9 @@
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #BB1A53">increment</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">456</span></div>
-</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #0086b3">456</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -172,14 +163,10 @@
 </div></div>
   <div>)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #319916">noop</span>(&nbsp;<span style="color: #0086b3">987</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #BB1A53">increment</span>(&nbsp;<span style="color: #0086b3">123</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
@@ -189,14 +176,10 @@
 </div></div>
 </div></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #319916">noop</span>(&nbsp;<span style="color: #0086b3">555</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #BB1A53">increment</span>(&nbsp;<span style="color: #0086b3">666</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
@@ -234,7 +217,6 @@
 </div></div>
 </div></div>
 </div></div>
-</div></div>
   <div>]</div>
 </div><p>You can also specify expected calls as a function that performs them:</p>
 <div class="code lang-javascript">
@@ -265,22 +247,16 @@
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #999933">spy1</span>(&nbsp;<span style="color: #0086b3">123</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #4311C2">spy2</span>(&nbsp;<span style="color: #0086b3">456</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #999933">spy1</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">false</span></div>
-</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #0086b3">false</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
@@ -288,13 +264,11 @@
 </div></div>
 </div></div>
 </div></div>
+</div></div>
   <div>)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #4311C2">spy2</span>(&nbsp;<span style="color: #0086b3">789</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-</div></div>
 </div></div>
   <div>]</div>
 </div>

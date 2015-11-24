@@ -37,55 +37,49 @@
 
 <section id="assertions">
     <nav id="assertion-menu" class="sidebar js-remember-scroll-position">
-    <ul>
-        
-        <li>
-            <h3>spy</h3>
-            <ul>
-                
-                <li class="">
-                    <a href="../threw">threw</a>
-                </li>
-                
-                <li class="active">
-                    <a href="">to have calls satisfying</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called">was called</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called-on">was called on</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called-times">was called times</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called-with">was called with</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-        <li>
-            <h3>array-like</h3>
-            <ul>
-                
-                <li class="">
-                    <a href="../../array-like/given-call-order">given call order</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../array-like/to-have-calls-satisfying">to have calls satisfying</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-    </ul>
+    
+        <h3 class=""><a href="..">spy</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../threw">threw</a>
+            </li>
+            
+            <li class="active">
+                <a href="">to have calls satisfying</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called">was called</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-on">was called on</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-times">was called times</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-with">was called with</a>
+            </li>
+            
+        </ul>
+    
+        <h3 class=""><a href="../../array-like">array-like</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../array-like/given-call-order">given call order</a>
+            </li>
+            
+            <li class="">
+                <a href="../../array-like/to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+        </ul>
+    
 </nav>
 
     <div class="main" tabindex="-1">
@@ -93,14 +87,14 @@
             <h1>to have calls satisfying</h1>
             
                 <ul class="declarations">
-                </p>
-                    <li>&lt;spy|array&gt; to have calls satisfying &lt;array|object&gt;</li>
-                </p>
-                    <li>&lt;spy|array&gt; to have calls satisfying &lt;function&gt;</li>
+                
+                    <li>&lt;spy&gt; to have calls satisfying &lt;array|object&gt;</li>
+                
+                    <li>&lt;spy&gt; to have calls satisfying &lt;function&gt;</li>
                 
                 </ul>
             
-            <p>Passes if all the calls of a spy satisfy a given spec:</p>
+            <p>Passes if all the calls of a spy <a href="http://unexpected.js.org/assertions/any/to-satisfy/">satisfy</a> a given spec:</p>
 <div class="code lang-javascript">
   <div><span style="color: #a71d5d">var</span>&nbsp;increment&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(</span><span style="color: #a71d5d">function</span>&nbsp;<span style="color: #000000">increment</span><span style="color: #000000">(</span>n<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{</span></div>
   <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a71d5d">return</span>&nbsp;n&nbsp;<span style="color: #a71d5d">+</span>&nbsp;<span style="color: #0086b3">1</span><span style="color: #000000">;</span></div>
@@ -126,17 +120,12 @@
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #C24747">increment</span>(&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #C24747">increment</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">46</span>,</div>
-</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #0086b3">46</span>,&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -145,12 +134,13 @@
 </div></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #df5000">'yadda'</span>&nbsp;<span style="color: red; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div>
+  <div><span style="color: #df5000">'yadda'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">should&nbsp;be&nbsp;removed</span></div>
 </div></div>
 </div></div>
   <div>)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-</div></div>
 </div></div>
   <div>]</div>
 </div><p>You can also specify expected calls as a function that performs them:</p>
@@ -175,18 +165,16 @@
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #336699">increment</span>(&nbsp;<span style="color: #0086b3">1</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #336699">increment</span>(&nbsp;<span style="color: #0086b3">2</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #336699">increment</span>(&nbsp;<span style="color: #0086b3">3</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<span style="color: red; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div>
+  <div><span style="color: #336699">increment</span>(&nbsp;<span style="color: #0086b3">3</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">should&nbsp;be&nbsp;removed</span></div>
 </div></div>
 </div></div>
   <div>]</div>

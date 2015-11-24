@@ -37,55 +37,49 @@
 
 <section id="assertions">
     <nav id="assertion-menu" class="sidebar js-remember-scroll-position">
-    <ul>
-        
-        <li>
-            <h3>spy</h3>
-            <ul>
-                
-                <li class="">
-                    <a href="../threw">threw</a>
-                </li>
-                
-                <li class="">
-                    <a href="../to-have-calls-satisfying">to have calls satisfying</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called">was called</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called-on">was called on</a>
-                </li>
-                
-                <li class="">
-                    <a href="../was-called-times">was called times</a>
-                </li>
-                
-                <li class="active">
-                    <a href="">was called with</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-        <li>
-            <h3>array-like</h3>
-            <ul>
-                
-                <li class="">
-                    <a href="../../array-like/given-call-order">given call order</a>
-                </li>
-                
-                <li class="">
-                    <a href="../../array-like/to-have-calls-satisfying">to have calls satisfying</a>
-                </li>
-                
-            </ul>
-        </li>
-        
-    </ul>
+    
+        <h3 class=""><a href="..">spy</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../threw">threw</a>
+            </li>
+            
+            <li class="">
+                <a href="../to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called">was called</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-on">was called on</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-times">was called times</a>
+            </li>
+            
+            <li class="active">
+                <a href="">was called with</a>
+            </li>
+            
+        </ul>
+    
+        <h3 class=""><a href="../../array-like">array-like</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../array-like/given-call-order">given call order</a>
+            </li>
+            
+            <li class="">
+                <a href="../../array-like/to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+        </ul>
+    
 </nav>
 
     <div class="main" tabindex="-1">
@@ -93,8 +87,8 @@
             <h1>was called with</h1>
             
                 <ul class="declarations">
-                </p>
-                    <li>&lt;spy&gt; was always called with exactly &lt;any*&gt;</li>
+                
+                    <li>&lt;spy&gt; was [always] called with [exactly] &lt;any*&gt;</li>
                 
                 </ul>
             
@@ -169,9 +163,17 @@ passes if the spy was always called with the provided arguments.</p>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: #df5000">'baz'</span></div>
 </div></div>
-  <div>&nbsp;&nbsp;<span style="color: red; font-weight: bold">//&nbsp;missing:</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">missing:&nbsp;</span><div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;be&nbsp;truthy</span></div>
+</div></div>
+</div></div>
+</div></div>
 </div></div>
 </div></div>
   <div>)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
@@ -194,23 +196,19 @@ arguments and no others, you can use the <code>exactly</code> flag.</p>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: #319916">mySpy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #df5000">'baz'</span>,</div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: #df5000">'qux'</span>,</div>
 </div></div>
-</div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #df5000">'quux'</span>&nbsp;<span style="color: red; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div>
+  <div><span style="color: #df5000">'quux'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: red; font-weight: bold">should&nbsp;be&nbsp;removed</span></div>
 </div></div>
 </div></div>
   <div>)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
@@ -242,22 +240,20 @@ others.</p>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: #BB1A53">mySpy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #df5000">'baz'</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #df5000">'baz'</span></div>
-</div></div>
-</div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">missing:&nbsp;</span><div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;be&nbsp;truthy</span></div>
+</div></div>
 </div></div>
 </div></div>
 </div></div>
