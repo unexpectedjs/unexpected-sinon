@@ -166,6 +166,38 @@ describe("documentation tests", function () {
             );
         }
 
+        var mySpy = sinon.spy().named('mySpy');
+        mySpy({foo: 123, bar: 456});
+        expect([ mySpy ], 'to have calls satisfying', [
+            { args: [ { foo: 123 } ] }
+        ]);
+
+        try {
+            expect([ mySpy ], 'to have calls exhaustively satisfying', [
+                { args: [ { foo: 123 } ] }
+            ]);
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("expect([ mySpy ], 'to have calls exhaustively satisfying', [").nl();
+                output.code("    { args: [ { foo: 123 } ] }").nl();
+                output.code("]);").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected [ mySpy ] to have calls exhaustively satisfying [ { args: [ ... ] } ]\n" +
+                "\n" +
+                "[\n" +
+                "  mySpy(\n" +
+                "    {\n" +
+                "      foo: 123,\n" +
+                "      bar: 456 // should be removed\n" +
+                "    }\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        }
+
         try {
             var spy1 = sinon.spy().named('spy1');
             var spy2 = sinon.spy().named('spy2');
@@ -323,6 +355,38 @@ describe("documentation tests", function () {
                 "  increment(\n" +
                 "    46, // should equal 20\n" +
                 "    'yadda' // should be removed\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        }
+
+        var mySpy = sinon.spy().named('mySpy');
+        mySpy({foo: 123, bar: 456});
+        expect(mySpy, 'to have calls satisfying', [
+            { args: [ { foo: 123 } ] }
+        ]);
+
+        try {
+            expect(mySpy, 'to have calls exhaustively satisfying', [
+                { args: [ { foo: 123 } ] }
+            ]);
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("expect(mySpy, 'to have calls exhaustively satisfying', [").nl();
+                output.code("    { args: [ { foo: 123 } ] }").nl();
+                output.code("]);").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected mySpy to have calls exhaustively satisfying [ { args: [ ... ] } ]\n" +
+                "\n" +
+                "[\n" +
+                "  mySpy(\n" +
+                "    {\n" +
+                "      foo: 123,\n" +
+                "      bar: 456 // should be removed\n" +
+                "    }\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
                 "]"
             );

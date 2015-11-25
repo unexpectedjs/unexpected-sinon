@@ -37,6 +37,40 @@ expected increment to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] }
 ]
 ```
 
+Note that the individual arguments are matched with
+[`to satisfy`](http://unexpected.js.org/assertions/any/to-satisfy/)
+semantics, which means that objects are allowed to have more properties than you
+specify, so the following passes:
+
+```js
+var mySpy = sinon.spy().named('mySpy');
+mySpy({foo: 123, bar: 456});
+expect(mySpy, 'to have calls satisfying', [
+    { args: [ { foo: 123 } ] }
+]);
+```
+
+If that's not what you want, consider using the `exhaustively` flag:
+
+```js
+expect(mySpy, 'to have calls exhaustively satisfying', [
+    { args: [ { foo: 123 } ] }
+]);
+```
+
+```output
+expected mySpy to have calls exhaustively satisfying [ { args: [ ... ] } ]
+
+[
+  mySpy(
+    {
+      foo: 123,
+      bar: 456 // should be removed
+    }
+  ) at theFunction (theFileName:xx:yy)
+]
+```
+
 You can also specify expected calls as a function that performs them:
 
 ```js
