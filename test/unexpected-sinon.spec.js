@@ -732,12 +732,14 @@ describe('unexpected-sinon', function () {
                 ]);
             }, 'to throw',
                 "expected [ spy1, spy2, die ] to have calls satisfying\n" +
-                "spy1,\n" +
-                "{ spy: spy2, args: [ 'quux' ], returned: 'yadda' },\n" +
-                "{ spy: die, threw: /cqwecqw/ },\n" +
-                "{ spy: spy1, args: [ 'yadda' ] },\n" +
-                "spy1,\n" +
-                "spy1\n" +
+                "[\n" +
+                "  spy1,\n" +
+                "  { spy: spy2, args: [ 'quux' ], returned: 'yadda' },\n" +
+                "  { spy: die, threw: /cqwecqw/ },\n" +
+                "  { spy: spy1, args: [ 'yadda' ] },\n" +
+                "  spy1,\n" +
+                "  spy1\n" +
+                "]\n" +
                 "\n" +
                 "spy1( 'foo', 'bar' ); at theFunction (theFileName:xx:yy)\n" +
                 "spy2( 'quux' ); at theFunction (theFileName:xx:yy) // returned: expected 'blah' to equal 'yadda'\n" +
