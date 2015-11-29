@@ -28,13 +28,11 @@ expect(increment, 'to have calls satisfying', [
 ```output
 expected increment to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] } ]
 
-[
-  increment( 42 ); at theFunction (theFileName:xx:yy)
-  increment(
-    46, // should equal 20
-    'yadda' // should be removed
-  ); at theFunction (theFileName:xx:yy)
-]
+increment( 42 ); at theFunction (theFileName:xx:yy)
+increment(
+  46, // should equal 20
+  'yadda' // should be removed
+); at theFunction (theFileName:xx:yy)
 ```
 
 Note that the individual arguments are matched with
@@ -61,14 +59,12 @@ expect(mySpy, 'to have calls exhaustively satisfying', [
 ```output
 expected mySpy to have calls exhaustively satisfying [ { args: [ ... ] } ]
 
-[
-  mySpy(
-    {
-      foo: 123,
-      bar: 456 // should be removed
-    }
-  ) at theFunction (theFileName:xx:yy)
-]
+mySpy(
+  {
+    foo: 123,
+    bar: 456 // should be removed
+  }
+); at theFunction (theFileName:xx:yy)
 ```
 
 You can also specify expected calls as a function that performs them:
@@ -87,14 +83,10 @@ expect(increment, 'to have calls satisfying', function () {
 
 ```output
 expected increment to have calls satisfying
-[
-  increment( 1 );
-  increment( expect.it('to be a number') );
-]
+increment( 1 );
+increment( expect.it('to be a number') );
 
-[
-  increment( 1 ); at theFunction (theFileName:xx:yy)
-  increment( 2 ); at theFunction (theFileName:xx:yy)
-  increment( 3 ); at theFunction (theFileName:xx:yy) // should be removed
-]
+increment( 1 ); at theFunction (theFileName:xx:yy)
+increment( 2 ); at theFunction (theFileName:xx:yy)
+increment( 3 ); at theFunction (theFileName:xx:yy) // should be removed
 ```

@@ -83,9 +83,7 @@ describe('unexpected-sinon', function () {
                 spy();
                 expect(spy, "was called twice");
             }, "to throw exception", "expected spy1 was called twice\n" +
-                "  expected\n" +
-                "  spy1(); at theFunction (theFileName:xx:yy)\n" +
-                "  to have length 2\n" +
+                "  expected spy1(); at theFunction (theFileName:xx:yy) to have length 2\n" +
                 "    expected 1 to be 2"
             );
 
@@ -295,9 +293,11 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
-                "// missing { spy: agent005 }\n" +
-                "// missing { spy: agent006 }\n" +
-                "// missing { spy: agent007 }"
+                "[\n" +
+                "  // missing { spy: agent005 }\n" +
+                "  // missing { spy: agent006 }\n" +
+                "  // missing { spy: agent007 }\n" +
+                "]"
             );
         });
     });
@@ -781,18 +781,16 @@ describe('unexpected-sinon', function () {
                 }, 'to throw',
                     "expected spy1 to have calls exhaustively satisfying [ { args: [ ..., ... ] } ]\n" +
                     "\n" +
-                    "[\n" +
-                    "  spy1(\n" +
+                    "spy1(\n" +
+                    "  {\n" +
+                    "    foo: 123 // should be removed\n" +
+                    "  },\n" +
+                    "  [\n" +
                     "    {\n" +
-                    "      foo: 123 // should be removed\n" +
-                    "    },\n" +
-                    "    [\n" +
-                    "      {\n" +
-                    "        bar: 'quux' // should be removed\n" +
-                    "      }\n" +
-                    "    ]\n" +
-                    "  ) at theFunction (theFileName:xx:yy)\n" +
-                    "]"
+                    "      bar: 'quux' // should be removed\n" +
+                    "    }\n" +
+                    "  ]\n" +
+                    "); at theFunction (theFileName:xx:yy)"
                 );
             });
         });
@@ -880,15 +878,11 @@ describe('unexpected-sinon', function () {
                     });
                 }, 'to throw',
                     "expected spy1 to have calls satisfying\n" +
-                    "[\n" +
-                    "  spy1( 'def', false )\n" +
-                    "  spy1( 'abc', true )\n" +
-                    "]\n" +
+                    "spy1( 'def', false );\n" +
+                    "spy1( 'abc', true );\n" +
                     "\n" +
-                    "[\n" +
-                    "  // missing spy1( 'def', false )\n" +
-                    "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
-                    "]"
+                    "// missing spy1( 'def', false );\n" +
+                    "spy1( 'abc', true ); at theFunction (theFileName:xx:yy)"
                 );
             });
 
@@ -906,19 +900,15 @@ describe('unexpected-sinon', function () {
                     });
                 }, 'to throw',
                     "expected spy1 to have calls satisfying\n" +
-                    "[\n" +
-                    "  spy1( 123, 456 )\n" +
-                    "  spy1( false )\n" +
-                    "  spy1( 234 )\n" +
-                    "  spy1( 987 )\n" +
-                    "]\n" +
+                    "spy1( 123, 456 );\n" +
+                    "spy1( false );\n" +
+                    "spy1( 234 );\n" +
+                    "spy1( 987 );\n" +
                     "\n" +
-                    "[\n" +
-                    "  spy1( 123, 456 ) at theFunction (theFileName:xx:yy)\n" +
-                    "  // missing spy1( false )\n" +
-                    "  spy1( 234 ) at theFunction (theFileName:xx:yy)\n" +
-                    "  spy1( 987 ) at theFunction (theFileName:xx:yy)\n" +
-                    "]"
+                    "spy1( 123, 456 ); at theFunction (theFileName:xx:yy)\n" +
+                    "// missing spy1( false );\n" +
+                    "spy1( 234 ); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1( 987 ); at theFunction (theFileName:xx:yy)"
                 );
             });
 
@@ -936,22 +926,18 @@ describe('unexpected-sinon', function () {
                     });
                 }, 'to throw',
                     "expected spy1 to have calls satisfying\n" +
-                    "[\n" +
-                    "  spy1( 123, 456 )\n" +
-                    "  spy1( { foo: 456 } )\n" +
-                    "  spy1( 987 )\n" +
-                    "]\n" +
+                    "spy1( 123, 456 );\n" +
+                    "spy1( { foo: 456 } );\n" +
+                    "spy1( 987 );\n" +
                     "\n" +
-                    "[\n" +
-                    "  spy1( 123, 456 ) at theFunction (theFileName:xx:yy)\n" +
-                    "  spy1(\n" +
-                    "    {\n" +
-                    "      foo: 123 // should equal 456\n" +
-                    "    }\n" +
-                    "  ) at theFunction (theFileName:xx:yy)\n" +
-                    "  spy1( 456 ) at theFunction (theFileName:xx:yy) // should be removed\n" +
-                    "  spy1( 987 ) at theFunction (theFileName:xx:yy)\n" +
-                    "]"
+                    "spy1( 123, 456 ); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1(\n" +
+                    "  {\n" +
+                    "    foo: 123 // should equal 456\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                    "spy1( 987 ); at theFunction (theFileName:xx:yy)"
                 );
             });
 

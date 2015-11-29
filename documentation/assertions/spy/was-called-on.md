@@ -16,11 +16,9 @@ expect(obj.spy, 'was called on', another);
 ```output
 expected mySpy was called on {}
 
-[
-  mySpy(); at theFunction (theFileName:xx:yy)
-  // expected: was called on {}
-  //   expected mySpy to be called with {} as this but was called with { spy: mySpy }
-]
+mySpy(); at theFunction (theFileName:xx:yy)
+// expected: was called on {}
+//   expected mySpy to be called with {} as this but was called with { spy: mySpy }
 ```
 
 You can make this assertion more strict by using the `always`
@@ -41,10 +39,8 @@ expect(obj.spy, 'was always called on', obj);
 ```output
 expected mySpy was always called on { spy: mySpy }
 
-[
-  mySpy(); at theFunction (theFileName:xx:yy)
-  mySpy(); at theFunction (theFileName:xx:yy)
-  // expected: was called on { spy: mySpy }
-  //   expected mySpy to be called with { spy: mySpy } as this but was called with {}
-]
+mySpy(); at theFunction (theFileName:xx:yy)
+mySpy(); at theFunction (theFileName:xx:yy)
+// expected: was called on { spy: mySpy }
+//   expected mySpy to be called with { spy: mySpy } as this but was called with {}
 ```

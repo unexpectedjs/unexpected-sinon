@@ -15,14 +15,12 @@ expect(mySpy, 'was called with', 'baz', { foo: 'bar' });
 ```output
 expected mySpy was called with 'baz', { foo: 'bar' }
 
-[
-  mySpy(
-    { foo: 'bar' }, // should equal 'baz'
-    'baz', // should equal { foo: 'bar' }
-    'qux',
-    'quux'
-  ); at theFunction (theFileName:xx:yy)
-]
+mySpy(
+  { foo: 'bar' }, // should equal 'baz'
+  'baz', // should equal { foo: 'bar' }
+  'qux',
+  'quux'
+); at theFunction (theFileName:xx:yy)
 ```
 
 You can make this assertion more strict using the `always` flag. Then
@@ -46,15 +44,13 @@ expect(mySpy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be 
 expected mySpy
 was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
-[
-  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)
-  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)
-  mySpy(
-    { foo: 'bar' },
-    'baz'
-    // missing: should be truthy
-  ); at theFunction (theFileName:xx:yy)
-]
+mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)
+mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)
+mySpy(
+  { foo: 'bar' },
+  'baz'
+  // missing: should be truthy
+); at theFunction (theFileName:xx:yy)
 ```
 
 I case you want to ensure that the spy was called with the provided
@@ -76,14 +72,12 @@ expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be
 expected mySpy
 was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
-[
-  mySpy(
-    { foo: 'bar' },
-    'baz',
-    'qux',
-    'quux' // should be removed
-  ); at theFunction (theFileName:xx:yy)
-]
+mySpy(
+  { foo: 'bar' },
+  'baz',
+  'qux',
+  'quux' // should be removed
+); at theFunction (theFileName:xx:yy)
 ```
 
 It is of course also possible to combine the two flags, that will then
@@ -108,13 +102,11 @@ expect(mySpy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it
 expected mySpy
 was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')
 
-[
-  mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)
-  mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)
-  mySpy(
-    { foo: 'bar' },
-    'baz'
-    // missing: should be truthy
-  ); at theFunction (theFileName:xx:yy)
-]
+mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)
+mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)
+mySpy(
+  { foo: 'bar' },
+  'baz'
+  // missing: should be truthy
+); at theFunction (theFileName:xx:yy)
 ```
