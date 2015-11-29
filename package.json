@@ -38,7 +38,7 @@
     "mocha": "2.2.5",
     "serve": "*",
     "sinon": "1.16.1",
-    "unexpected": "10.5.1",
+    "unexpected": "unexpectedjs/unexpected#feature/customizeIndentAndNewlines",
     "unexpected-documentation-site-generator": "^3.3.1"
   }
 }
