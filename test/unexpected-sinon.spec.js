@@ -825,6 +825,32 @@ describe('unexpected-sinon', function () {
             );
         });
 
+        describe('with the exhaustively flag', function () {
+            it('should fail if an object parameter contains additional properties', function () {
+                spy({foo: 123}, [{bar: 'quux'}]);
+                return expect(function () {
+                    expect(spy, 'to have calls exhaustively satisfying', [
+                        { args: [{}, [{}]] }
+                    ]);
+                }, 'to throw',
+                    "expected spy1 to have calls exhaustively satisfying [ { args: [ ..., ... ] } ]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1(\n" +
+                    "    {\n" +
+                    "      foo: 123 // should be removed\n" +
+                    "    },\n" +
+                    "    [\n" +
+                    "      {\n" +
+                    "        bar: 'quux' // should be removed\n" +
+                    "      }\n" +
+                    "    ]\n" +
+                    "  ) at theFunction (theFileName:xx:yy)\n" +
+                    "]"
+                );
+            });
+        });
+
         describe('when providing the expected calls as a function', function () {
             it('should succeed', function () {
                 var spy2 = sinon.spy().named('spy2');
