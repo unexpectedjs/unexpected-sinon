@@ -1,4 +1,4 @@
-Passes if the "timeline" of all the calls of a set of spies [satisfy](http://unexpected.js.org/assertions/any/to-satisfy/) a given spec:
+Passes if the "timeline" of all the calls of a set of spies [satisfies](http://unexpected.js.org/assertions/any/to-satisfy/) a given spec:
 
 ```js
 var noop = sinon.spy().named('noop');
