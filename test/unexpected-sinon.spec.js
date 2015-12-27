@@ -1014,4 +1014,21 @@ describe('unexpected-sinon', function () {
             });
         });
     });
+
+    var EventEmitter = require('events').EventEmitter;
+
+    it('should work with withArgs', function () {
+        var emitter1 = new EventEmitter();
+        var emitter2 = new EventEmitter();
+
+        sinon.spy(emitter1, 'emit').named('emitter1.emit').withArgs('foo').named('emitter1 foo');
+        sinon.spy(emitter2, 'emit').named('emitter2.emit');
+        emitter1.emit('foo', 123);
+        emitter2.emit('blabla');
+        emitter1.emit('bar', 456);
+        expect([ emitter1.emit.withArgs('foo'), emitter2.emit ], 'to have calls satisfying', function () {
+            emitter1.emit('foo', 123);
+            emitter2.emit('blabla');
+        });
+    });
 });
