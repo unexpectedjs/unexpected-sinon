@@ -303,7 +303,7 @@ describe('unexpected-sinon', function () {
                 "[\n" +
                 "  agent005() at theFunction (theFileName:xx:yy)\n" +
                 "  agent006() at theFunction (theFileName:xx:yy)\n" +
-                "  // missing: should equal { spy: agent007 }\n" +
+                "  // missing { spy: agent007 }\n" +
                 "]"
             );
         });
@@ -318,9 +318,9 @@ describe('unexpected-sinon', function () {
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
                 "[\n" +
-                "  // missing: should equal { spy: agent005 }\n" +
-                "  // missing: should equal { spy: agent006 }\n" +
-                "  // missing: should equal { spy: agent007 }\n" +
+                "  // missing { spy: agent005 }\n" +
+                "  // missing { spy: agent006 }\n" +
+                "  // missing { spy: agent007 }\n" +
                 "]"
             );
         });
@@ -381,7 +381,7 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was called with the provided arguments', function () {
             spy('something else');
             spy({ foo: 'bar' }, 'baz', true, false);
-            expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            expect(spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
         });
 
         it('considers arguments to be satisfied if they satisfy Object.is', function () {
@@ -394,9 +394,9 @@ describe('unexpected-sinon', function () {
         it('fails if the spy was not called with the provided arguments', function () {
             expect(function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
-                expect(spy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+                expect(spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
             }, 'to throw exception',
-                "expected spy1 was called with { foo: \'bar\' }, \'baz\', match(truthy)\n" +
+                "expected spy1 was called with { foo: \'bar\' }, \'baz\', expect.it('to be truthy')\n" +
                 "\n" +
                 "[\n" +
                 "  spy1(\n" +
@@ -418,25 +418,58 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was always called with the provided arguments', function () {
             spy({ foo: 'bar' }, 'baz', true, false);
             spy({ foo: 'bar' }, 'baz', true, false);
-            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
         });
 
         it('fails if the spy was called once with other arguments then the provided', function () {
             expect(function () {
                 spy('something else');
                 spy({ foo: 'bar' }, 'baz', true, false);
-                expect(spy, 'was always called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+                expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
             }, 'to throw exception',
-                "expected spy1 was always called with { foo: 'bar' }, 'baz', match(truthy)\n" +
+                "expected spy1 was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
                 "[\n" +
                 "  spy1(\n" +
                 "    'something else' // should equal { foo: 'bar' }\n" +
-                "    // missing: should equal 'baz'\n" +
-                "    // missing: expected spy1( 'something else' ) at theFunction (theFileName:xx:yy)\n" +
-                "    //          to satisfy { args: { 0: { foo: 'bar' }, 1: 'baz', 2: match(truthy) } }\n" +
+                "    // missing 'baz'\n" +
+                "    // missing: should be truthy\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
                 "  spy1( { foo: 'bar' }, 'baz', true, false ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        });
+
+        it('renders a nice diff for extraneous arguments', function () {
+            expect(function () {
+                spy('a', 'b', 'c');
+                expect(spy, 'was always called with exactly', 'a', 'c');
+            }, 'to throw exception',
+                "expected spy1 was always called with exactly 'a', 'c'\n" +
+                "\n" +
+                "[\n" +
+                "  spy1(\n" +
+                "    'a',\n" +
+                "    'b', // should be removed\n" +
+                "    'c'\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
+                "]"
+            );
+        });
+
+        it('renders a nice diff for missing arguments', function () {
+            expect(function () {
+                spy('a', 'c');
+                expect(spy, 'was always called with exactly', 'a', 'b', 'c');
+            }, 'to throw exception',
+                "expected spy1 was always called with exactly 'a', 'b', 'c'\n" +
+                "\n" +
+                "[\n" +
+                "  spy1(\n" +
+                "    'a',\n" +
+                "    // missing 'b'\n" +
+                "    'c'\n" +
+                "  ) at theFunction (theFileName:xx:yy)\n" +
                 "]"
             );
         });
@@ -445,18 +478,19 @@ describe('unexpected-sinon', function () {
     describe('was never called with', function () {
         it('passes if the spy was never called with the provided arguments', function () {
             spy('foo', 'true');
-            expect(spy, 'was never called with', 'bar', sinon.match.truthy);
+            expect(spy, 'was never called with', 'bar', expect.it('to be truthy'));
         });
 
         it('fails if the spy was called with the provided arguments', function () {
             expect(function () {
                 spy('bar', 'true');
-                expect(spy, 'was never called with', 'bar', sinon.match.truthy);
+                expect(spy, 'was never called with', 'bar', expect.it('to be truthy'));
             }, 'to throw exception',
-                "expected spy1 was never called with 'bar', match(truthy)\n" +
+                "expected spy1 was never called with 'bar', expect.it('to be truthy')\n" +
                 "\n" +
                 "[\n" +
-                "  spy1( 'bar', 'true' ) at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar', 1: match(truthy) } }\n" +
+                "  spy1( 'bar', 'true' ) at theFunction (theFileName:xx:yy)\n" +
+                "  // should not satisfy { args: { 0: 'bar', 1: expect.it('to be truthy') } }\n" +
                 "]"
             );
         });
@@ -481,15 +515,15 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was called with the provided arguments and no others', function () {
             spy('foo', 'bar', 'baz');
             spy('foo', 'bar', 'baz');
-            expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
+            expect(spy, 'was called with exactly', 'foo', 'bar', expect.it('to be truthy'));
         });
 
         it('fails if the spy was never called with the provided arguments and no others', function () {
             expect(function () {
                 spy('foo', 'bar', 'baz', 'qux');
-                expect(spy, 'was called with exactly', 'foo', 'bar', sinon.match.truthy);
+                expect(spy, 'was called with exactly', 'foo', 'bar', expect.it('to be truthy'));
             }, 'to throw exception',
-                "expected spy1 was called with exactly 'foo', 'bar', match(truthy)\n" +
+                "expected spy1 was called with exactly 'foo', 'bar', expect.it('to be truthy')\n" +
                 "\n" +
                 "[\n" +
                 "  spy1(\n" +
@@ -507,16 +541,16 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was always called with the provided arguments and no others', function () {
             spy('foo', 'bar', 'baz');
             spy('foo', 'bar', 'baz');
-            expect(spy, 'was always called with exactly', 'foo', 'bar', sinon.match.truthy);
+            expect(spy, 'was always called with exactly', 'foo', 'bar', expect.it('to be truthy'));
         });
 
         it('fails if the spy was ever called with anything else than the provided arguments', function () {
             expect(function () {
                 spy('foo', 'bar', 'baz');
                 spy('foo', 'bar', 'baz', 'qux');
-                expect(spy, 'was always called with exactly', 'foo', 'bar', sinon.match.truthy);
+                expect(spy, 'was always called with exactly', 'foo', 'bar', expect.it('to be truthy'));
             }, 'to throw exception',
-                "expected spy1 was always called with exactly 'foo', 'bar', match(truthy)\n" +
+                "expected spy1 was always called with exactly 'foo', 'bar', expect.it('to be truthy')\n" +
                 "\n" +
                 "[\n" +
                 "  spy1( 'foo', 'bar', 'baz' ) at theFunction (theFileName:xx:yy)\n" +
@@ -768,6 +802,7 @@ describe('unexpected-sinon', function () {
                 "  die() at theFunction (theFileName:xx:yy) // threw: expected Error('say what') to satisfy /cqwecqw/\n" +
                 "  spy1(\n" +
                 "    'baz' // should equal 'yadda'\n" +
+                "          //\n" +
                 "          // -baz\n" +
                 "          // +yadda\n" +
                 "  ) at theFunction (theFileName:xx:yy)\n" +
@@ -788,6 +823,162 @@ describe('unexpected-sinon', function () {
                 "expected [ spy1 ] to have calls satisfying [ spy1, spy2 ]\n" +
                 "  expected [ spy1 ] to contain spy2"
             );
+        });
+
+        describe('with the exhaustively flag', function () {
+            it('should fail if an object parameter contains additional properties', function () {
+                spy({foo: 123}, [{bar: 'quux'}]);
+                return expect(function () {
+                    expect(spy, 'to have calls exhaustively satisfying', [
+                        { args: [{}, [{}]] }
+                    ]);
+                }, 'to throw',
+                    "expected spy1 to have calls exhaustively satisfying [ { args: [ ..., ... ] } ]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1(\n" +
+                    "    {\n" +
+                    "      foo: 123 // should be removed\n" +
+                    "    },\n" +
+                    "    [\n" +
+                    "      {\n" +
+                    "        bar: 'quux' // should be removed\n" +
+                    "      }\n" +
+                    "    ]\n" +
+                    "  ) at theFunction (theFileName:xx:yy)\n" +
+                    "]"
+                );
+            });
+        });
+
+        describe('when providing the expected calls as a function', function () {
+            it('should succeed', function () {
+                var spy2 = sinon.spy().named('spy2');
+                spy2(123, 456);
+                /*jshint newcap: false */
+                new spy('abc', false);
+                /*jshint newcap: true */
+                spy(-99, Infinity);
+
+                expect([spy, spy2], 'to have calls satisfying', function () {
+                    spy2(123, 456);
+                    /*jshint newcap: false */
+                    new spy('abc', false);
+                    /*jshint newcap: true */
+                    spy(-99, Infinity);
+                });
+                expect(spy.args, 'to have length', 2);
+                expect(spy.callCount, 'to equal', 2);
+            });
+
+            it('should fail with a diff', function () {
+                var spy2 = sinon.spy().named('spy2');
+                spy2(123, 456, 99);
+                spy('abc', true);
+                /*jshint newcap: false */
+                new spy(-99, Infinity);
+                /*jshint newcap: true */
+
+                expect(function () {
+                    expect([spy, spy2], 'to have calls satisfying', function () {
+                        spy2(123, 456);
+                        /*jshint newcap: false */
+                        new spy('abc', false);
+                        /*jshint newcap: true */
+                        spy(-99, Infinity);
+                    });
+                }, 'to throw',
+                    "expected [ spy1, spy2 ] to have calls satisfying\n" +
+                    "[\n" +
+                    "  spy2( 123, 456 )\n" +
+                    "  new spy1( 'abc', false )\n" +
+                    "  spy1( -99, Infinity )\n" +
+                    "]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy2(\n" +
+                    "    123,\n" +
+                    "    456,\n" +
+                    "    99 // should be removed\n" +
+                    "  ) at theFunction (theFileName:xx:yy)\n" +
+                    "  spy1(\n" +
+                    "    'abc',\n" +
+                    "    true // should equal false\n" +
+                    "  ) at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
+                    "  new spy1( -99, Infinity ) at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
+                    "]"
+                );
+            });
+
+            it('should render missing spy calls nicely', function () {
+                spy('abc', true);
+
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', function () {
+                        spy('abc', true);
+                        spy('def', false);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying\n" +
+                    "[\n" +
+                    "  spy1( 'abc', true )\n" +
+                    "  spy1( 'def', false )\n" +
+                    "]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
+                    "  // missing spy1( 'def', false )\n" +
+                    "]"
+                );
+            });
+
+            it('should work with expect.it', function () {
+                spy('abc', true);
+                spy('abc', false, 123);
+
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', function () {
+                        spy('abc', expect.it('to be true'));
+                        spy('abc', false, expect.it('to be a number').and('to be less than', 100));
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying\n" +
+                    "[\n" +
+                    "  spy1( 'abc', expect.it('to be true') )\n" +
+                    "  spy1(\n" +
+                    "    'abc',\n" +
+                    "    false,\n" +
+                    "    expect.it('to be a number')\n" +
+                    "            .and('to be less than', 100)\n" +
+                    "  )\n" +
+                    "]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
+                    "  spy1(\n" +
+                    "    'abc',\n" +
+                    "    false,\n" +
+                    "    123 // ✓ should be a number and\n" +
+                    "        // ⨯ should be less than 100\n" +
+                    "  ) at theFunction (theFileName:xx:yy)\n" +
+                    "]"
+                );
+            });
+
+            it('should not break while recording when the spied-upon function has side effects', function () {
+                var throwingSpy = sinon.spy(function () {
+                    throw new Error('Urgh');
+                });
+                expect(throwingSpy, 'to throw');
+                expect(throwingSpy, 'to throw');
+
+                return expect(throwingSpy, 'to have calls satisfying', function () {
+                    throwingSpy();
+                    throwingSpy();
+                }).then(function () {
+                    expect(throwingSpy, 'was called twice');
+                });
+            });
         });
 
         describe('when asserting whether a call was invoked with the new operator', function () {
@@ -816,7 +1007,7 @@ describe('unexpected-sinon', function () {
                     "expected spy1 to have calls satisfying [ { calledWithNew: false }, { calledWithNew: true } ]\n" +
                     "\n" +
                     "[\n" +
-                    "  spy1() at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
+                    "  new spy1() at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
                     "  spy1() at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
                     "]"
                 );

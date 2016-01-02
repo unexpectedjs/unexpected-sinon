@@ -3,7 +3,7 @@ Passes if the spy was called with the provided arguments.
 ```js
 var mySpy = sinon.spy().named('mySpy');
 mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-expect(mySpy, 'was called with', { foo: 'bar' }, 'baz', sinon.match.truthy);
+expect(mySpy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
 ```
 
 In case of a failing expectation you get the following output:
@@ -63,7 +63,7 @@ arguments and no others, you can use the `exactly` flag.
 ```js
 var mySpy = sinon.spy().named('mySpy');
 mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', sinon.match.truthy, 'quux');
+expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'), 'quux');
 ```
 
 In case of a failing expectation you get the following output:

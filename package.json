@@ -1,6 +1,6 @@
 {
   "name": "unexpected-sinon",
-  "version": "8.0.0",
+  "version": "9.0.4",
   "author": "Sune Sloth Simonsen <sune@we-knowhow.dk>",
   "keywords": [
     "assertion",
@@ -24,7 +24,7 @@
     "coverage": "NODE_ENV=development istanbul cover _mocha -- --reporter dot",
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
     "update-examples": "generate-site --require ./bootstrap-unexpected-markdown.js --update-examples",
-    "deploy-site": "deploy-site"
+    "deploy-site": "deploy-site.sh"
   },
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
@@ -38,7 +38,7 @@
     "mocha": "2.2.5",
     "serve": "*",
     "sinon": "1.16.1",
-    "unexpected": "10",
-    "unexpected-documentation-site-generator": "3.1.0"
+    "unexpected": "10.3.1",
+    "unexpected-documentation-site-generator": "^3.3.1"
   }
 }
