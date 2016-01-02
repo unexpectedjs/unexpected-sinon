@@ -699,6 +699,65 @@ describe("documentation tests", function () {
         return expect.promise.all(testPromises);
     });
 
+    it("assertions/spyCall/to-satisfy.md contains correct examples", function () {
+        var testPromises = [];
+        var decrement = sinon.spy(function decrement(n) {
+            return n - 1;
+        });
+
+        decrement(42);
+        decrement(46);
+
+        expect(decrement.firstCall, 'to satisfy', { args: [ 42 ], returned: 41 });
+
+        try {
+            var decrement = sinon.spy(function decrement(n) {
+                return n - 1;
+            }).named('decrement');
+
+            decrement(20);
+            decrement(200);
+            decrement(2000);
+
+            expect(decrement.secondCall, 'to satisfy', { args: [ 20 ] });
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("var decrement = sinon.spy(function decrement(n) {").nl();
+                output.code("    return n - 1;").nl();
+                output.code("}).named('decrement');").nl();
+                output.code("").nl();
+                output.code("decrement(20);").nl();
+                output.code("decrement(200);").nl();
+                output.code("decrement(2000);").nl();
+                output.code("").nl();
+                output.code("expect(decrement.secondCall, 'to satisfy', { args: [ 20 ] });").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected decrement( 200 ) at theFunction (theFileName:xx:yy)\n" +
+                "to satisfy { args: [ 20 ] }\n" +
+                "\n" +
+                "decrement(\n" +
+                "  200 // should equal 20\n" +
+                ") at theFunction (theFileName:xx:yy)"
+            );
+        }
+
+        var getRandomPrefixedInteger = sinon.spy(function getRandomPrefixedInteger() {
+            return 'prefix-' + parseInt(Math.random() * 10, 10);
+        });
+
+        getRandomPrefixedInteger();
+        getRandomPrefixedInteger();
+        getRandomPrefixedInteger();
+
+        expect(getRandomPrefixedInteger.getCall(0), 'to satisfy', {
+            returned: expect.it('to be a string').and('to match', /^prefix-[0-9]$/)
+        });
+        return expect.promise.all(testPromises);
+    });
+
     it("index.md contains correct examples", function () {
         var testPromises = [];
         var obj = { spy: sinon.spy() };
