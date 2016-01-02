@@ -67,6 +67,15 @@
             
         </ul>
     
+        <h3 class=""><a href="../../spyCall">spyCall</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../spyCall/to-satisfy">to satisfy</a>
+            </li>
+            
+        </ul>
+    
         <h3 class=""><a href="../../array">array</a></h3>
         <ul>
             
@@ -101,11 +110,11 @@
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>mySpy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;with'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'baz'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;<span style="color: #000000">});</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #337777">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;with</span>&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;}</div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #319916">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;with</span>&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;}</div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #337777">mySpy</span>(</div>
+  <div><span style="color: #319916">mySpy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
@@ -145,18 +154,18 @@ passes if the spy was always called with the provided arguments.</p>
   <div><span style="color: #000000">mySpy</span><span style="color: #000000">({</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;<span style="color: #000000">},</span>&nbsp;<span style="color: #df5000">'baz'</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>mySpy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;always&nbsp;called&nbsp;with'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;<span style="color: #000000">},</span>&nbsp;<span style="color: #df5000">'baz'</span><span style="color: #000000">,</span>&nbsp;expect<span style="color: #000000">.</span><span style="color: #000000">it</span><span style="color: #000000">(</span><span style="color: #df5000">'to&nbsp;be&nbsp;truthy'</span><span style="color: #000000">));</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #710071">mySpy</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #BB1A53">mySpy</span></div>
   <div><span style="color: red; font-weight: bold">was&nbsp;always&nbsp;called&nbsp;with</span>&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;expect.it(<span style="color: #df5000">'to&nbsp;be&nbsp;truthy'</span>)</div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #710071">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>,&nbsp;<span style="color: #df5000">'quux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #BB1A53">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>,&nbsp;<span style="color: #df5000">'quux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #710071">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>,&nbsp;<span style="color: #df5000">'quux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #BB1A53">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>,&nbsp;<span style="color: #df5000">'quux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #710071">mySpy</span>(</div>
+  <div><span style="color: #BB1A53">mySpy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>
@@ -189,12 +198,12 @@ arguments and no others, you can use the <code>exactly</code> flag.</p>
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>mySpy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;called&nbsp;with&nbsp;exactly'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;<span style="color: #000000">},</span>&nbsp;<span style="color: #df5000">'baz'</span><span style="color: #000000">,</span>&nbsp;expect<span style="color: #000000">.</span><span style="color: #000000">it</span><span style="color: #000000">(</span><span style="color: #df5000">'to&nbsp;be&nbsp;truthy'</span><span style="color: #000000">));</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #319916">mySpy</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #999933">mySpy</span></div>
   <div><span style="color: red; font-weight: bold">was&nbsp;called&nbsp;with&nbsp;exactly</span>&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;expect.it(<span style="color: #df5000">'to&nbsp;be&nbsp;truthy'</span>)</div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #319916">mySpy</span>(</div>
+  <div><span style="color: #999933">mySpy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>
@@ -227,18 +236,18 @@ others.</p>
   <div><span style="color: #000000">mySpy</span><span style="color: #000000">({</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;<span style="color: #000000">},</span>&nbsp;<span style="color: #df5000">'baz'</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>mySpy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;always&nbsp;called&nbsp;with&nbsp;exactly'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;<span style="color: #000000">},</span>&nbsp;<span style="color: #df5000">'baz'</span><span style="color: #000000">,</span>&nbsp;expect<span style="color: #000000">.</span><span style="color: #000000">it</span><span style="color: #000000">(</span><span style="color: #df5000">'to&nbsp;be&nbsp;truthy'</span><span style="color: #000000">));</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #BB1A53">mySpy</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #4311C2">mySpy</span></div>
   <div><span style="color: red; font-weight: bold">was&nbsp;always&nbsp;called&nbsp;with&nbsp;exactly</span>&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;expect.it(<span style="color: #df5000">'to&nbsp;be&nbsp;truthy'</span>)</div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #BB1A53">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #4311C2">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #BB1A53">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #4311C2">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},&nbsp;<span style="color: #df5000">'baz'</span>,&nbsp;<span style="color: #df5000">'qux'</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #BB1A53">mySpy</span>(</div>
+  <div><span style="color: #4311C2">mySpy</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div>{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #df5000">'bar'</span>&nbsp;},</div>
 </div></div>

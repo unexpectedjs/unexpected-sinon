@@ -67,6 +67,15 @@
             
         </ul>
     
+        <h3 class=""><a href="../../spyCall">spyCall</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../spyCall/to-satisfy">to satisfy</a>
+            </li>
+            
+        </ul>
+    
         <h3 class=""><a href="../../array">array</a></h3>
         <ul>
             
@@ -101,7 +110,7 @@
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'mySpy'</span><span style="color: #000000">),</span>&nbsp;<span style="color: #df5000">'was&nbsp;called'</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #4311C2">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #993399">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called</span></div>
 </div><p>This assertion can be negated using the <code>not</code> flag:</p>
 <div class="code lang-javascript">
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(),</span>&nbsp;<span style="color: #df5000">'was&nbsp;not&nbsp;called'</span><span style="color: #000000">);</span></div>
@@ -111,11 +120,11 @@
   <div><span style="color: #000000">add</span><span style="color: #000000">(</span><span style="color: #0086b3">42</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">42</span><span style="color: #000000">);</span></div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>add<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'was&nbsp;not&nbsp;called'</span><span style="color: #000000">);</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #993399">add</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;not&nbsp;called</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #228842">add</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;not&nbsp;called</span></div>
   <div>&nbsp;</div>
   <div>[</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #993399">add</span>(&nbsp;<span style="color: #0086b3">42</span>,&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #228842">add</span>(&nbsp;<span style="color: #0086b3">42</span>,&nbsp;<span style="color: #0086b3">42</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;be&nbsp;removed</span></div>
