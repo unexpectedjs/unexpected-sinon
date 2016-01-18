@@ -35,19 +35,19 @@ expect(obj.spy, 'was always called on', obj);
 Install it with NPM or add it to your `package.json`:
 
 ```
-$ npm install unexpected unexpected-sinon
+$ npm install --save-dev unexpected unexpected-sinon
 ```
 
 Then:
 
 ```js#evaluate:false
 var expect = require('unexpected').clone();
-expect.installPlugin(require('unexpected-sinon'));
+expect.use(require('unexpected-sinon'));
 ```
 
 ### Browser
 
-Include the `unexpected.js` found at the lib directory of this
+Include the `unexpected-sinon.js` found at the lib directory of this
 repository.
 
 ```html
@@ -60,7 +60,7 @@ this will expose the expect function under the following namespace:
 
 ```js#evaluate:false
 var expect = weknowhow.expect.clone();
-expect.installPlugin(weknowhow.unexpectedSinon);
+expect.use(weknowhow.unexpectedSinon);
 ```
 
 ### RequireJS
@@ -70,7 +70,7 @@ Include the library with RequireJS the following way:
 ```js#evaluate:false
 define(['unexpected', 'unexpected-sinon'], funtion (unexpected, unexpectedSinon) {
    var expect = unexpected.clone();
-   expect.installPlugin(unexpectedSinon);
+   expect.use(unexpectedSinon);
    // Your code
 });
 ```
