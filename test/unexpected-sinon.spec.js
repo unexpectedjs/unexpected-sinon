@@ -910,7 +910,7 @@ describe('unexpected-sinon', function () {
                 );
             });
 
-            it('should render missing spy calls nicely', function () {
+            it('should render a spy call missing at the end', function () {
                 spy('abc', true);
 
                 expect(function () {
@@ -928,6 +928,91 @@ describe('unexpected-sinon', function () {
                     "[\n" +
                     "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
                     "  // missing spy1( 'def', false )\n" +
+                    "]"
+                );
+            });
+
+            it('should render a spy call missing at the end', function () {
+                spy('abc', true);
+
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', function () {
+                        spy('def', false);
+                        spy('abc', true);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying\n" +
+                    "[\n" +
+                    "  spy1( 'def', false )\n" +
+                    "  spy1( 'abc', true )\n" +
+                    "]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  // missing spy1( 'def', false )\n" +
+                    "  spy1( 'abc', true ) at theFunction (theFileName:xx:yy)\n" +
+                    "]"
+                );
+            });
+
+            it('should render a spy call missing in the middle', function () {
+                spy(123, 456);
+                spy(234);
+                spy(987);
+
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', function () {
+                        spy(123, 456);
+                        spy(false);
+                        spy(234);
+                        spy(987);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying\n" +
+                    "[\n" +
+                    "  spy1( 123, 456 )\n" +
+                    "  spy1( false )\n" +
+                    "  spy1( 234 )\n" +
+                    "  spy1( 987 )\n" +
+                    "]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1( 123, 456 ) at theFunction (theFileName:xx:yy)\n" +
+                    "  // missing spy1( false )\n" +
+                    "  spy1( 234 ) at theFunction (theFileName:xx:yy)\n" +
+                    "  spy1( 987 ) at theFunction (theFileName:xx:yy)\n" +
+                    "]"
+                );
+            });
+
+            it('should render the minimal diff when a structurally similar spy call is followed by an extraneous one', function () {
+                spy(123, 456);
+                spy({ foo: 123 });
+                spy(456);
+                spy(987);
+
+                expect(function () {
+                    expect(spy, 'to have calls satisfying', function () {
+                        spy(123, 456);
+                        spy({ foo: 456 });
+                        spy(987);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying\n" +
+                    "[\n" +
+                    "  spy1( 123, 456 )\n" +
+                    "  spy1( { foo: 456 } )\n" +
+                    "  spy1( 987 )\n" +
+                    "]\n" +
+                    "\n" +
+                    "[\n" +
+                    "  spy1( 123, 456 ) at theFunction (theFileName:xx:yy)\n" +
+                    "  spy1(\n" +
+                    "    {\n" +
+                    "      foo: 123 // should equal 456\n" +
+                    "    }\n" +
+                    "  ) at theFunction (theFileName:xx:yy)\n" +
+                    "  spy1( 456 ) at theFunction (theFileName:xx:yy) // should be removed\n" +
+                    "  spy1( 987 ) at theFunction (theFileName:xx:yy)\n" +
                     "]"
                 );
             });
