@@ -22,12 +22,10 @@ expect(add, 'was called times', 2);
 ```output
 expected add was called times 2
   expected
-  [
-    add( 41, 42 ) at theFunction (theFileName:xx:yy)
-    add( 41, 43 ) at theFunction (theFileName:xx:yy)
-    add( 41, 44 ) at theFunction (theFileName:xx:yy)
-    add( 41, 45 ) at theFunction (theFileName:xx:yy)
-  ]
+  add( 41, 42 ); at theFunction (theFileName:xx:yy)
+  add( 41, 43 ); at theFunction (theFileName:xx:yy)
+  add( 41, 44 ); at theFunction (theFileName:xx:yy)
+  add( 41, 45 ); at theFunction (theFileName:xx:yy)
   to have length 2
     expected 4 to be 2
 ```

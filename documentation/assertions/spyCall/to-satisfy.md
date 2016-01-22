@@ -26,12 +26,12 @@ expect(decrement.secondCall, 'to satisfy', { args: [ 20 ] });
 ```
 
 ```output
-expected decrement( 200 ) at theFunction (theFileName:xx:yy)
+expected decrement( 200 ); at theFunction (theFileName:xx:yy)
 to satisfy { args: [ 20 ] }
 
 decrement(
   200 // should equal 20
-) at theFunction (theFileName:xx:yy)
+); at theFunction (theFileName:xx:yy)
 ```
 
 All the semantics of [to satisfy](http://unexpected.js.org/assertions/any/to-satisfy/)

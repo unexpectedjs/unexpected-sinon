@@ -42,11 +42,9 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected [ bar, foo, baz ] given call order\n" +
                 "\n" +
-                "[\n" +
-                "  foo() at theFunction (theFileName:xx:yy) // spy: expected foo to be bar\n" +
-                "  bar() at theFunction (theFileName:xx:yy) // spy: expected bar to be foo\n" +
-                "  baz() at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "foo(); at theFunction (theFileName:xx:yy) // spy: expected foo to be bar\n" +
+                "bar(); at theFunction (theFileName:xx:yy) // spy: expected bar to be foo\n" +
+                "baz(); at theFunction (theFileName:xx:yy)"
             );
         }
 
@@ -73,11 +71,9 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected [ spy1, spy2, spy2 ] given call order\n" +
                 "\n" +
-                "[\n" +
-                "  spy1() at theFunction (theFileName:xx:yy)\n" +
-                "  spy2() at theFunction (theFileName:xx:yy)\n" +
-                "  spy1() at theFunction (theFileName:xx:yy) // spy: expected spy1 to be spy2\n" +
-                "]"
+                "spy1(); at theFunction (theFileName:xx:yy)\n" +
+                "spy2(); at theFunction (theFileName:xx:yy)\n" +
+                "spy1(); at theFunction (theFileName:xx:yy) // spy: expected spy1 to be spy2"
             );
         }
         return expect.promise.all(testPromises);
@@ -144,25 +140,23 @@ describe("documentation tests", function () {
                 "  }\n" +
                 "]\n" +
                 "\n" +
-                "[\n" +
-                "  increment(\n" +
-                "    456 // should equal 123\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "  noop( 987 ) at theFunction (theFileName:xx:yy)\n" +
-                "  increment( 123 ) at theFunction (theFileName:xx:yy)\n" +
-                "    // returned: expected 124 to equal 557\n" +
-                "  noop( 555 ) at theFunction (theFileName:xx:yy)\n" +
-                "  increment( 666 ) at theFunction (theFileName:xx:yy)\n" +
-                "    // threw: expected Error('No, I won\\'t do that')\n" +
-                "    //        to satisfy { message: expect.it('not to match', /^No/) }\n" +
-                "    //\n" +
-                "    //        {\n" +
-                "    //          message: 'No, I won\\'t do that' // should not match /^No/\n" +
-                "    //                                          //\n" +
-                "    //                                          // No, I won't do that\n" +
-                "    //                                          // ^^\n" +
-                "    //        }\n" +
-                "]"
+                "increment(\n" +
+                "  456 // should equal 123\n" +
+                "); at theFunction (theFileName:xx:yy)\n" +
+                "noop( 987 ); at theFunction (theFileName:xx:yy)\n" +
+                "increment( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "  // returned: expected 124 to equal 557\n" +
+                "noop( 555 ); at theFunction (theFileName:xx:yy)\n" +
+                "increment( 666 ); at theFunction (theFileName:xx:yy)\n" +
+                "  // threw: expected Error('No, I won\\'t do that')\n" +
+                "  //        to satisfy { message: expect.it('not to match', /^No/) }\n" +
+                "  //\n" +
+                "  //        {\n" +
+                "  //          message: 'No, I won\\'t do that' // should not match /^No/\n" +
+                "  //                                          //\n" +
+                "  //                                          // No, I won't do that\n" +
+                "  //                                          // ^^\n" +
+                "  //        }"
             );
         }
 
@@ -187,14 +181,12 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected [ mySpy ] to have calls exhaustively satisfying [ { args: [ ... ] } ]\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy(\n" +
-                "    {\n" +
-                "      foo: 123,\n" +
-                "      bar: 456 // should be removed\n" +
-                "    }\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "mySpy(\n" +
+                "  {\n" +
+                "    foo: 123,\n" +
+                "    bar: 456 // should be removed\n" +
+                "  }\n" +
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
 
@@ -234,21 +226,17 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected [ spy1, spy2 ] to have calls satisfying\n" +
-                "[\n" +
-                "  spy1( 123 )\n" +
-                "  spy2( 456 )\n" +
-                "  spy1( expect.it('to be a string') )\n" +
-                "  spy2( 789 )\n" +
-                "]\n" +
+                "spy1( 123 );\n" +
+                "spy2( 456 );\n" +
+                "spy1( expect.it('to be a string') );\n" +
+                "spy2( 789 );\n" +
                 "\n" +
-                "[\n" +
-                "  spy1( 123 ) at theFunction (theFileName:xx:yy)\n" +
-                "  spy2( 456 ) at theFunction (theFileName:xx:yy)\n" +
-                "  spy1(\n" +
-                "    false // should be a string\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "  spy2( 789 ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "spy2( 456 ); at theFunction (theFileName:xx:yy)\n" +
+                "spy1(\n" +
+                "  false // should be a string\n" +
+                "); at theFunction (theFileName:xx:yy)\n" +
+                "spy2( 789 ); at theFunction (theFileName:xx:yy)"
             );
         }
         return expect.promise.all(testPromises);
@@ -302,12 +290,10 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected myStub always threw /waat/\n" +
                 "\n" +
-                "[\n" +
-                "  myStub() at theFunction (theFileName:xx:yy)\n" +
-                "  // expected: threw /waat/\n" +
-                "  //   expected TypeError('wat') to satisfy /waat/\n" +
-                "  myStub() at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "myStub(); at theFunction (theFileName:xx:yy)\n" +
+                "// expected: threw /waat/\n" +
+                "//   expected TypeError('wat') to satisfy /waat/\n" +
+                "myStub(); at theFunction (theFileName:xx:yy)"
             );
         }
         return expect.promise.all(testPromises);
@@ -350,13 +336,11 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected increment to have calls satisfying [ { args: [ 42 ] }, { args: [ 20 ] } ]\n" +
                 "\n" +
-                "[\n" +
-                "  increment( 42 ) at theFunction (theFileName:xx:yy)\n" +
-                "  increment(\n" +
-                "    46, // should equal 20\n" +
-                "    'yadda' // should be removed\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "increment( 42 ); at theFunction (theFileName:xx:yy)\n" +
+                "increment(\n" +
+                "  46, // should equal 20\n" +
+                "  'yadda' // should be removed\n" +
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
 
@@ -381,14 +365,12 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected mySpy to have calls exhaustively satisfying [ { args: [ ... ] } ]\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy(\n" +
-                "    {\n" +
-                "      foo: 123,\n" +
-                "      bar: 456 // should be removed\n" +
-                "    }\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "mySpy(\n" +
+                "  {\n" +
+                "    foo: 123,\n" +
+                "    bar: 456 // should be removed\n" +
+                "  }\n" +
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
 
@@ -418,16 +400,12 @@ describe("documentation tests", function () {
         } catch (e) {
             expect(e, "to have message",
                 "expected increment to have calls satisfying\n" +
-                "[\n" +
-                "  increment( 1 )\n" +
-                "  increment( expect.it('to be a number') )\n" +
-                "]\n" +
+                "increment( 1 );\n" +
+                "increment( expect.it('to be a number') );\n" +
                 "\n" +
-                "[\n" +
-                "  increment( 1 ) at theFunction (theFileName:xx:yy)\n" +
-                "  increment( 2 ) at theFunction (theFileName:xx:yy)\n" +
-                "  increment( 3 ) at theFunction (theFileName:xx:yy) // should be removed\n" +
-                "]"
+                "increment( 1 ); at theFunction (theFileName:xx:yy)\n" +
+                "increment( 2 ); at theFunction (theFileName:xx:yy)\n" +
+                "increment( 3 ); at theFunction (theFileName:xx:yy) // should be removed"
             );
         }
         return expect.promise.all(testPromises);
@@ -452,11 +430,9 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected mySpy was called on {}\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy() at theFunction (theFileName:xx:yy)\n" +
-                "  // expected: was called on {}\n" +
-                "  //   expected mySpy to be called with {} as this but was called with { spy: mySpy }\n" +
-                "]"
+                "mySpy(); at theFunction (theFileName:xx:yy)\n" +
+                "// expected: was called on {}\n" +
+                "//   expected mySpy to be called with {} as this but was called with { spy: mySpy }"
             );
         }
 
@@ -475,12 +451,10 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected mySpy was always called on { spy: mySpy }\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy() at theFunction (theFileName:xx:yy)\n" +
-                "  mySpy() at theFunction (theFileName:xx:yy)\n" +
-                "  // expected: was called on { spy: mySpy }\n" +
-                "  //   expected mySpy to be called with { spy: mySpy } as this but was called with {}\n" +
-                "]"
+                "mySpy(); at theFunction (theFileName:xx:yy)\n" +
+                "mySpy(); at theFunction (theFileName:xx:yy)\n" +
+                "// expected: was called on { spy: mySpy }\n" +
+                "//   expected mySpy to be called with { spy: mySpy } as this but was called with {}"
             );
         }
         return expect.promise.all(testPromises);
@@ -515,12 +489,10 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected add was called times 2\n" +
                 "  expected\n" +
-                "  [\n" +
-                "    add( 41, 42 ) at theFunction (theFileName:xx:yy)\n" +
-                "    add( 41, 43 ) at theFunction (theFileName:xx:yy)\n" +
-                "    add( 41, 44 ) at theFunction (theFileName:xx:yy)\n" +
-                "    add( 41, 45 ) at theFunction (theFileName:xx:yy)\n" +
-                "  ]\n" +
+                "  add( 41, 42 ); at theFunction (theFileName:xx:yy)\n" +
+                "  add( 41, 43 ); at theFunction (theFileName:xx:yy)\n" +
+                "  add( 41, 44 ); at theFunction (theFileName:xx:yy)\n" +
+                "  add( 41, 45 ); at theFunction (theFileName:xx:yy)\n" +
                 "  to have length 2\n" +
                 "    expected 4 to be 2"
             );
@@ -553,14 +525,12 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected mySpy was called with 'baz', { foo: 'bar' }\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy(\n" +
-                "    { foo: 'bar' }, // should equal 'baz'\n" +
-                "    'baz', // should equal { foo: 'bar' }\n" +
-                "    'qux',\n" +
-                "    'quux'\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "mySpy(\n" +
+                "  { foo: 'bar' }, // should equal 'baz'\n" +
+                "  'baz', // should equal { foo: 'bar' }\n" +
+                "  'qux',\n" +
+                "  'quux'\n" +
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
 
@@ -583,15 +553,13 @@ describe("documentation tests", function () {
                 "expected mySpy\n" +
                 "was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)\n" +
-                "  mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ) at theFunction (theFileName:xx:yy)\n" +
-                "  mySpy(\n" +
-                "    { foo: 'bar' },\n" +
-                "    'baz'\n" +
-                "    // missing: should be truthy\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)\n" +
+                "mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)\n" +
+                "mySpy(\n" +
+                "  { foo: 'bar' },\n" +
+                "  'baz'\n" +
+                "  // missing: should be truthy\n" +
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
 
@@ -611,14 +579,12 @@ describe("documentation tests", function () {
                 "expected mySpy\n" +
                 "was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy(\n" +
-                "    { foo: 'bar' },\n" +
-                "    'baz',\n" +
-                "    'qux',\n" +
-                "    'quux' // should be removed\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "mySpy(\n" +
+                "  { foo: 'bar' },\n" +
+                "  'baz',\n" +
+                "  'qux',\n" +
+                "  'quux' // should be removed\n" +
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
 
@@ -641,15 +607,13 @@ describe("documentation tests", function () {
                 "expected mySpy\n" +
                 "was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
                 "\n" +
-                "[\n" +
-                "  mySpy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)\n" +
-                "  mySpy( { foo: 'bar' }, 'baz', 'qux' ) at theFunction (theFileName:xx:yy)\n" +
-                "  mySpy(\n" +
-                "    { foo: 'bar' },\n" +
-                "    'baz'\n" +
-                "    // missing: should be truthy\n" +
-                "  ) at theFunction (theFileName:xx:yy)\n" +
-                "]"
+                "mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)\n" +
+                "mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)\n" +
+                "mySpy(\n" +
+                "  { foo: 'bar' },\n" +
+                "  'baz'\n" +
+                "  // missing: should be truthy\n" +
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
         return expect.promise.all(testPromises);
@@ -691,9 +655,7 @@ describe("documentation tests", function () {
             expect(e, "to have message",
                 "expected add was not called\n" +
                 "\n" +
-                "[\n" +
-                "  add( 42, 42 ) at theFunction (theFileName:xx:yy) // should be removed\n" +
-                "]"
+                "add( 42, 42 ); at theFunction (theFileName:xx:yy) // should be removed"
             );
         }
         return expect.promise.all(testPromises);
@@ -735,12 +697,12 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected decrement( 200 ) at theFunction (theFileName:xx:yy)\n" +
+                "expected decrement( 200 ); at theFunction (theFileName:xx:yy)\n" +
                 "to satisfy { args: [ 20 ] }\n" +
                 "\n" +
                 "decrement(\n" +
                 "  200 // should equal 20\n" +
-                ") at theFunction (theFileName:xx:yy)"
+                "); at theFunction (theFileName:xx:yy)"
             );
         }
 

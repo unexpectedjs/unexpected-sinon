@@ -53,25 +53,23 @@ expected [ increment, noop ] to have calls satisfying
   }
 ]
 
-[
-  increment(
-    456 // should equal 123
-  ) at theFunction (theFileName:xx:yy)
-  noop( 987 ) at theFunction (theFileName:xx:yy)
-  increment( 123 ) at theFunction (theFileName:xx:yy)
-    // returned: expected 124 to equal 557
-  noop( 555 ) at theFunction (theFileName:xx:yy)
-  increment( 666 ) at theFunction (theFileName:xx:yy)
-    // threw: expected Error('No, I won\'t do that')
-    //        to satisfy { message: expect.it('not to match', /^No/) }
-    //
-    //        {
-    //          message: 'No, I won\'t do that' // should not match /^No/
-    //                                          //
-    //                                          // No, I won't do that
-    //                                          // ^^
-    //        }
-]
+increment(
+  456 // should equal 123
+); at theFunction (theFileName:xx:yy)
+noop( 987 ); at theFunction (theFileName:xx:yy)
+increment( 123 ); at theFunction (theFileName:xx:yy)
+  // returned: expected 124 to equal 557
+noop( 555 ); at theFunction (theFileName:xx:yy)
+increment( 666 ); at theFunction (theFileName:xx:yy)
+  // threw: expected Error('No, I won\'t do that')
+  //        to satisfy { message: expect.it('not to match', /^No/) }
+  //
+  //        {
+  //          message: 'No, I won\'t do that' // should not match /^No/
+  //                                          //
+  //                                          // No, I won't do that
+  //                                          // ^^
+  //        }
 ```
 
 Note that the individual arguments are matched with
@@ -98,14 +96,12 @@ expect([ mySpy ], 'to have calls exhaustively satisfying', [
 ```output
 expected [ mySpy ] to have calls exhaustively satisfying [ { args: [ ... ] } ]
 
-[
-  mySpy(
-    {
-      foo: 123,
-      bar: 456 // should be removed
-    }
-  ) at theFunction (theFileName:xx:yy)
-]
+mySpy(
+  {
+    foo: 123,
+    bar: 456 // should be removed
+  }
+); at theFunction (theFileName:xx:yy)
 ```
 
 You can also specify expected calls as a function that performs them:
@@ -129,19 +125,15 @@ expect([ spy1, spy2 ], 'to have calls satisfying', function () {
 
 ```output
 expected [ spy1, spy2 ] to have calls satisfying
-[
-  spy1( 123 )
-  spy2( 456 )
-  spy1( expect.it('to be a string') )
-  spy2( 789 )
-]
+spy1( 123 );
+spy2( 456 );
+spy1( expect.it('to be a string') );
+spy2( 789 );
 
-[
-  spy1( 123 ) at theFunction (theFileName:xx:yy)
-  spy2( 456 ) at theFunction (theFileName:xx:yy)
-  spy1(
-    false // should be a string
-  ) at theFunction (theFileName:xx:yy)
-  spy2( 789 ) at theFunction (theFileName:xx:yy)
-]
+spy1( 123 ); at theFunction (theFileName:xx:yy)
+spy2( 456 ); at theFunction (theFileName:xx:yy)
+spy1(
+  false // should be a string
+); at theFunction (theFileName:xx:yy)
+spy2( 789 ); at theFunction (theFileName:xx:yy)
 ```
