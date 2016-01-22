@@ -511,104 +511,49 @@ describe("documentation tests", function () {
     it("assertions/spy/was-called-with.md contains correct examples", function () {
         var testPromises = [];
         var mySpy = sinon.spy().named('mySpy');
-        mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        expect(mySpy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+        mySpy({ foo: 'bar' }, 'baz', 'quux');
+        expect(mySpy, 'was called with', [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]);
 
         try {
-            expect(mySpy, 'was called with', 'baz', { foo: 'bar' });
+            expect(mySpy, 'was called with', [ 'baz', { foo: 'bar' }, 'quux' ]);
             expect.fail(function (output) {
                 output.error("expected:").nl();
-                output.code("expect(mySpy, 'was called with', 'baz', { foo: 'bar' });").nl();
+                output.code("expect(mySpy, 'was called with', [ 'baz', { foo: 'bar' }, 'quux' ]);").nl();
                 output.error("to throw");
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected mySpy was called with 'baz', { foo: 'bar' }\n" +
+                "expected mySpy was called with [ 'baz', { foo: 'bar' }, 'quux' ]\n" +
                 "\n" +
                 "mySpy(\n" +
                 "  { foo: 'bar' }, // should equal 'baz'\n" +
                 "  'baz', // should equal { foo: 'bar' }\n" +
-                "  'qux',\n" +
                 "  'quux'\n" +
                 "); at theFunction (theFileName:xx:yy)"
             );
         }
 
         var mySpy = sinon.spy().named('mySpy');
-        mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        expect(mySpy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+        mySpy({ foo: 'bar' }, 'baz', true);
+        mySpy({ foo: 'bar' }, 'baz', true);
+        expect(mySpy, 'was always called with', [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]);
 
         try {
             mySpy({ foo: 'bar' }, 'baz');
-            expect(mySpy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+            expect(mySpy, 'was always called with', [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]);
             expect.fail(function (output) {
                 output.error("expected:").nl();
                 output.code("mySpy({ foo: 'bar' }, 'baz');").nl();
-                output.code("expect(mySpy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));").nl();
+                output.code("expect(mySpy, 'was always called with', [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]);").nl();
                 output.error("to throw");
             });
         } catch (e) {
             expect(e, "to have message",
                 "expected mySpy\n" +
-                "was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
+                "was always called with [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]\n" +
                 "\n" +
-                "mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)\n" +
-                "mySpy( { foo: 'bar' }, 'baz', 'qux', 'quux' ); at theFunction (theFileName:xx:yy)\n" +
-                "mySpy(\n" +
-                "  { foo: 'bar' },\n" +
-                "  'baz'\n" +
-                "  // missing: should be truthy\n" +
-                "); at theFunction (theFileName:xx:yy)"
-            );
-        }
-
-        var mySpy = sinon.spy().named('mySpy');
-        mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
-        expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'), 'quux');
-
-        try {
-            expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("expect(mySpy, 'was called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected mySpy\n" +
-                "was called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
-                "\n" +
-                "mySpy(\n" +
-                "  { foo: 'bar' },\n" +
-                "  'baz',\n" +
-                "  'qux',\n" +
-                "  'quux' // should be removed\n" +
-                "); at theFunction (theFileName:xx:yy)"
-            );
-        }
-
-        var mySpy = sinon.spy().named('mySpy');
-        mySpy({ foo: 'bar' }, 'baz', 'qux');
-        mySpy({ foo: 'bar' }, 'baz', 'qux');
-        expect(mySpy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
-
-        try {
-            mySpy({ foo: 'bar' }, 'baz');
-            expect(mySpy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
-            expect.fail(function (output) {
-                output.error("expected:").nl();
-                output.code("mySpy({ foo: 'bar' }, 'baz');").nl();
-                output.code("expect(mySpy, 'was always called with exactly', { foo: 'bar' }, 'baz', expect.it('to be truthy'));").nl();
-                output.error("to throw");
-            });
-        } catch (e) {
-            expect(e, "to have message",
-                "expected mySpy\n" +
-                "was always called with exactly { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
-                "\n" +
-                "mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)\n" +
-                "mySpy( { foo: 'bar' }, 'baz', 'qux' ); at theFunction (theFileName:xx:yy)\n" +
+                "mySpy( { foo: 'bar' }, 'baz', true ); at theFunction (theFileName:xx:yy)\n" +
+                "mySpy( { foo: 'bar' }, 'baz', true ); at theFunction (theFileName:xx:yy)\n" +
                 "mySpy(\n" +
                 "  { foo: 'bar' },\n" +
                 "  'baz'\n" +
@@ -726,7 +671,7 @@ describe("documentation tests", function () {
         obj.spy(42);
         obj.spy({ foo: 'bar' }, 'baz', "qux");
         expect(obj.spy, "was called twice");
-        expect(obj.spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+        expect(obj.spy, 'was called with', [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]);
         expect(obj.spy, 'was always called on', obj);
 
         var spy = sinon.spy();
