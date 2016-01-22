@@ -355,22 +355,22 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was called with the provided arguments', function () {
             spy('something else');
             spy({ foo: 'bar' }, 'baz', true, false);
-            expect(spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+            expect(spy, 'was called with', [{ foo: 'bar' }, 'baz', expect.it('to be truthy'), false]);
         });
 
         it('considers arguments to be satisfied if they satisfy Object.is', function () {
             var circular = {};
             circular.loop = circular;
             spy(circular);
-            expect(spy, 'was called with', circular);
+            expect(spy, 'was called with', [ circular ]);
         });
 
         it('fails if the spy was not called with the provided arguments', function () {
             expect(function () {
                 spy({ foo: 'baa' }, 'baz', true, false);
-                expect(spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+                expect(spy, 'was called with', [ { foo: 'bar' }, 'baz', expect.it('to be truthy') ]);
             }, 'to throw exception',
-                "expected spy1 was called with { foo: \'bar\' }, \'baz\', expect.it('to be truthy')\n" +
+                "expected spy1 was called with [ { foo: \'bar\' }, \'baz\', expect.it('to be truthy') ]\n" +
                 "\n" +
                 "spy1(\n" +
                 "  {\n" +
@@ -380,7 +380,7 @@ describe('unexpected-sinon', function () {
                 "  },\n" +
                 "  'baz',\n" +
                 "  true,\n" +
-                "  false\n" +
+                "  false // should be removed\n" +
                 "); at theFunction (theFileName:xx:yy)"
             );
         });
@@ -390,21 +390,22 @@ describe('unexpected-sinon', function () {
         it('passes if the spy was always called with the provided arguments', function () {
             spy({ foo: 'bar' }, 'baz', true, false);
             spy({ foo: 'bar' }, 'baz', true, false);
-            expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+            expect(spy, 'was always called with', [ { foo: 'bar' }, 'baz', expect.it('to be truthy'), false ]);
         });
 
-        it('fails if the spy was called once with other arguments then the provided', function () {
+        it('fails if the spy was called once with other arguments than the provided', function () {
             expect(function () {
-                spy('something else');
+                spy('something', 'else');
                 spy({ foo: 'bar' }, 'baz', true, false);
-                expect(spy, 'was always called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
+                expect(spy, 'was always called with', [ { foo: 'bar' }, expect.it('to be a string'), true, false ]);
             }, 'to throw exception',
-                "expected spy1 was always called with { foo: 'bar' }, 'baz', expect.it('to be truthy')\n" +
+                "expected spy1 was always called with [ { foo: 'bar' }, expect.it('to be a string'), true, false ]\n" +
                 "\n" +
                 "spy1(\n" +
-                "  'something else' // should equal { foo: 'bar' }\n" +
-                "  // missing 'baz'\n" +
-                "  // missing: should be truthy\n" +
+                "  'something', // should equal { foo: 'bar' }\n" +
+                "  'else'\n" +
+                "  // missing true\n" +
+                "  // missing false\n" +
                 "); at theFunction (theFileName:xx:yy)\n" +
                 "spy1( { foo: 'bar' }, 'baz', true, false ); at theFunction (theFileName:xx:yy)"
             );
@@ -413,9 +414,9 @@ describe('unexpected-sinon', function () {
         it('renders a nice diff for extraneous arguments', function () {
             expect(function () {
                 spy('a', 'b', 'c');
-                expect(spy, 'was always called with exactly', 'a', 'c');
+                expect(spy, 'was always called with', [ 'a', 'c' ]);
             }, 'to throw exception',
-                "expected spy1 was always called with exactly 'a', 'c'\n" +
+                "expected spy1 was always called with [ 'a', 'c' ]\n" +
                 "\n" +
                 "spy1(\n" +
                 "  'a',\n" +
@@ -428,9 +429,9 @@ describe('unexpected-sinon', function () {
         it('renders a nice diff for missing arguments', function () {
             expect(function () {
                 spy('a', 'c');
-                expect(spy, 'was always called with exactly', 'a', 'b', 'c');
+                expect(spy, 'was always called with', [ 'a', 'b', 'c' ]);
             }, 'to throw exception',
-                "expected spy1 was always called with exactly 'a', 'b', 'c'\n" +
+                "expected spy1 was always called with [ 'a', 'b', 'c' ]\n" +
                 "\n" +
                 "spy1(\n" +
                 "  'a',\n" +
@@ -444,81 +445,31 @@ describe('unexpected-sinon', function () {
     describe('was never called with', function () {
         it('passes if the spy was never called with the provided arguments', function () {
             spy('foo', 'true');
-            expect(spy, 'was never called with', 'bar', expect.it('to be truthy'));
+            expect(spy, 'was never called with', [ 'bar', expect.it('to be truthy') ]);
         });
 
         it('fails if the spy was called with the provided arguments', function () {
             expect(function () {
                 spy('bar', 'true');
-                expect(spy, 'was never called with', 'bar', expect.it('to be truthy'));
+                expect(spy, 'was never called with', [ 'bar', expect.it('to be truthy') ]);
             }, 'to throw exception',
-                "expected spy1 was never called with 'bar', expect.it('to be truthy')\n" +
+                "expected spy1 was never called with [ 'bar', expect.it('to be truthy') ]\n" +
                 "\n" +
                 "spy1( 'bar', 'true' ); at theFunction (theFileName:xx:yy)\n" +
-                "// should not satisfy { args: { 0: 'bar', 1: expect.it('to be truthy') } }"
+                "// should not satisfy { args: [ 'bar', expect.it('to be truthy') ] }"
             );
         });
 
         it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
             expect(function () {
                 spy('foo');
-                spy('bar', {});
-                expect(spy, 'was never called with', 'bar');
+                spy('bar');
+                expect(spy, 'was never called with', [ 'bar' ]);
             }, 'to throw exception',
-                "expected spy1 was never called with 'bar'\n" +
+                "expected spy1 was never called with [ 'bar' ]\n" +
                 "\n" +
                 "spy1( 'foo' ); at theFunction (theFileName:xx:yy)\n" +
-                "spy1( 'bar', {} ); at theFunction (theFileName:xx:yy) // should not satisfy { args: { 0: 'bar' } }"
-            );
-        });
-    });
-
-    describe('was called with exactly', function () {
-        it('passes if the spy was called with the provided arguments and no others', function () {
-            spy('foo', 'bar', 'baz');
-            spy('foo', 'bar', 'baz');
-            expect(spy, 'was called with exactly', 'foo', 'bar', expect.it('to be truthy'));
-        });
-
-        it('fails if the spy was never called with the provided arguments and no others', function () {
-            expect(function () {
-                spy('foo', 'bar', 'baz', 'qux');
-                expect(spy, 'was called with exactly', 'foo', 'bar', expect.it('to be truthy'));
-            }, 'to throw exception',
-                "expected spy1 was called with exactly 'foo', 'bar', expect.it('to be truthy')\n" +
-                "\n" +
-                "spy1(\n" +
-                "  'foo',\n" +
-                "  'bar',\n" +
-                "  'baz',\n" +
-                "  'qux' // should be removed\n" +
-                "); at theFunction (theFileName:xx:yy)"
-            );
-        });
-    });
-
-    describe('was always called with exactly', function () {
-        it('passes if the spy was always called with the provided arguments and no others', function () {
-            spy('foo', 'bar', 'baz');
-            spy('foo', 'bar', 'baz');
-            expect(spy, 'was always called with exactly', 'foo', 'bar', expect.it('to be truthy'));
-        });
-
-        it('fails if the spy was ever called with anything else than the provided arguments', function () {
-            expect(function () {
-                spy('foo', 'bar', 'baz');
-                spy('foo', 'bar', 'baz', 'qux');
-                expect(spy, 'was always called with exactly', 'foo', 'bar', expect.it('to be truthy'));
-            }, 'to throw exception',
-                "expected spy1 was always called with exactly 'foo', 'bar', expect.it('to be truthy')\n" +
-                "\n" +
-                "spy1( 'foo', 'bar', 'baz' ); at theFunction (theFileName:xx:yy)\n" +
-                "spy1(\n" +
-                "  'foo',\n" +
-                "  'bar',\n" +
-                "  'baz',\n" +
-                "  'qux' // should be removed\n" +
-                "); at theFunction (theFileName:xx:yy)"
+                "spy1( 'bar' ); at theFunction (theFileName:xx:yy) // should not satisfy { args: [ 'bar' ] }"
             );
         });
     });
