@@ -121,9 +121,9 @@
 </div><div class="output">
   <div><span style="color: red; font-weight: bold">expected</span>&nbsp;[&nbsp;<span style="color: #669933">bar</span>,&nbsp;<span style="color: #993333">foo</span>,&nbsp;<span style="color: #314575">baz</span>&nbsp;]&nbsp;<span style="color: red; font-weight: bold">given&nbsp;call&nbsp;order</span></div>
   <div>&nbsp;</div>
-  <div>[</div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #993333">foo</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #993333">foo</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy:&nbsp;</span><div style="display: inline-block; vertical-align: top">
@@ -131,8 +131,10 @@
 </div></div>
 </div></div>
 </div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #669933">bar</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+</div></div>
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #669933">bar</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy:&nbsp;</span><div style="display: inline-block; vertical-align: top">
@@ -140,10 +142,12 @@
 </div></div>
 </div></div>
 </div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #314575">baz</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-  <div>]</div>
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #314575">baz</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+</div></div>
+</div></div>
 </div><p>NOTE: This assertion has slightly different semantics from Sinon.js&#39; own
 built-in <a href="http://sinonjs.org/docs/#assertions">callOrder</a> assertion, which
 is a bit loose a when a spy/stub has been called multiple times, especially
@@ -161,15 +165,19 @@ asserts that the spy was called multiple times:</p>
 </div><div class="output">
   <div><span style="color: red; font-weight: bold">expected</span>&nbsp;[&nbsp;<span style="color: #337777">spy1</span>,&nbsp;<span style="color: #710071">spy2</span>,&nbsp;<span style="color: #710071">spy2</span>&nbsp;]&nbsp;<span style="color: red; font-weight: bold">given&nbsp;call&nbsp;order</span></div>
   <div>&nbsp;</div>
-  <div>[</div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #337777">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #337777">spy1</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #710071">spy2</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #337777">spy1</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #710071">spy2</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+</div></div>
+</div></div>
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #337777">spy1</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">spy:&nbsp;</span><div style="display: inline-block; vertical-align: top">
@@ -177,7 +185,7 @@ asserts that the spy was called multiple times:</p>
 </div></div>
 </div></div>
 </div></div>
-  <div>]</div>
+</div></div>
 </div>
         </div>
     </div>

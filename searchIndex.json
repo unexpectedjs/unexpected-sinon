@@ -1,9 +1,5 @@
 [
   {
-    "label": "to satisfy (spyCall)",
-    "url": "/assertions/spyCall/to-satisfy/"
-  },
-  {
     "label": "given call order (array)",
     "url": "/assertions/array/given-call-order/"
   },
@@ -34,5 +30,9 @@
   {
     "label": "was called (spy)",
     "url": "/assertions/spy/was-called/"
+  },
+  {
+    "label": "to satisfy (spyCall)",
+    "url": "/assertions/spyCall/to-satisfy/"
   }
 ]

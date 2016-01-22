@@ -113,10 +113,9 @@
 </div><div class="output">
   <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #669933">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;called&nbsp;on</span>&nbsp;{}</div>
   <div>&nbsp;</div>
-  <div>[</div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #669933">mySpy</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #669933">mySpy</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
   <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
   <div><span style="color: red; font-weight: bold">//</span></div>
@@ -128,7 +127,6 @@
 </div></div>
 </div></div>
 </div></div>
-  <div>]</div>
 </div><p>You can make this assertion more strict by using the <code>always</code>
 flag. Then it passes if the spy was always called with obj as its this
 value.</p>
@@ -141,13 +139,12 @@ value.</p>
 </div><div class="output">
   <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #669933">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">was&nbsp;always&nbsp;called&nbsp;on</span>&nbsp;{&nbsp;<span style="color: #555">spy</span>:&nbsp;<span style="color: #669933">mySpy</span>&nbsp;}</div>
   <div>&nbsp;</div>
-  <div>[</div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #669933">mySpy</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-</div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #669933">mySpy</span>()&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #669933">mySpy</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+</div></div>
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #669933">mySpy</span>();&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
   <div><div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
   <div><span style="color: red; font-weight: bold">//</span></div>
@@ -159,7 +156,6 @@ value.</p>
 </div></div>
 </div></div>
 </div></div>
-  <div>]</div>
 </div>
         </div>
     </div>

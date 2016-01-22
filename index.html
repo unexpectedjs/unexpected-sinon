@@ -57,13 +57,13 @@ mocking library.</p>
 <h3 id="node">Node</h3>
 <p>Install it with NPM or add it to your <code>package.json</code>:</p>
 <div class="code lang-">
-  <div>$&nbsp;npm&nbsp;install&nbsp;unexpected&nbsp;unexpected-sinon</div>
+  <div>$&nbsp;npm&nbsp;install&nbsp;--save-dev&nbsp;unexpected&nbsp;unexpected-sinon</div>
 </div><p>Then:</p>
 <div class="code lang-javascript">
   <div><span style="color: #FFAA27">var</span>&nbsp;expect&nbsp;<span style="color: #3CDAFF">=</span>&nbsp;require<span style="color: #999">(</span><span style="color: #3CDAFF">'unexpected'</span><span style="color: #999">).</span>clone<span style="color: #999">();</span></div>
-  <div>expect<span style="color: #999">.</span>installPlugin<span style="color: #999">(</span>require<span style="color: #999">(</span><span style="color: #3CDAFF">'unexpected-sinon'</span><span style="color: #999">));</span></div>
+  <div>expect<span style="color: #999">.</span>use<span style="color: #999">(</span>require<span style="color: #999">(</span><span style="color: #3CDAFF">'unexpected-sinon'</span><span style="color: #999">));</span></div>
 </div><h3 id="browser">Browser</h3>
-<p>Include the <code>unexpected.js</code> found at the lib directory of this
+<p>Include the <code>unexpected-sinon.js</code> found at the lib directory of this
 repository.</p>
 <div class="code lang-html">
   <div><span style="color: #999">&lt;</span><span style="color: white">script&nbsp;</span><span style="color: #3CDAFF">src</span><span style="color: #999">=&quot;</span><span style="color: #FFAA27">sinon.js</span><span style="color: #999">&quot;&gt;&lt;/</span><span style="color: white">script</span><span style="color: #999">&gt;</span></div>
@@ -72,13 +72,13 @@ repository.</p>
 </div><p>this will expose the expect function under the following namespace:</p>
 <div class="code lang-javascript">
   <div><span style="color: #FFAA27">var</span>&nbsp;expect&nbsp;<span style="color: #3CDAFF">=</span>&nbsp;weknowhow<span style="color: #999">.</span>expect<span style="color: #999">.</span>clone<span style="color: #999">();</span></div>
-  <div>expect<span style="color: #999">.</span>installPlugin<span style="color: #999">(</span>weknowhow<span style="color: #999">.</span>unexpectedSinon<span style="color: #999">);</span></div>
+  <div>expect<span style="color: #999">.</span>use<span style="color: #999">(</span>weknowhow<span style="color: #999">.</span>unexpectedSinon<span style="color: #999">);</span></div>
 </div><h3 id="requirejs">RequireJS</h3>
 <p>Include the library with RequireJS the following way:</p>
 <div class="code lang-javascript">
   <div>define<span style="color: #999">([</span><span style="color: #3CDAFF">'unexpected'</span><span style="color: #999">,</span>&nbsp;<span style="color: #3CDAFF">'unexpected-sinon'</span><span style="color: #999">],</span>&nbsp;funtion&nbsp;<span style="color: #999">(</span>unexpected<span style="color: #999">,</span>&nbsp;unexpectedSinon<span style="color: #999">)</span>&nbsp;<span style="color: #999">{</span></div>
   <div>&nbsp;&nbsp;&nbsp;<span style="color: #FFAA27">var</span>&nbsp;expect&nbsp;<span style="color: #3CDAFF">=</span>&nbsp;unexpected<span style="color: #999">.</span>clone<span style="color: #999">();</span></div>
-  <div>&nbsp;&nbsp;&nbsp;expect<span style="color: #999">.</span>installPlugin<span style="color: #999">(</span>unexpectedSinon<span style="color: #999">);</span></div>
+  <div>&nbsp;&nbsp;&nbsp;expect<span style="color: #999">.</span>use<span style="color: #999">(</span>unexpectedSinon<span style="color: #999">);</span></div>
   <div>&nbsp;&nbsp;<span style="color: gray">&nbsp;//&nbsp;Your&nbsp;code</span></div>
   <div><span style="color: #999">});</span></div>
 </div><p>Because Sinon is currently not AMD compatible you will need this RequireJS configuration to make things work:</p>
@@ -134,7 +134,7 @@ now it matches on the error message like
 <li>Improved the output for failing assertions a lot.</li>
 </ul>
 <h2 id="mit-license">MIT License</h2>
-<p>Copyright (c) 2013 Sune Simonsen <a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x73;&#117;&#110;&#101;&#x40;&#x77;&#x65;&#x2d;&#x6b;&#110;&#111;&#119;&#104;&#x6f;&#119;&#46;&#100;&#x6b;">&#x73;&#117;&#110;&#101;&#x40;&#x77;&#x65;&#x2d;&#x6b;&#110;&#111;&#119;&#104;&#x6f;&#119;&#46;&#100;&#x6b;</a></p>
+<p>Copyright (c) 2013 Sune Simonsen <a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#x73;&#x75;&#110;&#101;&#64;&#x77;&#x65;&#x2d;&#107;&#110;&#111;&#x77;&#x68;&#111;&#x77;&#x2e;&#x64;&#107;">&#x73;&#x75;&#110;&#101;&#64;&#x77;&#x65;&#x2d;&#107;&#110;&#111;&#x77;&#x68;&#111;&#x77;&#x2e;&#x64;&#107;</a></p>
 <p>Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 &#39;Software&#39;), to deal in the Software without restriction, including

@@ -123,12 +123,14 @@
   <div>&nbsp;</div>
   <div><span style="color: #000000">expect</span><span style="color: #000000">(</span>decrement<span style="color: #000000">.</span>secondCall<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;satisfy'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">20</span>&nbsp;<span style="color: #000000">]</span>&nbsp;<span style="color: #000000">});</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #336699">decrement</span>(&nbsp;<span style="color: #0086b3">200</span>&nbsp;)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #336699">decrement</span>(&nbsp;<span style="color: #0086b3">200</span>&nbsp;);&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
   <div><span style="color: red; font-weight: bold">to&nbsp;satisfy</span>&nbsp;{&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">20</span>&nbsp;]&nbsp;}</div>
   <div>&nbsp;</div>
   <div><span style="color: #336699">decrement</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #0086b3">200</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #0086b3">200</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: red; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
@@ -136,7 +138,7 @@
 </div></div>
 </div></div>
 </div></div>
-  <div>)&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div>);&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div><p>All the semantics of <a href="http://unexpected.js.org/assertions/any/to-satisfy/">to satisfy</a>
 are supported. For example:</p>
 <div class="code lang-javascript">
