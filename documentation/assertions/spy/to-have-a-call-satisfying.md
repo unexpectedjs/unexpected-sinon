@@ -12,16 +12,16 @@ expect(increment, 'to have a call satisfying', { args: [ 42 ], returnValue: 43 }
 In case of a failing expectation you get the following output:
 
 ```js
-var quux = sinon.spy().named('increment');
+var quux = sinon.spy().named('quux');
 quux(123, 456);
 
 expect(quux, 'to have a call satisfying', { args: [ 'foo', 456 ] });
 ```
 
 ```output
-expected increment to have a call satisfying { args: [ 'foo', 456 ] }
+expected quux to have a call satisfying { args: [ 'foo', 456 ] }
 
-increment(
+quux(
   123, // should equal 'foo'
   456
 ); at theFunction (theFileName:xx:yy)
