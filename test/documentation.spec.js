@@ -309,13 +309,13 @@ describe("documentation tests", function () {
         expect(increment, 'to have a call satisfying', { args: [ 42 ], returnValue: 43 });
 
         try {
-            var quux = sinon.spy().named('increment');
+            var quux = sinon.spy().named('quux');
             quux(123, 456);
 
             expect(quux, 'to have a call satisfying', { args: [ 'foo', 456 ] });
             expect.fail(function (output) {
                 output.error("expected:").nl();
-                output.code("var quux = sinon.spy().named('increment');").nl();
+                output.code("var quux = sinon.spy().named('quux');").nl();
                 output.code("quux(123, 456);").nl();
                 output.code("").nl();
                 output.code("expect(quux, 'to have a call satisfying', { args: [ 'foo', 456 ] });").nl();
@@ -323,14 +323,18 @@ describe("documentation tests", function () {
             });
         } catch (e) {
             expect(e, "to have message",
-                "expected increment to have a call satisfying { args: [ 'foo', 456 ] }\n" +
+                "expected quux to have a call satisfying { args: [ 'foo', 456 ] }\n" +
                 "\n" +
-                "increment(\n" +
+                "quux(\n" +
                 "  123, // should equal 'foo'\n" +
                 "  456\n" +
                 "); at theFunction (theFileName:xx:yy)"
             );
         }
+
+        expect(quux, 'to have a call satisfying', [ 123, 456 ]);
+
+        expect(quux, 'to have a call satisfying', { 1: 456 });
 
         var mySpy = sinon.spy().named('mySpy');
         mySpy({foo: 123, bar: 456});
@@ -434,6 +438,10 @@ describe("documentation tests", function () {
                 "); at theFunction (theFileName:xx:yy)"
             );
         }
+
+        expect(increment, 'to have a call satisfying', [ 42 ]);
+
+        expect(increment, 'to have a call satisfying', { 1: 'yadda' });
 
         var mySpy = sinon.spy().named('mySpy');
         mySpy({foo: 123, bar: 456});
