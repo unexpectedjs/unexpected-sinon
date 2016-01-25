@@ -700,6 +700,101 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('to have a call satisfying', function () {
+        describe('when passed a spec object', function () {
+            it('should succeed when a spy call satisfies the spec', function () {
+                spy(123, 456);
+                expect(spy, 'to have a call satisfying', {
+                    args: [ 123, 456 ]
+                });
+            });
+
+            it('should fail when the spy was not called at all', function () {
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', {
+                        args: [ 123, 456 ]
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying { args: [ 123, 456 ] }\n" +
+                    "  expected [] to have items satisfying { args: [ 123, 456 ] }\n" +
+                    "    expected [] to be non-empty"
+                );
+            });
+
+            it('should fail when the spy was called but never with the right arguments', function () {
+                spy(456);
+                spy(567);
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', {
+                        args: [ 123, 456 ]
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying { args: [ 123, 456 ] }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  // missing 123\n" +
+                    "  456\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1(\n" +
+                    "  567 // should equal 123\n" +
+                    "  // missing 456\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed a function that performs the expected call', function () {
+            it('should succeed when a spy call satisfies the spec', function () {
+                spy(123, 456);
+                expect(spy, 'to have a call satisfying', function () {
+                    spy(123, 456);
+                });
+            });
+
+            it('should fail if the function does not call the spy', function () {
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', function () {});
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying function () {}\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 0 times"
+                );
+            });
+
+            it('should fail if the function calls the spy more than once', function () {
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', function () {
+                        spy(123);
+                        spy(456);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying\n" +
+                    "spy1( 123 );\n" +
+                    "spy1( 456 );\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 2 times"
+                );
+            });
+
+            it('should fail when the spy was called but never with the right arguments', function () {
+                spy(123);
+                spy(456);
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', function () {
+                        spy(789);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying spy1( 789 );\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123 // should equal 789\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1(\n" +
+                    "  456 // should equal 789\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+    });
+
     describe('to have calls satisfying', function () {
         it('should satisfy against a list of all calls to the specified spies', function () {
             var spy2 = sinon.spy(function spy2() {
