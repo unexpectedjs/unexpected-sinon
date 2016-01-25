@@ -994,6 +994,15 @@ describe('unexpected-sinon', function () {
             );
         });
 
+        it('should complain if a spy call spec contains an unsupported type', function () {
+            expect(function () {
+                expect(spy, 'to have calls satisfying', [123]);
+            }, 'to throw',
+                "expected spy1 to have calls satisfying [ 123 ]\n" +
+                "  unsupported value in spy call spec: 123"
+            );
+        });
+
         describe('with the exhaustively flag', function () {
             it('should fail if an object parameter contains additional properties', function () {
                 spy({foo: 123}, [{bar: 'quux'}]);
