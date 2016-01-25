@@ -771,6 +771,56 @@ describe('unexpected-sinon', function () {
             });
         });
 
+        describe('when passed an array (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have a call satisfying', [ 123, { foo: 'bar' } ]);
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have a call satisfying', [ 123, { foo: 'baz' } ]);
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying [ 123, { foo: 'baz' } ]\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have a call satisfying', {0: 123, 1: {foo: 'bar'}});
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have a call satisfying', {0: 123, 1: {foo: 'baz'}});
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying { 0: 123, 1: { foo: 'baz' } }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
         describe('when passed a function that performs the expected call', function () {
             it('should succeed when a spy call satisfies the spec', function () {
                 spy(123, 456);
