@@ -741,6 +741,26 @@ describe('unexpected-sinon', function () {
                     "); at theFunction (theFileName:xx:yy)"
                 );
             });
+
+            describe('with the exhaustively flag', function () {
+                it('should succeed when a spy call satisfies the spec', function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have a call satisfying', {
+                        args: [ 123, { foo: 'bar' } ]
+                    });
+                });
+
+                it('should fail when a spy call does not satisfy the spec only because of the "exhaustively" semantics', function () {
+                    spy(123, { foo: 'bar', quux: 'baz' });
+                    expect(function () {
+                        expect(spy, 'to have a call exhaustively satisfying', {
+                            args: [ 123, { foo: 'bar' } ]
+                        });
+                    }, 'to throw',
+                        ''
+                    );
+                });
+            });
         });
 
         describe('when passed a function that performs the expected call', function () {
