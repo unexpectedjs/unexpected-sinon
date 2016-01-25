@@ -757,7 +757,15 @@ describe('unexpected-sinon', function () {
                             args: [ 123, { foo: 'bar' } ]
                         });
                     }, 'to throw',
-                        ''
+                        "expected spy1 to have a call exhaustively satisfying { args: [ 123, { foo: 'bar' } ] }\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  123,\n" +
+                        "  {\n" +
+                        "    foo: 'bar',\n" +
+                        "    quux: 'baz' // should be removed\n" +
+                        "  }\n" +
+                        "); at theFunction (theFileName:xx:yy)"
                     );
                 });
             });
