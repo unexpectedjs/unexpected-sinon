@@ -299,6 +299,97 @@ describe("documentation tests", function () {
         return expect.promise.all(testPromises);
     });
 
+    it("assertions/spy/to-have-a-call-satisfying.md contains correct examples", function () {
+        var testPromises = [];
+        var increment = sinon.spy(function increment(n) {
+            return n + 1;
+        });
+        increment(42);
+        increment(46);
+        expect(increment, 'to have a call satisfying', { args: [ 42 ], returnValue: 43 });
+
+        try {
+            var quux = sinon.spy().named('increment');
+            quux(123, 456);
+
+            expect(quux, 'to have a call satisfying', { args: [ 'foo', 456 ] });
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("var quux = sinon.spy().named('increment');").nl();
+                output.code("quux(123, 456);").nl();
+                output.code("").nl();
+                output.code("expect(quux, 'to have a call satisfying', { args: [ 'foo', 456 ] });").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected increment to have a call satisfying { args: [ 'foo', 456 ] }\n" +
+                "\n" +
+                "increment(\n" +
+                "  123, // should equal 'foo'\n" +
+                "  456\n" +
+                "); at theFunction (theFileName:xx:yy)"
+            );
+        }
+
+        var mySpy = sinon.spy().named('mySpy');
+        mySpy({foo: 123, bar: 456});
+        expect(mySpy, 'to have a call satisfying', { args: [ { foo: 123 } ] });
+
+        try {
+            expect(mySpy, 'to have a call exhaustively satisfying', { args: [ { foo: 123 } ] });
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("expect(mySpy, 'to have a call exhaustively satisfying', { args: [ { foo: 123 } ] });").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected mySpy to have a call exhaustively satisfying { args: [ { foo: 123 } ] }\n" +
+                "\n" +
+                "mySpy(\n" +
+                "  {\n" +
+                "    foo: 123,\n" +
+                "    bar: 456 // should be removed\n" +
+                "  }\n" +
+                "); at theFunction (theFileName:xx:yy)"
+            );
+        }
+
+        try {
+            var foo = sinon.spy().named('foo');
+            foo(1);
+            foo(2);
+
+            expect(foo, 'to have a call satisfying', function () {
+                foo(3);
+            });
+            expect.fail(function (output) {
+                output.error("expected:").nl();
+                output.code("var foo = sinon.spy().named('foo');").nl();
+                output.code("foo(1);").nl();
+                output.code("foo(2);").nl();
+                output.code("").nl();
+                output.code("expect(foo, 'to have a call satisfying', function () {").nl();
+                output.code("    foo(3);").nl();
+                output.code("});").nl();
+                output.error("to throw");
+            });
+        } catch (e) {
+            expect(e, "to have message",
+                "expected foo to have a call satisfying foo( 3 );\n" +
+                "\n" +
+                "foo(\n" +
+                "  1 // should equal 3\n" +
+                "); at theFunction (theFileName:xx:yy)\n" +
+                "foo(\n" +
+                "  2 // should equal 3\n" +
+                "); at theFunction (theFileName:xx:yy)"
+            );
+        }
+        return expect.promise.all(testPromises);
+    });
+
     it("assertions/spy/to-have-calls-satisfying.md contains correct examples", function () {
         var testPromises = [];
         var increment = sinon.spy(function increment(n) {
