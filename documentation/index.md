@@ -15,12 +15,31 @@ library with integration for the [Sinonjs](http://sinonjs.org/)
 mocking library.
 
 ```js
-var obj = { spy: sinon.spy() };
-obj.spy(42);
-obj.spy({ foo: 'bar' }, 'baz', "qux");
-expect(obj.spy, "was called twice");
-expect(obj.spy, 'was called with', { foo: 'bar' }, 'baz', expect.it('to be truthy'));
-expect(obj.spy, 'was always called on', obj);
+var mySpy = sinon.spy().named('mySpy');
+mySpy(42);
+mySpy({ foo: 'bar' }, 'baz', 'qux');
+expect(mySpy, 'was called twice');
+expect(mySpy, 'to have calls satisfying', function () {
+    mySpy(42);
+    mySpy({ foo: 'baz' }, expect.it('to be a string'));
+});
+```
+
+```output
+expected mySpy to have calls satisfying
+mySpy( 42 );
+mySpy( { foo: 'baz' }, expect.it('to be a string') );
+
+mySpy( 42 ); at theFunction (theFileName:xx:yy)
+mySpy(
+  {
+    foo: 'bar' // should equal 'baz'
+               // -bar
+               // +baz
+  },
+  'baz',
+  'qux' // should be removed
+); at theFunction (theFileName:xx:yy)
 ```
 
 [![NPM version](https://badge.fury.io/js/unexpected-sinon.svg)](http://badge.fury.io/js/unexpected-sinon)
@@ -88,31 +107,6 @@ requirejs.config({
          exports: 'sinon'
       }
    }
-});
-```
-
-## Expectations on arguments of individual calls
-
-```js
-var spy = sinon.spy();
-spy({ foo: 'bar' }, 'baz');
-spy('qux');
-spy('quux');
-
-expect(spy.args, 'to equal', [
-    [{ foo: 'bar' }, 'baz'],
-    ['qux'],
-    ['quux']
-]);
-
-expect(spy.args[1], 'to equal', ['qux']);
-
-expect(spy.args, 'to satisfy', {
-    0: [
-        { foo: 'bar' },
-        expect.it('to be a string').and('to have length', 3)
-    ],
-    2: ['quux']
 });
 ```
 
