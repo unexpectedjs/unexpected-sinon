@@ -35,6 +35,18 @@ increment(
 ); at theFunction (theFileName:xx:yy)
 ```
 
+An array entry value will be interpreted as a shorthand for `{ args: ... }`:
+
+```js
+expect(increment, 'to have a call satisfying', [ 42 ]);
+```
+
+Likewise for an object with only numerical properties:
+
+```js
+expect(increment, 'to have a call satisfying', { 1: 'yadda' });
+```
+
 Note that the individual arguments are matched with
 [`to satisfy`](http://unexpected.js.org/assertions/any/to-satisfy/)
 semantics, which means that objects are allowed to have more properties than you

@@ -700,6 +700,179 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('to have a call satisfying', function () {
+        describe('when passed a spec object', function () {
+            it('should succeed when a spy call satisfies the spec', function () {
+                spy(123, 456);
+                expect(spy, 'to have a call satisfying', {
+                    args: [ 123, 456 ]
+                });
+            });
+
+            it('should fail when the spy was not called at all', function () {
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', {
+                        args: [ 123, 456 ]
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying { args: [ 123, 456 ] }\n" +
+                    "  expected [] to have items satisfying { args: [ 123, 456 ] }\n" +
+                    "    expected [] to be non-empty"
+                );
+            });
+
+            it('should fail when the spy was called but never with the right arguments', function () {
+                spy(456);
+                spy(567);
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', {
+                        args: [ 123, 456 ]
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying { args: [ 123, 456 ] }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  // missing 123\n" +
+                    "  456\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1(\n" +
+                    "  567 // should equal 123\n" +
+                    "  // missing 456\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+
+            describe('with the exhaustively flag', function () {
+                it('should succeed when a spy call satisfies the spec', function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have a call satisfying', {
+                        args: [ 123, { foo: 'bar' } ]
+                    });
+                });
+
+                it('should fail when a spy call does not satisfy the spec only because of the "exhaustively" semantics', function () {
+                    spy(123, { foo: 'bar', quux: 'baz' });
+                    expect(function () {
+                        expect(spy, 'to have a call exhaustively satisfying', {
+                            args: [ 123, { foo: 'bar' } ]
+                        });
+                    }, 'to throw',
+                        "expected spy1 to have a call exhaustively satisfying { args: [ 123, { foo: 'bar' } ] }\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  123,\n" +
+                        "  {\n" +
+                        "    foo: 'bar',\n" +
+                        "    quux: 'baz' // should be removed\n" +
+                        "  }\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
+        });
+
+        describe('when passed an array (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have a call satisfying', [ 123, { foo: 'bar' } ]);
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have a call satisfying', [ 123, { foo: 'baz' } ]);
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying [ 123, { foo: 'baz' } ]\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have a call satisfying', {0: 123, 1: {foo: 'bar'}});
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have a call satisfying', {0: 123, 1: {foo: 'baz'}});
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying { 0: 123, 1: { foo: 'baz' } }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed a function that performs the expected call', function () {
+            it('should succeed when a spy call satisfies the spec', function () {
+                spy(123, 456);
+                expect(spy, 'to have a call satisfying', function () {
+                    spy(123, 456);
+                });
+            });
+
+            it('should fail if the function does not call the spy', function () {
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', function () {});
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying function () {}\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 0 times"
+                );
+            });
+
+            it('should fail if the function calls the spy more than once', function () {
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', function () {
+                        spy(123);
+                        spy(456);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying\n" +
+                    "spy1( 123 );\n" +
+                    "spy1( 456 );\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 2 times"
+                );
+            });
+
+            it('should fail when the spy was called but never with the right arguments', function () {
+                spy(123);
+                spy(456);
+                expect(function () {
+                    expect(spy, 'to have a call satisfying', function () {
+                        spy(789);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have a call satisfying spy1( 789 );\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123 // should equal 789\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1(\n" +
+                    "  456 // should equal 789\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+    });
+
     describe('to have calls satisfying', function () {
         it('should satisfy against a list of all calls to the specified spies', function () {
             var spy2 = sinon.spy(function spy2() {
@@ -758,6 +931,56 @@ describe('unexpected-sinon', function () {
             );
         });
 
+        describe('when passed an array entry (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have calls satisfying', [ [ 123, { foo: 'bar' } ] ]);
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have calls satisfying', [ [ 123, { foo: 'baz' } ] ]);
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying [ [ 123, { foo: 'baz' } ] ]\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have calls satisfying', [{0: 123, 1: {foo: 'bar'}}]);
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have calls satisfying', [{0: 123, 1: {foo: 'baz'}}]);
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying [ { 0: 123, 1: { foo: 'baz' } } ]\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
         it('should complain if the spy list does not contain a spy that is contained by the spec', function () {
             var spy2 = sinon.spy(function spy2() {
                 return 'blah';
@@ -768,6 +991,15 @@ describe('unexpected-sinon', function () {
             }, 'to throw',
                 "expected [ spy1 ] to have calls satisfying [ spy1, spy2 ]\n" +
                 "  expected [ spy1 ] to contain spy2"
+            );
+        });
+
+        it('should complain if a spy call spec contains an unsupported type', function () {
+            expect(function () {
+                expect(spy, 'to have calls satisfying', [123]);
+            }, 'to throw',
+                "expected spy1 to have calls satisfying [ 123 ]\n" +
+                "  unsupported value in spy call spec: 123"
             );
         });
 
