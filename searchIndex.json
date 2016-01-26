@@ -12,6 +12,10 @@
     "url": "/assertions/spy/threw/"
   },
   {
+    "label": "to have a call satisfying (spy)",
+    "url": "/assertions/spy/to-have-a-call-satisfying/"
+  },
+  {
     "label": "to have calls satisfying (spy)",
     "url": "/assertions/spy/to-have-calls-satisfying/"
   },
