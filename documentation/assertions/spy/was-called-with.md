@@ -1,5 +1,8 @@
 Passes if the spy was called with the provided arguments.
 
+THIS ASSERTION IS DEPRECATED AND WILL BE REMOVED IN A LATER VERSION.
+Please use [`to have a call satisfying`](../to-have-a-call-satisfying/) instead.
+
 ```js
 var mySpy = sinon.spy().named('mySpy');
 mySpy({ foo: 'bar' }, 'baz', 'qux', 'quux');
