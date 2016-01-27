@@ -41,7 +41,7 @@ An array value will be interpreted as a shorthand for `{ args: ... }`:
 expect(increment, 'to have calls satisfying', [
     [ 42 ],
     [ 46, 'yadda' ]
-);
+]);
 ```
 
 Likewise for an object with only numerical properties:
@@ -50,7 +50,7 @@ Likewise for an object with only numerical properties:
 expect(increment, 'to have calls satisfying', [
     { 0: 42 },
     { 1: 'yadda' }
-);
+]);
 ```
 
 Note that the individual arguments are matched with
