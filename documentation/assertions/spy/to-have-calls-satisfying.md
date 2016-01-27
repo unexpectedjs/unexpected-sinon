@@ -35,16 +35,22 @@ increment(
 ); at theFunction (theFileName:xx:yy)
 ```
 
-An array entry value will be interpreted as a shorthand for `{ args: ... }`:
+An array value will be interpreted as a shorthand for `{ args: ... }`:
 
 ```js
-expect(increment, 'to have a call satisfying', [ 42 ]);
+expect(increment, 'to have calls satisfying', [
+    [ 42 ],
+    [ 46, 'yadda' ]
+);
 ```
 
 Likewise for an object with only numerical properties:
 
 ```js
-expect(increment, 'to have a call satisfying', { 1: 'yadda' });
+expect(increment, 'to have calls satisfying', [
+    { 0: 42 },
+    { 1: 'yadda' }
+);
 ```
 
 Note that the individual arguments are matched with

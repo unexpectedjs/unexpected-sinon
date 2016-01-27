@@ -104,6 +104,28 @@ mySpy(
 ); at theFunction (theFileName:xx:yy)
 ```
 
+If you only care about certain call numbers, you can specify an object with
+numerical properties:
+
+```js
+var foo = sinon.spy().named('foo');
+foo(1);
+foo(2);
+
+expect(foo, 'to have calls satisfying', {
+    1: [ 3 ]
+});
+```
+
+```output
+expected foo to have calls satisfying { 1: [ 3 ] }
+
+foo( 1 ); at theFunction (theFileName:xx:yy)
+foo(
+  2 // should equal 3
+); at theFunction (theFileName:xx:yy)
+```
+
 You can also specify expected calls as a function that performs them:
 
 ```js
