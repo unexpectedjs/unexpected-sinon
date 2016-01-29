@@ -293,11 +293,9 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
-                "[\n" +
-                "  // missing { spy: agent005 }\n" +
-                "  // missing { spy: agent006 }\n" +
-                "  // missing { spy: agent007 }\n" +
-                "]"
+                "// missing { spy: agent005 }\n" +
+                "// missing { spy: agent006 }\n" +
+                "// missing { spy: agent007 }"
             );
         });
     });
@@ -1215,6 +1213,18 @@ describe('unexpected-sinon', function () {
                 }).then(function () {
                     expect(throwingSpy, 'was called twice');
                 });
+            });
+
+            it('should render the correct diff when the expected spy calls consist of a single entry', function () {
+                return expect(function () {
+                    return expect(spy, 'to have calls satisfying', function () {
+                        spy(123);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have calls satisfying spy1( 123 );\n" +
+                    "\n" +
+                    "// missing spy1( 123 );"
+                );
             });
         });
 
