@@ -872,6 +872,58 @@ describe('unexpected-sinon', function () {
     });
 
     describe('to have calls satisfying', function () {
+        it.skip('should render a swapped expected call sensibly', function () {
+            var spy1 = sinon.spy().named('spy1');
+            var spy2 = sinon.spy().named('spy2');
+            var spy3 = sinon.spy().named('spy3');
+            spy1(123);
+            spy2(456);
+            spy3(789);
+            expect(function () {
+                expect([spy1, spy2, spy3], 'to have calls satisfying', function () {
+                    spy1(123);
+                    spy3(789);
+                    spy2(456);
+                });
+            }, 'to throw',
+                "expected [ spy1, spy2, spy3 ] to have calls satisfying\n" +
+                "spy1( 123 );\n" +
+                "spy3( 789 );\n" +
+                "spy2( 456 );\n" +
+                "\n" +
+                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "// missing spy3( 789 ); at theFunction (theFileName:xx:yy)\n" +
+                "spy2( 456 ); at theFunction (theFileName:xx:yy)\n" +
+                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be removed"
+            );
+        });
+
+        it.skip('should render a swapped actual function call sensibly', function () {
+            var spy1 = sinon.spy().named('spy1');
+            var spy2 = sinon.spy().named('spy2');
+            var spy3 = sinon.spy().named('spy3');
+            spy1(123);
+            spy3(789);
+            spy2(456);
+            expect(function () {
+                expect([spy1, spy2, spy3], 'to have calls satisfying', function () {
+                    spy1(123);
+                    spy2(456);
+                    spy3(789);
+                });
+            }, 'to throw',
+                "expected [ spy1, spy2, spy3 ] to have calls satisfying\n" +
+                "spy1( 123 );\n" +
+                "spy2( 456 );\n" +
+                "spy3( 789 );\n" +
+                "\n" +
+                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                "spy2( 456 ); at theFunction (theFileName:xx:yy)\n" +
+                "// missing spy3( 789 );"
+            );
+        });
+
         it('should satisfy against a list of all calls to the specified spies', function () {
             var spy2 = sinon.spy(function spy2() {
                 return 'blah';
