@@ -373,6 +373,7 @@ describe('unexpected-sinon', function () {
                 "spy1(\n" +
                 "  {\n" +
                 "    foo: 'baa' // should equal 'bar'\n" +
+                "               //\n" +
                 "               // -baa\n" +
                 "               // +bar\n" +
                 "  },\n" +
@@ -560,6 +561,7 @@ describe('unexpected-sinon', function () {
                     "                                           //   {\n" +
                     "                                           //     message: '',\n" +
                     "                                           //     name: 'Error' // should equal 'TypeError'\n" +
+                    "                                           //                   //\n" +
                     "                                           //                   // -Error\n" +
                     "                                           //                   // +TypeError\n" +
                     "                                           //   }"
@@ -650,6 +652,7 @@ describe('unexpected-sinon', function () {
                     "                                           //   {\n" +
                     "                                           //     message: '',\n" +
                     "                                           //     name: 'TypeError' // should equal 'Error'\n" +
+                    "                                           //                       //\n" +
                     "                                           //                       // -TypeError\n" +
                     "                                           //                       // +Error\n" +
                     "                                           //   }"
@@ -786,6 +789,7 @@ describe('unexpected-sinon', function () {
                     "  123,\n" +
                     "  {\n" +
                     "    foo: 'bar' // should equal 'baz'\n" +
+                    "               //\n" +
                     "               // -bar\n" +
                     "               // +baz\n" +
                     "  }\n" +
@@ -811,6 +815,7 @@ describe('unexpected-sinon', function () {
                     "  123,\n" +
                     "  {\n" +
                     "    foo: 'bar' // should equal 'baz'\n" +
+                    "               //\n" +
                     "               // -bar\n" +
                     "               // +baz\n" +
                     "  }\n" +
@@ -998,6 +1003,7 @@ describe('unexpected-sinon', function () {
                     "  123,\n" +
                     "  {\n" +
                     "    foo: 'bar' // should equal 'baz'\n" +
+                    "               //\n" +
                     "               // -bar\n" +
                     "               // +baz\n" +
                     "  }\n" +
@@ -1023,6 +1029,7 @@ describe('unexpected-sinon', function () {
                     "  123,\n" +
                     "  {\n" +
                     "    foo: 'bar' // should equal 'baz'\n" +
+                    "               //\n" +
                     "               // -bar\n" +
                     "               // +baz\n" +
                     "  }\n" +

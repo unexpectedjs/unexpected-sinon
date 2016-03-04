@@ -34,6 +34,7 @@ mySpy( 42 ); at theFunction (theFileName:xx:yy)
 mySpy(
   {
     foo: 'bar' // should equal 'baz'
+               //
                // -bar
                // +baz
   },

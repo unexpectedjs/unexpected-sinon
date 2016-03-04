@@ -65,10 +65,11 @@ increment( 666 ); at theFunction (theFileName:xx:yy)
   //        to satisfy { message: expect.it('not to match', /^No/) }
   //
   //        {
-  //          message: 'No, I won\'t do that' // should not match /^No/
-  //                                          //
-  //                                          // No, I won't do that
-  //                                          // ^^
+  //          message:
+  //            'No, I won\'t do that' // should not match /^No/
+  //                                   //
+  //                                   // No, I won't do that
+  //                                   // ^^
   //        }
 ```
 
