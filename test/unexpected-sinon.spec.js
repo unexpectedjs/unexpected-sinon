@@ -245,7 +245,7 @@ describe('unexpected-sinon', function () {
                 "agent007(); at theFunction (theFileName:xx:yy)\n" +
                 "agent005(); at theFunction (theFileName:xx:yy)\n" +
                 "agent006(); at theFunction (theFileName:xx:yy)\n" +
-                "agent007(); at theFunction (theFileName:xx:yy) // spy: expected agent007 to be agent005"
+                "agent007(); at theFunction (theFileName:xx:yy) // should be agent005"
             );
         });
 
@@ -262,8 +262,8 @@ describe('unexpected-sinon', function () {
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
                 "agent005(); at theFunction (theFileName:xx:yy)\n" +
-                "agent007(); at theFunction (theFileName:xx:yy) // spy: expected agent007 to be agent006\n" +
-                "agent006(); at theFunction (theFileName:xx:yy) // spy: expected agent006 to be agent007"
+                "agent007(); at theFunction (theFileName:xx:yy) // should be agent006\n" +
+                "agent006(); at theFunction (theFileName:xx:yy) // should be agent007"
             );
         });
 
@@ -877,7 +877,7 @@ describe('unexpected-sinon', function () {
     });
 
     describe('to have calls satisfying', function () {
-        it.skip('should render a swapped expected call sensibly', function () {
+        it('should render a swapped expected call sensibly', function () {
             var spy1 = sinon.spy().named('spy1');
             var spy2 = sinon.spy().named('spy2');
             var spy3 = sinon.spy().named('spy3');
@@ -897,13 +897,12 @@ describe('unexpected-sinon', function () {
                 "spy2( 456 );\n" +
                 "\n" +
                 "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
-                "// missing spy3( 789 ); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 456 ); at theFunction (theFileName:xx:yy)\n" +
-                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be removed"
+                "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy3( 789 );\n" +
+                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be spy2( 456 );"
             );
         });
 
-        it.skip('should render a swapped actual function call sensibly', function () {
+        it('should render a swapped actual function call sensibly', function () {
             var spy1 = sinon.spy().named('spy1');
             var spy2 = sinon.spy().named('spy2');
             var spy3 = sinon.spy().named('spy3');
@@ -923,9 +922,21 @@ describe('unexpected-sinon', function () {
                 "spy3( 789 );\n" +
                 "\n" +
                 "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
-                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
-                "spy2( 456 ); at theFunction (theFileName:xx:yy)\n" +
-                "// missing spy3( 789 );"
+                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be spy2( 456 );\n" +
+                "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy3( 789 );"
+            );
+        });
+
+        it('should render the wrong spy being called with no expectation for the arguments', function () {
+            var spy1 = sinon.spy().named('spy1');
+            var spy2 = sinon.spy().named('spy2');
+            spy1(123);
+            expect(function () {
+                expect([spy1, spy2], 'to have calls satisfying', [ { spy: spy2 } ]);
+            }, 'to throw',
+                "expected [ spy1, spy2 ] to have calls satisfying [ { spy: spy2 } ]\n" +
+                "\n" +
+                "spy1( 123 ); at theFunction (theFileName:xx:yy) // should be spy2"
             );
         });
 
@@ -981,7 +992,7 @@ describe('unexpected-sinon', function () {
                 "        // -baz\n" +
                 "        // +yadda\n" +
                 "); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 'yadda' ); at theFunction (theFileName:xx:yy) // spy: expected spy2 to be spy1\n" +
+                "spy2( 'yadda' ); at theFunction (theFileName:xx:yy) // should be spy1\n" +
                 "spy1( 'baz' ); at theFunction (theFileName:xx:yy)"
             );
         });
