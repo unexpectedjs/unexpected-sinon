@@ -43,24 +43,24 @@
 library with integration for the <a href="http://sinonjs.org/">Sinonjs</a>
 mocking library.</p>
 <div class="code lang-javascript">
-  <div><span style="color: #FFAA27">var</span>&nbsp;mySpy&nbsp;<span style="color: #3CDAFF">=</span>&nbsp;sinon<span style="color: #999">.</span>spy<span style="color: #999">().</span>named<span style="color: #999">(</span><span style="color: #3CDAFF">'mySpy'</span><span style="color: #999">);</span></div>
-  <div>mySpy<span style="color: #999">(</span><span style="color: white">42</span><span style="color: #999">);</span></div>
-  <div>mySpy<span style="color: #999">({</span>&nbsp;foo<span style="color: #999">:</span>&nbsp;<span style="color: #3CDAFF">'bar'</span>&nbsp;<span style="color: #999">},</span>&nbsp;<span style="color: #3CDAFF">'baz'</span><span style="color: #999">,</span>&nbsp;<span style="color: #3CDAFF">'qux'</span><span style="color: #999">);</span></div>
-  <div>expect<span style="color: #999">(</span>mySpy<span style="color: #999">,</span>&nbsp;<span style="color: #3CDAFF">'was&nbsp;called&nbsp;twice'</span><span style="color: #999">);</span></div>
-  <div>expect<span style="color: #999">(</span>mySpy<span style="color: #999">,</span>&nbsp;<span style="color: #3CDAFF">'to&nbsp;have&nbsp;calls&nbsp;satisfying'</span><span style="color: #999">,</span>&nbsp;<span style="color: #FFAA27">function</span>&nbsp;<span style="color: #999">()</span>&nbsp;<span style="color: #999">{</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;mySpy<span style="color: #999">(</span><span style="color: white">42</span><span style="color: #999">);</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;mySpy<span style="color: #999">({</span>&nbsp;foo<span style="color: #999">:</span>&nbsp;<span style="color: #3CDAFF">'baz'</span>&nbsp;<span style="color: #999">},</span>&nbsp;expect<span style="color: #999">.</span>it<span style="color: #999">(</span><span style="color: #3CDAFF">'to&nbsp;be&nbsp;a&nbsp;string'</span><span style="color: #999">));</span></div>
+  <div><span style="color: #F92672">var</span>&nbsp;mySpy&nbsp;<span style="color: #F92672">=</span>&nbsp;sinon<span style="color: #999">.</span>spy<span style="color: #999">().</span>named<span style="color: #999">(</span><span style="color: #E6DB74">'mySpy'</span><span style="color: #999">);</span></div>
+  <div>mySpy<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">42</span><span style="color: #999">);</span></div>
+  <div>mySpy<span style="color: #999">({</span>&nbsp;foo<span style="color: #999">:</span>&nbsp;<span style="color: #E6DB74">'bar'</span>&nbsp;<span style="color: #999">},</span>&nbsp;<span style="color: #E6DB74">'baz'</span><span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'qux'</span><span style="color: #999">);</span></div>
+  <div>expect<span style="color: #999">(</span>mySpy<span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'was&nbsp;called&nbsp;twice'</span><span style="color: #999">);</span></div>
+  <div>expect<span style="color: #999">(</span>mySpy<span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'to&nbsp;have&nbsp;calls&nbsp;satisfying'</span><span style="color: #999">,</span>&nbsp;<span style="color: #F92672">function</span>&nbsp;<span style="color: #999">()</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;mySpy<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">42</span><span style="color: #999">);</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;mySpy<span style="color: #999">({</span>&nbsp;foo<span style="color: #999">:</span>&nbsp;<span style="color: #E6DB74">'baz'</span>&nbsp;<span style="color: #999">},</span>&nbsp;expect<span style="color: #999">.</span>it<span style="color: #999">(</span><span style="color: #E6DB74">'to&nbsp;be&nbsp;a&nbsp;string'</span><span style="color: #999">));</span></div>
   <div><span style="color: #999">});</span></div>
 </div><div class="output">
-  <div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #319916">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;have&nbsp;calls&nbsp;satisfying</span></div>
+  <div><span style="color: #F92672; font-weight: bold">expected</span>&nbsp;<span style="color: #319916">mySpy</span>&nbsp;<span style="color: #F92672; font-weight: bold">to&nbsp;have&nbsp;calls&nbsp;satisfying</span></div>
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #319916">mySpy</span>(&nbsp;42&nbsp;);</div>
-  <div><span style="color: #319916">mySpy</span>(&nbsp;{&nbsp;<span style="color: #939393">foo</span>:&nbsp;<span style="color: #3CDAFF">'baz'</span>&nbsp;},&nbsp;expect.it(<span style="color: #3CDAFF">'to&nbsp;be&nbsp;a&nbsp;string'</span>)&nbsp;);</div>
+  <div><span style="color: #319916">mySpy</span>(&nbsp;<span style="color: #66D9EF">42</span>&nbsp;);</div>
+  <div><span style="color: #319916">mySpy</span>(&nbsp;{&nbsp;<span style="color: #CCC">foo</span>:&nbsp;<span style="color: #E6DB74">'baz'</span>&nbsp;},&nbsp;expect.it(<span style="color: #E6DB74">'to&nbsp;be&nbsp;a&nbsp;string'</span>)&nbsp;);</div>
 </div></div>
   <div>&nbsp;</div>
   <div><div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #319916">mySpy</span>(&nbsp;42&nbsp;);&nbsp;<span style="color: gray">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div><span style="color: #319916">mySpy</span>(&nbsp;<span style="color: #66D9EF">42</span>&nbsp;);&nbsp;<span style="color: #888">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
 </div></div>
   <div><div style="display: inline-block; vertical-align: top">
@@ -70,19 +70,19 @@ mocking library.</p>
   <div><div style="display: inline-block; vertical-align: top">
   <div>{</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #939393">foo</span>:&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #3CDAFF">'bar'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: red; font-weight: bold">//</span></div>
-  <div><span style="color: red; font-weight: bold">//</span></div>
-  <div><span style="color: red; font-weight: bold">//</span></div>
-  <div><span style="color: red; font-weight: bold">//</span></div>
+  <div><span style="color: #CCC">foo</span>:&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #E6DB74">'bar'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: red; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #3CDAFF">'baz'</span></div>
+  <div><span style="color: #F92672; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #E6DB74">'baz'</span></div>
 </div></div>
   <div>&nbsp;</div>
-  <div><span style="background-color: red; color: black">bar</span></div>
-  <div><span style="background-color: green; color: black">baz</span></div>
+  <div><span style="background-color: #F92672; color: black">bar</span></div>
+  <div><span style="background-color: #A6E22E; color: black">baz</span></div>
 </div></div>
 </div></div>
 </div></div>
@@ -91,15 +91,15 @@ mocking library.</p>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #3CDAFF">'baz'</span>,</div>
+  <div><span style="color: #E6DB74">'baz'</span>,</div>
 </div></div>
 </div></div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #3CDAFF">'qux'</span>&nbsp;<span style="color: red; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div>
+  <div><span style="color: #E6DB74">'qux'</span>&nbsp;<span style="color: #F92672; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div>
 </div></div>
 </div></div>
-  <div>);&nbsp;<span style="color: gray">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+  <div>);&nbsp;<span style="color: #888">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
 </div></div>
 </div><p><a href="http://badge.fury.io/js/unexpected-sinon"><img src="https://badge.fury.io/js/unexpected-sinon.svg" alt="NPM version"></a>
@@ -113,37 +113,37 @@ mocking library.</p>
   <div>$&nbsp;npm&nbsp;install&nbsp;--save-dev&nbsp;unexpected&nbsp;unexpected-sinon</div>
 </div><p>Then:</p>
 <div class="code lang-javascript">
-  <div><span style="color: #FFAA27">var</span>&nbsp;expect&nbsp;<span style="color: #3CDAFF">=</span>&nbsp;require<span style="color: #999">(</span><span style="color: #3CDAFF">'unexpected'</span><span style="color: #999">).</span>clone<span style="color: #999">();</span></div>
-  <div>expect<span style="color: #999">.</span>use<span style="color: #999">(</span>require<span style="color: #999">(</span><span style="color: #3CDAFF">'unexpected-sinon'</span><span style="color: #999">));</span></div>
+  <div><span style="color: #F92672">var</span>&nbsp;expect&nbsp;<span style="color: #F92672">=</span>&nbsp;require<span style="color: #999">(</span><span style="color: #E6DB74">'unexpected'</span><span style="color: #999">).</span>clone<span style="color: #999">();</span></div>
+  <div>expect<span style="color: #999">.</span>use<span style="color: #999">(</span>require<span style="color: #999">(</span><span style="color: #E6DB74">'unexpected-sinon'</span><span style="color: #999">));</span></div>
 </div><h3 id="browser">Browser</h3>
 <p>Include the <code>unexpected-sinon.js</code> found at the lib directory of this
 repository.</p>
 <div class="code lang-html">
-  <div><span style="color: #999">&lt;</span><span style="color: white">script&nbsp;</span><span style="color: #3CDAFF">src</span><span style="color: #999">=&quot;</span><span style="color: #FFAA27">sinon.js</span><span style="color: #999">&quot;&gt;&lt;/</span><span style="color: white">script</span><span style="color: #999">&gt;</span></div>
-  <div><span style="color: #999">&lt;</span><span style="color: white">script&nbsp;</span><span style="color: #3CDAFF">src</span><span style="color: #999">=&quot;</span><span style="color: #FFAA27">unexpected.js</span><span style="color: #999">&quot;&gt;&lt;/</span><span style="color: white">script</span><span style="color: #999">&gt;</span></div>
-  <div><span style="color: #999">&lt;</span><span style="color: white">script&nbsp;</span><span style="color: #3CDAFF">src</span><span style="color: #999">=&quot;</span><span style="color: #FFAA27">unexpected-sinon.js</span><span style="color: #999">&quot;&gt;&lt;/</span><span style="color: white">script</span><span style="color: #999">&gt;</span></div>
+  <div><span style="color: #999">&lt;</span><span style="color: #66D9EF; font-weight: bold">script&nbsp;</span><span style="color: #E6DB74">src</span><span style="color: #999">=&quot;</span><span style="color: #F92672">sinon.js</span><span style="color: #999">&quot;&gt;&lt;/</span><span style="color: #66D9EF; font-weight: bold">script</span><span style="color: #999">&gt;</span></div>
+  <div><span style="color: #999">&lt;</span><span style="color: #66D9EF; font-weight: bold">script&nbsp;</span><span style="color: #E6DB74">src</span><span style="color: #999">=&quot;</span><span style="color: #F92672">unexpected.js</span><span style="color: #999">&quot;&gt;&lt;/</span><span style="color: #66D9EF; font-weight: bold">script</span><span style="color: #999">&gt;</span></div>
+  <div><span style="color: #999">&lt;</span><span style="color: #66D9EF; font-weight: bold">script&nbsp;</span><span style="color: #E6DB74">src</span><span style="color: #999">=&quot;</span><span style="color: #F92672">unexpected-sinon.js</span><span style="color: #999">&quot;&gt;&lt;/</span><span style="color: #66D9EF; font-weight: bold">script</span><span style="color: #999">&gt;</span></div>
 </div><p>this will expose the expect function under the following namespace:</p>
 <div class="code lang-javascript">
-  <div><span style="color: #FFAA27">var</span>&nbsp;expect&nbsp;<span style="color: #3CDAFF">=</span>&nbsp;weknowhow<span style="color: #999">.</span>expect<span style="color: #999">.</span>clone<span style="color: #999">();</span></div>
+  <div><span style="color: #F92672">var</span>&nbsp;expect&nbsp;<span style="color: #F92672">=</span>&nbsp;weknowhow<span style="color: #999">.</span>expect<span style="color: #999">.</span>clone<span style="color: #999">();</span></div>
   <div>expect<span style="color: #999">.</span>use<span style="color: #999">(</span>weknowhow<span style="color: #999">.</span>unexpectedSinon<span style="color: #999">);</span></div>
 </div><h3 id="requirejs">RequireJS</h3>
 <p>Include the library with RequireJS the following way:</p>
 <div class="code lang-javascript">
-  <div>define<span style="color: #999">([</span><span style="color: #3CDAFF">'unexpected'</span><span style="color: #999">,</span>&nbsp;<span style="color: #3CDAFF">'unexpected-sinon'</span><span style="color: #999">],</span>&nbsp;funtion&nbsp;<span style="color: #999">(</span>unexpected<span style="color: #999">,</span>&nbsp;unexpectedSinon<span style="color: #999">)</span>&nbsp;<span style="color: #999">{</span></div>
-  <div>&nbsp;&nbsp;&nbsp;<span style="color: #FFAA27">var</span>&nbsp;expect&nbsp;<span style="color: #3CDAFF">=</span>&nbsp;unexpected<span style="color: #999">.</span>clone<span style="color: #999">();</span></div>
+  <div>define<span style="color: #999">([</span><span style="color: #E6DB74">'unexpected'</span><span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'unexpected-sinon'</span><span style="color: #999">],</span>&nbsp;funtion&nbsp;<span style="color: #999">(</span>unexpected<span style="color: #999">,</span>&nbsp;unexpectedSinon<span style="color: #999">)</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;<span style="color: #F92672">var</span>&nbsp;expect&nbsp;<span style="color: #F92672">=</span>&nbsp;unexpected<span style="color: #999">.</span>clone<span style="color: #999">();</span></div>
   <div>&nbsp;&nbsp;&nbsp;expect<span style="color: #999">.</span>use<span style="color: #999">(</span>unexpectedSinon<span style="color: #999">);</span></div>
-  <div>&nbsp;&nbsp;<span style="color: gray">&nbsp;//&nbsp;Your&nbsp;code</span></div>
+  <div>&nbsp;&nbsp;<span style="color: #888">&nbsp;//&nbsp;Your&nbsp;code</span></div>
   <div><span style="color: #999">});</span></div>
 </div><p>Because Sinon is currently not AMD compatible you will need this RequireJS configuration to make things work:</p>
 <div class="code lang-javascript">
   <div>requirejs<span style="color: #999">.</span>config<span style="color: #999">({</span></div>
   <div>&nbsp;&nbsp;&nbsp;paths<span style="color: #999">:</span>&nbsp;<span style="color: #999">{</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #3CDAFF">'sinon'</span><span style="color: #999">:</span>&nbsp;<span style="color: #3CDAFF">'path/to/sinon'</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E6DB74">'sinon'</span><span style="color: #999">:</span>&nbsp;<span style="color: #E6DB74">'path/to/sinon'</span></div>
   <div>&nbsp;&nbsp;&nbsp;<span style="color: #999">},</span></div>
   <div>&nbsp;&nbsp;&nbsp;shim<span style="color: #999">:</span>&nbsp;<span style="color: #999">{</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #3CDAFF">'sinon'</span><span style="color: #999">:</span>&nbsp;<span style="color: #999">{</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deps<span style="color: #999">:</span>&nbsp;<span style="color: #999">[</span><span style="color: #3CDAFF">'sinon'</span><span style="color: #999">],</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exports<span style="color: #999">:</span>&nbsp;<span style="color: #3CDAFF">'sinon'</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #E6DB74">'sinon'</span><span style="color: #999">:</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deps<span style="color: #999">:</span>&nbsp;<span style="color: #999">[</span><span style="color: #E6DB74">'sinon'</span><span style="color: #999">],</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exports<span style="color: #999">:</span>&nbsp;<span style="color: #E6DB74">'sinon'</span></div>
   <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999">}</span></div>
   <div>&nbsp;&nbsp;&nbsp;<span style="color: #999">}</span></div>
   <div><span style="color: #999">});</span></div>
@@ -165,7 +165,7 @@ now it matches on the error message like
 <li>Improved the output for failing assertions a lot.</li>
 </ul>
 <h2 id="mit-license">MIT License</h2>
-<p>Copyright (c) 2013 Sune Simonsen <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x73;&#x75;&#x6e;&#101;&#64;&#119;&#101;&#x2d;&#107;&#110;&#111;&#119;&#x68;&#111;&#119;&#46;&#x64;&#x6b;">&#x73;&#x75;&#x6e;&#101;&#64;&#119;&#101;&#x2d;&#107;&#110;&#111;&#119;&#x68;&#111;&#119;&#46;&#x64;&#x6b;</a></p>
+<p>Copyright (c) 2013 Sune Simonsen <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#115;&#x75;&#x6e;&#x65;&#x40;&#x77;&#101;&#45;&#107;&#110;&#111;&#119;&#104;&#x6f;&#x77;&#x2e;&#x64;&#x6b;">&#115;&#x75;&#x6e;&#x65;&#x40;&#x77;&#101;&#45;&#107;&#110;&#111;&#119;&#104;&#x6f;&#x77;&#x2e;&#x64;&#x6b;</a></p>
 <p>Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 &#39;Software&#39;), to deal in the Software without restriction, including
