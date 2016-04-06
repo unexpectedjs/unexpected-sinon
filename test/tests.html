@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="mocha"></div>
-    <script src="../vendor/mocha.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
     <script src="../node_modules/unexpected/unexpected.js"></script>
     <script src="../node_modules/sinon/pkg/sinon.js"></script>
@@ -14,8 +14,8 @@
     <script>
       unexpected = weknowhow.expect.clone();
       unexpected.installPlugin(weknowhow.unexpectedSinon);
+      unexpected.output.preferredWidth = 80;
     </script>
-    <script src="documentation.spec.js"></script>
     <script src="unexpected-sinon.spec.js"></script>
     <script>
       mocha.run();
