@@ -17,7 +17,7 @@
     "url": "https://github.com/unexpectedjs/unexpected-sinon"
   },
   "scripts": {
-    "lint": "jshint .",
+    "lint": "eslint .",
     "test": "mocha --compilers md:unexpected-markdown test/*.js `find documentation -name '*.md'` && npm run lint",
     "travis": "npm test && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run generate-site",
     "test-browser": "serve .",
@@ -33,8 +33,9 @@
   },
   "devDependencies": {
     "coveralls": "2.11.3",
+    "eslint": "2.7.0",
+    "eslint-config-onelint": "1.0.2",
     "istanbul": "0.3.17",
-    "jshint": "2.8.0",
     "mocha": "2.4.5",
     "serve": "*",
     "sinon": "1.16.1",
