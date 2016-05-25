@@ -875,6 +875,17 @@ describe('unexpected-sinon', function () {
     });
 
     describe('to have calls satisfying', function () {
+        it('should complain if the args value is passed as an object with non-numerical properties', function () {
+            spy(123);
+            expect(function () {
+                expect(spy, 'to have calls satisfying', [ { args: { foo: 123 } } ]);
+            }, 'to throw',
+                'expected spy1 to have calls satisfying [ { args: { foo: 123 } } ]\n' +
+                '\n' +
+                'spy1( 123 ); at theFunction (theFileName:xx:yy) // unsupported value in spy call spec: { foo: 123 }'
+            );
+        });
+
         it('should render a swapped expected call sensibly', function () {
             var spy1 = sinon.spy().named('spy1');
             var spy2 = sinon.spy().named('spy2');
