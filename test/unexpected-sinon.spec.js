@@ -1030,6 +1030,41 @@ describe('unexpected-sinon', function () {
                     "); at theFunction (theFileName:xx:yy)"
                 );
             });
+
+            describe('when passed a sinon sandbox as the subject', function () {
+                it('should succeed', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(sandbox, 'to have calls satisfying', [
+                        { spy: spy1, args: [ 123 ] },
+                        { spy: spy2, args: [ 456 ] }
+                    ]);
+                });
+
+                it('should fail with a diff', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(function () {
+                        return expect(sandbox, 'to have calls satisfying', [
+                            { spy: spy1, args: [ 123 ] },
+                            { spy: spy2, args: [ 789 ] }
+                        ]);
+                    }, 'to error with',
+                        "expected sinon sandbox to have calls satisfying [ { spy: spy1, args: [ 123 ] }, { spy: spy2, args: [ 789 ] } ]\n" +
+                        "\n" +
+                        "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                        "spy2(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
         });
 
         describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
@@ -1149,6 +1184,43 @@ describe('unexpected-sinon', function () {
                     "); at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
                     "new spy1( -99, Infinity ); at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false"
                 );
+            });
+
+            describe('when passed a sinon sandbox as the subject', function () {
+                it('should succeed', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(sandbox, 'to have calls satisfying', function () {
+                        spy1(123);
+                        spy2(456);
+                    });
+                });
+
+                it('should fail with a diff', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(function () {
+                        return expect(sandbox, 'to have calls satisfying', function () {
+                            spy1(123);
+                            spy2(789);
+                        });
+                    }, 'to error with',
+                        "expected sinon sandbox to have calls satisfying\n" +
+                        "spy1( 123 );\n" +
+                        "spy2( 789 );\n" +
+                        "\n" +
+                        "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                        "spy2(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
             });
 
             it('should render a spy call missing at the end', function () {
