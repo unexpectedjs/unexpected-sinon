@@ -41,7 +41,7 @@
     "mocha-phantomjs-core": "2.0.1",
     "phantomjs-prebuilt": "2.1.7",
     "serve": "*",
-    "sinon": "git://github.com/papandreou/Sinon.js.git#fix/captureStackInPhantomJs",
+    "sinon": "1.17.5",
     "unexpected": "10.10.5",
     "unexpected-documentation-site-generator": "^4.0.0",
     "unexpected-markdown": "1.4.1"
