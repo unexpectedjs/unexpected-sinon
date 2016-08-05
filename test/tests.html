@@ -21,9 +21,7 @@
           var getStackFrames = call && call.getStackFrames;
           if (getStackFrames) {
               call.getStackFrames = function () {
-                  var stackFrames = getStackFrames.call(this);
-                  stackFrames[0] = 'at theFunction (theFileName:xx:yy)';
-                  return stackFrames;
+                  return ['at theFunction (theFileName:xx:yy)'];
               };
           }
           return call;
@@ -43,6 +41,7 @@
               };
               return result;
           };
+          sinon[name].create = orig.create;
       });
     </script>
     <script src="unexpected-sinon.spec.js"></script>

@@ -7,9 +7,7 @@ module.exports = function (sinon) {
         var getStackFrames = call && call.getStackFrames;
         if (getStackFrames) {
             call.getStackFrames = function () {
-                var stackFrames = getStackFrames.call(this);
-                stackFrames[0] = 'at theFunction (theFileName:xx:yy)';
-                return stackFrames;
+                return ['at theFunction (theFileName:xx:yy)'];
             };
         }
         return call;
@@ -29,5 +27,6 @@ module.exports = function (sinon) {
             };
             return result;
         };
+        sinon[name].create = orig.create;
     });
 };
