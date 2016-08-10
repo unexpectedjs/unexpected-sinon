@@ -872,6 +872,32 @@ describe('unexpected-sinon', function () {
                 );
             });
         });
+
+        describe('when passed a sinon sandbox as the subject', function () {
+            it('should succeed', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                var spy2 = sandbox.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect(sandbox, 'to have a call satisfying', { spy: spy1, args: [ 123 ] });
+            });
+
+            it('should fail with a diff', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                spy1(456);
+                return expect(function () {
+                    return expect(sandbox, 'to have a call satisfying', { spy: spy1, args: [ 123 ] });
+                }, 'to error with',
+                    "expected sinon sandbox to have a call satisfying { spy: spy1, args: [ 123 ] }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  456 // should equal 123\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
     });
 
     describe('to have calls satisfying', function () {
