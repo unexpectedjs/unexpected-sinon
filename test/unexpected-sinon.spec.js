@@ -1326,4 +1326,74 @@ describe('unexpected-sinon', function () {
             });
         });
     });
+
+    describe('spyCall type', function () {
+        describe('to satisfy', function () {
+            describe('with an object with only numerical properties', function () {
+                it('should succeed', function () {
+                    spy(123);
+                    spy(456);
+                    expect(spy.lastCall, 'to satisfy', {0: 456});
+                });
+
+                it('should fail with a diff', function () {
+                    spy(123);
+                    spy(456);
+                    expect(function () {
+                        expect(spy.lastCall, 'to satisfy', {0: 789});
+                    }, 'to throw',
+                        "expected spy1( 456 ); at theFunction (theFileName:xx:yy) to satisfy { 0: 789 }\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
+
+            describe('with an array', function () {
+                it('should succeed', function () {
+                    spy(123);
+                    spy(456);
+                    expect(spy.lastCall, 'to satisfy', [456]);
+                });
+
+                it('should fail with a diff', function () {
+                    spy(123);
+                    spy(456);
+                    expect(function () {
+                        expect(spy.lastCall, 'to satisfy', [789]);
+                    }, 'to throw',
+                        "expected spy1( 456 ); at theFunction (theFileName:xx:yy) to satisfy [ 789 ]\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
+
+            describe('with an object', function () {
+                it('should succeed', function () {
+                    spy(123);
+                    spy(456);
+                    expect(spy.lastCall, 'to satisfy', {args: [456]});
+                });
+
+                it('should fail with a diff', function () {
+                    spy(123);
+                    spy(456);
+                    expect(function () {
+                        expect(spy.lastCall, 'to satisfy', {args: [789]});
+                    }, 'to throw',
+                        "expected spy1( 456 ); at theFunction (theFileName:xx:yy) to satisfy { args: [ 789 ] }\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
+        });
+    });
 });
