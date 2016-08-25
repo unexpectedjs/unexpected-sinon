@@ -40,6 +40,7 @@
     "mocha": "2.4.5",
     "mocha-phantomjs-core": "2.0.1",
     "phantomjs-prebuilt": "2.1.7",
+    "rsvp": "3.0.18",
     "serve": "*",
     "sinon": "1.17.5",
     "unexpected": "10.16.0",
