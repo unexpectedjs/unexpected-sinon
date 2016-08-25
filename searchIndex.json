@@ -8,6 +8,10 @@
     "url": "/assertions/array/to-have-calls-satisfying/"
   },
   {
+    "label": "to satisfy (spyCall)",
+    "url": "/assertions/spyCall/to-satisfy/"
+  },
+  {
     "label": "threw (spy)",
     "url": "/assertions/spy/threw/"
   },
@@ -24,19 +28,15 @@
     "url": "/assertions/spy/was-called-on/"
   },
   {
-    "label": "was called with (spy)",
-    "url": "/assertions/spy/was-called-with/"
-  },
-  {
     "label": "was called times (spy)",
     "url": "/assertions/spy/was-called-times/"
   },
   {
-    "label": "was called (spy)",
-    "url": "/assertions/spy/was-called/"
+    "label": "was called with (spy)",
+    "url": "/assertions/spy/was-called-with/"
   },
   {
-    "label": "to satisfy (spyCall)",
-    "url": "/assertions/spyCall/to-satisfy/"
+    "label": "was called (spy)",
+    "url": "/assertions/spy/was-called/"
   }
 ]
