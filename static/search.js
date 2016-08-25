@@ -170,7 +170,7 @@ var getJSON = function (url, successHandler, errorHandler) {
     xhr.send();
 };
 
-getJSON(baseUrl + '/searchIndex.json', function (status, data) {
+getJSON((baseUrl || '.') + '/searchIndex.json', function (status, data) {
     if (data.length > 0) {
         setupSearch(data);
     }
