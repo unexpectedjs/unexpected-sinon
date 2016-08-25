@@ -42,71 +42,113 @@
 <a href="https://github.com/unexpectedjs/unexpected">Unexpected</a> assertion
 library with integration for the <a href="http://sinonjs.org/">Sinonjs</a>
 mocking library.</p>
+<p><a href="http://badge.fury.io/js/unexpected-sinon"><img src="https://badge.fury.io/js/unexpected-sinon.svg" alt="NPM version"></a>
+<a href="https://travis-ci.org/unexpectedjs/unexpected-sinon"><img src="https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/r/unexpectedjs/unexpected-sinon"><img src="https://coveralls.io/repos/unexpectedjs/unexpected-sinon/badge.svg" alt="Coverage Status"></a>
+<a href="https://david-dm.org/unexpectedjs/unexpected-sinon"><img src="https://david-dm.org/unexpectedjs/unexpected-sinon.svg" alt="Dependency Status"></a></p>
+<h2 id="usage">Usage</h2>
+<p>Here is an example an example stolen from
+<a href="https://twitter.com/garybernhardt">Gary Bernhardt</a>.</p>
 <div class="code lang-javascript">
-  <div><span style="color: #F92672">var</span>&nbsp;mySpy&nbsp;<span style="color: #F92672">=</span>&nbsp;sinon<span style="color: #999">.</span>spy<span style="color: #999">().</span>named<span style="color: #999">(</span><span style="color: #E6DB74">'mySpy'</span><span style="color: #999">);</span></div>
-  <div>mySpy<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">42</span><span style="color: #999">);</span></div>
-  <div>mySpy<span style="color: #999">({</span>&nbsp;foo<span style="color: #999">:</span>&nbsp;<span style="color: #E6DB74">'bar'</span>&nbsp;<span style="color: #999">},</span>&nbsp;<span style="color: #E6DB74">'baz'</span><span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'qux'</span><span style="color: #999">);</span></div>
-  <div>expect<span style="color: #999">(</span>mySpy<span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'was&nbsp;called&nbsp;twice'</span><span style="color: #999">);</span></div>
-  <div>expect<span style="color: #999">(</span>mySpy<span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'to&nbsp;have&nbsp;calls&nbsp;satisfying'</span><span style="color: #999">,</span>&nbsp;<span style="color: #F92672">function</span>&nbsp;<span style="color: #999">()</span>&nbsp;<span style="color: #999">{</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;mySpy<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">42</span><span style="color: #999">);</span></div>
-  <div>&nbsp;&nbsp;&nbsp;&nbsp;mySpy<span style="color: #999">({</span>&nbsp;foo<span style="color: #999">:</span>&nbsp;<span style="color: #E6DB74">'baz'</span>&nbsp;<span style="color: #999">},</span>&nbsp;expect<span style="color: #999">.</span>it<span style="color: #999">(</span><span style="color: #E6DB74">'to&nbsp;be&nbsp;a&nbsp;string'</span><span style="color: #999">));</span></div>
+  <div><span style="color: #F92672">function</span>&nbsp;SucksRocks<span style="color: #999">(</span>searchEngine<span style="color: #999">)</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;<span style="color: #F92672">this</span><span style="color: #999">.</span>forTerm&nbsp;<span style="color: #F92672">=</span>&nbsp;<span style="color: #F92672">function</span>&nbsp;<span style="color: #999">(</span>term<span style="color: #999">)</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F92672">return</span>&nbsp;Promise<span style="color: #999">.</span>all<span style="color: #999">([</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">(</span>term&nbsp;<span style="color: #F92672">+</span>&nbsp;<span style="color: #E6DB74">&quot;&nbsp;rocks&quot;</span><span style="color: #999">),</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">(</span>term&nbsp;<span style="color: #F92672">+</span>&nbsp;<span style="color: #E6DB74">&quot;&nbsp;sucks&quot;</span><span style="color: #999">)</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999">]).</span>then<span style="color: #999">(</span><span style="color: #F92672">function</span>&nbsp;<span style="color: #999">(</span>results<span style="color: #999">)</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F92672">var</span>&nbsp;positive&nbsp;<span style="color: #F92672">=</span>&nbsp;results<span style="color: #999">[</span><span style="color: #66D9EF; font-weight: bold">0</span><span style="color: #999">];</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F92672">var</span>&nbsp;negative&nbsp;<span style="color: #F92672">=</span>&nbsp;results<span style="color: #999">[</span><span style="color: #66D9EF; font-weight: bold">1</span><span style="color: #999">];</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F92672">return</span>&nbsp;positive&nbsp;<span style="color: #F92672">&gt;</span>&nbsp;negative&nbsp;<span style="color: #F92672">?</span>&nbsp;<span style="color: #E6DB74">'Rocks!'</span>&nbsp;<span style="color: #999">:</span>&nbsp;<span style="color: #E6DB74">'Sucks!'</span><span style="color: #999">;</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999">});</span></div>
+  <div>&nbsp;&nbsp;<span style="color: #999">};</span></div>
+  <div><span style="color: #999">}</span></div>
+</div><div class="code lang-javascript">
+  <div><span style="color: #F92672">var</span>&nbsp;searchEngine&nbsp;<span style="color: #F92672">=</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;countResults<span style="color: #999">:</span>&nbsp;sinon<span style="color: #999">.</span>stub<span style="color: #999">()</span></div>
+  <div><span style="color: #999">};</span></div>
+  <div>&nbsp;</div>
+  <div>searchEngine<span style="color: #999">.</span>countResults</div>
+  <div>&nbsp;&nbsp;<span style="color: #999">.</span>onFirstCall<span style="color: #999">().</span>returns<span style="color: #999">(</span>Promise<span style="color: #999">.</span>resolve<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">6920000</span><span style="color: #999">))</span></div>
+  <div>&nbsp;&nbsp;<span style="color: #999">.</span>onSecondCall<span style="color: #999">().</span>returns<span style="color: #999">(</span>Promise<span style="color: #999">.</span>resolve<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">3400000</span><span style="color: #999">));</span></div>
+  <div>&nbsp;</div>
+  <div><span style="color: #F92672">var</span>&nbsp;result&nbsp;<span style="color: #F92672">=</span>&nbsp;<span style="color: #F92672">new</span>&nbsp;SucksRocks<span style="color: #999">(</span>searchEngine<span style="color: #999">).</span>forTerm<span style="color: #999">(</span><span style="color: #E6DB74">'Open&nbsp;source'</span><span style="color: #999">);</span></div>
+  <div>&nbsp;</div>
+  <div>expect<span style="color: #999">(</span>searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'to&nbsp;have&nbsp;calls&nbsp;satisfying'</span><span style="color: #999">,</span>&nbsp;<span style="color: #F92672">function</span>&nbsp;<span style="color: #999">()</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">(</span><span style="color: #E6DB74">'Open&nbsp;source&nbsp;rocks'</span><span style="color: #999">);</span></div>
+  <div>&nbsp;&nbsp;searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">(</span><span style="color: #E6DB74">'Open&nbsp;source&nbsp;sucks'</span><span style="color: #999">);</span></div>
+  <div><span style="color: #999">});</span></div>
+  <div>&nbsp;</div>
+  <div><span style="color: #F92672">return</span>&nbsp;expect<span style="color: #999">(</span>result<span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'when&nbsp;fulfilled'</span><span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'to&nbsp;equal'</span><span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'Rocks!'</span><span style="color: #999">);</span></div>
+</div><p>Amazing output when a failure happens!</p>
+<div class="code lang-javascript">
+  <div><span style="color: #F92672">var</span>&nbsp;searchEngine&nbsp;<span style="color: #F92672">=</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;countResults<span style="color: #999">:</span>&nbsp;sinon<span style="color: #999">.</span>stub<span style="color: #999">()</span></div>
+  <div><span style="color: #999">};</span></div>
+  <div>&nbsp;</div>
+  <div>searchEngine<span style="color: #999">.</span>countResults</div>
+  <div>&nbsp;&nbsp;<span style="color: #999">.</span>onFirstCall<span style="color: #999">().</span>returns<span style="color: #999">(</span>Promise<span style="color: #999">.</span>resolve<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">6920000</span><span style="color: #999">))</span></div>
+  <div>&nbsp;&nbsp;<span style="color: #999">.</span>onSecondCall<span style="color: #999">().</span>returns<span style="color: #999">(</span>Promise<span style="color: #999">.</span>resolve<span style="color: #999">(</span><span style="color: #66D9EF; font-weight: bold">3400000</span><span style="color: #999">));</span></div>
+  <div>&nbsp;</div>
+  <div><span style="color: #F92672">var</span>&nbsp;score&nbsp;<span style="color: #F92672">=</span>&nbsp;<span style="color: #F92672">new</span>&nbsp;SucksRocks<span style="color: #999">(</span>searchEngine<span style="color: #999">).</span>forTerm<span style="color: #999">(</span><span style="color: #E6DB74">'Open&nbsp;source'</span><span style="color: #999">);</span></div>
+  <div>&nbsp;</div>
+  <div>expect<span style="color: #999">(</span>searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">,</span>&nbsp;<span style="color: #E6DB74">'to&nbsp;have&nbsp;calls&nbsp;satisfying'</span><span style="color: #999">,</span>&nbsp;<span style="color: #F92672">function</span>&nbsp;<span style="color: #999">()</span>&nbsp;<span style="color: #999">{</span></div>
+  <div>&nbsp;&nbsp;searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">(</span><span style="color: #E6DB74">'Open&nbsp;source&nbsp;rocks!'</span><span style="color: #999">);</span></div>
+  <div>&nbsp;&nbsp;searchEngine<span style="color: #999">.</span>countResults<span style="color: #999">(</span><span style="color: #E6DB74">'Open&nbsp;source&nbsp;sucks!'</span><span style="color: #999">);</span></div>
   <div><span style="color: #999">});</span></div>
 </div><div class="output">
-  <div><span style="color: #F92672; font-weight: bold">expected</span>&nbsp;<span style="color: #319916">mySpy</span>&nbsp;<span style="color: #F92672; font-weight: bold">to&nbsp;have&nbsp;calls&nbsp;satisfying</span></div>
+  <div><span style="color: #F92672; font-weight: bold">expected</span>&nbsp;<span style="color: #4311C2">stub</span>&nbsp;<span style="color: #F92672; font-weight: bold">to&nbsp;have&nbsp;calls&nbsp;satisfying</span></div>
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #319916">mySpy</span>(&nbsp;<span style="color: #66D9EF">42</span>&nbsp;);</div>
-  <div><span style="color: #319916">mySpy</span>(&nbsp;{&nbsp;<span style="color: #CCC">foo</span>:&nbsp;<span style="color: #E6DB74">'baz'</span>&nbsp;},&nbsp;expect.it(<span style="color: #E6DB74">'to&nbsp;be&nbsp;a&nbsp;string'</span>)&nbsp;);</div>
+  <div><span style="color: #4311C2">stub</span>(&nbsp;<span style="color: #E6DB74">'Open&nbsp;source&nbsp;rocks!'</span>&nbsp;);</div>
+  <div><span style="color: #4311C2">stub</span>(&nbsp;<span style="color: #E6DB74">'Open&nbsp;source&nbsp;sucks!'</span>&nbsp;);</div>
 </div></div>
   <div>&nbsp;</div>
   <div><div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #319916">mySpy</span>(&nbsp;<span style="color: #66D9EF">42</span>&nbsp;);&nbsp;<span style="color: #888">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
-</div></div>
-</div></div>
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #319916">mySpy</span>(</div>
+  <div><span style="color: #4311C2">stub</span>(</div>
   <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><div style="display: inline-block; vertical-align: top">
-  <div>{</div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #CCC">foo</span>:&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #E6DB74">'bar'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #E6DB74">'Open&nbsp;source&nbsp;rocks'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: #F92672; font-weight: bold">//</span></div>
   <div><span style="color: #F92672; font-weight: bold">//</span></div>
   <div><span style="color: #F92672; font-weight: bold">//</span></div>
   <div><span style="color: #F92672; font-weight: bold">//</span></div>
 </div>&nbsp;<div style="display: inline-block; vertical-align: top">
   <div><span style="color: #F92672; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #E6DB74">'baz'</span></div>
+  <div><span style="color: #E6DB74">'Open&nbsp;source&nbsp;rocks!'</span></div>
 </div></div>
   <div>&nbsp;</div>
-  <div><span style="background-color: #F92672; color: black">bar</span></div>
-  <div><span style="background-color: #A6E22E; color: black">baz</span></div>
+  <div><span style="color: #F92672">Open&nbsp;source&nbsp;rocks</span></div>
+  <div><span style="color: #A6E22E">Open&nbsp;source&nbsp;rocks</span><span style="background-color: #A6E22E; color: black">!</span></div>
 </div></div>
-</div></div>
-</div></div>
-  <div>},</div>
-</div></div>
-</div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #E6DB74">'baz'</span>,</div>
-</div></div>
-</div></div>
-  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
-  <div><div style="display: inline-block; vertical-align: top">
-  <div><span style="color: #E6DB74">'qux'</span>&nbsp;<span style="color: #F92672; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div>
 </div></div>
 </div></div>
   <div>);&nbsp;<span style="color: #888">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
 </div></div>
 </div></div>
-</div><p><a href="http://badge.fury.io/js/unexpected-sinon"><img src="https://badge.fury.io/js/unexpected-sinon.svg" alt="NPM version"></a>
-<a href="https://travis-ci.org/unexpectedjs/unexpected-sinon"><img src="https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=master" alt="Build Status"></a>
-<a href="https://coveralls.io/r/unexpectedjs/unexpected-sinon"><img src="https://coveralls.io/repos/unexpectedjs/unexpected-sinon/badge.svg" alt="Coverage Status"></a>
-<a href="https://david-dm.org/unexpectedjs/unexpected-sinon"><img src="https://david-dm.org/unexpectedjs/unexpected-sinon.svg" alt="Dependency Status"></a></p>
-<h2 id="how-to-use">How to use</h2>
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #4311C2">stub</span>(</div>
+  <div>&nbsp;&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #E6DB74">'Open&nbsp;source&nbsp;sucks'</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
+  <div><span style="color: #F92672; font-weight: bold">//</span></div>
+</div>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #F92672; font-weight: bold">should&nbsp;equal</span>&nbsp;<div style="display: inline-block; vertical-align: top">
+  <div><span style="color: #E6DB74">'Open&nbsp;source&nbsp;sucks!'</span></div>
+</div></div>
+  <div>&nbsp;</div>
+  <div><span style="color: #F92672">Open&nbsp;source&nbsp;sucks</span></div>
+  <div><span style="color: #A6E22E">Open&nbsp;source&nbsp;sucks</span><span style="background-color: #A6E22E; color: black">!</span></div>
+</div></div>
+</div></div>
+</div></div>
+  <div>);&nbsp;<span style="color: #888">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div>
+</div></div>
+</div></div>
+</div><h2 id="setup">Setup</h2>
 <h3 id="node">Node</h3>
 <p>Install it with NPM or add it to your <code>package.json</code>:</p>
 <div class="code lang-">
@@ -165,7 +207,7 @@ now it matches on the error message like
 <li>Improved the output for failing assertions a lot.</li>
 </ul>
 <h2 id="mit-license">MIT License</h2>
-<p>Copyright (c) 2013 Sune Simonsen <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#115;&#x75;&#x6e;&#x65;&#x40;&#x77;&#101;&#45;&#107;&#110;&#111;&#119;&#104;&#x6f;&#x77;&#x2e;&#x64;&#x6b;">&#115;&#x75;&#x6e;&#x65;&#x40;&#x77;&#101;&#45;&#107;&#110;&#111;&#119;&#104;&#x6f;&#x77;&#x2e;&#x64;&#x6b;</a></p>
+<p>Copyright (c) 2013 Sune Simonsen <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x73;&#117;&#110;&#x65;&#x40;&#119;&#x65;&#45;&#107;&#110;&#111;&#119;&#104;&#111;&#x77;&#46;&#100;&#x6b;">&#x73;&#117;&#110;&#x65;&#x40;&#119;&#x65;&#45;&#107;&#110;&#111;&#119;&#104;&#111;&#x77;&#46;&#100;&#x6b;</a></p>
 <p>Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 &#39;Software&#39;), to deal in the Software without restriction, including
