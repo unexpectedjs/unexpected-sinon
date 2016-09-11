@@ -259,9 +259,10 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
-                "agent005(); at theFunction (theFileName:xx:yy)\n" +
-                "agent007(); at theFunction (theFileName:xx:yy) // should be agent006\n" +
-                "agent006(); at theFunction (theFileName:xx:yy) // should be agent007"
+                "    agent005(); at theFunction (theFileName:xx:yy)\n" +
+                "┌─▷\n" +
+                "│   agent007(); at theFunction (theFileName:xx:yy)\n" +
+                "└── agent006(); at theFunction (theFileName:xx:yy) // should be moved"
             );
         });
 
@@ -959,9 +960,10 @@ describe('unexpected-sinon', function () {
                 "spy3( 789 );\n" +
                 "spy2( 456 );\n" +
                 "\n" +
-                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy3( 789 );\n" +
-                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be spy2( 456 );"
+                "    spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "┌─▷\n" +
+                "│   spy2( 456 ); at theFunction (theFileName:xx:yy)\n" +
+                "└── spy3( 789 ); at theFunction (theFileName:xx:yy) // should be moved"
             );
         });
 
@@ -984,9 +986,10 @@ describe('unexpected-sinon', function () {
                 "spy2( 456 );\n" +
                 "spy3( 789 );\n" +
                 "\n" +
-                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
-                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be spy2( 456 );\n" +
-                "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy3( 789 );"
+                "    spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "┌─▷\n" +
+                "│   spy3( 789 ); at theFunction (theFileName:xx:yy)\n" +
+                "└── spy2( 456 ); at theFunction (theFileName:xx:yy) // should be moved"
             );
         });
 
@@ -1043,20 +1046,17 @@ describe('unexpected-sinon', function () {
                 "  spy1\n" +
                 "]\n" +
                 "\n" +
-                "spy1( 'foo', 'bar' ); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 'quux' ); at theFunction (theFileName:xx:yy) // returned: expected 'blah' to equal 'yadda'\n" +
-                "                                                   //\n" +
-                "                                                   //           -blah\n" +
-                "                                                   //           +yadda\n" +
-                "die(); at theFunction (theFileName:xx:yy) // threw: expected Error('say what') to satisfy /cqwecqw/\n" +
-                "spy1(\n" +
-                "  'baz' // should equal 'yadda'\n" +
-                "        //\n" +
-                "        // -baz\n" +
-                "        // +yadda\n" +
-                "); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 'yadda' ); at theFunction (theFileName:xx:yy) // should be spy1\n" +
-                "spy1( 'baz' ); at theFunction (theFileName:xx:yy)"
+                "    spy1( 'foo', 'bar' ); at theFunction (theFileName:xx:yy)\n" +
+                "    spy2( 'quux' ); at theFunction (theFileName:xx:yy) // returned: expected 'blah' to equal 'yadda'\n" +
+                "                                                       //\n" +
+                "                                                       //           -blah\n" +
+                "                                                       //           +yadda\n" +
+                "    // missing { spy: die, threw: /cqwecqw/ }\n" +
+                "┌─▷\n" +
+                "│   die(); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                "│   spy1( 'baz' ); at theFunction (theFileName:xx:yy)\n" +
+                "└── spy2( 'yadda' ); at theFunction (theFileName:xx:yy) // should be moved\n" +
+                "    spy1( 'baz' ); at theFunction (theFileName:xx:yy)"
             );
         });
 
@@ -1446,8 +1446,9 @@ describe('unexpected-sinon', function () {
                 }, 'to throw',
                     "expected spy1 to have calls satisfying [ { calledWithNew: false }, { calledWithNew: true } ]\n" +
                     "\n" +
-                    "new spy1(); at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
-                    "spy1(); at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true"
+                    "┌─▷\n" +
+                    "│   new spy1(); at theFunction (theFileName:xx:yy)\n" +
+                    "└── spy1(); at theFunction (theFileName:xx:yy) // should be moved"
                 );
             });
         });

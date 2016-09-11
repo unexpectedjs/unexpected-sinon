@@ -43,7 +43,7 @@
     "rsvp": "3.0.18",
     "serve": "*",
     "sinon": "1.17.5",
-    "unexpected": "10.16.0",
+    "unexpected": "10.18.1",
     "unexpected-documentation-site-generator": "^4.2.3",
     "unexpected-markdown": "1.4.1"
   }

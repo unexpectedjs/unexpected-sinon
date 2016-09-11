@@ -24,9 +24,10 @@ expect([obj.bar, obj.foo, obj.baz], 'given call order');
 ```output
 expected [ bar, foo, baz ] given call order
 
-foo(); at theFunction (theFileName:xx:yy) // should be bar
-bar(); at theFunction (theFileName:xx:yy) // should be foo
-baz(); at theFunction (theFileName:xx:yy)
+┌─▷
+│   foo(); at theFunction (theFileName:xx:yy)
+└── bar(); at theFunction (theFileName:xx:yy) // should be moved
+    baz(); at theFunction (theFileName:xx:yy)
 ```
 
 NOTE: This assertion has slightly different semantics from Sinon.js' own
