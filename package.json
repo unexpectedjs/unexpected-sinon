@@ -1,6 +1,6 @@
 {
   "name": "unexpected-sinon",
-  "version": "10.2.1",
+  "version": "10.5.0",
   "author": "Sune Sloth Simonsen <sune@we-knowhow.dk>",
   "keywords": [
     "assertion",
@@ -19,7 +19,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "mocha --compilers md:unexpected-markdown test/*.js `find documentation -name '*.md'` && npm run lint",
-    "travis": "npm test && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run generate-site",
+    "phantom": "phantomjs ./node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/tests.html spec \"`node -pe 'JSON.stringify({useColors:true,grep:process.env.grep})'`\"",
+    "travis": "npm test && npm run phantom && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run generate-site",
     "test-browser": "serve .",
     "coverage": "NODE_ENV=development istanbul cover _mocha -- --reporter dot && echo google-chrome coverage/lcov-report/index.html",
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
@@ -37,10 +38,13 @@
     "eslint-config-onelint": "1.0.2",
     "istanbul": "0.3.17",
     "mocha": "2.4.5",
+    "mocha-phantomjs-core": "2.0.1",
+    "phantomjs-prebuilt": "2.1.7",
+    "rsvp": "3.0.18",
     "serve": "*",
-    "sinon": "1.16.1",
-    "unexpected": "10.10.5",
-    "unexpected-documentation-site-generator": "^4.0.0",
+    "sinon": "1.17.5",
+    "unexpected": "10.18.1",
+    "unexpected-documentation-site-generator": "^4.2.3",
     "unexpected-markdown": "1.4.1"
   }
 }

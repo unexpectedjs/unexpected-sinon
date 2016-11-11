@@ -259,9 +259,10 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
-                "agent005(); at theFunction (theFileName:xx:yy)\n" +
-                "agent007(); at theFunction (theFileName:xx:yy) // should be agent006\n" +
-                "agent006(); at theFunction (theFileName:xx:yy) // should be agent007"
+                "    agent005(); at theFunction (theFileName:xx:yy)\n" +
+                "┌─▷\n" +
+                "│   agent007(); at theFunction (theFileName:xx:yy)\n" +
+                "└── agent006(); at theFunction (theFileName:xx:yy) // should be moved"
             );
         });
 
@@ -872,6 +873,60 @@ describe('unexpected-sinon', function () {
                 );
             });
         });
+
+        describe('when passed a sinon sandbox as the subject', function () {
+            it('should succeed', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                var spy2 = sandbox.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect(sandbox, 'to have a call satisfying', { spy: spy1, args: [ 123 ] });
+            });
+
+            it('should fail with a diff', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                spy1(456);
+                return expect(function () {
+                    return expect(sandbox, 'to have a call satisfying', { spy: spy1, args: [ 123 ] });
+                }, 'to error with',
+                    "expected sinon sandbox to have a call satisfying { spy: spy1, args: [ 123 ] }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  456 // should equal 123\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array of spies as the subject', function () {
+            it('should succeed', function () {
+                var spy1 = sinon.spy().named('spy1');
+                var spy2 = sinon.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect([spy1, spy2], 'to have a call satisfying', { spy: spy1, args: [ 123 ] });
+            });
+
+            it('should fail with a diff', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                var spy2 = sandbox.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect(function () {
+                    return expect([spy1, spy2], 'to have a call satisfying', { spy: spy1, args: [ 789 ] });
+                }, 'to error with',
+                    "expected [ spy1, spy2 ] to have a call satisfying { spy: spy1, args: [ 789 ] }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123 // should equal 789\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy1( 789 );"
+                );
+            });
+        });
     });
 
     describe('to have calls satisfying', function () {
@@ -905,9 +960,10 @@ describe('unexpected-sinon', function () {
                 "spy3( 789 );\n" +
                 "spy2( 456 );\n" +
                 "\n" +
-                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy3( 789 );\n" +
-                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be spy2( 456 );"
+                "    spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "┌─▷\n" +
+                "│   spy2( 456 ); at theFunction (theFileName:xx:yy)\n" +
+                "└── spy3( 789 ); at theFunction (theFileName:xx:yy) // should be moved"
             );
         });
 
@@ -930,9 +986,10 @@ describe('unexpected-sinon', function () {
                 "spy2( 456 );\n" +
                 "spy3( 789 );\n" +
                 "\n" +
-                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
-                "spy3( 789 ); at theFunction (theFileName:xx:yy) // should be spy2( 456 );\n" +
-                "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy3( 789 );"
+                "    spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "┌─▷\n" +
+                "│   spy3( 789 ); at theFunction (theFileName:xx:yy)\n" +
+                "└── spy2( 456 ); at theFunction (theFileName:xx:yy) // should be moved"
             );
         });
 
@@ -989,20 +1046,17 @@ describe('unexpected-sinon', function () {
                 "  spy1\n" +
                 "]\n" +
                 "\n" +
-                "spy1( 'foo', 'bar' ); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 'quux' ); at theFunction (theFileName:xx:yy) // returned: expected 'blah' to equal 'yadda'\n" +
-                "                                                   //\n" +
-                "                                                   //           -blah\n" +
-                "                                                   //           +yadda\n" +
-                "die(); at theFunction (theFileName:xx:yy) // threw: expected Error('say what') to satisfy /cqwecqw/\n" +
-                "spy1(\n" +
-                "  'baz' // should equal 'yadda'\n" +
-                "        //\n" +
-                "        // -baz\n" +
-                "        // +yadda\n" +
-                "); at theFunction (theFileName:xx:yy)\n" +
-                "spy2( 'yadda' ); at theFunction (theFileName:xx:yy) // should be spy1\n" +
-                "spy1( 'baz' ); at theFunction (theFileName:xx:yy)"
+                "    spy1( 'foo', 'bar' ); at theFunction (theFileName:xx:yy)\n" +
+                "    spy2( 'quux' ); at theFunction (theFileName:xx:yy) // returned: expected 'blah' to equal 'yadda'\n" +
+                "                                                       //\n" +
+                "                                                       //           -blah\n" +
+                "                                                       //           +yadda\n" +
+                "    // missing { spy: die, threw: /cqwecqw/ }\n" +
+                "┌─▷\n" +
+                "│   die(); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                "│   spy1( 'baz' ); at theFunction (theFileName:xx:yy)\n" +
+                "└── spy2( 'yadda' ); at theFunction (theFileName:xx:yy) // should be moved\n" +
+                "    spy1( 'baz' ); at theFunction (theFileName:xx:yy)"
             );
         });
 
@@ -1029,6 +1083,41 @@ describe('unexpected-sinon', function () {
                     "  }\n" +
                     "); at theFunction (theFileName:xx:yy)"
                 );
+            });
+
+            describe('when passed a sinon sandbox as the subject', function () {
+                it('should succeed', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(sandbox, 'to have calls satisfying', [
+                        { spy: spy1, args: [ 123 ] },
+                        { spy: spy2, args: [ 456 ] }
+                    ]);
+                });
+
+                it('should fail with a diff', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(function () {
+                        return expect(sandbox, 'to have calls satisfying', [
+                            { spy: spy1, args: [ 123 ] },
+                            { spy: spy2, args: [ 789 ] }
+                        ]);
+                    }, 'to error with',
+                        "expected sinon sandbox to have calls satisfying [ { spy: spy1, args: [ 123 ] }, { spy: spy2, args: [ 789 ] } ]\n" +
+                        "\n" +
+                        "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                        "spy2(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
             });
         });
 
@@ -1149,6 +1238,43 @@ describe('unexpected-sinon', function () {
                     "); at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true\n" +
                     "new spy1( -99, Infinity ); at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false"
                 );
+            });
+
+            describe('when passed a sinon sandbox as the subject', function () {
+                it('should succeed', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(sandbox, 'to have calls satisfying', function () {
+                        spy1(123);
+                        spy2(456);
+                    });
+                });
+
+                it('should fail with a diff', function () {
+                    var sandbox = sinon.sandbox.create();
+                    var spy1 = sandbox.spy().named('spy1');
+                    var spy2 = sandbox.spy().named('spy2');
+                    spy1(123);
+                    spy2(456);
+                    return expect(function () {
+                        return expect(sandbox, 'to have calls satisfying', function () {
+                            spy1(123);
+                            spy2(789);
+                        });
+                    }, 'to error with',
+                        "expected sinon sandbox to have calls satisfying\n" +
+                        "spy1( 123 );\n" +
+                        "spy2( 789 );\n" +
+                        "\n" +
+                        "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                        "spy2(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
             });
 
             it('should render a spy call missing at the end', function () {
@@ -1320,9 +1446,80 @@ describe('unexpected-sinon', function () {
                 }, 'to throw',
                     "expected spy1 to have calls satisfying [ { calledWithNew: false }, { calledWithNew: true } ]\n" +
                     "\n" +
-                    "new spy1(); at theFunction (theFileName:xx:yy) // calledWithNew: expected true to equal false\n" +
-                    "spy1(); at theFunction (theFileName:xx:yy) // calledWithNew: expected false to equal true"
+                    "┌─▷\n" +
+                    "│   new spy1(); at theFunction (theFileName:xx:yy)\n" +
+                    "└── spy1(); at theFunction (theFileName:xx:yy) // should be moved"
                 );
+            });
+        });
+    });
+
+    describe('spyCall type', function () {
+        describe('to satisfy', function () {
+            describe('with an object with only numerical properties', function () {
+                it('should succeed', function () {
+                    spy(123);
+                    spy(456);
+                    expect(spy.lastCall, 'to satisfy', {0: 456});
+                });
+
+                it('should fail with a diff', function () {
+                    spy(123);
+                    spy(456);
+                    expect(function () {
+                        expect(spy.lastCall, 'to satisfy', {0: 789});
+                    }, 'to throw',
+                        "expected spy1( 456 ); at theFunction (theFileName:xx:yy) to satisfy { 0: 789 }\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
+
+            describe('with an array', function () {
+                it('should succeed', function () {
+                    spy(123);
+                    spy(456);
+                    expect(spy.lastCall, 'to satisfy', [456]);
+                });
+
+                it('should fail with a diff', function () {
+                    spy(123);
+                    spy(456);
+                    expect(function () {
+                        expect(spy.lastCall, 'to satisfy', [789]);
+                    }, 'to throw',
+                        "expected spy1( 456 ); at theFunction (theFileName:xx:yy) to satisfy [ 789 ]\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
+
+            describe('with an object', function () {
+                it('should succeed', function () {
+                    spy(123);
+                    spy(456);
+                    expect(spy.lastCall, 'to satisfy', {args: [456]});
+                });
+
+                it('should fail with a diff', function () {
+                    spy(123);
+                    spy(456);
+                    expect(function () {
+                        expect(spy.lastCall, 'to satisfy', {args: [789]});
+                    }, 'to throw',
+                        "expected spy1( 456 ); at theFunction (theFileName:xx:yy) to satisfy { args: [ 789 ] }\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  456 // should equal 789\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
             });
         });
     });

@@ -14,41 +14,89 @@ This module extends the
 library with integration for the [Sinonjs](http://sinonjs.org/)
 mocking library.
 
-```js
-var mySpy = sinon.spy().named('mySpy');
-mySpy(42);
-mySpy({ foo: 'bar' }, 'baz', 'qux');
-expect(mySpy, 'was called twice');
-expect(mySpy, 'to have calls satisfying', function () {
-    mySpy(42);
-    mySpy({ foo: 'baz' }, expect.it('to be a string'));
-});
-```
-
-```output
-expected mySpy to have calls satisfying
-mySpy( 42 );
-mySpy( { foo: 'baz' }, expect.it('to be a string') );
-
-mySpy( 42 ); at theFunction (theFileName:xx:yy)
-mySpy(
-  {
-    foo: 'bar' // should equal 'baz'
-               //
-               // -bar
-               // +baz
-  },
-  'baz',
-  'qux' // should be removed
-); at theFunction (theFileName:xx:yy)
-```
-
 [![NPM version](https://badge.fury.io/js/unexpected-sinon.svg)](http://badge.fury.io/js/unexpected-sinon)
 [![Build Status](https://travis-ci.org/unexpectedjs/unexpected-sinon.svg?branch=master)](https://travis-ci.org/unexpectedjs/unexpected-sinon)
 [![Coverage Status](https://coveralls.io/repos/unexpectedjs/unexpected-sinon/badge.svg)](https://coveralls.io/r/unexpectedjs/unexpected-sinon)
 [![Dependency Status](https://david-dm.org/unexpectedjs/unexpected-sinon.svg)](https://david-dm.org/unexpectedjs/unexpected-sinon)
 
-## How to use
+## Usage
+
+Here is an example an example stolen from
+[Gary Bernhardt](https://twitter.com/garybernhardt).
+
+```js
+function SucksRocks(searchEngine) {
+  this.forTerm = function (term) {
+    return Promise.all([
+      searchEngine.countResults(term + " rocks"),
+      searchEngine.countResults(term + " sucks")
+    ]).then(function (results) {
+      var positive = results[0];
+      var negative = results[1];
+      return positive > negative ? 'Rocks!' : 'Sucks!';
+    });
+  };
+}
+```
+
+```js#async:true
+var searchEngine = {
+  countResults: sinon.stub()
+};
+
+searchEngine.countResults
+  .onFirstCall().returns(Promise.resolve(6920000))
+  .onSecondCall().returns(Promise.resolve(3400000));
+
+var result = new SucksRocks(searchEngine).forTerm('Open source');
+
+expect(searchEngine.countResults, 'to have calls satisfying', function () {
+  searchEngine.countResults('Open source rocks');
+  searchEngine.countResults('Open source sucks');
+});
+
+return expect(result, 'when fulfilled', 'to equal', 'Rocks!');
+```
+
+Amazing output when a failure happens!
+
+```js
+var searchEngine = {
+  countResults: sinon.stub()
+};
+
+searchEngine.countResults
+  .onFirstCall().returns(Promise.resolve(6920000))
+  .onSecondCall().returns(Promise.resolve(3400000));
+
+var score = new SucksRocks(searchEngine).forTerm('Open source');
+
+expect(searchEngine.countResults, 'to have calls satisfying', function () {
+  searchEngine.countResults('Open source rocks!');
+  searchEngine.countResults('Open source sucks!');
+});
+```
+
+```output
+expected stub to have calls satisfying
+stub( 'Open source rocks!' );
+stub( 'Open source sucks!' );
+
+stub(
+  'Open source rocks' // should equal 'Open source rocks!'
+                      //
+                      // -Open source rocks
+                      // +Open source rocks!
+); at theFunction (theFileName:xx:yy)
+stub(
+  'Open source sucks' // should equal 'Open source sucks!'
+                      //
+                      // -Open source sucks
+                      // +Open source sucks!
+); at theFunction (theFileName:xx:yy)
+```
+
+## Setup
 
 ### Node
 
