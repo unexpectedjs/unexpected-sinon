@@ -1525,25 +1525,27 @@ describe('unexpected-sinon', function () {
     });
 
     // Regression test for an issue reported by Gert Sønderby in the Unexpected gitter channel:
-    it('should avoid retrieving a property of undefined in the similar function', function () {
-        spy(123);
-        spy(function () {
-            return {then: function (fn) { setImmediate(fn); }};
-        });
+    if (typeof navigator === 'undefined' || !/phantom/i.test(navigator.userAgent)) {
+        it('should avoid retrieving a property of undefined in the similar function', function () {
+            spy(123);
+            spy(function () {
+                return {then: function (fn) { setImmediate(fn); }};
+            });
 
-        return expect(function () {
-            return expect(spy, 'to have calls satisfying', [
-                { args: [ expect.it('when called with', [], 'to be fulfilled') ] }
-            ]);
-        }, 'to error',
-            "expected spy1 to have calls satisfying [ { args: [ expect.it('when called with', ..., 'to be fulfilled') ] } ]\n" +
-            "\n" +
-            "spy1( 123 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
-            "spy1(\n" +
-            "  function () {\n" +
-            "    return {then: function (fn) { setImmediate(fn); }};\n" +
-            "  }\n" +
-            "); at theFunction (theFileName:xx:yy)"
-        );
-    });
+            return expect(function () {
+                return expect(spy, 'to have calls satisfying', [
+                    { args: [ expect.it('when called with', [], 'to be fulfilled') ] }
+                ]);
+            }, 'to error',
+                "expected spy1 to have calls satisfying [ { args: [ expect.it('when called with', ..., 'to be fulfilled') ] } ]\n" +
+                "\n" +
+                "spy1( 123 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                "spy1(\n" +
+                "  function () {\n" +
+                "    return {then: function (fn) { setImmediate(fn); }};\n" +
+                "  }\n" +
+                "); at theFunction (theFileName:xx:yy)"
+            );
+        });
+    }
 });
