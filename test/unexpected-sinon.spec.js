@@ -471,6 +471,194 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('to have no calls satisfying', function () {
+        it('passes if the spy was never called with the provided arguments', function () {
+            spy('foo', 'true');
+            expect(spy, 'to have no calls satisfying', ['bar', expect.it('to be truthy')]);
+        });
+
+        it('fails if the spy was called with the provided arguments', function () {
+            expect(function () {
+                spy('bar', 'true');
+                expect(spy, 'to have no calls satisfying', ['bar', expect.it('to be truthy')]);
+            }, 'to throw exception',
+                "expected spy1 to have no calls satisfying [ 'bar', expect.it('to be truthy') ]\n" +
+                "\n" +
+                "spy1( 'bar', 'true' ); at theFunction (theFileName:xx:yy) // should be removed"
+            );
+        });
+
+        it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
+            expect(function () {
+                spy('foo');
+                spy('bar', {});
+                expect(spy, 'to have no calls satisfying', { 0: 'bar' });
+            }, 'to throw exception',
+                "expected spy1 to have no calls satisfying { 0: 'bar' }\n" +
+                "\n" +
+                "spy1( 'foo' ); at theFunction (theFileName:xx:yy)\n" +
+                "spy1( 'bar', {} ); at theFunction (theFileName:xx:yy) // should be removed"
+            );
+        });
+
+        describe('when passed a spec object', function () {
+            it('should succeed when no spy call satisfies the spec', function () {
+                spy(123, 456);
+                expect(spy, 'to have no calls satisfying', {
+                    args: [ 789 ]
+                });
+            });
+
+            it('should fail when the spy was called with the provided parameters', function () {
+                spy(456);
+                spy(567);
+                expect(function () {
+                    expect(spy, 'to have no calls satisfying', {
+                        args: [ 456 ]
+                    });
+                }, 'to throw',
+                    "expected spy1 to have no calls satisfying { args: [ 456 ] }\n" +
+                    "\n" +
+                    "spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                    "spy1( 567 ); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'baz' });
+                expect(spy, 'to have no calls satisfying', [ 123, { foo: 'bar' } ]);
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have no calls satisfying', [ 123, { foo: 'bar' } ]);
+                }, 'to throw',
+                    "expected spy1 to have no calls satisfying [ 123, { foo: 'bar' } ]\n" +
+                    "\n" +
+                    "spy1( 123, { foo: 'bar' } ); at theFunction (theFileName:xx:yy) // should be removed"
+                );
+            });
+        });
+
+        describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have no calls satisfying', {0: 123, 1: {foo: 'baz'}});
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'baz' });
+                    expect(spy, 'to have no calls satisfying', {0: 123, 1: {foo: 'baz'}});
+                }, 'to throw',
+                    "expected spy1 to have no calls satisfying { 0: 123, 1: { foo: 'baz' } }\n" +
+                    "\n" +
+                    "spy1( 123, { foo: 'baz' } ); at theFunction (theFileName:xx:yy) // should be removed"
+                );
+            });
+        });
+
+        describe('when passed a function that performs the expected call', function () {
+            it('should succeed when a spy call satisfies the spec', function () {
+                spy(123, 789);
+                expect(spy, 'to have no calls satisfying', function () {
+                    spy(123, 456);
+                });
+            });
+
+            it('should fail if the function does not call the spy', function () {
+                expect(function () {
+                    expect(spy, 'to have no calls satisfying', function () {});
+                }, 'to throw',
+                    "expected spy1 to have no calls satisfying function () {}\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 0 times"
+                );
+            });
+
+            it('should fail if the function calls the spy more than once', function () {
+                expect(function () {
+                    expect(spy, 'to have no calls satisfying', function () {
+                        spy(123);
+                        spy(456);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have no calls satisfying\n" +
+                    "spy1( 123 );\n" +
+                    "spy1( 456 );\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 2 times"
+                );
+            });
+
+            it('should fail when the spy was called with the given arguments', function () {
+                spy(123);
+                spy(456);
+                expect(function () {
+                    expect(spy, 'to have no calls satisfying', function () {
+                        spy(456);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have no calls satisfying spy1( 456 );\n" +
+                    "\n" +
+                    "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed"
+                );
+            });
+        });
+
+        describe('when passed a sinon sandbox as the subject', function () {
+            it('should succeed', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                var spy2 = sandbox.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect(sandbox, 'to have no calls satisfying', { spy: spy1, args: [ 789 ] });
+            });
+
+            it('should fail with a diff', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                spy1(456);
+                return expect(function () {
+                    return expect(sandbox, 'to have no calls satisfying', { spy: spy1, args: [ 456 ] });
+                }, 'to error with',
+                    "expected sinon sandbox to have no calls satisfying { spy: spy1, args: [ 456 ] }\n" +
+                    "\n" +
+                    "spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed"
+                );
+            });
+        });
+
+        describe('when passed an array of spies as the subject', function () {
+            it('should succeed', function () {
+                var spy1 = sinon.spy().named('spy1');
+                var spy2 = sinon.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect([spy1, spy2], 'to have no calls satisfying', { spy: spy1, args: [ 789 ] });
+            });
+
+            it('should fail with a diff', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                var spy2 = sandbox.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect(function () {
+                    return expect([spy1, spy2], 'to have no calls satisfying', { spy: spy1, args: [ 123 ] });
+                }, 'to error with',
+                    "expected [ spy1, spy2 ] to have no calls satisfying { spy: spy1, args: [ 123 ] }\n" +
+                    "\n" +
+                    "spy1( 123 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                    "spy2( 456 ); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+    });
+
     describe('was called with exactly', function () {
         it('passes if the spy was called with the provided arguments and no others', function () {
             spy('foo', 'bar', 'baz');
