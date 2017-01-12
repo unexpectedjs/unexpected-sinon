@@ -471,6 +471,37 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('to have no calls satisfying', function () {
+        it('passes if the spy was never called with the provided arguments', function () {
+            spy('foo', 'true');
+            expect(spy, 'to have no calls satisfying', ['bar', expect.it('to be truthy')]);
+        });
+
+        it('fails if the spy was called with the provided arguments', function () {
+            expect(function () {
+                spy('bar', 'true');
+                expect(spy, 'to have no calls satisfying', ['bar', expect.it('to be truthy')]);
+            }, 'to throw exception',
+                "expected spy1 to have no calls satisfying [ 'bar', expect.it('to be truthy') ]\n" +
+                "\n" +
+                "spy1( 'bar', 'true' ); at theFunction (theFileName:xx:yy) // should be removed"
+            );
+        });
+
+        it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
+            expect(function () {
+                spy('foo');
+                spy('bar', {});
+                expect(spy, 'to have no calls satisfying', { 0: 'bar' });
+            }, 'to throw exception',
+                "expected spy1 to have no calls satisfying { 0: 'bar' }\n" +
+                "\n" +
+                "spy1( 'foo' ); at theFunction (theFileName:xx:yy)\n" +
+                "spy1( 'bar', {} ); at theFunction (theFileName:xx:yy) // should be removed"
+            );
+        });
+    });
+
     describe('was called with exactly', function () {
         it('passes if the spy was called with the provided arguments and no others', function () {
             spy('foo', 'bar', 'baz');
