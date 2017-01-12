@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../../static/normalize.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../static/main.css" type="text/css" media="screen" />
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../../../static/bug-icon-black.ico">
+    <title>spy - to have no calls satisfying</title>
+</head>
+<body class="sidebar-hidden has-sidebar"> 
+    <header>
+        <div class="logo-icon"></div>
+        <nav>
+            <ul>
+                <li class="menu-toggle-item">
+                    <button class="menu-toggle" onclick="toggleSidebar()"></button>
+                </li>
+                
+                <li class=""><a href="../../..">unexpected-sinon</a></li>
+                
+                
+                <li class="active"><a href="../threw">Assertions</a></li>
+                
+                
+                
+            </ul>
+        </nav>
+        <div class="search" style="visibility: hidden">
+            <input id="search" placeholder="Search..." value="">
+            <div id="searchDropDown" class="dropDown">
+                <ul id="searchResults"></ul>
+            </div>
+        </div>
+    </header>
+
+<section id="assertions">
+    <nav id="assertion-menu" class="sidebar js-remember-scroll-position">
+    
+        <h3 class=""><a href="..">spy</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../threw">threw</a>
+            </li>
+            
+            <li class="">
+                <a href="../to-have-a-call-satisfying">to have a call satisfying</a>
+            </li>
+            
+            <li class="">
+                <a href="../to-have-all-calls-satisfying">to have all calls satisfying</a>
+            </li>
+            
+            <li class="">
+                <a href="../to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+            <li class="active">
+                <a href="">to have no calls satisfying</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called">was called</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-on">was called on</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-times">was called times</a>
+            </li>
+            
+            <li class="">
+                <a href="../was-called-with">was called with</a>
+            </li>
+            
+        </ul>
+    
+        <h3 class=""><a href="../../spyCall">spyCall</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../spyCall/to-satisfy">to satisfy</a>
+            </li>
+            
+        </ul>
+    
+        <h3 class=""><a href="../../array">array</a></h3>
+        <ul>
+            
+            <li class="">
+                <a href="../../array/given-call-order">given call order</a>
+            </li>
+            
+            <li class="">
+                <a href="../../array/to-have-calls-satisfying">to have calls satisfying</a>
+            </li>
+            
+        </ul>
+    
+</nav>
+
+    <div class="main" tabindex="-1">
+        <div class="content">
+            <h1>to have no calls satisfying</h1>
+            
+                <ul class="declarations">
+                
+                    <li>&lt;spy&gt; to have no calls [exhaustively] satisfying &lt;array&gt;</li>
+                
+                    <li>&lt;spy&gt; to have no calls satisfying &lt;function&gt;</li>
+                
+                    <li>&lt;spy&gt; to have no calls [exhaustively] satisfying &lt;object&gt;</li>
+                
+                </ul>
+            
+            <p>Passes if none of the calls to a spy <a href="http://unexpected.js.org/assertions/any/to-satisfy/">satisfy</a> a given spec:</p>
+<div class="code lang-javascript"><div><span style="color: #a71d5d">var</span>&nbsp;increment&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">(</span><span style="color: #a71d5d">function</span>&nbsp;<span style="color: #000000">increment</span><span style="color: #000000">(</span>n<span style="color: #000000">)</span>&nbsp;<span style="color: #000000">{</span></div><div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a71d5d">return</span>&nbsp;n&nbsp;<span style="color: #a71d5d">+</span>&nbsp;<span style="color: #0086b3">1</span><span style="color: #000000">;</span></div><div><span style="color: #000000">});</span></div><div><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">42</span><span style="color: #000000">);</span></div><div><span style="color: #000000">increment</span><span style="color: #000000">(</span><span style="color: #0086b3">46</span><span style="color: #000000">);</span></div><div><span style="color: #000000">expect</span><span style="color: #000000">(</span>increment<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">43</span>&nbsp;<span style="color: #000000">],</span>&nbsp;returnValue<span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">44</span>&nbsp;<span style="color: #000000">});</span></div></div><p>In case of a failing expectation you get the following output:</p>
+<div class="code lang-javascript"><div><span style="color: #a71d5d">var</span>&nbsp;quux&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'quux'</span><span style="color: #000000">);</span></div><div><span style="color: #000000">quux</span><span style="color: #000000">(</span><span style="color: #0086b3">789</span><span style="color: #000000">);</span></div><div><span style="color: #000000">quux</span><span style="color: #000000">(</span><span style="color: #0086b3">123</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">456</span><span style="color: #000000">);</span></div><div>&nbsp;</div><div><span style="color: #000000">expect</span><span style="color: #000000">(</span>quux<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">123</span><span style="color: #000000">,</span>&nbsp;<span style="color: #0086b3">456</span>&nbsp;<span style="color: #000000">]</span>&nbsp;<span style="color: #000000">});</span></div></div><div class="output"><div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #228842">quux</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying</span>&nbsp;{&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;<span style="color: #0086b3">123</span>,&nbsp;<span style="color: #0086b3">456</span>&nbsp;]&nbsp;}</div><div>&nbsp;</div><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><span style="color: #228842">quux</span>(&nbsp;<span style="color: #0086b3">789</span>&nbsp;);&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div></div></div></div></div><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><span style="color: #228842">quux</span>(&nbsp;<span style="color: #0086b3">123</span>,&nbsp;<span style="color: #0086b3">456</span>&nbsp;);&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<span style="color: red; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div></div></div></div></div></div></div></div><p>An array value will be interpreted as a shorthand for <code>{ args: ... }</code>:</p>
+<div class="code lang-javascript"><div><span style="color: #000000">expect</span><span style="color: #000000">(</span>quux<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #0086b3">123</span>&nbsp;<span style="color: #000000">]);</span></div></div><p>Likewise for an object with only numerical properties:</p>
+<div class="code lang-javascript"><div><span style="color: #000000">expect</span><span style="color: #000000">(</span>quux<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;<span style="color: #0086b3">1</span><span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">789</span>&nbsp;<span style="color: #000000">});</span></div></div><p>Note that the individual parameters are matched with
+<a href="http://unexpected.js.org/assertions/any/to-satisfy/"><code>to satisfy</code></a>
+semantics, so the following fails despite the actual call
+also had a <code>bar</code> property in the object passed as the first
+parameter:</p>
+<div class="code lang-javascript"><div><span style="color: #a71d5d">var</span>&nbsp;mySpy&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'mySpy'</span><span style="color: #000000">);</span></div><div><span style="color: #000000">mySpy</span><span style="color: #000000">({</span>foo<span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">123</span><span style="color: #000000">,</span>&nbsp;bar<span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">456</span><span style="color: #000000">});</span></div><div><span style="color: #000000">expect</span><span style="color: #000000">(</span>mySpy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #000000">{</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">123</span>&nbsp;<span style="color: #000000">}</span>&nbsp;<span style="color: #000000">]</span>&nbsp;<span style="color: #000000">});</span></div></div><div class="output"><div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #C24747">mySpy</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying</span>&nbsp;{&nbsp;<span style="color: #555">args</span>:&nbsp;[&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #0086b3">123</span>&nbsp;}&nbsp;]&nbsp;}</div><div>&nbsp;</div><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><span style="color: #C24747">mySpy</span>(&nbsp;{&nbsp;<span style="color: #555">foo</span>:&nbsp;<span style="color: #0086b3">123</span>,&nbsp;<span style="color: #555">bar</span>:&nbsp;<span style="color: #0086b3">456</span>&nbsp;}&nbsp;);&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<span style="color: red; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div></div></div></div></div></div></div></div><p>If that&#39;s not what you want, consider using the <code>exhaustively</code> flag. Then
+the assertion passes because none of the calls matched exhaustively:</p>
+<div class="code lang-javascript"><div><span style="color: #000000">expect</span><span style="color: #000000">(</span>mySpy<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;no&nbsp;calls&nbsp;exhaustively&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #000000">{</span>&nbsp;args<span style="color: #000000">:</span>&nbsp;<span style="color: #000000">[</span>&nbsp;<span style="color: #000000">{</span>&nbsp;foo<span style="color: #000000">:</span>&nbsp;<span style="color: #0086b3">123</span>&nbsp;<span style="color: #000000">}</span>&nbsp;<span style="color: #000000">]</span>&nbsp;<span style="color: #000000">});</span></div></div><p>You can also specify the expected call as a function that performs it:</p>
+<div class="code lang-javascript"><div><span style="color: #a71d5d">var</span>&nbsp;foo&nbsp;<span style="color: #a71d5d">=</span>&nbsp;sinon<span style="color: #000000">.</span><span style="color: #000000">spy</span><span style="color: #000000">().</span><span style="color: #000000">named</span><span style="color: #000000">(</span><span style="color: #df5000">'foo'</span><span style="color: #000000">);</span></div><div><span style="color: #000000">foo</span><span style="color: #000000">(</span><span style="color: #0086b3">1</span><span style="color: #000000">);</span></div><div><span style="color: #000000">foo</span><span style="color: #000000">(</span><span style="color: #0086b3">2</span><span style="color: #000000">);</span></div><div>&nbsp;</div><div><span style="color: #000000">expect</span><span style="color: #000000">(</span>foo<span style="color: #000000">,</span>&nbsp;<span style="color: #df5000">'to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying'</span><span style="color: #000000">,</span>&nbsp;<span style="color: #a71d5d">function</span>&nbsp;<span style="color: #000000">()</span>&nbsp;<span style="color: #000000">{</span></div><div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #000000">foo</span><span style="color: #000000">(</span><span style="color: #0086b3">1</span><span style="color: #000000">);</span></div><div><span style="color: #000000">});</span></div></div><div class="output"><div><span style="color: red; font-weight: bold">expected</span>&nbsp;<span style="color: #336699">foo</span>&nbsp;<span style="color: red; font-weight: bold">to&nbsp;have&nbsp;no&nbsp;calls&nbsp;satisfying</span>&nbsp;<div style="display: inline-block; vertical-align: top"><div><span style="color: #336699">foo</span>(&nbsp;<span style="color: #0086b3">1</span>&nbsp;);</div></div></div><div>&nbsp;</div><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><span style="color: #336699">foo</span>(&nbsp;<span style="color: #0086b3">1</span>&nbsp;);&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span>&nbsp;<span style="color: red; font-weight: bold">//&nbsp;should&nbsp;be&nbsp;removed</span></div></div></div></div></div><div><div style="display: inline-block; vertical-align: top"><div><div style="display: inline-block; vertical-align: top"><div><span style="color: #336699">foo</span>(&nbsp;<span style="color: #0086b3">2</span>&nbsp;);&nbsp;<span style="color: #969896">at&nbsp;theFunction&nbsp;(theFileName:xx:yy)</span></div></div></div></div></div></div></div></div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    baseUrl = '../../..';
+</script>
+<script type="text/javascript" src="../../../static/toggleSidebar.js"></script>
+<script type="text/javascript" src="../../../static/rememberScrollPosition.js"></script>
+<script type="text/javascript" src="../../../static/focusMain.js"></script>
+<script type="text/javascript" src="../../../static/search.js"></script>
+</body>
+</html>
+
