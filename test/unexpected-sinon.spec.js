@@ -1117,6 +1117,226 @@ describe('unexpected-sinon', function () {
         });
     });
 
+    describe('to have all calls satisfying', function () {
+        describe('when passed a spec object', function () {
+            it('should succeed when a spy call satisfies the spec', function () {
+                spy(123, 456);
+                expect(spy, 'to have all calls satisfying', {
+                    args: [ 123, 456 ]
+                });
+            });
+
+            it('should fail when the spy was not called at all', function () {
+                expect(function () {
+                    expect(spy, 'to have all calls satisfying', {
+                        args: [ 123, 456 ]
+                    });
+                }, 'to throw',
+                    "expected spy1 to have all calls satisfying { args: [ 123, 456 ] }\n" +
+                    "  expected [] to have items satisfying { args: [ 123, 456 ] }\n" +
+                    "    expected [] to be non-empty"
+                );
+            });
+
+            it('should fail when one of the calls had the wrong arguments', function () {
+                spy(456);
+                spy(567);
+                expect(function () {
+                    expect(spy, 'to have all calls satisfying', {
+                        args: [ 456 ]
+                    });
+                }, 'to throw',
+                    "expected spy1 to have all calls satisfying { args: [ 456 ] }\n" +
+                    "\n" +
+                    "spy1( 456 ); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1(\n" +
+                    "  567 // should equal 456\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+
+            describe('with the exhaustively flag', function () {
+                it('should succeed when a spy call satisfies the spec', function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have all calls satisfying', {
+                        args: [ 123, { foo: 'bar' } ]
+                    });
+                });
+
+                it('should fail when a spy call does not satisfy the spec only because of the "exhaustively" semantics', function () {
+                    spy(123, { foo: 'bar', quux: 'baz' });
+                    expect(function () {
+                        expect(spy, 'to have all calls exhaustively satisfying', {
+                            args: [ 123, { foo: 'bar' } ]
+                        });
+                    }, 'to throw',
+                        "expected spy1 to have all calls exhaustively satisfying { args: [ 123, { foo: 'bar' } ] }\n" +
+                        "\n" +
+                        "spy1(\n" +
+                        "  123,\n" +
+                        "  {\n" +
+                        "    foo: 'bar',\n" +
+                        "    quux: 'baz' // should be removed\n" +
+                        "  }\n" +
+                        "); at theFunction (theFileName:xx:yy)"
+                    );
+                });
+            });
+        });
+
+        describe('when passed an array (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have all calls satisfying', [ 123, { foo: 'bar' } ]);
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have all calls satisfying', [ 123, { foo: 'baz' } ]);
+                }, 'to throw',
+                    "expected spy1 to have all calls satisfying [ 123, { foo: 'baz' } ]\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               //\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+            it('should succeed', function () {
+                spy(123, { foo: 'bar' });
+                expect(spy, 'to have all calls satisfying', {0: 123, 1: {foo: 'bar'}});
+            });
+
+            it('should fail with a diff', function () {
+                expect(function () {
+                    spy(123, { foo: 'bar' });
+                    expect(spy, 'to have all calls satisfying', {0: 123, 1: {foo: 'baz'}});
+                }, 'to throw',
+                    "expected spy1 to have all calls satisfying { 0: 123, 1: { foo: 'baz' } }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  123,\n" +
+                    "  {\n" +
+                    "    foo: 'bar' // should equal 'baz'\n" +
+                    "               //\n" +
+                    "               // -bar\n" +
+                    "               // +baz\n" +
+                    "  }\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed a function that performs the expected call', function () {
+            it('should succeed when a spy call satisfies the spec', function () {
+                spy(123, 456);
+                expect(spy, 'to have all calls satisfying', function () {
+                    spy(123, 456);
+                });
+            });
+
+            it('should fail if the function does not call the spy', function () {
+                expect(function () {
+                    expect(spy, 'to have all calls satisfying', function () {});
+                }, 'to throw',
+                    "expected spy1 to have all calls satisfying function () {}\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 0 times"
+                );
+            });
+
+            it('should fail if the function calls the spy more than once', function () {
+                expect(function () {
+                    expect(spy, 'to have all calls satisfying', function () {
+                        spy(123);
+                        spy(456);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have all calls satisfying\n" +
+                    "spy1( 123 );\n" +
+                    "spy1( 456 );\n" +
+                    "  expected the provided function to call the spy exactly once, but it called it 2 times"
+                );
+            });
+
+            it('should fail when the spy was called, but one of the calls had the wrong arguments', function () {
+                spy(123);
+                spy(456);
+                expect(function () {
+                    expect(spy, 'to have all calls satisfying', function () {
+                        spy(123);
+                    });
+                }, 'to throw',
+                    "expected spy1 to have all calls satisfying spy1( 123 );\n" +
+                    "\n" +
+                    "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "spy1(\n" +
+                    "  456 // should equal 123\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed a sinon sandbox as the subject', function () {
+            it('should succeed', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                sandbox.spy().named('spy2');
+                spy1(123);
+                spy1(123);
+                return expect(sandbox, 'to have all calls satisfying', { spy: spy1, args: [ 123 ] });
+            });
+
+            it('should fail with a diff', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                spy1(456);
+                return expect(function () {
+                    return expect(sandbox, 'to have all calls satisfying', { spy: spy1, args: [ 123 ] });
+                }, 'to error with',
+                    "expected sinon sandbox to have all calls satisfying { spy: spy1, args: [ 123 ] }\n" +
+                    "\n" +
+                    "spy1(\n" +
+                    "  456 // should equal 123\n" +
+                    "); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array of spies as the subject', function () {
+            it('should succeed', function () {
+                var spy1 = sinon.spy().named('spy1');
+                var spy2 = sinon.spy().named('spy2');
+                spy1(123);
+                return expect([spy1, spy2], 'to have all calls satisfying', { spy: spy1, args: [ 123 ] });
+            });
+
+            it('should fail with a diff', function () {
+                var sandbox = sinon.sandbox.create();
+                var spy1 = sandbox.spy().named('spy1');
+                var spy2 = sandbox.spy().named('spy2');
+                spy1(123);
+                spy2(456);
+                return expect(function () {
+                    return expect([spy1, spy2], 'to have all calls satisfying', { spy: spy1, args: [ 123 ] });
+                }, 'to error with',
+                    "expected [ spy1, spy2 ] to have all calls satisfying { spy: spy1, args: [ 123 ] }\n" +
+                    "\n" +
+                    "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be spy1( 123 );"
+                );
+            });
+        });
+    });
+
     describe('to have calls satisfying', function () {
         it('should complain if the args value is passed as an object with non-numerical properties', function () {
             spy(123);
