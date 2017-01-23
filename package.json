@@ -34,8 +34,8 @@
   },
   "devDependencies": {
     "coveralls": "2.11.3",
-    "eslint": "2.7.0",
-    "eslint-config-onelint": "1.0.2",
+    "eslint": "2.13.1",
+    "eslint-config-onelint": "1.2.0",
     "istanbul": "0.3.17",
     "mocha": "2.4.5",
     "mocha-phantomjs-core": "2.0.1",
