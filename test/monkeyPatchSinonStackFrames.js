@@ -2,7 +2,11 @@
 // so that the top stack frame is a predictable string.
 // Prevents every test from failing when the test suite is updated.
 module.exports = function (sinon) {
-    // Copied from test/monkeyPatchSinonStackFrames.js
+    function isSpy(value) {
+        return value && typeof value.id === 'string' &&
+            /^spy#/.test(value.id);
+    }
+
     function patchCall(call) {
         var getStackFrames = call && call.getStackFrames;
         if (getStackFrames) {
@@ -13,18 +17,25 @@ module.exports = function (sinon) {
         return call;
     }
 
+    function patchSpy(spy) {
+        var getCall = spy.getCall;
+        spy.getCall = function () {
+            return patchCall(getCall.apply(spy, arguments));
+        };
+        var getCalls = spy.getCalls;
+        spy.getCalls = function () {
+            return getCalls.call(spy).map(patchCall);
+        };
+    }
+
+
     ['spy', 'stub'].forEach(function (name) {
         var orig = sinon[name];
         sinon[name] = function () {
             var result = orig.apply(this, arguments);
-            var getCall = result.getCall;
-            result.getCall = function () {
-                return patchCall(getCall.apply(result, arguments));
-            };
-            var getCalls = result.getCalls;
-            result.getCalls = function () {
-                return getCalls.call(result).map(patchCall);
-            };
+            if (isSpy(result)) {
+                patchSpy(result);
+            }
             return result;
         };
         sinon[name].create = orig.create;
