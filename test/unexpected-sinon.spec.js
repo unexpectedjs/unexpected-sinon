@@ -472,6 +472,25 @@ describe('unexpected-sinon', function () {
     });
 
     describe('to have no calls satisfying', function () {
+        // Regression test
+        it('should order the calls in the timeline correctly', function () {
+            var spy2 = sinon.spy().named('spy2');
+            spy(123);
+            spy2(456);
+            spy(123);
+            return expect(function () {
+                return expect([spy, spy2], 'to have no calls satisfying', function () {
+                    spy2(456);
+                });
+            }, 'to error with',
+                "expected [ spy1, spy2 ] to have no calls satisfying spy2( 456 );\n" +
+                "\n" +
+                "spy1( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                "spy2( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                "spy1( 123 ); at theFunction (theFileName:xx:yy)"
+            );
+        });
+
         it('passes if the spy was never called with the provided arguments', function () {
             spy('foo', 'true');
             expect(spy, 'to have no calls satisfying', ['bar', expect.it('to be truthy')]);
