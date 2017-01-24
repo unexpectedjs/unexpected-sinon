@@ -10,39 +10,12 @@
     <script>mocha.setup('bdd')</script>
     <script src="../node_modules/unexpected/unexpected.js"></script>
     <script src="../node_modules/sinon/pkg/sinon.js"></script>
+    <script src="monkeyPatchSinonStackFrames.js"></script>
     <script src="../lib/unexpected-sinon.js"></script>
     <script>
       unexpected = weknowhow.expect.clone();
       unexpected.installPlugin(weknowhow.unexpectedSinon);
       unexpected.output.preferredWidth = 80;
-
-      // Copied from test/monkeyPatchSinonStackFrames.js
-      function patchCall(call) {
-          var getStackFrames = call && call.getStackFrames;
-          if (getStackFrames) {
-              call.getStackFrames = function () {
-                  return ['at theFunction (theFileName:xx:yy)'];
-              };
-          }
-          return call;
-      }
-
-      ['spy', 'stub'].forEach(function (name) {
-          var orig = sinon[name];
-          sinon[name] = function () {
-              var result = orig.apply(this, arguments);
-              var getCall = result.getCall;
-              result.getCall = function () {
-                  return patchCall(getCall.apply(result, arguments));
-              };
-              var getCalls = result.getCalls;
-              result.getCalls = function () {
-                  return getCalls.call(result).map(patchCall);
-              };
-              return result;
-          };
-          sinon[name].create = orig.create;
-      });
     </script>
     <script src="unexpected-sinon.spec.js"></script>
     <script>

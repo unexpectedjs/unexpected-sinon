@@ -1,7 +1,17 @@
 // Monkey-patch sinon.create to patch all created spyCall instances
 // so that the top stack frame is a predictable string.
 // Prevents every test from failing when the test suite is updated.
-module.exports = function (sinon) {
+
+// Use an UMD wrapper so it can be used in both node.js and Phantom.JS
+(function (root, factory) {
+    if (typeof exports === 'object') {
+        factory(require('sinon'));
+    } else if (typeof define === 'function' && define.amd) {
+        define(['sinon'], factory);
+    } else {
+        factory(root.sinon);
+    }
+}(this, function (sinon) {
     function isSpy(value) {
         return value && typeof value.id === 'string' &&
             /^spy#/.test(value.id);
@@ -28,7 +38,6 @@ module.exports = function (sinon) {
         };
     }
 
-
     ['spy', 'stub'].forEach(function (name) {
         var orig = sinon[name];
         sinon[name] = function () {
@@ -40,4 +49,4 @@ module.exports = function (sinon) {
         };
         sinon[name].create = orig.create;
     });
-};
+}));
