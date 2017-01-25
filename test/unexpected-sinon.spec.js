@@ -558,6 +558,26 @@ describe('unexpected-sinon', function () {
                     "foo( 123 ); at theFunction (theFileName:xx:yy)"
                 );
             });
+
+            it('should dot out the list of contained spies when they exceed expect.output.preferredWidth', function () {
+                expect.output.preferredWidth = 45;
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.bar(456);
+                stubInstance.foo(123);
+                return expect(function () {
+                    return expect(stubInstance, 'to have no calls satisfying', function () {
+                        stubInstance.bar(456);
+                    });
+                }, 'to error with',
+                    "expected MyClass({foo /* 1 more */})\n" +
+                    "to have no calls satisfying bar( 456 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)"
+                );
+            });
         });
 
         describe('when passed a spec object', function () {
