@@ -578,6 +578,14 @@ describe('unexpected-sinon', function () {
                     "foo( 123 ); at theFunction (theFileName:xx:yy)"
                 );
             });
+
+            it('should throw if the stub instance (indistinguishable from a regular object) does not hold any spies', function () {
+                return expect(function () {
+                    return expect({}, 'to have no calls satisfying', function () {});
+                }, 'to error with',
+                    'The passed object was not recognized as a sinon "stub instance" as it has no spies attached to it:\n\n{}'
+                );
+            });
         });
 
         describe('when passed a spec object', function () {
