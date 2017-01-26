@@ -551,7 +551,7 @@ describe('unexpected-sinon', function () {
                         stubInstance.bar(456);
                     });
                 }, 'to error with',
-                    "expected MyClass({foo, bar}) to have no calls satisfying bar( 456 );\n" +
+                    "expected MyClass({ foo, bar }) to have no calls satisfying bar( 456 );\n" +
                     "\n" +
                     "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
                     "bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
@@ -570,7 +570,7 @@ describe('unexpected-sinon', function () {
                         stubInstance.bar(456);
                     });
                 }, 'to error with',
-                    "expected MyClass({foo /* 1 more */})\n" +
+                    "expected MyClass({ foo /* 1 more */ })\n" +
                     "to have no calls satisfying bar( 456 );\n" +
                     "\n" +
                     "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
@@ -996,7 +996,7 @@ describe('unexpected-sinon', function () {
                         stubInstance.bar(789);
                     });
                 }, 'to error with',
-                    "expected MyClass({foo, bar}) to have a call satisfying bar( 789 );\n" +
+                    "expected MyClass({ foo, bar }) to have a call satisfying bar( 789 );\n" +
                     "\n" +
                     "foo( 123 ); at theFunction (theFileName:xx:yy) // should be bar( 789 );\n" +
                     "bar(\n" +
@@ -1255,7 +1255,7 @@ describe('unexpected-sinon', function () {
                         stubInstance.bar(456);
                     });
                 }, 'to error with',
-                    "expected MyClass({foo, bar}) to have all calls satisfying bar( 456 );\n" +
+                    "expected MyClass({ foo, bar }) to have all calls satisfying bar( 456 );\n" +
                     "\n" +
                     "foo( 123 ); at theFunction (theFileName:xx:yy) // should be bar( 456 );\n" +
                     "bar( 456 ); at theFunction (theFileName:xx:yy)\n" +
@@ -1639,7 +1639,7 @@ describe('unexpected-sinon', function () {
                         stubInstance.foo(123);
                     });
                 }, 'to error with',
-                    "expected MyClass({foo, bar}) to have calls satisfying\n" +
+                    "expected MyClass({ foo, bar }) to have calls satisfying\n" +
                     "foo( 123 );\n" +
                     "bar( 123 );\n" +
                     "foo( 123 );\n" +
