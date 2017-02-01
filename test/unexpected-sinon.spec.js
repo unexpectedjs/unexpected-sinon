@@ -588,6 +588,35 @@ describe('unexpected-sinon', function () {
             });
         });
 
+        describe('when passed an array of sinon stub instances as the subject', function () {
+            it('should succeed', function () {
+                var stubInstance1 = sinon.createStubInstance(MyClass);
+                stubInstance1.foo(123);
+                var stubInstance2 = sinon.createStubInstance(MyClass);
+                stubInstance2.foo(123);
+                return expect([stubInstance1, stubInstance2], 'to have no calls satisfying', function () {
+                    stubInstance1.foo(456);
+                });
+            });
+
+            it('should fail with a diff', function () {
+                var stubInstance1 = sinon.createStubInstance(MyClass);
+                stubInstance1.foo(123);
+                var stubInstance2 = sinon.createStubInstance(MyClass);
+                stubInstance2.foo(123);
+                return expect(function () {
+                    return expect([stubInstance1, stubInstance2], 'to have no calls satisfying', function () {
+                        stubInstance1.foo(123);
+                    });
+                }, 'to error with',
+                    "expected [ MyClass({ foo: foo, bar: bar }), MyClass({ foo: foo, bar: bar }) ] to have no calls satisfying foo( 123 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy) // should be removed"
+                );
+            });
+        });
+
         describe('when passed a spec object', function () {
             it('should succeed when no spy call satisfies the spec', function () {
                 spy(123, 456);
