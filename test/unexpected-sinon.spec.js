@@ -609,7 +609,12 @@ describe('unexpected-sinon', function () {
                         stubInstance1.foo(123);
                     });
                 }, 'to error with',
-                    "expected [ MyClass({ foo: foo, bar: bar }), MyClass({ foo: foo, bar: bar }) ] to have no calls satisfying foo( 123 );\n" +
+                    "expected\n" +
+                    "[\n" +
+                    "  MyClass({ foo, bar }),\n" +
+                    "  MyClass({ foo, bar })\n" +
+                    "]\n" +
+                    "to have no calls satisfying foo( 123 );\n" +
                     "\n" +
                     "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
                     "foo( 123 ); at theFunction (theFileName:xx:yy) // should be removed"
