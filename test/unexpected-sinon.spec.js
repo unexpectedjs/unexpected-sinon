@@ -291,7 +291,7 @@ describe('unexpected-sinon', function () {
                 "\n" +
                 "agent005(); at theFunction (theFileName:xx:yy)\n" +
                 "agent006(); at theFunction (theFileName:xx:yy)\n" +
-                "// missing { spy: agent007 }"
+                "// missing { agent007 }"
             );
         });
 
@@ -304,9 +304,9 @@ describe('unexpected-sinon', function () {
             }, 'to throw exception',
                 "expected [ agent005, agent006, agent007 ] given call order\n" +
                 "\n" +
-                "// missing { spy: agent005 }\n" +
-                "// missing { spy: agent006 }\n" +
-                "// missing { spy: agent007 }"
+                "// missing { agent005 }\n" +
+                "// missing { agent006 }\n" +
+                "// missing { agent007 }"
             );
         });
     });
@@ -350,12 +350,11 @@ describe('unexpected-sinon', function () {
                 obj.spy.call(null);
                 expect(obj.spy, 'was always called on', obj);
             }, 'to throw exception',
-                "expected spy1 was always called on { spy: spy1 }\n" +
+                "expected spy1 was always called on { spy1 }\n" +
                 "\n" +
                 "spy1(); at theFunction (theFileName:xx:yy)\n" +
-                "spy1(); at theFunction (theFileName:xx:yy)\n" +
-                "// expected: was called on { spy: spy1 }\n" +
-                "//   expected spy1 to be called with { spy: spy1 } as this but was called with null"
+                "spy1(); at theFunction (theFileName:xx:yy) // expected: was called on { spy1 }\n" +
+                "                                           //   expected spy1 to be called with { spy1 } as this but was called with null"
             );
         });
     });
@@ -1583,7 +1582,7 @@ describe('unexpected-sinon', function () {
             expect(function () {
                 expect([spy1, spy2], 'to have calls satisfying', [ { spy: spy2 } ]);
             }, 'to throw',
-                "expected [ spy1, spy2 ] to have calls satisfying [ { spy: spy2 } ]\n" +
+                "expected [ spy1, spy2 ] to have calls satisfying [ { spy2 } ]\n" +
                 "\n" +
                 "spy1( 123 ); at theFunction (theFileName:xx:yy) // should be spy2"
             );
