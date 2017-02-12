@@ -1975,4 +1975,19 @@ describe('unexpected-sinon', function () {
             );
         });
     }
+
+    // Regression test for #38
+    it('should work with bounded functions', function () {
+        var obj = { method: function () {} };
+        obj.method = obj.method.bind(obj);
+        sinon.spy(obj, "method");
+        obj.method();
+        expect(function () {
+            expect(obj.method, "was called times", 2);
+        }, "to throw",
+           "expected method was called times 2\n" +
+           "  expected method(); at theFunction (theFileName:xx:yy) to have length 2\n" +
+           "    expected 1 to be 2"
+        );
+    });
 });
