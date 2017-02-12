@@ -40,7 +40,7 @@
 
     ['spy', 'stub'].forEach(function (name) {
         var orig = sinon[name];
-        sinon[name] = function () {
+        sinon[name] = function () { // ...
             var result = orig.apply(this, arguments);
             if (isSpy(result)) {
                 patchSpy(result);
@@ -49,4 +49,15 @@
         };
         sinon[name].create = orig.create;
     });
+
+    var origCreateStubInstance = sinon.createStubInstance;
+    sinon.createStubInstance = function () { // ...
+        var instance = origCreateStubInstance.apply(this, arguments);
+        for (var propertyName in instance) {
+            if (isSpy(instance[propertyName])) {
+                patchSpy(instance[propertyName]);
+            }
+        }
+        return instance;
+    };
 }));

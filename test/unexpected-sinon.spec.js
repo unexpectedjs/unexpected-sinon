@@ -1,4 +1,16 @@
 /*global describe, it, beforeEach, sinon, unexpected*/
+
+// Bogus class to be used with sinon.createStubInstance:
+function MyClass() {
+    throw new Error('oh no');
+}
+MyClass.prototype.foo = function () {
+    throw new Error('oh no');
+};
+MyClass.prototype.bar = function () {
+    throw new Error('oh no');
+};
+
 describe('unexpected-sinon', function () {
     var expect, spy;
 
@@ -520,6 +532,83 @@ describe('unexpected-sinon', function () {
             );
         });
 
+        describe('when passed a sinon stub instance as the subject', function () {
+            it('should succeed', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                return expect(stubInstance, 'to have no calls satisfying', function () {
+                    stubInstance.foo(456);
+                });
+            });
+
+            it('should fail with a diff', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.bar(456);
+                stubInstance.foo(123);
+                return expect(function () {
+                    return expect(stubInstance, 'to have no calls satisfying', function () {
+                        stubInstance.bar(456);
+                    });
+                }, 'to error with',
+                    "expected MyClass({ foo, bar }) to have no calls satisfying bar( 456 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)"
+                );
+            });
+
+            it('should dot out the list of contained spies when they exceed expect.output.preferredWidth', function () {
+                expect.output.preferredWidth = 45;
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.bar(456);
+                stubInstance.foo(123);
+                return expect(function () {
+                    return expect(stubInstance, 'to have no calls satisfying', function () {
+                        stubInstance.bar(456);
+                    });
+                }, 'to error with',
+                    "expected MyClass({ foo /* 1 more */ })\n" +
+                    "to have no calls satisfying bar( 456 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)"
+                );
+            });
+        });
+
+        describe('when passed an array of sinon stub instances as the subject', function () {
+            it('should succeed', function () {
+                var stubInstance1 = sinon.createStubInstance(MyClass);
+                stubInstance1.foo(123);
+                var stubInstance2 = sinon.createStubInstance(MyClass);
+                stubInstance2.foo(123);
+                return expect([stubInstance1, stubInstance2], 'to have no calls satisfying', function () {
+                    stubInstance1.foo(456);
+                });
+            });
+
+            it('should fail with a diff', function () {
+                var stubInstance1 = sinon.createStubInstance(MyClass);
+                stubInstance1.foo(123);
+                var stubInstance2 = sinon.createStubInstance(MyClass);
+                stubInstance2.foo(123);
+                return expect(function () {
+                    return expect([stubInstance1, stubInstance2], 'to have no calls satisfying', function () {
+                        stubInstance1.foo(123);
+                    });
+                }, 'to error with',
+                    "expected [ MyClass({ foo, bar }), MyClass({ foo, bar }) ] to have no calls satisfying foo( 123 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy) // should be removed"
+                );
+            });
+        });
+
         describe('when passed a spec object', function () {
             it('should succeed when no spy call satisfies the spec', function () {
                 spy(123, 456);
@@ -908,6 +997,36 @@ describe('unexpected-sinon', function () {
     });
 
     describe('to have a call satisfying', function () {
+        describe('when passed a sinon stub instance as the subject', function () {
+            it('should succeed', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.foo(456);
+                return expect(stubInstance, 'to have a call satisfying', function () {
+                    stubInstance.foo(123);
+                });
+            });
+
+            it('should fail with a diff', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.bar(456);
+                stubInstance.foo(123);
+                return expect(function () {
+                    return expect(stubInstance, 'to have a call satisfying', function () {
+                        stubInstance.bar(789);
+                    });
+                }, 'to error with',
+                    "expected MyClass({ foo, bar }) to have a call satisfying bar( 789 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy) // should be bar( 789 );\n" +
+                    "bar(\n" +
+                    "  456 // should equal 789\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy) // should be bar( 789 );"
+                );
+            });
+        });
         describe('when passed a spec object', function () {
             it('should succeed when a spy call satisfies the spec', function () {
                 spy(123, 456);
@@ -1137,6 +1256,35 @@ describe('unexpected-sinon', function () {
     });
 
     describe('to have all calls satisfying', function () {
+        describe('when passed a sinon stub instance as the subject', function () {
+            it('should succeed', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.foo(123);
+                return expect(stubInstance, 'to have all calls satisfying', function () {
+                    stubInstance.foo(123);
+                });
+            });
+
+            it('should fail with a diff', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.bar(456);
+                stubInstance.foo(123);
+                return expect(function () {
+                    return expect(stubInstance, 'to have all calls satisfying', function () {
+                        stubInstance.bar(456);
+                    });
+                }, 'to error with',
+                    "expected MyClass({ foo, bar }) to have all calls satisfying bar( 456 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy) // should be bar( 456 );\n" +
+                    "bar( 456 ); at theFunction (theFileName:xx:yy)\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy) // should be bar( 456 );"
+                );
+            });
+        });
+
         describe('when passed a spec object', function () {
             it('should succeed when a spy call satisfies the spec', function () {
                 spy(123, 456);
@@ -1485,6 +1633,45 @@ describe('unexpected-sinon', function () {
                 "└── spy2( 'yadda' ); at theFunction (theFileName:xx:yy) // should be moved\n" +
                 "    spy1( 'baz' ); at theFunction (theFileName:xx:yy)"
             );
+        });
+
+        describe('when passed a sinon stub instance as the subject', function () {
+            it('should succeed', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.bar(456);
+                stubInstance.foo(789);
+                return expect(stubInstance, 'to have calls satisfying', function () {
+                    stubInstance.foo(123);
+                    stubInstance.bar(456);
+                    stubInstance.foo(789);
+                });
+            });
+
+            it('should fail with a diff', function () {
+                var stubInstance = sinon.createStubInstance(MyClass);
+                stubInstance.foo(123);
+                stubInstance.bar(456);
+                stubInstance.foo(123);
+                return expect(function () {
+                    return expect(stubInstance, 'to have calls satisfying', function () {
+                        stubInstance.foo(123);
+                        stubInstance.bar(123);
+                        stubInstance.foo(123);
+                    });
+                }, 'to error with',
+                    "expected MyClass({ foo, bar }) to have calls satisfying\n" +
+                    "foo( 123 );\n" +
+                    "bar( 123 );\n" +
+                    "foo( 123 );\n" +
+                    "\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)\n" +
+                    "bar(\n" +
+                    "  456 // should equal 123\n" +
+                    "); at theFunction (theFileName:xx:yy)\n" +
+                    "foo( 123 ); at theFunction (theFileName:xx:yy)"
+                );
+            });
         });
 
         describe('when passed an array entry (shorthand for {args: ...})', function () {
