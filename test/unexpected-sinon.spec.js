@@ -2177,4 +2177,34 @@ describe('unexpected-sinon', function () {
            '    expected 1 to be 2'
         );
     });
+
+    // Regression test for:
+    // Function has non-object prototype 'undefined' in instanceof check
+    describe('when spying on console methods', function () {
+        beforeEach(function () {
+            sinon.spy(console, 'error');
+        });
+
+        afterEach(function () {
+            console.error.restore();
+        });
+
+        it('should not fail when spying on console methods', function () {
+            expect(console.error, 'to have no calls satisfying', function () {
+                console.error('hey');
+            });
+        });
+    });
+
+    // Regression test for:
+    // Function has non-object prototype 'undefined' in instanceof check
+    describe('when spying on a bound function', function () {
+        it('should not fail when spying on console methods', function () {
+            var foo = { bar: function () {}.bind({}) };
+            sinon.spy(foo, 'bar');
+            expect(foo.bar, 'to have no calls satisfying', function () {
+                foo.bar('hey');
+            });
+        });
+    });
 });
