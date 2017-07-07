@@ -1,7 +1,7 @@
 [
   {
-    "label": "to have no calls satisfying (spy)",
-    "url": "/assertions/spy/to-have-no-calls-satisfying/"
+    "label": "to have calls satisfying (spy)",
+    "url": "/assertions/spy/to-have-calls-satisfying/"
   },
   {
     "label": "given call order (array)",
@@ -12,6 +12,10 @@
     "url": "/assertions/spy/threw/"
   },
   {
+    "label": "not to have calls satisfying (spy)",
+    "url": "/assertions/spy/not-to-have-calls-satisfying/"
+  },
+  {
     "label": "to have a call satisfying (spy)",
     "url": "/assertions/spy/to-have-a-call-satisfying/"
   },
@@ -20,12 +24,12 @@
     "url": "/assertions/spy/to-have-all-calls-satisfying/"
   },
   {
-    "label": "to have calls satisfying (spy)",
-    "url": "/assertions/spy/to-have-calls-satisfying/"
-  },
-  {
     "label": "to have calls satisfying (array)",
     "url": "/assertions/array/to-have-calls-satisfying/"
+  },
+  {
+    "label": "to have no calls satisfying (spy)",
+    "url": "/assertions/spy/to-have-no-calls-satisfying/"
   },
   {
     "label": "was called on (spy)",
