@@ -17,12 +17,19 @@
             /^spy#/.test(value.id);
     }
 
+    var bogusStack =
+        'Error\n' +
+        'at theFunction (theFileName:xx:yy)\n' +
+        'at theFunction (theFileName:xx:yy)\n' +
+        'at theFunction (theFileName:xx:yy)';
+
+
     function patchCall(call) {
-        var getStackFrames = call && call.getStackFrames;
-        if (getStackFrames) {
-            call.getStackFrames = function () {
-                return ['at theFunction (theFileName:xx:yy)'];
-            };
+        if (call) {
+            call.stack = bogusStack;
+            if (call.errorWithCallStack) {
+                call.errorWithCallStack = { stack: bogusStack };
+            }
         }
         return call;
     }
@@ -30,24 +37,31 @@
     function patchSpy(spy) {
         var getCall = spy.getCall;
         spy.getCall = function () {
-            return patchCall(getCall.apply(spy, arguments));
+            var call = getCall.apply(spy, arguments);
+            return patchCall(call);
         };
         var getCalls = spy.getCalls;
         spy.getCalls = function () {
-            return getCalls.call(spy).map(patchCall);
+            var calls = getCalls.apply(spy, arguments);
+            return calls.map(patchCall, this);
         };
     }
 
-    ['spy', 'stub'].forEach(function (name) {
-        var orig = sinon[name];
-        sinon[name] = function () { // ...
+    function replace(name, obj) {
+        var orig = obj[name];
+        obj[name] = function () { // ...
             var result = orig.apply(this, arguments);
             if (isSpy(result)) {
                 patchSpy(result);
             }
             return result;
         };
-        sinon[name].create = orig.create;
+        obj[name].create = orig.create;
+    }
+
+    ['spy', 'stub'].forEach(function (name) {
+        replace(name, sinon);
+        replace(name, sinon.sandbox);
     });
 
     var origCreateStubInstance = sinon.createStubInstance;
