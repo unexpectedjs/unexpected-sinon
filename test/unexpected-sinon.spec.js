@@ -1045,7 +1045,7 @@ describe('unexpected-sinon', function () {
                 }, 'to throw',
                 'expected spy1 to have a call satisfying { args: [ 123, 456 ] }\n' +
                     '  expected [] to have items satisfying { args: [ 123, 456 ] }\n' +
-                    '    expected [] to be non-empty'
+                    '    expected [] not to be empty'
                 );
             });
 
@@ -1303,7 +1303,7 @@ describe('unexpected-sinon', function () {
                 }, 'to throw',
                 'expected spy1 to have all calls satisfying { args: [ 123, 456 ] }\n' +
                     '  expected [] to have items satisfying { args: [ 123, 456 ] }\n' +
-                    '    expected [] to be non-empty'
+                    '    expected [] not to be empty'
                 );
             });
 
