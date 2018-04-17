@@ -934,9 +934,16 @@ describe('unexpected-sinon', function () {
             it('fails if the spy did not always threw an exception of the given type', function () {
                 expect(function () {
                     var stub = sinon.stub();
-                    stub.throws('Error');
+                    var callNumber = 0;
+                    stub.callsFake(function () {
+                        callNumber += 1;
+                        if (callNumber === 1) {
+                            throw new Error();
+                        } else {
+                            throw new TypeError();
+                        }
+                    });
                     try { stub(); } catch (e) {}
-                    stub.throws('TypeError');
                     try { stub(); } catch (e) {}
                     expect(stub, 'always threw', { name: 'Error' });
                 }, 'to throw exception',
