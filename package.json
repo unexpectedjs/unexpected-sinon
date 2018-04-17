@@ -37,7 +37,7 @@
     "eslint": "^4.19.1",
     "eslint-config-onelint": "^3.0.0",
     "istanbul": "^0.3.17",
-    "mocha": "^2.4.5",
+    "mocha": "^5.1.0",
     "mocha-phantomjs-core": "^2.0.1",
     "phantomjs-prebuilt": "^2.1.7",
     "rsvp": "^4.8.2",
