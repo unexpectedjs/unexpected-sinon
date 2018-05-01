@@ -58,11 +58,29 @@
         };
         obj[name].create = orig.create;
     }
-
     ['spy', 'stub'].forEach(function (name) {
         replace(name, sinon);
-        replace(name, sinon.sandbox);
     });
+
+    if (sinon.sandbox.create) {
+        var originalSandboxCreate = sinon.sandbox.create;
+        sinon.sandbox.create = function () {
+            var sandbox = originalSandboxCreate.apply(this, arguments);
+            replace('spy', sandbox);
+            replace('stub', sandbox);
+            return sandbox;
+        };
+    }
+
+    if (sinon.createSandbox) {
+        var originalCreateSandbox = sinon.createSandbox;
+        sinon.createSandbox = function () {
+            var sandbox = originalCreateSandbox.apply(this, arguments);
+            replace('spy', sandbox);
+            replace('stub', sandbox);
+            return sandbox;
+        };
+    }
 
     var origCreateStubInstance = sinon.createStubInstance;
     sinon.createStubInstance = function () { // ...
