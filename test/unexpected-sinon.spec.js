@@ -719,7 +719,7 @@ describe('unexpected-sinon', function () {
 
             describe('when passed a sinon sandbox as the subject', function () {
                 it('should succeed', function () {
-                    var sandbox = sinon.sandbox.create();
+                    var sandbox = sinon.createSandbox();
                     var spy1 = sandbox.spy().named('spy1');
                     var spy2 = sandbox.spy().named('spy2');
                     spy1(123);
@@ -728,7 +728,7 @@ describe('unexpected-sinon', function () {
                 });
 
                 it('should fail with a diff', function () {
-                    var sandbox = sinon.sandbox.create();
+                    var sandbox = sinon.createSandbox();
                     var spy1 = sandbox.spy().named('spy1');
                     spy1(456);
                     return expect(function () {
@@ -751,7 +751,7 @@ describe('unexpected-sinon', function () {
                 });
 
                 it('should fail with a diff', function () {
-                    var sandbox = sinon.sandbox.create();
+                    var sandbox = sinon.createSandbox();
                     var spy1 = sandbox.spy().named('spy1');
                     var spy2 = sandbox.spy().named('spy2');
                     spy1(123);
@@ -1211,7 +1211,7 @@ describe('unexpected-sinon', function () {
 
         describe('when passed a sinon sandbox as the subject', function () {
             it('should succeed', function () {
-                var sandbox = sinon.sandbox.create();
+                var sandbox = sinon.createSandbox();
                 var spy1 = sandbox.spy().named('spy1');
                 var spy2 = sandbox.spy().named('spy2');
                 spy1(123);
@@ -1220,7 +1220,7 @@ describe('unexpected-sinon', function () {
             });
 
             it('should fail with a diff', function () {
-                var sandbox = sinon.sandbox.create();
+                var sandbox = sinon.createSandbox();
                 var spy1 = sandbox.spy().named('spy1');
                 spy1(456);
                 return expect(function () {
@@ -1245,7 +1245,7 @@ describe('unexpected-sinon', function () {
             });
 
             it('should fail with a diff', function () {
-                var sandbox = sinon.sandbox.create();
+                var sandbox = sinon.createSandbox();
                 var spy1 = sandbox.spy().named('spy1');
                 var spy2 = sandbox.spy().named('spy2');
                 spy1(123);
@@ -1463,7 +1463,7 @@ describe('unexpected-sinon', function () {
 
         describe('when passed a sinon sandbox as the subject', function () {
             it('should succeed', function () {
-                var sandbox = sinon.sandbox.create();
+                var sandbox = sinon.createSandbox();
                 var spy1 = sandbox.spy().named('spy1');
                 sandbox.spy().named('spy2');
                 spy1(123);
@@ -1472,7 +1472,7 @@ describe('unexpected-sinon', function () {
             });
 
             it('should fail with a diff', function () {
-                var sandbox = sinon.sandbox.create();
+                var sandbox = sinon.createSandbox();
                 var spy1 = sandbox.spy().named('spy1');
                 spy1(456);
                 return expect(function () {
@@ -1496,7 +1496,7 @@ describe('unexpected-sinon', function () {
             });
 
             it('should fail with a diff', function () {
-                var sandbox = sinon.sandbox.create();
+                var sandbox = sinon.createSandbox();
                 var spy1 = sandbox.spy().named('spy1');
                 var spy2 = sandbox.spy().named('spy2');
                 spy1(123);
@@ -1710,7 +1710,7 @@ describe('unexpected-sinon', function () {
 
             describe('when passed a sinon sandbox as the subject', function () {
                 it('should succeed', function () {
-                    var sandbox = sinon.sandbox.create();
+                    var sandbox = sinon.createSandbox();
                     var spy1 = sandbox.spy().named('spy1');
                     var spy2 = sandbox.spy().named('spy2');
                     spy1(123);
@@ -1722,7 +1722,7 @@ describe('unexpected-sinon', function () {
                 });
 
                 it('should fail with a diff', function () {
-                    var sandbox = sinon.sandbox.create();
+                    var sandbox = sinon.createSandbox();
                     var spy1 = sandbox.spy().named('spy1');
                     var spy2 = sandbox.spy().named('spy2');
                     spy1(123);
@@ -1865,7 +1865,7 @@ describe('unexpected-sinon', function () {
 
             describe('when passed a sinon sandbox as the subject', function () {
                 it('should succeed', function () {
-                    var sandbox = sinon.sandbox.create();
+                    var sandbox = sinon.createSandbox();
                     var spy1 = sandbox.spy().named('spy1');
                     var spy2 = sandbox.spy().named('spy2');
                     spy1(123);
@@ -1877,7 +1877,7 @@ describe('unexpected-sinon', function () {
                 });
 
                 it('should fail with a diff', function () {
-                    var sandbox = sinon.sandbox.create();
+                    var sandbox = sinon.createSandbox();
                     var spy1 = sandbox.spy().named('spy1');
                     var spy2 = sandbox.spy().named('spy2');
                     spy1(123);
