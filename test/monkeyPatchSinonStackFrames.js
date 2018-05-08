@@ -14,7 +14,7 @@
 }(this, function (sinon) {
     function isSpy(value) {
         return value && typeof value.id === 'string' &&
-            /^spy#/.test(value.id);
+            /^(?:spy|stub|fake)#/.test(value.id);
     }
 
     var bogusStack =
