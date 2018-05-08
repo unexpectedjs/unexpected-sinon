@@ -11,6 +11,11 @@ MyClass.prototype.bar = function () {
     throw new Error('oh no');
 };
 
+unexpected.addAssertion('<any> to inspect as <any>', function (expect, subject, value) {
+    expect.errorMode = 'nested';
+    expect(expect.inspect(subject).toString(), 'to satisfy', value);
+});
+
 describe('unexpected-sinon', function () {
     var expect, spy;
 
@@ -18,6 +23,18 @@ describe('unexpected-sinon', function () {
         expect = unexpected.clone();
         expect.output.preferredWidth = 120;
         spy = sinon.spy().named('spy1');
+    });
+
+    it('should inspect a spy correctly', function () {
+        expect(spy, 'to inspect as', /^spy\d+$/);
+    });
+
+    it('should inspect a stub correctly', function () {
+        expect(sinon.stub(), 'to inspect as', /^stub\d+$/);
+    });
+
+    it('should inspect a fake correctly', function () {
+        expect(sinon.fake(), 'to inspect as', /^fake\d+$/);
     });
 
     describe('was called', function () {
@@ -845,23 +862,23 @@ describe('unexpected-sinon', function () {
 
             it('fails if the spy never threw an exception of the given type', function () {
                 expect(function () {
-                    var stub = sinon.stub();
+                    var stub = sinon.stub().named('myStub');
                     stub.throws('Error');
                     try { stub(); } catch (e) {}
                     expect(stub, 'threw', { name: 'TypeError' });
                 }, 'to throw exception',
-                "expected stub threw { name: 'TypeError' }\n" +
+                "expected myStub threw { name: 'TypeError' }\n" +
                     '\n' +
-                    "stub(); at theFunction (theFileName:xx:yy) // expected: threw { name: 'TypeError' }\n" +
-                    "                                           //   expected Error() to satisfy { name: 'TypeError' }\n" +
-                    '                                           //\n' +
-                    '                                           //   {\n' +
-                    "                                           //     message: '',\n" +
-                    "                                           //     name: 'Error' // should equal 'TypeError'\n" +
-                    '                                           //                   //\n' +
-                    '                                           //                   // -Error\n' +
-                    '                                           //                   // +TypeError\n' +
-                    '                                           //   }'
+                    "myStub(); at theFunction (theFileName:xx:yy) // expected: threw { name: 'TypeError' }\n" +
+                    "                                             //   expected Error() to satisfy { name: 'TypeError' }\n" +
+                    '                                             //\n' +
+                    '                                             //   {\n' +
+                    "                                             //     message: '',\n" +
+                    "                                             //     name: 'Error' // should equal 'TypeError'\n" +
+                    '                                             //                   //\n' +
+                    '                                             //                   // -Error\n' +
+                    '                                             //                   // +TypeError\n' +
+                    '                                             //   }'
                 );
             });
         });
@@ -877,15 +894,15 @@ describe('unexpected-sinon', function () {
 
             it('fails if the spy never threw the given exception', function () {
                 expect(function () {
-                    var stub = sinon.stub();
+                    var stub = sinon.stub().named('myStub');
                     stub.throws(new TypeError());
                     try { stub(); } catch (e) {}
                     expect(stub, 'threw', new Error());
                 }, 'to throw exception',
-                'expected stub threw Error()\n' +
+                'expected myStub threw Error()\n' +
                     '\n' +
-                    'stub(); at theFunction (theFileName:xx:yy) // expected: threw Error()\n' +
-                    '                                           //   expected TypeError() to satisfy Error()'
+                    'myStub(); at theFunction (theFileName:xx:yy) // expected: threw Error()\n' +
+                    '                                             //   expected TypeError() to satisfy Error()'
                 );
             });
         });
@@ -933,7 +950,7 @@ describe('unexpected-sinon', function () {
 
             it('fails if the spy did not always threw an exception of the given type', function () {
                 expect(function () {
-                    var stub = sinon.stub();
+                    var stub = sinon.stub().named('myStub');
                     var callNumber = 0;
                     stub.callsFake(function () {
                         callNumber += 1;
@@ -947,19 +964,19 @@ describe('unexpected-sinon', function () {
                     try { stub(); } catch (e) {}
                     expect(stub, 'always threw', { name: 'Error' });
                 }, 'to throw exception',
-                "expected stub always threw { name: 'Error' }\n" +
+                "expected myStub always threw { name: 'Error' }\n" +
                     '\n' +
-                    'stub(); at theFunction (theFileName:xx:yy)\n' +
-                    "stub(); at theFunction (theFileName:xx:yy) // expected: threw { name: 'Error' }\n" +
-                    "                                           //   expected TypeError() to satisfy { name: 'Error' }\n" +
-                    '                                           //\n' +
-                    '                                           //   {\n' +
-                    "                                           //     message: '',\n" +
-                    "                                           //     name: 'TypeError' // should equal 'Error'\n" +
-                    '                                           //                       //\n' +
-                    '                                           //                       // -TypeError\n' +
-                    '                                           //                       // +Error\n' +
-                    '                                           //   }'
+                    'myStub(); at theFunction (theFileName:xx:yy)\n' +
+                    "myStub(); at theFunction (theFileName:xx:yy) // expected: threw { name: 'Error' }\n" +
+                    "                                             //   expected TypeError() to satisfy { name: 'Error' }\n" +
+                    '                                             //\n' +
+                    '                                             //   {\n' +
+                    "                                             //     message: '',\n" +
+                    "                                             //     name: 'TypeError' // should equal 'Error'\n" +
+                    '                                             //                       //\n' +
+                    '                                             //                       // -TypeError\n' +
+                    '                                             //                       // +Error\n' +
+                    '                                             //   }'
                 );
             });
         });
@@ -976,7 +993,7 @@ describe('unexpected-sinon', function () {
 
             it('fails if the spy did not always threw the given exception', function () {
                 expect(function () {
-                    var stub = sinon.stub();
+                    var stub = sinon.stub().named('myStub');
                     var error = new Error();
                     stub.throws(error);
                     try { stub(); } catch (e) {}
@@ -984,11 +1001,11 @@ describe('unexpected-sinon', function () {
                     try { stub(); } catch (e) {}
                     expect(stub, 'always threw', error);
                 }, 'to throw exception',
-                'expected stub always threw Error()\n' +
+                'expected myStub always threw Error()\n' +
                     '\n' +
-                    'stub(); at theFunction (theFileName:xx:yy)\n' +
-                    'stub(); at theFunction (theFileName:xx:yy) // expected: threw Error()\n' +
-                    '                                           //   expected TypeError() to satisfy Error()'
+                    'myStub(); at theFunction (theFileName:xx:yy)\n' +
+                    'myStub(); at theFunction (theFileName:xx:yy) // expected: threw Error()\n' +
+                    '                                             //   expected TypeError() to satisfy Error()'
                 );
             });
         });
