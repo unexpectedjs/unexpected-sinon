@@ -62,7 +62,7 @@ Amazing output when a failure happens!
 
 ```js
 var searchEngine = {
-  countResults: sinon.stub()
+  countResults: sinon.stub().named('myStub')
 };
 
 searchEngine.countResults
@@ -78,17 +78,17 @@ expect(searchEngine.countResults, 'to have calls satisfying', function () {
 ```
 
 ```output
-expected stub to have calls satisfying
-stub( 'Open source rocks!' );
-stub( 'Open source sucks!' );
+expected myStub to have calls satisfying
+myStub( 'Open source rocks!' );
+myStub( 'Open source sucks!' );
 
-stub(
+myStub(
   'Open source rocks' // should equal 'Open source rocks!'
                       //
                       // -Open source rocks
                       // +Open source rocks!
 ); at theFunction (theFileName:xx:yy)
-stub(
+myStub(
   'Open source sucks' // should equal 'Open source sucks!'
                       //
                       // -Open source sucks
