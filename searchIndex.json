@@ -8,12 +8,12 @@
     "url": "/assertions/array/given-call-order/"
   },
   {
-    "label": "threw (spy)",
-    "url": "/assertions/spy/threw/"
-  },
-  {
     "label": "not to have calls satisfying (spy)",
     "url": "/assertions/spy/not-to-have-calls-satisfying/"
+  },
+  {
+    "label": "threw (spy)",
+    "url": "/assertions/spy/threw/"
   },
   {
     "label": "to have a call satisfying (spy)",
