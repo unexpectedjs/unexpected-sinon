@@ -42,7 +42,7 @@
     "phantomjs-prebuilt": "^2.1.7",
     "rsvp": "^4.8.2",
     "serve": "*",
-    "sinon": "^5.0.2",
+    "sinon": "^5.0.7",
     "unexpected": "^10.23.0",
     "unexpected-documentation-site-generator": "^4.5.0",
     "unexpected-markdown": "^1.7.2"
