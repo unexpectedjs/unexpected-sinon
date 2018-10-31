@@ -44,7 +44,7 @@
     "serve": "*",
     "sinon": "^7.0.0",
     "unexpected": "^10.23.0",
-    "unexpected-documentation-site-generator": "^4.5.0",
+    "unexpected-documentation-site-generator": "^5.0.0",
     "unexpected-markdown": "^1.7.2"
   }
 }
