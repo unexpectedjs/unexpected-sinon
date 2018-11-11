@@ -136,10 +136,10 @@ expect.use(weknowhow.unexpectedSinon);
 Include the library with RequireJS the following way:
 
 ```js#evaluate:false
-define(['unexpected', 'unexpected-sinon'], funtion (unexpected, unexpectedSinon) {
-   var expect = unexpected.clone();
-   expect.use(unexpectedSinon);
-   // Your code
+require(['unexpected', 'unexpected-sinon', 'sinon'], function (unexpected, unexpectedSinon, sinon) {
+  var expect = unexpected.clone();
+  expect.use(unexpectedSinon);
+  // Your code
 });
 ```
 
