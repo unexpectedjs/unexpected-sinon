@@ -258,7 +258,7 @@ describe('unexpected-sinon', function() {
 
   describe('was called the new operator', function() {
     it('passes if spy was called the new operator', function() {
-      new spy(); // eslint-disable-line new-cap
+      new spy(); // eslint-disable-line no-new, new-cap
       expect(spy, 'was called with new');
     });
     it('fails if spy was never called with new operator', function() {
@@ -2201,12 +2201,12 @@ describe('unexpected-sinon', function() {
       it('should succeed', function() {
         var spy2 = sinon.spy().named('spy2');
         spy2(123, 456);
-        new spy('abc', false); // eslint-disable-line new-cap
+        new spy('abc', false); // eslint-disable-line no-new, new-cap
         spy(-99, Infinity);
 
         expect([spy, spy2], 'to have calls satisfying', function() {
           spy2(123, 456);
-          new spy('abc', false); // eslint-disable-line new-cap
+          new spy('abc', false); // eslint-disable-line no-new, new-cap
           spy(-99, Infinity);
         });
         expect(spy.args, 'to have length', 2);
@@ -2217,13 +2217,13 @@ describe('unexpected-sinon', function() {
         var spy2 = sinon.spy().named('spy2');
         spy2(123, 456, 99);
         spy('abc', true);
-        new spy(-99, Infinity); // eslint-disable-line new-cap
+        new spy(-99, Infinity); // eslint-disable-line no-new, new-cap
 
         expect(
           function() {
             expect([spy, spy2], 'to have calls satisfying', function() {
               spy2(123, 456);
-              new spy('abc', false); // eslint-disable-line new-cap
+              new spy('abc', false); // eslint-disable-line no-new, new-cap
               spy(-99, Infinity);
             });
           },
@@ -2305,7 +2305,7 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should render a spy call missing at the end', function() {
+      it('should render a spy call missing at the beginning', function() {
         spy('abc', true);
 
         expect(
@@ -2451,7 +2451,7 @@ describe('unexpected-sinon', function() {
 
     describe('when asserting whether a call was invoked with the new operator', function() {
       it('should succeed', function() {
-        new spy(); // eslint-disable-line new-cap
+        new spy(); // eslint-disable-line no-new, new-cap
         spy();
         expect(spy, 'to have calls satisfying', [
           { calledWithNew: true },
@@ -2460,7 +2460,7 @@ describe('unexpected-sinon', function() {
       });
 
       it('should fail with a diff', function() {
-        new spy(); // eslint-disable-line new-cap
+        new spy(); // eslint-disable-line no-new, new-cap
         spy();
         expect(
           function() {
@@ -2629,7 +2629,7 @@ describe('unexpected-sinon', function() {
   // Function has non-object prototype 'undefined' in instanceof check
   describe('when spying on a bound function', function() {
     it('should not fail when spying on console methods', function() {
-      var foo = { bar: function() {}.bind({}) };
+      var foo = { bar: function() {}.bind({}) }; // eslint-disable-line no-extra-bind
       sinon.spy(foo, 'bar');
       expect(foo.bar, 'to have no calls satisfying', function() {
         foo.bar('hey');

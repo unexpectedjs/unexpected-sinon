@@ -1,4 +1,4 @@
-/*global unexpected:true, sinon, Promise:true*/
+/*global unexpected:true, sinon:true, Promise:true*/
 /* exported Promise, sinon */
 unexpected = require('unexpected');
 unexpected.output.preferredWidth = 80;

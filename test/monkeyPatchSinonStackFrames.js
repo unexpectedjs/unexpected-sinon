@@ -1,3 +1,4 @@
+/* global define */
 // Monkey-patch sinon.create to patch all created spyCall instances
 // so that the top stack frame is a predictable string.
 // Prevents every test from failing when the test suite is updated.
