@@ -2581,11 +2581,7 @@ describe('unexpected-sinon', function() {
         "expected spy1 to have calls satisfying [ { args: [ expect.it('when called with', ..., 'to be fulfilled') ] } ]\n" +
           '\n' +
           'spy1( 123 ); at theFunction (theFileName:xx:yy) // should be removed\n' +
-          'spy1(\n' +
-          '  function () {\n' +
-          '    return {then: function (fn) { setImmediate(fn); }};\n' +
-          '  }\n' +
-          '); at theFunction (theFileName:xx:yy)'
+          'spy1( function ( /*...*/ ) { /*...*/ } ); at theFunction (theFileName:xx:yy)'
       );
     });
   }
