@@ -839,7 +839,7 @@ describe('unexpected-sinon', () => {
               'to throw',
               'expected spy1 ' +
                 assertion +
-                ' function () {}\n' +
+                ' () => {}\n' +
                 '  expected the provided function to call the spy exactly once, but it called it 0 times'
             );
           });
@@ -1438,7 +1438,7 @@ describe('unexpected-sinon', () => {
             expect(spy, 'to have a call satisfying', () => {});
           },
           'to throw',
-          'expected spy1 to have a call satisfying function () {}\n' +
+          'expected spy1 to have a call satisfying () => {}\n' +
             '  expected the provided function to call the spy exactly once, but it called it 0 times'
         );
       });
@@ -1729,7 +1729,7 @@ describe('unexpected-sinon', () => {
             expect(spy, 'to have all calls satisfying', () => {});
           },
           'to throw',
-          'expected spy1 to have all calls satisfying function () {}\n' +
+          'expected spy1 to have all calls satisfying () => {}\n' +
             '  expected the provided function to call the spy exactly once, but it called it 0 times'
         );
       });
@@ -2544,13 +2544,11 @@ describe('unexpected-sinon', () => {
           '\n' +
           'spy1( 123 ); at theFunction (theFileName:xx:yy) // should be removed\n' +
           'spy1(\n' +
-          '  function () {\n' +
-          '    return {\n' +
-          '      then: function(fn) {\n' +
-          '        setImmediate(fn);\n' +
-          '      }\n' +
-          '    };\n' +
-          '  }\n' +
+          '  () => ({\n' +
+          '          then(fn) {\n' +
+          '            setImmediate(fn);\n' +
+          '          }\n' +
+          '        })\n' +
           '); at theFunction (theFileName:xx:yy)'
       );
     });
