@@ -1,5 +1,5 @@
-node_modules
-coverage
-vendor
-test/documentation.spec.js
-site-build
+/documentation/
+/vendor/
+/.nyc_output/
+/coverage/
+/site-build/
