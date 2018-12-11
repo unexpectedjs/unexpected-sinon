@@ -11,10 +11,13 @@ MyClass.prototype.bar = () => {
   throw new Error('oh no');
 };
 
-unexpected.addAssertion('<any> to inspect as <any>', (expect, subject, value) => {
-  expect.errorMode = 'nested';
-  expect(expect.inspect(subject).toString(), 'to satisfy', value);
-});
+unexpected.addAssertion(
+  '<any> to inspect as <any>',
+  (expect, subject, value) => {
+    expect.errorMode = 'nested';
+    expect(expect.inspect(subject).toString(), 'to satisfy', value);
+  }
+);
 
 describe('unexpected-sinon', () => {
   let expect, spy;
@@ -611,9 +614,10 @@ describe('unexpected-sinon', () => {
           spy2(456);
           spy(123);
           return expect(
-            () => expect([spy, spy2], assertion, () => {
-              spy2(456);
-            }),
+            () =>
+              expect([spy, spy2], assertion, () => {
+                spy2(456);
+              }),
             'to error with',
             'expected [ spy1, spy2 ] ' +
               assertion +
@@ -677,9 +681,10 @@ describe('unexpected-sinon', () => {
             stubInstance.bar(456);
             stubInstance.foo(123);
             return expect(
-              () => expect(stubInstance, assertion, () => {
-                stubInstance.bar(456);
-              }),
+              () =>
+                expect(stubInstance, assertion, () => {
+                  stubInstance.bar(456);
+                }),
               'to error with',
               'expected MyClass({ foo, bar }) ' +
                 assertion +
@@ -698,9 +703,10 @@ describe('unexpected-sinon', () => {
             stubInstance.bar(456);
             stubInstance.foo(123);
             return expect(
-              () => expect(stubInstance, assertion, () => {
-                stubInstance.bar(456);
-              }),
+              () =>
+                expect(stubInstance, assertion, () => {
+                  stubInstance.bar(456);
+                }),
               'to error with',
               'expected MyClass({ foo /* 1 more */ })\n' +
                 assertion +
@@ -719,13 +725,9 @@ describe('unexpected-sinon', () => {
             stubInstance1.foo(123);
             const stubInstance2 = sinon.createStubInstance(MyClass);
             stubInstance2.foo(123);
-            return expect(
-              [stubInstance1, stubInstance2],
-              assertion,
-              () => {
-                stubInstance1.foo(456);
-              }
-            );
+            return expect([stubInstance1, stubInstance2], assertion, () => {
+              stubInstance1.foo(456);
+            });
           });
 
           it('should fail with a diff', () => {
@@ -734,13 +736,10 @@ describe('unexpected-sinon', () => {
             const stubInstance2 = sinon.createStubInstance(MyClass);
             stubInstance2.foo(123);
             return expect(
-              () => expect(
-                [stubInstance1, stubInstance2],
-                assertion,
-                () => {
+              () =>
+                expect([stubInstance1, stubInstance2], assertion, () => {
                   stubInstance1.foo(123);
-                }
-              ),
+                }),
               'to error with',
               'expected [ MyClass({ foo, bar }), MyClass({ foo, bar }) ] ' +
                 assertion +
@@ -925,10 +924,11 @@ describe('unexpected-sinon', () => {
             spy1(123);
             spy2(456);
             return expect(
-              () => expect([spy1, spy2], assertion, {
-                spy: spy1,
-                args: [123]
-              }),
+              () =>
+                expect([spy1, spy2], assertion, {
+                  spy: spy1,
+                  args: [123]
+                }),
               'to error with',
               'expected [ spy1, spy2 ] ' +
                 assertion +
@@ -1274,13 +1274,10 @@ describe('unexpected-sinon', () => {
         stubInstance.bar(456);
         stubInstance.foo(123);
         return expect(
-          () => expect(
-            stubInstance,
-            'to have a call satisfying',
-            () => {
+          () =>
+            expect(stubInstance, 'to have a call satisfying', () => {
               stubInstance.bar(789);
-            }
-          ),
+            }),
           'to error with',
           'expected MyClass({ foo, bar }) to have a call satisfying bar( 789 );\n' +
             '\n' +
@@ -1502,10 +1499,11 @@ describe('unexpected-sinon', () => {
         const spy1 = sandbox.spy().named('spy1');
         spy1(456);
         return expect(
-          () => expect(sandbox, 'to have a call satisfying', {
-            spy: spy1,
-            args: [123]
-          }),
+          () =>
+            expect(sandbox, 'to have a call satisfying', {
+              spy: spy1,
+              args: [123]
+            }),
           'to error with',
           'expected sinon sandbox to have a call satisfying { spy: spy1, args: [ 123 ] }\n' +
             '\n' +
@@ -1535,10 +1533,11 @@ describe('unexpected-sinon', () => {
         spy1(123);
         spy2(456);
         return expect(
-          () => expect([spy1, spy2], 'to have a call satisfying', {
-            spy: spy1,
-            args: [789]
-          }),
+          () =>
+            expect([spy1, spy2], 'to have a call satisfying', {
+              spy: spy1,
+              args: [789]
+            }),
           'to error with',
           'expected [ spy1, spy2 ] to have a call satisfying { spy: spy1, args: [ 789 ] }\n' +
             '\n' +
@@ -1568,13 +1567,10 @@ describe('unexpected-sinon', () => {
         stubInstance.bar(456);
         stubInstance.foo(123);
         return expect(
-          () => expect(
-            stubInstance,
-            'to have all calls satisfying',
-            () => {
+          () =>
+            expect(stubInstance, 'to have all calls satisfying', () => {
               stubInstance.bar(456);
-            }
-          ),
+            }),
           'to error with',
           'expected MyClass({ foo, bar }) to have all calls satisfying bar( 456 );\n' +
             '\n' +
@@ -1792,10 +1788,11 @@ describe('unexpected-sinon', () => {
         const spy1 = sandbox.spy().named('spy1');
         spy1(456);
         return expect(
-          () => expect(sandbox, 'to have all calls satisfying', {
-            spy: spy1,
-            args: [123]
-          }),
+          () =>
+            expect(sandbox, 'to have all calls satisfying', {
+              spy: spy1,
+              args: [123]
+            }),
           'to error with',
           'expected sinon sandbox to have all calls satisfying { spy: spy1, args: [ 123 ] }\n' +
             '\n' +
@@ -1824,10 +1821,11 @@ describe('unexpected-sinon', () => {
         spy1(123);
         spy2(456);
         return expect(
-          () => expect([spy1, spy2], 'to have all calls satisfying', {
-            spy: spy1,
-            args: [123]
-          }),
+          () =>
+            expect([spy1, spy2], 'to have all calls satisfying', {
+              spy: spy1,
+              args: [123]
+            }),
           'to error with',
           'expected [ spy1, spy2 ] to have all calls satisfying { spy: spy1, args: [ 123 ] }\n' +
             '\n' +
@@ -1998,11 +1996,12 @@ describe('unexpected-sinon', () => {
         stubInstance.bar(456);
         stubInstance.foo(123);
         return expect(
-          () => expect(stubInstance, 'to have calls satisfying', () => {
-            stubInstance.foo(123);
-            stubInstance.bar(123);
-            stubInstance.foo(123);
-          }),
+          () =>
+            expect(stubInstance, 'to have calls satisfying', () => {
+              stubInstance.foo(123);
+              stubInstance.bar(123);
+              stubInstance.foo(123);
+            }),
           'to error with',
           'expected MyClass({ foo, bar }) to have calls satisfying\n' +
             'foo( 123 );\n' +
@@ -2065,10 +2064,11 @@ describe('unexpected-sinon', () => {
           spy1(123);
           spy2(456);
           return expect(
-            () => expect(sandbox, 'to have calls satisfying', [
-              { spy: spy1, args: [123] },
-              { spy: spy2, args: [789] }
-            ]),
+            () =>
+              expect(sandbox, 'to have calls satisfying', [
+                { spy: spy1, args: [123] },
+                { spy: spy2, args: [789] }
+              ]),
             'to error with',
             'expected sinon sandbox to have calls satisfying [ { spy: spy1, args: [ 123 ] }, { spy: spy2, args: [ 789 ] } ]\n' +
               '\n' +
@@ -2234,10 +2234,11 @@ describe('unexpected-sinon', () => {
           spy1(123);
           spy2(456);
           return expect(
-            () => expect(sandbox, 'to have calls satisfying', () => {
-              spy1(123);
-              spy2(789);
-            }),
+            () =>
+              expect(sandbox, 'to have calls satisfying', () => {
+                spy1(123);
+                spy2(789);
+              }),
             'to error with',
             'expected sinon sandbox to have calls satisfying\n' +
               'spy1( 123 );\n' +
@@ -2400,15 +2401,17 @@ describe('unexpected-sinon', () => {
         });
       });
 
-      it('should render the correct diff when the expected spy calls consist of a single entry', () => expect(
-        () => expect(spy, 'to have calls satisfying', () => {
-          spy(123);
-        }),
-        'to throw',
-        'expected spy1 to have calls satisfying spy1( 123 );\n' +
-          '\n' +
-          '// missing spy1( 123 );'
-      ));
+      it('should render the correct diff when the expected spy calls consist of a single entry', () =>
+        expect(
+          () =>
+            expect(spy, 'to have calls satisfying', () => {
+              spy(123);
+            }),
+          'to throw',
+          'expected spy1 to have calls satisfying spy1( 123 );\n' +
+            '\n' +
+            '// missing spy1( 123 );'
+        ));
     });
 
     describe('when asserting whether a call was invoked with the new operator', () => {
@@ -2532,9 +2535,10 @@ describe('unexpected-sinon', () => {
       }));
 
       return expect(
-        () => expect(spy, 'to have calls satisfying', [
-          { args: [expect.it('when called with', [], 'to be fulfilled')] }
-        ]),
+        () =>
+          expect(spy, 'to have calls satisfying', [
+            { args: [expect.it('when called with', [], 'to be fulfilled')] }
+          ]),
         'to error',
         "expected spy1 to have calls satisfying [ { args: [ expect.it('when called with', ..., 'to be fulfilled') ] } ]\n" +
           '\n' +
