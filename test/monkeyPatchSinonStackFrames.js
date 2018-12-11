@@ -4,7 +4,7 @@
 // Prevents every test from failing when the test suite is updated.
 
 // Use an UMD wrapper so it can be used in both node.js and Phantom.JS
-(function(root, factory) {
+((root, factory) => {
   if (typeof exports === 'object') {
     factory(require('sinon'));
   } else if (typeof define === 'function' && define.amd) {
@@ -12,7 +12,7 @@
   } else {
     factory(root.sinon);
   }
-})(this, function(sinon) {
+})(this, sinon => {
   function isSpy(value) {
     return (
       value &&
@@ -21,7 +21,7 @@
     );
   }
 
-  var bogusStack =
+  const bogusStack =
     'Error\n' +
     'at theFunction (theFileName:xx:yy)\n' +
     'at theFunction (theFileName:xx:yy)\n' +
@@ -38,23 +38,23 @@
   }
 
   function patchSpy(spy) {
-    var getCall = spy.getCall;
+    const getCall = spy.getCall;
     spy.getCall = function() {
-      var call = getCall.apply(spy, arguments);
+      const call = getCall.apply(spy, arguments);
       return patchCall(call);
     };
-    var getCalls = spy.getCalls;
+    const getCalls = spy.getCalls;
     spy.getCalls = function() {
-      var calls = getCalls.apply(spy, arguments);
+      const calls = getCalls.apply(spy, arguments);
       return calls.map(patchCall, this);
     };
   }
 
   function replace(name, obj) {
-    var orig = obj[name];
+    const orig = obj[name];
     obj[name] = function() {
       // ...
-      var result = orig.apply(this, arguments);
+      const result = orig.apply(this, arguments);
       if (isSpy(result)) {
         patchSpy(result);
       }
@@ -62,14 +62,14 @@
     };
     obj[name].create = orig.create;
   }
-  ['spy', 'stub'].forEach(function(name) {
+  ['spy', 'stub'].forEach(name => {
     replace(name, sinon);
   });
 
   if (sinon.sandbox.create) {
-    var originalSandboxCreate = sinon.sandbox.create;
+    const originalSandboxCreate = sinon.sandbox.create;
     sinon.sandbox.create = function() {
-      var sandbox = originalSandboxCreate.apply(this, arguments);
+      const sandbox = originalSandboxCreate.apply(this, arguments);
       replace('spy', sandbox);
       replace('stub', sandbox);
       return sandbox;
@@ -77,20 +77,20 @@
   }
 
   if (sinon.createSandbox) {
-    var originalCreateSandbox = sinon.createSandbox;
+    const originalCreateSandbox = sinon.createSandbox;
     sinon.createSandbox = function() {
-      var sandbox = originalCreateSandbox.apply(this, arguments);
+      const sandbox = originalCreateSandbox.apply(this, arguments);
       replace('spy', sandbox);
       replace('stub', sandbox);
       return sandbox;
     };
   }
 
-  var origCreateStubInstance = sinon.createStubInstance;
+  const origCreateStubInstance = sinon.createStubInstance;
   sinon.createStubInstance = function() {
     // ...
-    var instance = origCreateStubInstance.apply(this, arguments);
-    for (var propertyName in instance) {
+    const instance = origCreateStubInstance.apply(this, arguments);
+    for (const propertyName in instance) {
       if (isSpy(instance[propertyName])) {
         patchSpy(instance[propertyName]);
       }
