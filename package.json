@@ -48,6 +48,6 @@
     "sinon": "^7.0.0",
     "unexpected": "^10.39.2",
     "unexpected-documentation-site-generator": "^5.0.0",
-    "unexpected-markdown": "^1.7.2"
+    "unexpected-markdown": "^2.0.0"
   }
 }
