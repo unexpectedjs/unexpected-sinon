@@ -1,8 +1,10 @@
 /*global unexpected:true, sinon:true, Promise:true*/
 /* exported Promise, sinon */
-unexpected = require('unexpected').clone();
+unexpected = require('unexpected')
+  .clone()
+  .use(require('./lib/unexpected-sinon'));
 unexpected.output.preferredWidth = 80;
-unexpected.installPlugin(require('./lib/unexpected-sinon'));
+
 require('./test/monkeyPatchSinonStackFrames');
 if (typeof Promise === 'undefined') {
   Promise = require('rsvp').Promise;
