@@ -30,7 +30,7 @@
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
     "sinon": "*",
-    "unexpected": "^10.8.0"
+    "unexpected": "^10.8.0 || ^11.0.0-4"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
@@ -46,7 +46,7 @@
     "rsvp": "^4.8.2",
     "serve": "*",
     "sinon": "^7.0.0",
-    "unexpected": "^10.39.2",
+    "unexpected": "^11.0.0-4",
     "unexpected-documentation-site-generator": "^5.0.0",
     "unexpected-markdown": "^2.0.0"
   }
