@@ -2557,10 +2557,7 @@ describe('unexpected-sinon', function() {
   });
 
   // Regression test for an issue reported by Gert Sønderby in the Unexpected gitter channel:
-  if (
-    typeof navigator === 'undefined' ||
-    !/phantom/i.test(navigator.userAgent)
-  ) {
+  if (typeof navigator === 'undefined') {
     it('should avoid retrieving a property of undefined in the similar function', function() {
       spy(123);
       spy(function() {
