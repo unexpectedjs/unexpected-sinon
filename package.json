@@ -18,7 +18,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha --compilers md:unexpected-markdown test/*.js `find documentation -name '*.md'`",
+    "test": "mocha --require unexpected-markdown test/*.js `find documentation -name '*.md'`",
     "test-headless": "karma start --single-run",
     "ci": "npm test && npm run test-headless && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run lint && npm run generate-site",
     "test-browser": "serve .",
