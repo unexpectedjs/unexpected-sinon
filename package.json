@@ -22,7 +22,7 @@
     "test-headless": "karma start --single-run",
     "ci": "npm test && npm run test-headless && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run lint && npm run generate-site",
     "test-browser": "serve .",
-    "coverage": "nyc npm test",
+    "coverage": "nyc --reporter=lcov --reporter=text npm test",
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
     "update-examples": "generate-site --require ./bootstrap-unexpected-markdown.js --update-examples",
     "deploy-site": "deploy-site.sh"
@@ -51,5 +51,10 @@
     "unexpected": "^11.0.0-4",
     "unexpected-documentation-site-generator": "^5.0.0",
     "unexpected-markdown": "^2.0.0"
+  },
+  "nyc": {
+    "include": [
+      "lib/**"
+    ]
   }
 }
