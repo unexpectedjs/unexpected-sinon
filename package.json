@@ -22,7 +22,7 @@
     "test-headless": "karma start --single-run",
     "ci": "npm test && npm run test-headless && npm run coverage && (<coverage/lcov.info coveralls || true) && npm run lint && npm run generate-site",
     "test-browser": "serve .",
-    "coverage": "nyc --reporter=lcov --reporter=text npm test",
+    "coverage": "nyc --reporter=lcov --reporter=text npm test && echo google-chrome coverage/lcov-report/index.html",
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
     "update-examples": "generate-site --require ./bootstrap-unexpected-markdown.js --update-examples",
     "deploy-site": "deploy-site.sh"
