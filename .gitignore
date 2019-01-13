@@ -1,3 +1,4 @@
 /node_modules/
 /site-build/
 /coverage/
+/.nyc_output/
