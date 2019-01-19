@@ -29,6 +29,30 @@ describe('unexpected-sinon', function() {
     spy = sinon.spy().named('spy1');
   });
 
+  describe('deprecation warning', function() {
+    beforeEach(function() {
+      sinon.stub(console, 'warn');
+    });
+
+    afterEach(function() {
+      console.warn.restore();
+    });
+
+    it('renders a deprecation warning when "was called with" is called the first time', function() {
+      spy(123);
+      expect(spy, 'was called with', 123);
+      expect(console.warn, 'to have calls satisfying', function() {
+        console.warn(
+          "unexpected-sinon: The 'was [always] called with [exactly]' assertion is deprecated.\nPlease use 'to have a call satisfying' instead:\n" +
+            'http://unexpected.js.org/unexpected-sinon/assertions/spy/to-have-a-call-satisfying/'
+        );
+      });
+      // Make sure that the warning isn't triggered again the second time it's used:
+      expect(spy, 'was called with', 123);
+      expect(console.warn, 'was called once');
+    });
+  });
+
   it('should inspect a spy correctly', function() {
     expect(spy, 'to inspect as', /^spy\d+$/);
   });
