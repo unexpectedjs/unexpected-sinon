@@ -25,7 +25,7 @@
     "coverage": "nyc --reporter=lcov --reporter=text npm test && echo google-chrome coverage/lcov-report/index.html",
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
     "update-examples": "generate-site --require ./bootstrap-unexpected-markdown.js --update-examples",
-    "deploy-site": "deploy-site.sh"
+    "deploy-site": "deploy-site"
   },
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
