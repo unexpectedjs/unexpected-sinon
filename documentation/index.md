@@ -21,7 +21,7 @@ mocking library.
 
 ## Usage
 
-Here is an example an example stolen from
+Here is an example stolen from
 [Gary Bernhardt](https://twitter.com/garybernhardt).
 
 ```js
