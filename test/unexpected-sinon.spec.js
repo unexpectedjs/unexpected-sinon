@@ -2270,6 +2270,16 @@ describe('unexpected-sinon', function() {
         );
       });
 
+      it('should not fail when the spy has a property getter that throws', function() {
+        Object.defineProperty(spy, 'foo', {
+          get: function() {
+            throw new Error('oh dear');
+          }
+        });
+
+        expect(spy, 'to have calls satisfying', function() {});
+      });
+
       describe('when passed a sinon sandbox as the subject', function() {
         it('should succeed', function() {
           var sandbox = sinon.createSandbox();
