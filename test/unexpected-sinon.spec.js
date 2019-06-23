@@ -1,4 +1,4 @@
-/*global describe, it, beforeEach, sinon, unexpected*/
+/*global sinon, unexpected*/
 
 // Bogus class to be used with sinon.createStubInstance:
 function MyClass() {
