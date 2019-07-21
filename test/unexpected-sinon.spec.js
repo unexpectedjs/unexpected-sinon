@@ -1,4 +1,4 @@
-/*global sinon, unexpected*/
+/* global sinon, unexpected */
 
 // Bogus class to be used with sinon.createStubInstance:
 function MyClass() {
@@ -645,13 +645,13 @@ describe('unexpected-sinon', function() {
               });
             },
             'to error with',
-            'expected [ spy1, spy2 ] ' +
-              assertion +
-              ' spy2( 456 );\n' +
-              '\n' +
-              'spy1( 123 ); at theFunction (theFileName:xx:yy)\n' +
-              'spy2( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n' +
-              'spy1( 123 ); at theFunction (theFileName:xx:yy)'
+            `expected [ spy1, spy2 ] ${ 
+              assertion 
+              } spy2( 456 );\n` +
+              `\n` +
+              `spy1( 123 ); at theFunction (theFileName:xx:yy)\n` +
+              `spy2( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n` +
+              `spy1( 123 ); at theFunction (theFileName:xx:yy)`
           );
         });
 
@@ -667,11 +667,11 @@ describe('unexpected-sinon', function() {
               expect(spy, assertion, ['bar', expect.it('to be truthy')]);
             },
             'to throw exception',
-            'expected spy1 ' +
-              assertion +
-              " [ 'bar', expect.it('to be truthy') ]\n" +
-              '\n' +
-              "spy1( 'bar', 'true' ); at theFunction (theFileName:xx:yy) // should be removed"
+            `expected spy1 ${ 
+              assertion 
+              } [ 'bar', expect.it('to be truthy') ]\n` +
+              `\n` +
+              `spy1( 'bar', 'true' ); at theFunction (theFileName:xx:yy) // should be removed`
           );
         });
 
@@ -683,12 +683,12 @@ describe('unexpected-sinon', function() {
               expect(spy, assertion, { 0: 'bar' });
             },
             'to throw exception',
-            'expected spy1 ' +
-              assertion +
-              " { 0: 'bar' }\n" +
-              '\n' +
-              "spy1( 'foo' ); at theFunction (theFileName:xx:yy)\n" +
-              "spy1( 'bar', {} ); at theFunction (theFileName:xx:yy) // should be removed"
+            `expected spy1 ${ 
+              assertion 
+              } { 0: 'bar' }\n` +
+              `\n` +
+              `spy1( 'foo' ); at theFunction (theFileName:xx:yy)\n` +
+              `spy1( 'bar', {} ); at theFunction (theFileName:xx:yy) // should be removed`
           );
         });
 
@@ -713,13 +713,13 @@ describe('unexpected-sinon', function() {
                 });
               },
               'to error with',
-              'expected MyClass({ foo, bar }) ' +
-                assertion +
-                ' bar( 456 );\n' +
-                '\n' +
-                'foo( 123 ); at theFunction (theFileName:xx:yy)\n' +
-                'bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n' +
-                'foo( 123 ); at theFunction (theFileName:xx:yy)'
+              `expected MyClass({ foo, bar }) ${ 
+                assertion 
+                } bar( 456 );\n` +
+                `\n` +
+                `foo( 123 ); at theFunction (theFileName:xx:yy)\n` +
+                `bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n` +
+                `foo( 123 ); at theFunction (theFileName:xx:yy)`
             );
           });
 
@@ -736,13 +736,13 @@ describe('unexpected-sinon', function() {
                 });
               },
               'to error with',
-              'expected MyClass({ foo /* 1 more */ })\n' +
-                assertion +
-                ' bar( 456 );\n' +
-                '\n' +
-                'foo( 123 ); at theFunction (theFileName:xx:yy)\n' +
-                'bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n' +
-                'foo( 123 ); at theFunction (theFileName:xx:yy)'
+              `expected MyClass({ foo /* 1 more */ })\n${ 
+                assertion 
+                } bar( 456 );\n` +
+                `\n` +
+                `foo( 123 ); at theFunction (theFileName:xx:yy)\n` +
+                `bar( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n` +
+                `foo( 123 ); at theFunction (theFileName:xx:yy)`
             );
           });
         });
@@ -778,12 +778,12 @@ describe('unexpected-sinon', function() {
                 );
               },
               'to error with',
-              'expected [ MyClass({ foo, bar }), MyClass({ foo, bar }) ] ' +
-                assertion +
-                ' foo( 123 );\n' +
-                '\n' +
-                'foo( 123 ); at theFunction (theFileName:xx:yy)\n' +
-                'foo( 123 ); at theFunction (theFileName:xx:yy) // should be removed'
+              `expected [ MyClass({ foo, bar }), MyClass({ foo, bar }) ] ${ 
+                assertion 
+                } foo( 123 );\n` +
+                `\n` +
+                `foo( 123 ); at theFunction (theFileName:xx:yy)\n` +
+                `foo( 123 ); at theFunction (theFileName:xx:yy) // should be removed`
             );
           });
         });
@@ -806,12 +806,12 @@ describe('unexpected-sinon', function() {
                 });
               },
               'to throw',
-              'expected spy1 ' +
-                assertion +
-                ' { args: [ 456 ] }\n' +
-                '\n' +
-                'spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n' +
-                'spy1( 567 ); at theFunction (theFileName:xx:yy)'
+              `expected spy1 ${ 
+                assertion 
+                } { args: [ 456 ] }\n` +
+                `\n` +
+                `spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed\n` +
+                `spy1( 567 ); at theFunction (theFileName:xx:yy)`
             );
           });
         });
@@ -829,11 +829,11 @@ describe('unexpected-sinon', function() {
                 expect(spy, assertion, [123, { foo: 'bar' }]);
               },
               'to throw',
-              'expected spy1 ' +
-                assertion +
-                " [ 123, { foo: 'bar' } ]\n" +
-                '\n' +
-                "spy1( 123, { foo: 'bar' } ); at theFunction (theFileName:xx:yy) // should be removed"
+              `expected spy1 ${ 
+                assertion 
+                } [ 123, { foo: 'bar' } ]\n` +
+                `\n` +
+                `spy1( 123, { foo: 'bar' } ); at theFunction (theFileName:xx:yy) // should be removed`
             );
           });
         });
@@ -851,11 +851,11 @@ describe('unexpected-sinon', function() {
                 expect(spy, assertion, { 0: 123, 1: { foo: 'baz' } });
               },
               'to throw',
-              'expected spy1 ' +
-                assertion +
-                " { 0: 123, 1: { foo: 'baz' } }\n" +
-                '\n' +
-                "spy1( 123, { foo: 'baz' } ); at theFunction (theFileName:xx:yy) // should be removed"
+              `expected spy1 ${ 
+                assertion 
+                } { 0: 123, 1: { foo: 'baz' } }\n` +
+                `\n` +
+                `spy1( 123, { foo: 'baz' } ); at theFunction (theFileName:xx:yy) // should be removed`
             );
           });
         });
@@ -874,10 +874,10 @@ describe('unexpected-sinon', function() {
                 expect(spy, assertion, function() {});
               },
               'to throw',
-              'expected spy1 ' +
-                assertion +
-                ' function () {}\n' +
-                '  expected the provided function to call the spy exactly once, but it called it 0 times'
+              `expected spy1 ${ 
+                assertion 
+                } function () {}\n` +
+                `  expected the provided function to call the spy exactly once, but it called it 0 times`
             );
           });
 
@@ -890,12 +890,12 @@ describe('unexpected-sinon', function() {
                 });
               },
               'to throw',
-              'expected spy1 ' +
-                assertion +
-                '\n' +
-                'spy1( 123 );\n' +
-                'spy1( 456 );\n' +
-                '  expected the provided function to call the spy exactly once, but it called it 2 times'
+              `expected spy1 ${ 
+                assertion 
+                }\n` +
+                `spy1( 123 );\n` +
+                `spy1( 456 );\n` +
+                `  expected the provided function to call the spy exactly once, but it called it 2 times`
             );
           });
 
@@ -909,12 +909,12 @@ describe('unexpected-sinon', function() {
                 });
               },
               'to throw',
-              'expected spy1 ' +
-                assertion +
-                ' spy1( 456 );\n' +
-                '\n' +
-                'spy1( 123 ); at theFunction (theFileName:xx:yy)\n' +
-                'spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed'
+              `expected spy1 ${ 
+                assertion 
+                } spy1( 456 );\n` +
+                `\n` +
+                `spy1( 123 ); at theFunction (theFileName:xx:yy)\n` +
+                `spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed`
             );
           });
         });
@@ -938,11 +938,11 @@ describe('unexpected-sinon', function() {
                 return expect(sandbox, assertion, { spy: spy1, args: [456] });
               },
               'to error with',
-              'expected sinon sandbox ' +
-                assertion +
-                ' { spy: spy1, args: [ 456 ] }\n' +
-                '\n' +
-                'spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed'
+              `expected sinon sandbox ${ 
+                assertion 
+                } { spy: spy1, args: [ 456 ] }\n` +
+                `\n` +
+                `spy1( 456 ); at theFunction (theFileName:xx:yy) // should be removed`
             );
           });
         });
@@ -970,12 +970,12 @@ describe('unexpected-sinon', function() {
                 });
               },
               'to error with',
-              'expected [ spy1, spy2 ] ' +
-                assertion +
-                ' { spy: spy1, args: [ 123 ] }\n' +
-                '\n' +
-                'spy1( 123 ); at theFunction (theFileName:xx:yy) // should be removed\n' +
-                'spy2( 456 ); at theFunction (theFileName:xx:yy)'
+              `expected [ spy1, spy2 ] ${ 
+                assertion 
+                } { spy: spy1, args: [ 123 ] }\n` +
+                `\n` +
+                `spy1( 123 ); at theFunction (theFileName:xx:yy) // should be removed\n` +
+                `spy2( 456 ); at theFunction (theFileName:xx:yy)`
             );
           });
         });

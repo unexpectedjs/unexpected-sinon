@@ -1,4 +1,4 @@
-/*global unexpected:true, sinon:true*/
+/* global unexpected:true, sinon:true */
 /* exported Promise, sinon */
 unexpected = require('unexpected')
   .clone()
