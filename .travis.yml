@@ -16,8 +16,8 @@ matrix:
       env:
         - TARGET=lint
     - name: Coverage
-      env:
       node_js: '8.10.0'
+      env:
         - TARGET=coverage
     - name: Chrome headless
       node_js: '8.10.0'
