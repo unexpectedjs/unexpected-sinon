@@ -6,23 +6,23 @@ env:
 node_js:
   - '6'
   - '7'
-  - '8.7.0'
+  - '8.10.0'
   - '10'
 
 matrix:
   include:
-  - name: Lint
-    node_js: '8.7.0'
-    env:
-      - TARGET=lint
-  - name: Coverage
-    node_js: '8.7.0'
-    env:
-      - TARGET=coverage
-  - name: Chrome headless
-    node_js: '8.7.0'
-    env:
-      - TARGET=test-headless
+    - name: Lint
+      node_js: '8.10.0'
+      env:
+        - TARGET=lint
+    - name: Coverage
+      node_js: '8.10.0'
+      env:
+        - TARGET=coverage
+    - name: Chrome headless
+      node_js: '8.10.0'
+      env:
+        - TARGET=test-headless
 
 script: npm run $TARGET
 
