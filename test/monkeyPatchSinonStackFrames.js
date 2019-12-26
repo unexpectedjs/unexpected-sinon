@@ -66,16 +66,6 @@
     replace(name, sinon);
   });
 
-  if (sinon.sandbox.create) {
-    var originalSandboxCreate = sinon.sandbox.create;
-    sinon.sandbox.create = function() {
-      var sandbox = originalSandboxCreate.apply(this, arguments);
-      replace('spy', sandbox);
-      replace('stub', sandbox);
-      return sandbox;
-    };
-  }
-
   if (sinon.createSandbox) {
     var originalCreateSandbox = sinon.createSandbox;
     sinon.createSandbox = function() {
