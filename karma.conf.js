@@ -1,7 +1,7 @@
 var puppeteer = require('puppeteer');
 process.env.CHROME_BIN = puppeteer.executablePath();
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     frameworks: ['mocha'],
 
@@ -11,16 +11,16 @@ module.exports = function(config) {
       './lib/unexpected-sinon.js',
       './test/common/browser.js',
       './test/monkeyPatchSinonStackFrames.js',
-      './test/unexpected-sinon.spec.js'
+      './test/unexpected-sinon.spec.js',
     ],
 
     client: {
       mocha: {
         reporter: 'html',
-        timeout: 60000
-      }
+        timeout: 60000,
+      },
     },
 
-    browsers: ['ChromeHeadless']
+    browsers: ['ChromeHeadless'],
   });
 };

@@ -4,14 +4,14 @@
 function MyClass() {
   throw new Error('oh no');
 }
-MyClass.prototype.foo = function() {
+MyClass.prototype.foo = function () {
   throw new Error('oh no');
 };
-MyClass.prototype.bar = function() {
+MyClass.prototype.bar = function () {
   throw new Error('oh no');
 };
 
-unexpected.addAssertion('<any> to inspect as <any>', function(
+unexpected.addAssertion('<any> to inspect as <any>', function (
   expect,
   subject,
   value
@@ -20,28 +20,28 @@ unexpected.addAssertion('<any> to inspect as <any>', function(
   expect(expect.inspect(subject).toString(), 'to satisfy', value);
 });
 
-describe('unexpected-sinon', function() {
+describe('unexpected-sinon', function () {
   var expect, spy;
 
-  beforeEach(function() {
+  beforeEach(function () {
     expect = unexpected.clone();
     expect.output.preferredWidth = 120;
     spy = sinon.spy().named('spy1');
   });
 
-  describe('deprecation warning', function() {
-    beforeEach(function() {
+  describe('deprecation warning', function () {
+    beforeEach(function () {
       sinon.stub(console, 'warn');
     });
 
-    afterEach(function() {
+    afterEach(function () {
       console.warn.restore();
     });
 
-    it('renders a deprecation warning when "was called with" is called the first time', function() {
+    it('renders a deprecation warning when "was called with" is called the first time', function () {
       spy(123);
       expect(spy, 'was called with', 123);
-      expect(console.warn, 'to have calls satisfying', function() {
+      expect(console.warn, 'to have calls satisfying', function () {
         console.warn(
           "unexpected-sinon: The 'was [always] called with [exactly]' assertion is deprecated.\nPlease use 'to have a call satisfying' instead:\n" +
             'http://unexpected.js.org/unexpected-sinon/assertions/spy/to-have-a-call-satisfying/'
@@ -53,27 +53,27 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  it('should inspect a spy correctly', function() {
+  it('should inspect a spy correctly', function () {
     expect(spy, 'to inspect as', /^spy\d+$/);
   });
 
-  it('should inspect a stub correctly', function() {
+  it('should inspect a stub correctly', function () {
     expect(sinon.stub(), 'to inspect as', /^stub\d+$/);
   });
 
-  it('should inspect a fake correctly', function() {
+  it('should inspect a fake correctly', function () {
     expect(sinon.fake(), 'to inspect as', /^fake\d+$/);
   });
 
-  describe('was called', function() {
-    it('passes if spy was called at least once', function() {
+  describe('was called', function () {
+    it('passes if spy was called at least once', function () {
       spy();
       expect(spy, 'was called');
     });
 
-    it('fails if spy was never called', function() {
+    it('fails if spy was never called', function () {
       expect(
-        function() {
+        function () {
           expect(spy, 'was called');
         },
         'to throw exception',
@@ -82,14 +82,14 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was not called', function() {
-    it('passes if spy was never called', function() {
+  describe('was not called', function () {
+    it('passes if spy was never called', function () {
       expect(spy, 'was not called');
     });
 
-    it('fails if spy was called', function() {
+    it('fails if spy was called', function () {
       expect(
-        function() {
+        function () {
           spy(42, { foo: 'bar' });
           spy('baz');
           expect(spy, 'was not called');
@@ -103,15 +103,15 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was called once', function() {
-    it('passes if spy was called once and only once', function() {
+  describe('was called once', function () {
+    it('passes if spy was called once and only once', function () {
       spy();
       expect(spy, 'was called once');
     });
 
-    it('fails if spy was not called exactly once', function() {
+    it('fails if spy was not called exactly once', function () {
       expect(
-        function() {
+        function () {
           expect(spy, 'was called once');
         },
         'to throw exception',
@@ -119,7 +119,7 @@ describe('unexpected-sinon', function() {
       );
 
       expect(
-        function() {
+        function () {
           spy(42, { foo: 'bar' });
           spy('baz');
           expect(spy, 'was called once');
@@ -135,16 +135,16 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was called twice', function() {
-    it('passes if spy was called exactly twice', function() {
+  describe('was called twice', function () {
+    it('passes if spy was called exactly twice', function () {
       spy();
       spy();
       expect(spy, 'was called twice');
     });
 
-    it('fails if spy was not called exactly twice', function() {
+    it('fails if spy was not called exactly twice', function () {
       expect(
-        function() {
+        function () {
           expect(spy, 'was called twice');
         },
         'to throw exception',
@@ -152,7 +152,7 @@ describe('unexpected-sinon', function() {
       );
 
       expect(
-        function() {
+        function () {
           var spy = sinon.spy().named('spy1');
           spy();
           expect(spy, 'was called twice');
@@ -164,7 +164,7 @@ describe('unexpected-sinon', function() {
       );
 
       expect(
-        function() {
+        function () {
           var spy = sinon.spy().named('spy1');
           spy();
           spy(42);
@@ -183,17 +183,17 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was called thrice', function() {
-    it('passes if spy was called exactly three times', function() {
+  describe('was called thrice', function () {
+    it('passes if spy was called exactly three times', function () {
       spy();
       spy();
       spy();
       expect(spy, 'was called thrice');
     });
 
-    it('fails if spy was not called exactly three times', function() {
+    it('fails if spy was not called exactly three times', function () {
       expect(
-        function() {
+        function () {
           var spy = sinon.spy().named('spy1');
           spy();
           spy();
@@ -209,7 +209,7 @@ describe('unexpected-sinon', function() {
       );
 
       expect(
-        function() {
+        function () {
           var spy = sinon.spy().named('spy1');
           spy();
           spy();
@@ -230,8 +230,8 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was called times', function() {
-    it('passes if the spy was called exactly number of times', function() {
+  describe('was called times', function () {
+    it('passes if the spy was called exactly number of times', function () {
       var spy = sinon.spy();
       spy();
       spy();
@@ -241,9 +241,9 @@ describe('unexpected-sinon', function() {
       expect(spy, 'was called times', 5);
     });
 
-    it('fails if the spy was not called exactly number of times', function() {
+    it('fails if the spy was not called exactly number of times', function () {
       expect(
-        function() {
+        function () {
           var spy = sinon.spy().named('spy1');
           spy();
           spy();
@@ -259,7 +259,7 @@ describe('unexpected-sinon', function() {
       );
 
       expect(
-        function() {
+        function () {
           var spy = sinon.spy().named('spy1');
           spy();
           spy();
@@ -280,14 +280,14 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was called the new operator', function() {
-    it('passes if spy was called the new operator', function() {
+  describe('was called the new operator', function () {
+    it('passes if spy was called the new operator', function () {
       new spy(); // eslint-disable-line no-new, new-cap
       expect(spy, 'was called with new');
     });
-    it('fails if spy was never called with new operator', function() {
+    it('fails if spy was never called with new operator', function () {
       expect(
-        function() {
+        function () {
           var spy = sinon.spy().named('spy1');
           spy();
           expect(spy, 'was called with new');
@@ -298,8 +298,8 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('given call order', function() {
-    it('passes if the provided spies where called in the given order', function() {
+  describe('given call order', function () {
+    it('passes if the provided spies where called in the given order', function () {
       var agent005 = sinon.spy().named('agent005');
       var agent006 = sinon.spy().named('agent006');
       var agent007 = sinon.spy().named('agent007');
@@ -309,7 +309,7 @@ describe('unexpected-sinon', function() {
       expect([agent005, agent006, agent007], 'given call order');
     });
 
-    it('passes if the provided spies were called multiple times in the given order', function() {
+    it('passes if the provided spies were called multiple times in the given order', function () {
       var agent005 = sinon.spy().named('agent005');
       var agent006 = sinon.spy().named('agent006');
       var agent007 = sinon.spy().named('agent007');
@@ -325,7 +325,7 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('passes if the provided spies were called multiple times in the wrong order', function() {
+    it('passes if the provided spies were called multiple times in the wrong order', function () {
       var agent005 = sinon.spy().named('agent005');
       var agent006 = sinon.spy().named('agent006');
       var agent007 = sinon.spy().named('agent007');
@@ -336,7 +336,7 @@ describe('unexpected-sinon', function() {
       agent006();
       agent007();
       expect(
-        function() {
+        function () {
           expect(
             [agent005, agent006, agent007, agent005, agent006, agent005],
             'given call order'
@@ -354,9 +354,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('fails if the provided spies were all called, but not in the given order', function() {
+    it('fails if the provided spies were all called, but not in the given order', function () {
       expect(
-        function() {
+        function () {
           var agent005 = sinon.spy().named('agent005');
           var agent006 = sinon.spy().named('agent006');
           var agent007 = sinon.spy().named('agent007');
@@ -375,9 +375,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('fails if one of the spies was never called', function() {
+    it('fails if one of the spies was never called', function () {
       expect(
-        function() {
+        function () {
           var agent005 = sinon.spy().named('agent005');
           var agent006 = sinon.spy().named('agent006');
           var agent007 = sinon.spy().named('agent007');
@@ -394,9 +394,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('fails with an intelligible error message when none of the spies were called', function() {
+    it('fails with an intelligible error message when none of the spies were called', function () {
       expect(
-        function() {
+        function () {
           var agent005 = sinon.spy().named('agent005');
           var agent006 = sinon.spy().named('agent006');
           var agent007 = sinon.spy().named('agent007');
@@ -412,19 +412,19 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was called on', function() {
-    it('passes if the spy was ever called with obj as its this value', function() {
+  describe('was called on', function () {
+    it('passes if the spy was ever called with obj as its this value', function () {
       var obj = {
-        spy: sinon.spy()
+        spy: sinon.spy(),
       };
       obj.spy();
       obj.spy.call(null);
       expect(obj.spy, 'was called on', obj);
     });
 
-    it('fails if the spy was never called with obj as its this value', function() {
+    it('fails if the spy was never called with obj as its this value', function () {
       expect(
-        function() {
+        function () {
           expect(spy, 'was called on', { other: true });
         },
         'to throw exception',
@@ -434,21 +434,21 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was always called on', function() {
-    it('passes if the spy was always called with obj as its this value', function() {
+  describe('was always called on', function () {
+    it('passes if the spy was always called with obj as its this value', function () {
       var obj = {
-        spy: sinon.spy()
+        spy: sinon.spy(),
       };
       obj.spy();
       obj.spy();
       expect(obj.spy, 'was always called on', obj);
     });
 
-    it('fails if the spy was called with another obj as its this value', function() {
+    it('fails if the spy was called with another obj as its this value', function () {
       expect(
-        function() {
+        function () {
           var obj = {
-            spy: sinon.spy().named('spy1')
+            spy: sinon.spy().named('spy1'),
           };
           obj.spy();
           obj.spy.call(null);
@@ -465,8 +465,8 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was called with', function() {
-    it('passes if the spy was called with the provided arguments', function() {
+  describe('was called with', function () {
+    it('passes if the spy was called with the provided arguments', function () {
       spy('something else');
       spy({ foo: 'bar' }, 'baz', true, false);
       expect(
@@ -478,16 +478,16 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('considers arguments to be satisfied if they satisfy Object.is', function() {
+    it('considers arguments to be satisfied if they satisfy Object.is', function () {
       var circular = {};
       circular.loop = circular;
       spy(circular);
       expect(spy, 'was called with', circular);
     });
 
-    it('fails if the spy was not called with the provided arguments', function() {
+    it('fails if the spy was not called with the provided arguments', function () {
       expect(
-        function() {
+        function () {
           spy({ foo: 'baa' }, 'baz', true, false);
           expect(
             spy,
@@ -515,8 +515,8 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was always called with', function() {
-    it('passes if the spy was always called with the provided arguments', function() {
+  describe('was always called with', function () {
+    it('passes if the spy was always called with the provided arguments', function () {
       spy({ foo: 'bar' }, 'baz', true, false);
       spy({ foo: 'bar' }, 'baz', true, false);
       expect(
@@ -528,9 +528,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('fails if the spy was called once with other arguments then the provided', function() {
+    it('fails if the spy was called once with other arguments then the provided', function () {
       expect(
-        function() {
+        function () {
           spy('something else');
           spy({ foo: 'bar' }, 'baz', true, false);
           expect(
@@ -553,9 +553,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('renders a nice diff for extraneous arguments', function() {
+    it('renders a nice diff for extraneous arguments', function () {
       expect(
-        function() {
+        function () {
           spy('a', 'b', 'c');
           expect(spy, 'was always called with exactly', 'a', 'c');
         },
@@ -570,9 +570,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('renders a nice diff for missing arguments', function() {
+    it('renders a nice diff for missing arguments', function () {
       expect(
-        function() {
+        function () {
           spy('a', 'c');
           expect(spy, 'was always called with exactly', 'a', 'b', 'c');
         },
@@ -588,15 +588,15 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was never called with', function() {
-    it('passes if the spy was never called with the provided arguments', function() {
+  describe('was never called with', function () {
+    it('passes if the spy was never called with the provided arguments', function () {
       spy('foo', 'true');
       expect(spy, 'was never called with', 'bar', expect.it('to be truthy'));
     });
 
-    it('fails if the spy was called with the provided arguments', function() {
+    it('fails if the spy was called with the provided arguments', function () {
       expect(
-        function() {
+        function () {
           spy('bar', 'true');
           expect(
             spy,
@@ -613,9 +613,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('fails if the spy has a call that satisfies the criteria and another call that does not', function() {
+    it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
       expect(
-        function() {
+        function () {
           spy('foo');
           spy('bar', {});
           expect(spy, 'was never called with', 'bar');
@@ -630,17 +630,17 @@ describe('unexpected-sinon', function() {
   });
 
   ['to have no calls satisfying', 'not to have calls satisfying'].forEach(
-    function(assertion) {
-      describe(assertion, function() {
+    function (assertion) {
+      describe(assertion, function () {
         // Regression test
-        it('should order the calls in the timeline correctly', function() {
+        it('should order the calls in the timeline correctly', function () {
           var spy2 = sinon.spy().named('spy2');
           spy(123);
           spy2(456);
           spy(123);
           return expect(
-            function() {
-              return expect([spy, spy2], assertion, function() {
+            function () {
+              return expect([spy, spy2], assertion, function () {
                 spy2(456);
               });
             },
@@ -653,14 +653,14 @@ describe('unexpected-sinon', function() {
           );
         });
 
-        it('passes if the spy was never called with the provided arguments', function() {
+        it('passes if the spy was never called with the provided arguments', function () {
           spy('foo', 'true');
           expect(spy, assertion, ['bar', expect.it('to be truthy')]);
         });
 
-        it('fails if the spy was called with the provided arguments', function() {
+        it('fails if the spy was called with the provided arguments', function () {
           expect(
-            function() {
+            function () {
               spy('bar', 'true');
               expect(spy, assertion, ['bar', expect.it('to be truthy')]);
             },
@@ -671,9 +671,9 @@ describe('unexpected-sinon', function() {
           );
         });
 
-        it('fails if the spy has a call that satisfies the criteria and another call that does not', function() {
+        it('fails if the spy has a call that satisfies the criteria and another call that does not', function () {
           expect(
-            function() {
+            function () {
               spy('foo');
               spy('bar', {});
               expect(spy, assertion, { 0: 'bar' });
@@ -686,23 +686,23 @@ describe('unexpected-sinon', function() {
           );
         });
 
-        describe('when passed a sinon stub instance as the subject', function() {
-          it('should succeed', function() {
+        describe('when passed a sinon stub instance as the subject', function () {
+          it('should succeed', function () {
             var stubInstance = sinon.createStubInstance(MyClass);
             stubInstance.foo(123);
-            return expect(stubInstance, assertion, function() {
+            return expect(stubInstance, assertion, function () {
               stubInstance.foo(456);
             });
           });
 
-          it('should fail with a diff', function() {
+          it('should fail with a diff', function () {
             var stubInstance = sinon.createStubInstance(MyClass);
             stubInstance.foo(123);
             stubInstance.bar(456);
             stubInstance.foo(123);
             return expect(
-              function() {
-                return expect(stubInstance, assertion, function() {
+              function () {
+                return expect(stubInstance, assertion, function () {
                   stubInstance.bar(456);
                 });
               },
@@ -715,15 +715,15 @@ describe('unexpected-sinon', function() {
             );
           });
 
-          it('should dot out the list of contained spies when they exceed expect.output.preferredWidth', function() {
+          it('should dot out the list of contained spies when they exceed expect.output.preferredWidth', function () {
             expect.output.preferredWidth = 45;
             var stubInstance = sinon.createStubInstance(MyClass);
             stubInstance.foo(123);
             stubInstance.bar(456);
             stubInstance.foo(123);
             return expect(
-              function() {
-                return expect(stubInstance, assertion, function() {
+              function () {
+                return expect(stubInstance, assertion, function () {
                   stubInstance.bar(456);
                 });
               },
@@ -737,8 +737,8 @@ describe('unexpected-sinon', function() {
           });
         });
 
-        describe('when passed an array of sinon stub instances as the subject', function() {
-          it('should succeed', function() {
+        describe('when passed an array of sinon stub instances as the subject', function () {
+          it('should succeed', function () {
             var stubInstance1 = sinon.createStubInstance(MyClass);
             stubInstance1.foo(123);
             var stubInstance2 = sinon.createStubInstance(MyClass);
@@ -746,23 +746,23 @@ describe('unexpected-sinon', function() {
             return expect(
               [stubInstance1, stubInstance2],
               assertion,
-              function() {
+              function () {
                 stubInstance1.foo(456);
               }
             );
           });
 
-          it('should fail with a diff', function() {
+          it('should fail with a diff', function () {
             var stubInstance1 = sinon.createStubInstance(MyClass);
             stubInstance1.foo(123);
             var stubInstance2 = sinon.createStubInstance(MyClass);
             stubInstance2.foo(123);
             return expect(
-              function() {
+              function () {
                 return expect(
                   [stubInstance1, stubInstance2],
                   assertion,
-                  function() {
+                  function () {
                     stubInstance1.foo(123);
                   }
                 );
@@ -776,21 +776,21 @@ describe('unexpected-sinon', function() {
           });
         });
 
-        describe('when passed a spec object', function() {
-          it('should succeed when no spy call satisfies the spec', function() {
+        describe('when passed a spec object', function () {
+          it('should succeed when no spy call satisfies the spec', function () {
             spy(123, 456);
             expect(spy, assertion, {
-              args: [789]
+              args: [789],
             });
           });
 
-          it('should fail when the spy was called with the provided parameters', function() {
+          it('should fail when the spy was called with the provided parameters', function () {
             spy(456);
             spy(567);
             expect(
-              function() {
+              function () {
                 expect(spy, assertion, {
-                  args: [456]
+                  args: [456],
                 });
               },
               'to throw',
@@ -802,15 +802,15 @@ describe('unexpected-sinon', function() {
           });
         });
 
-        describe('when passed an array (shorthand for {args: ...})', function() {
-          it('should succeed', function() {
+        describe('when passed an array (shorthand for {args: ...})', function () {
+          it('should succeed', function () {
             spy(123, { foo: 'baz' });
             expect(spy, assertion, [123, { foo: 'bar' }]);
           });
 
-          it('should fail with a diff', function() {
+          it('should fail with a diff', function () {
             expect(
-              function() {
+              function () {
                 spy(123, { foo: 'bar' });
                 expect(spy, assertion, [123, { foo: 'bar' }]);
               },
@@ -822,15 +822,15 @@ describe('unexpected-sinon', function() {
           });
         });
 
-        describe('when passed an array with only numerical properties (shorthand for {args: ...})', function() {
-          it('should succeed', function() {
+        describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+          it('should succeed', function () {
             spy(123, { foo: 'bar' });
             expect(spy, assertion, { 0: 123, 1: { foo: 'baz' } });
           });
 
-          it('should fail with a diff', function() {
+          it('should fail with a diff', function () {
             expect(
-              function() {
+              function () {
                 spy(123, { foo: 'baz' });
                 expect(spy, assertion, { 0: 123, 1: { foo: 'baz' } });
               },
@@ -842,18 +842,18 @@ describe('unexpected-sinon', function() {
           });
         });
 
-        describe('when passed a function that performs the expected call', function() {
-          it('should succeed when a spy call satisfies the spec', function() {
+        describe('when passed a function that performs the expected call', function () {
+          it('should succeed when a spy call satisfies the spec', function () {
             spy(123, 789);
-            expect(spy, assertion, function() {
+            expect(spy, assertion, function () {
               spy(123, 456);
             });
           });
 
-          it('should fail if the function does not call the spy', function() {
+          it('should fail if the function does not call the spy', function () {
             expect(
-              function() {
-                expect(spy, assertion, function() {});
+              function () {
+                expect(spy, assertion, function () {});
               },
               'to throw',
               `expected spy1 ${assertion} function () {}\n` +
@@ -861,10 +861,10 @@ describe('unexpected-sinon', function() {
             );
           });
 
-          it('should fail if the function calls the spy more than once', function() {
+          it('should fail if the function calls the spy more than once', function () {
             expect(
-              function() {
-                expect(spy, assertion, function() {
+              function () {
+                expect(spy, assertion, function () {
                   spy(123);
                   spy(456);
                 });
@@ -877,12 +877,12 @@ describe('unexpected-sinon', function() {
             );
           });
 
-          it('should fail when the spy was called with the given arguments', function() {
+          it('should fail when the spy was called with the given arguments', function () {
             spy(123);
             spy(456);
             expect(
-              function() {
-                expect(spy, assertion, function() {
+              function () {
+                expect(spy, assertion, function () {
                   spy(456);
                 });
               },
@@ -895,8 +895,8 @@ describe('unexpected-sinon', function() {
           });
         });
 
-        describe('when passed a sinon sandbox as the subject', function() {
-          it('should succeed', function() {
+        describe('when passed a sinon sandbox as the subject', function () {
+          it('should succeed', function () {
             var sandbox = sinon.createSandbox();
             var spy1 = sandbox.spy().named('spy1');
             var spy2 = sandbox.spy().named('spy2');
@@ -905,12 +905,12 @@ describe('unexpected-sinon', function() {
             return expect(sandbox, assertion, { spy: spy1, args: [789] });
           });
 
-          it('should fail with a diff', function() {
+          it('should fail with a diff', function () {
             var sandbox = sinon.createSandbox();
             var spy1 = sandbox.spy().named('spy1');
             spy1(456);
             return expect(
-              function() {
+              function () {
                 return expect(sandbox, assertion, { spy: spy1, args: [456] });
               },
               'to error with',
@@ -921,8 +921,8 @@ describe('unexpected-sinon', function() {
           });
         });
 
-        describe('when passed an array of spies as the subject', function() {
-          it('should succeed', function() {
+        describe('when passed an array of spies as the subject', function () {
+          it('should succeed', function () {
             var spy1 = sinon.spy().named('spy1');
             var spy2 = sinon.spy().named('spy2');
             spy1(123);
@@ -930,17 +930,17 @@ describe('unexpected-sinon', function() {
             return expect([spy1, spy2], assertion, { spy: spy1, args: [789] });
           });
 
-          it('should fail with a diff', function() {
+          it('should fail with a diff', function () {
             var sandbox = sinon.createSandbox();
             var spy1 = sandbox.spy().named('spy1');
             var spy2 = sandbox.spy().named('spy2');
             spy1(123);
             spy2(456);
             return expect(
-              function() {
+              function () {
                 return expect([spy1, spy2], assertion, {
                   spy: spy1,
-                  args: [123]
+                  args: [123],
                 });
               },
               'to error with',
@@ -955,8 +955,8 @@ describe('unexpected-sinon', function() {
     }
   );
 
-  describe('was called with exactly', function() {
-    it('passes if the spy was called with the provided arguments and no others', function() {
+  describe('was called with exactly', function () {
+    it('passes if the spy was called with the provided arguments and no others', function () {
       spy('foo', 'bar', 'baz');
       spy('foo', 'bar', 'baz');
       expect(
@@ -968,9 +968,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('fails if the spy was never called with the provided arguments and no others', function() {
+    it('fails if the spy was never called with the provided arguments and no others', function () {
       expect(
-        function() {
+        function () {
           spy('foo', 'bar', 'baz', 'qux');
           expect(
             spy,
@@ -993,8 +993,8 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('was always called with exactly', function() {
-    it('passes if the spy was always called with the provided arguments and no others', function() {
+  describe('was always called with exactly', function () {
+    it('passes if the spy was always called with the provided arguments and no others', function () {
       spy('foo', 'bar', 'baz');
       spy('foo', 'bar', 'baz');
       expect(
@@ -1006,9 +1006,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('fails if the spy was ever called with anything else than the provided arguments', function() {
+    it('fails if the spy was ever called with anything else than the provided arguments', function () {
       expect(
-        function() {
+        function () {
           spy('foo', 'bar', 'baz');
           spy('foo', 'bar', 'baz', 'qux');
           expect(
@@ -1033,9 +1033,9 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('threw', function() {
-    describe('without arguments', function() {
-      it('passes if the spy threw an exception', function() {
+  describe('threw', function () {
+    describe('without arguments', function () {
+      it('passes if the spy threw an exception', function () {
         var stub = sinon.stub();
         stub.throws();
         try {
@@ -1044,9 +1044,9 @@ describe('unexpected-sinon', function() {
         expect(stub, 'threw');
       });
 
-      it('fails if the spy never threw an exception', function() {
+      it('fails if the spy never threw an exception', function () {
         expect(
-          function() {
+          function () {
             expect(spy, 'threw');
           },
           'to throw exception',
@@ -1055,8 +1055,8 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('given a string as argument', function() {
-      it('passes if the spy threw an exception of the given type', function() {
+    describe('given a string as argument', function () {
+      it('passes if the spy threw an exception of the given type', function () {
         var stub = sinon.stub();
         stub.throws('TypeError');
         try {
@@ -1065,9 +1065,9 @@ describe('unexpected-sinon', function() {
         expect(stub, 'threw', { name: 'TypeError' });
       });
 
-      it('fails if the spy never threw an exception of the given type', function() {
+      it('fails if the spy never threw an exception of the given type', function () {
         expect(
-          function() {
+          function () {
             var stub = sinon.stub().named('myStub');
             stub.throws('Error');
             try {
@@ -1092,8 +1092,8 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('given a object as argument', function() {
-      it('passes if the spy threw the given exception', function() {
+    describe('given a object as argument', function () {
+      it('passes if the spy threw the given exception', function () {
         var stub = sinon.stub();
         var error = new Error();
         stub.throws(error);
@@ -1103,9 +1103,9 @@ describe('unexpected-sinon', function() {
         expect(stub, 'threw', error);
       });
 
-      it('fails if the spy never threw the given exception', function() {
+      it('fails if the spy never threw the given exception', function () {
         expect(
-          function() {
+          function () {
             var stub = sinon.stub().named('myStub');
             stub.throws(new TypeError());
             try {
@@ -1123,9 +1123,9 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('always threw', function() {
-    describe('without arguments', function() {
-      it('passes if the spy always threw an exception', function() {
+  describe('always threw', function () {
+    describe('without arguments', function () {
+      it('passes if the spy always threw an exception', function () {
         var stub = sinon.stub();
         stub.throws();
         try {
@@ -1137,12 +1137,12 @@ describe('unexpected-sinon', function() {
         expect(stub, 'always threw');
       });
 
-      it('fails if the spy did not always threw an exception', function() {
+      it('fails if the spy did not always threw an exception', function () {
         expect(
-          function() {
+          function () {
             var hasThrown = false;
             var spy = sinon
-              .spy(function() {
+              .spy(function () {
                 if (!hasThrown) {
                   hasThrown = true;
                   throw Error();
@@ -1164,8 +1164,8 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('given a string as argument', function() {
-      it('passes if the spy always threw an exception of the given type', function() {
+    describe('given a string as argument', function () {
+      it('passes if the spy always threw an exception of the given type', function () {
         var stub = sinon.stub();
         stub.throws('Error');
         try {
@@ -1177,12 +1177,12 @@ describe('unexpected-sinon', function() {
         expect(stub, 'always threw', { name: 'Error' });
       });
 
-      it('fails if the spy did not always threw an exception of the given type', function() {
+      it('fails if the spy did not always threw an exception of the given type', function () {
         expect(
-          function() {
+          function () {
             var stub = sinon.stub().named('myStub');
             var callNumber = 0;
-            stub.callsFake(function() {
+            stub.callsFake(function () {
               callNumber += 1;
               if (callNumber === 1) {
                 throw new Error();
@@ -1216,8 +1216,8 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('given a object as argument', function() {
-      it('passes if the spy always threw the given exception', function() {
+    describe('given a object as argument', function () {
+      it('passes if the spy always threw the given exception', function () {
         var stub = sinon.stub();
         var error = new Error();
         stub.throws(error);
@@ -1230,9 +1230,9 @@ describe('unexpected-sinon', function() {
         expect(stub, 'always threw', error);
       });
 
-      it('fails if the spy did not always threw the given exception', function() {
+      it('fails if the spy did not always threw the given exception', function () {
         expect(
-          function() {
+          function () {
             var stub = sinon.stub().named('myStub');
             var error = new Error();
             stub.throws(error);
@@ -1256,10 +1256,10 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('spyCall to satisfy', function() {
-    it('should throw if an unsupported key is used', function() {
+  describe('spyCall to satisfy', function () {
+    it('should throw if an unsupported key is used', function () {
       expect(
-        function() {
+        function () {
           spy(123);
           expect(spy, 'to have calls satisfying', [{ foobar: 123 }]);
         },
@@ -1269,28 +1269,28 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('to have a call satisfying', function() {
-    describe('when passed a sinon stub instance as the subject', function() {
-      it('should succeed', function() {
+  describe('to have a call satisfying', function () {
+    describe('when passed a sinon stub instance as the subject', function () {
+      it('should succeed', function () {
         var stubInstance = sinon.createStubInstance(MyClass);
         stubInstance.foo(123);
         stubInstance.foo(456);
-        return expect(stubInstance, 'to have a call satisfying', function() {
+        return expect(stubInstance, 'to have a call satisfying', function () {
           stubInstance.foo(123);
         });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var stubInstance = sinon.createStubInstance(MyClass);
         stubInstance.foo(123);
         stubInstance.bar(456);
         stubInstance.foo(123);
         return expect(
-          function() {
+          function () {
             return expect(
               stubInstance,
               'to have a call satisfying',
-              function() {
+              function () {
                 stubInstance.bar(789);
               }
             );
@@ -1306,19 +1306,19 @@ describe('unexpected-sinon', function() {
         );
       });
     });
-    describe('when passed a spec object', function() {
-      it('should succeed when a spy call satisfies the spec', function() {
+    describe('when passed a spec object', function () {
+      it('should succeed when a spy call satisfies the spec', function () {
         spy(123, 456);
         expect(spy, 'to have a call satisfying', {
-          args: [123, 456]
+          args: [123, 456],
         });
       });
 
-      it('should fail when the spy was not called at all', function() {
+      it('should fail when the spy was not called at all', function () {
         expect(
-          function() {
+          function () {
             expect(spy, 'to have a call satisfying', {
-              args: [123, 456]
+              args: [123, 456],
             });
           },
           'to throw',
@@ -1328,13 +1328,13 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should fail when the spy was called but never with the right arguments', function() {
+      it('should fail when the spy was called but never with the right arguments', function () {
         spy(456);
         spy(567);
         expect(
-          function() {
+          function () {
             expect(spy, 'to have a call satisfying', {
-              args: [123, 456]
+              args: [123, 456],
             });
           },
           'to throw',
@@ -1351,20 +1351,20 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      describe('with the exhaustively flag', function() {
-        it('should succeed when a spy call satisfies the spec', function() {
+      describe('with the exhaustively flag', function () {
+        it('should succeed when a spy call satisfies the spec', function () {
           spy(123, { foo: 'bar' });
           expect(spy, 'to have a call satisfying', {
-            args: [123, { foo: 'bar' }]
+            args: [123, { foo: 'bar' }],
           });
         });
 
-        it('should fail when a spy call does not satisfy the spec only because of the "exhaustively" semantics', function() {
+        it('should fail when a spy call does not satisfy the spec only because of the "exhaustively" semantics', function () {
           spy(123, { foo: 'bar', quux: 'baz' });
           expect(
-            function() {
+            function () {
               expect(spy, 'to have a call exhaustively satisfying', {
-                args: [123, { foo: 'bar' }]
+                args: [123, { foo: 'bar' }],
               });
             },
             'to throw',
@@ -1382,15 +1382,15 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array (shorthand for {args: ...})', function() {
-      it('should succeed', function() {
+    describe('when passed an array (shorthand for {args: ...})', function () {
+      it('should succeed', function () {
         spy(123, { foo: 'bar' });
         expect(spy, 'to have a call satisfying', [123, { foo: 'bar' }]);
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         expect(
-          function() {
+          function () {
             spy(123, { foo: 'bar' });
             expect(spy, 'to have a call satisfying', [123, { foo: 'baz' }]);
           },
@@ -1410,19 +1410,19 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array with only numerical properties (shorthand for {args: ...})', function() {
-      it('should succeed', function() {
+    describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+      it('should succeed', function () {
         spy(123, { foo: 'bar' });
         expect(spy, 'to have a call satisfying', { 0: 123, 1: { foo: 'bar' } });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         expect(
-          function() {
+          function () {
             spy(123, { foo: 'bar' });
             expect(spy, 'to have a call satisfying', {
               0: 123,
-              1: { foo: 'baz' }
+              1: { foo: 'baz' },
             });
           },
           'to throw',
@@ -1441,18 +1441,18 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed a function that performs the expected call', function() {
-      it('should succeed when a spy call satisfies the spec', function() {
+    describe('when passed a function that performs the expected call', function () {
+      it('should succeed when a spy call satisfies the spec', function () {
         spy(123, 456);
-        expect(spy, 'to have a call satisfying', function() {
+        expect(spy, 'to have a call satisfying', function () {
           spy(123, 456);
         });
       });
 
-      it('should fail if the function does not call the spy', function() {
+      it('should fail if the function does not call the spy', function () {
         expect(
-          function() {
-            expect(spy, 'to have a call satisfying', function() {});
+          function () {
+            expect(spy, 'to have a call satisfying', function () {});
           },
           'to throw',
           'expected spy1 to have a call satisfying function () {}\n' +
@@ -1460,10 +1460,10 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should fail if the function calls the spy more than once', function() {
+      it('should fail if the function calls the spy more than once', function () {
         expect(
-          function() {
-            expect(spy, 'to have a call satisfying', function() {
+          function () {
+            expect(spy, 'to have a call satisfying', function () {
               spy(123);
               spy(456);
             });
@@ -1476,12 +1476,12 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should fail when the spy was called but never with the right arguments', function() {
+      it('should fail when the spy was called but never with the right arguments', function () {
         spy(123);
         spy(456);
         expect(
-          function() {
-            expect(spy, 'to have a call satisfying', function() {
+          function () {
+            expect(spy, 'to have a call satisfying', function () {
               spy(789);
             });
           },
@@ -1498,8 +1498,8 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed a sinon sandbox as the subject', function() {
-      it('should succeed', function() {
+    describe('when passed a sinon sandbox as the subject', function () {
+      it('should succeed', function () {
         var sandbox = sinon.createSandbox();
         var spy1 = sandbox.spy().named('spy1');
         var spy2 = sandbox.spy().named('spy2');
@@ -1507,19 +1507,19 @@ describe('unexpected-sinon', function() {
         spy2(456);
         return expect(sandbox, 'to have a call satisfying', {
           spy: spy1,
-          args: [123]
+          args: [123],
         });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var sandbox = sinon.createSandbox();
         var spy1 = sandbox.spy().named('spy1');
         spy1(456);
         return expect(
-          function() {
+          function () {
             return expect(sandbox, 'to have a call satisfying', {
               spy: spy1,
-              args: [123]
+              args: [123],
             });
           },
           'to error with',
@@ -1532,29 +1532,29 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array of spies as the subject', function() {
-      it('should succeed', function() {
+    describe('when passed an array of spies as the subject', function () {
+      it('should succeed', function () {
         var spy1 = sinon.spy().named('spy1');
         var spy2 = sinon.spy().named('spy2');
         spy1(123);
         spy2(456);
         return expect([spy1, spy2], 'to have a call satisfying', {
           spy: spy1,
-          args: [123]
+          args: [123],
         });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var sandbox = sinon.createSandbox();
         var spy1 = sandbox.spy().named('spy1');
         var spy2 = sandbox.spy().named('spy2');
         spy1(123);
         spy2(456);
         return expect(
-          function() {
+          function () {
             return expect([spy1, spy2], 'to have a call satisfying', {
               spy: spy1,
-              args: [789]
+              args: [789],
             });
           },
           'to error with',
@@ -1569,28 +1569,32 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('to have all calls satisfying', function() {
-    describe('when passed a sinon stub instance as the subject', function() {
-      it('should succeed', function() {
+  describe('to have all calls satisfying', function () {
+    describe('when passed a sinon stub instance as the subject', function () {
+      it('should succeed', function () {
         var stubInstance = sinon.createStubInstance(MyClass);
         stubInstance.foo(123);
         stubInstance.foo(123);
-        return expect(stubInstance, 'to have all calls satisfying', function() {
-          stubInstance.foo(123);
-        });
+        return expect(
+          stubInstance,
+          'to have all calls satisfying',
+          function () {
+            stubInstance.foo(123);
+          }
+        );
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var stubInstance = sinon.createStubInstance(MyClass);
         stubInstance.foo(123);
         stubInstance.bar(456);
         stubInstance.foo(123);
         return expect(
-          function() {
+          function () {
             return expect(
               stubInstance,
               'to have all calls satisfying',
-              function() {
+              function () {
                 stubInstance.bar(456);
               }
             );
@@ -1605,19 +1609,19 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed a spec object', function() {
-      it('should succeed when a spy call satisfies the spec', function() {
+    describe('when passed a spec object', function () {
+      it('should succeed when a spy call satisfies the spec', function () {
         spy(123, 456);
         expect(spy, 'to have all calls satisfying', {
-          args: [123, 456]
+          args: [123, 456],
         });
       });
 
-      it('should fail when the spy was not called at all', function() {
+      it('should fail when the spy was not called at all', function () {
         expect(
-          function() {
+          function () {
             expect(spy, 'to have all calls satisfying', {
-              args: [123, 456]
+              args: [123, 456],
             });
           },
           'to throw',
@@ -1627,13 +1631,13 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should fail when one of the calls had the wrong arguments', function() {
+      it('should fail when one of the calls had the wrong arguments', function () {
         spy(456);
         spy(567);
         expect(
-          function() {
+          function () {
             expect(spy, 'to have all calls satisfying', {
-              args: [456]
+              args: [456],
             });
           },
           'to throw',
@@ -1646,20 +1650,20 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      describe('with the exhaustively flag', function() {
-        it('should succeed when a spy call satisfies the spec', function() {
+      describe('with the exhaustively flag', function () {
+        it('should succeed when a spy call satisfies the spec', function () {
           spy(123, { foo: 'bar' });
           expect(spy, 'to have all calls satisfying', {
-            args: [123, { foo: 'bar' }]
+            args: [123, { foo: 'bar' }],
           });
         });
 
-        it('should fail when a spy call does not satisfy the spec only because of the "exhaustively" semantics', function() {
+        it('should fail when a spy call does not satisfy the spec only because of the "exhaustively" semantics', function () {
           spy(123, { foo: 'bar', quux: 'baz' });
           expect(
-            function() {
+            function () {
               expect(spy, 'to have all calls exhaustively satisfying', {
-                args: [123, { foo: 'bar' }]
+                args: [123, { foo: 'bar' }],
               });
             },
             'to throw',
@@ -1677,15 +1681,15 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array (shorthand for {args: ...})', function() {
-      it('should succeed', function() {
+    describe('when passed an array (shorthand for {args: ...})', function () {
+      it('should succeed', function () {
         spy(123, { foo: 'bar' });
         expect(spy, 'to have all calls satisfying', [123, { foo: 'bar' }]);
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         expect(
-          function() {
+          function () {
             spy(123, { foo: 'bar' });
             expect(spy, 'to have all calls satisfying', [123, { foo: 'baz' }]);
           },
@@ -1705,22 +1709,22 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array with only numerical properties (shorthand for {args: ...})', function() {
-      it('should succeed', function() {
+    describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+      it('should succeed', function () {
         spy(123, { foo: 'bar' });
         expect(spy, 'to have all calls satisfying', {
           0: 123,
-          1: { foo: 'bar' }
+          1: { foo: 'bar' },
         });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         expect(
-          function() {
+          function () {
             spy(123, { foo: 'bar' });
             expect(spy, 'to have all calls satisfying', {
               0: 123,
-              1: { foo: 'baz' }
+              1: { foo: 'baz' },
             });
           },
           'to throw',
@@ -1739,18 +1743,18 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed a function that performs the expected call', function() {
-      it('should succeed when a spy call satisfies the spec', function() {
+    describe('when passed a function that performs the expected call', function () {
+      it('should succeed when a spy call satisfies the spec', function () {
         spy(123, 456);
-        expect(spy, 'to have all calls satisfying', function() {
+        expect(spy, 'to have all calls satisfying', function () {
           spy(123, 456);
         });
       });
 
-      it('should fail if the function does not call the spy', function() {
+      it('should fail if the function does not call the spy', function () {
         expect(
-          function() {
-            expect(spy, 'to have all calls satisfying', function() {});
+          function () {
+            expect(spy, 'to have all calls satisfying', function () {});
           },
           'to throw',
           'expected spy1 to have all calls satisfying function () {}\n' +
@@ -1758,10 +1762,10 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should fail if the function calls the spy more than once', function() {
+      it('should fail if the function calls the spy more than once', function () {
         expect(
-          function() {
-            expect(spy, 'to have all calls satisfying', function() {
+          function () {
+            expect(spy, 'to have all calls satisfying', function () {
               spy(123);
               spy(456);
             });
@@ -1774,12 +1778,12 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should fail when the spy was called, but one of the calls had the wrong arguments', function() {
+      it('should fail when the spy was called, but one of the calls had the wrong arguments', function () {
         spy(123);
         spy(456);
         expect(
-          function() {
-            expect(spy, 'to have all calls satisfying', function() {
+          function () {
+            expect(spy, 'to have all calls satisfying', function () {
               spy(123);
             });
           },
@@ -1794,8 +1798,8 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed a sinon sandbox as the subject', function() {
-      it('should succeed', function() {
+    describe('when passed a sinon sandbox as the subject', function () {
+      it('should succeed', function () {
         var sandbox = sinon.createSandbox();
         var spy1 = sandbox.spy().named('spy1');
         sandbox.spy().named('spy2');
@@ -1803,19 +1807,19 @@ describe('unexpected-sinon', function() {
         spy1(123);
         return expect(sandbox, 'to have all calls satisfying', {
           spy: spy1,
-          args: [123]
+          args: [123],
         });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var sandbox = sinon.createSandbox();
         var spy1 = sandbox.spy().named('spy1');
         spy1(456);
         return expect(
-          function() {
+          function () {
             return expect(sandbox, 'to have all calls satisfying', {
               spy: spy1,
-              args: [123]
+              args: [123],
             });
           },
           'to error with',
@@ -1828,28 +1832,28 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array of spies as the subject', function() {
-      it('should succeed', function() {
+    describe('when passed an array of spies as the subject', function () {
+      it('should succeed', function () {
         var spy1 = sinon.spy().named('spy1');
         var spy2 = sinon.spy().named('spy2');
         spy1(123);
         return expect([spy1, spy2], 'to have all calls satisfying', {
           spy: spy1,
-          args: [123]
+          args: [123],
         });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var sandbox = sinon.createSandbox();
         var spy1 = sandbox.spy().named('spy1');
         var spy2 = sandbox.spy().named('spy2');
         spy1(123);
         spy2(456);
         return expect(
-          function() {
+          function () {
             return expect([spy1, spy2], 'to have all calls satisfying', {
               spy: spy1,
-              args: [123]
+              args: [123],
             });
           },
           'to error with',
@@ -1862,11 +1866,11 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('to have calls satisfying', function() {
-    it('should complain if the args value is passed as an object with non-numerical properties', function() {
+  describe('to have calls satisfying', function () {
+    it('should complain if the args value is passed as an object with non-numerical properties', function () {
       spy(123);
       expect(
-        function() {
+        function () {
           expect(spy, 'to have calls satisfying', [{ args: { foo: 123 } }]);
         },
         'to throw',
@@ -1876,7 +1880,7 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('should render a swapped expected call sensibly', function() {
+    it('should render a swapped expected call sensibly', function () {
       var spy1 = sinon.spy().named('spy1');
       var spy2 = sinon.spy().named('spy2');
       var spy3 = sinon.spy().named('spy3');
@@ -1884,8 +1888,8 @@ describe('unexpected-sinon', function() {
       spy2(456);
       spy3(789);
       expect(
-        function() {
-          expect([spy1, spy2, spy3], 'to have calls satisfying', function() {
+        function () {
+          expect([spy1, spy2, spy3], 'to have calls satisfying', function () {
             spy1(123);
             spy3(789);
             spy2(456);
@@ -1904,7 +1908,7 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('should render a swapped actual function call sensibly', function() {
+    it('should render a swapped actual function call sensibly', function () {
       var spy1 = sinon.spy().named('spy1');
       var spy2 = sinon.spy().named('spy2');
       var spy3 = sinon.spy().named('spy3');
@@ -1912,8 +1916,8 @@ describe('unexpected-sinon', function() {
       spy3(789);
       spy2(456);
       expect(
-        function() {
-          expect([spy1, spy2, spy3], 'to have calls satisfying', function() {
+        function () {
+          expect([spy1, spy2, spy3], 'to have calls satisfying', function () {
             spy1(123);
             spy2(456);
             spy3(789);
@@ -1932,12 +1936,12 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('should render the wrong spy being called with no expectation for the arguments', function() {
+    it('should render the wrong spy being called with no expectation for the arguments', function () {
       var spy1 = sinon.spy().named('spy1');
       var spy2 = sinon.spy().named('spy2');
       spy1(123);
       expect(
-        function() {
+        function () {
           expect([spy1, spy2], 'to have calls satisfying', [{ spy: spy2 }]);
         },
         'to throw',
@@ -1947,15 +1951,15 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('should satisfy against a list of all calls to the specified spies', function() {
+    it('should satisfy against a list of all calls to the specified spies', function () {
       var spy2 = sinon.spy(function spy2() {
         return 'blah';
       });
 
       var obj = {
-        die: function() {
+        die: function () {
           throw new Error('say what');
-        }
+        },
       };
       sinon.spy(obj, 'die');
 
@@ -1968,14 +1972,14 @@ describe('unexpected-sinon', function() {
       spy2('yadda');
       spy('baz');
       expect(
-        function() {
+        function () {
           expect([spy, spy2, obj.die], 'to have calls satisfying', [
             spy,
             { spy: spy2, args: ['quux'], returned: 'yadda' },
             { spy: obj.die, threw: /cqwecqw/ },
             { spy: spy, args: ['yadda'] },
             spy,
-            spy
+            spy,
           ]);
         },
         'to throw',
@@ -2003,31 +2007,35 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    describe('when passed a sinon stub instance as the subject', function() {
-      it('should succeed', function() {
+    describe('when passed a sinon stub instance as the subject', function () {
+      it('should succeed', function () {
         var stubInstance = sinon.createStubInstance(MyClass);
         stubInstance.foo(123);
         stubInstance.bar(456);
         stubInstance.foo(789);
-        return expect(stubInstance, 'to have calls satisfying', function() {
+        return expect(stubInstance, 'to have calls satisfying', function () {
           stubInstance.foo(123);
           stubInstance.bar(456);
           stubInstance.foo(789);
         });
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var stubInstance = sinon.createStubInstance(MyClass);
         stubInstance.foo(123);
         stubInstance.bar(456);
         stubInstance.foo(123);
         return expect(
-          function() {
-            return expect(stubInstance, 'to have calls satisfying', function() {
-              stubInstance.foo(123);
-              stubInstance.bar(123);
-              stubInstance.foo(123);
-            });
+          function () {
+            return expect(
+              stubInstance,
+              'to have calls satisfying',
+              function () {
+                stubInstance.foo(123);
+                stubInstance.bar(123);
+                stubInstance.foo(123);
+              }
+            );
           },
           'to error with',
           'expected MyClass({ foo, bar }) to have calls satisfying\n' +
@@ -2044,15 +2052,15 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array entry (shorthand for {args: ...})', function() {
-      it('should succeed', function() {
+    describe('when passed an array entry (shorthand for {args: ...})', function () {
+      it('should succeed', function () {
         spy(123, { foo: 'bar' });
         expect(spy, 'to have calls satisfying', [[123, { foo: 'bar' }]]);
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         expect(
-          function() {
+          function () {
             spy(123, { foo: 'bar' });
             expect(spy, 'to have calls satisfying', [[123, { foo: 'baz' }]]);
           },
@@ -2071,8 +2079,8 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      describe('when passed a sinon sandbox as the subject', function() {
-        it('should succeed', function() {
+      describe('when passed a sinon sandbox as the subject', function () {
+        it('should succeed', function () {
           var sandbox = sinon.createSandbox();
           var spy1 = sandbox.spy().named('spy1');
           var spy2 = sandbox.spy().named('spy2');
@@ -2080,21 +2088,21 @@ describe('unexpected-sinon', function() {
           spy2(456);
           return expect(sandbox, 'to have calls satisfying', [
             { spy: spy1, args: [123] },
-            { spy: spy2, args: [456] }
+            { spy: spy2, args: [456] },
           ]);
         });
 
-        it('should fail with a diff', function() {
+        it('should fail with a diff', function () {
           var sandbox = sinon.createSandbox();
           var spy1 = sandbox.spy().named('spy1');
           var spy2 = sandbox.spy().named('spy2');
           spy1(123);
           spy2(456);
           return expect(
-            function() {
+            function () {
               return expect(sandbox, 'to have calls satisfying', [
                 { spy: spy1, args: [123] },
-                { spy: spy2, args: [789] }
+                { spy: spy2, args: [789] },
               ]);
             },
             'to error with',
@@ -2109,20 +2117,20 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when passed an array with only numerical properties (shorthand for {args: ...})', function() {
-      it('should succeed', function() {
+    describe('when passed an array with only numerical properties (shorthand for {args: ...})', function () {
+      it('should succeed', function () {
         spy(123, { foo: 'bar' });
         expect(spy, 'to have calls satisfying', [
-          { 0: 123, 1: { foo: 'bar' } }
+          { 0: 123, 1: { foo: 'bar' } },
         ]);
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         expect(
-          function() {
+          function () {
             spy(123, { foo: 'bar' });
             expect(spy, 'to have calls satisfying', [
-              { 0: 123, 1: { foo: 'baz' } }
+              { 0: 123, 1: { foo: 'baz' } },
             ]);
           },
           'to throw',
@@ -2141,13 +2149,13 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    it('should complain if the spy list does not contain a spy that is contained by the spec', function() {
+    it('should complain if the spy list does not contain a spy that is contained by the spec', function () {
       var spy2 = sinon.spy(function spy2() {
         return 'blah';
       });
       spy2.displayName = 'spy2';
       expect(
-        function() {
+        function () {
           expect([spy], 'to have calls satisfying', [spy, spy2]);
         },
         'to throw',
@@ -2156,9 +2164,9 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    it('should complain if a spy call spec contains an unsupported type', function() {
+    it('should complain if a spy call spec contains an unsupported type', function () {
       expect(
-        function() {
+        function () {
           expect(spy, 'to have calls satisfying', [123]);
         },
         'to throw',
@@ -2167,13 +2175,13 @@ describe('unexpected-sinon', function() {
       );
     });
 
-    describe('with the exhaustively flag', function() {
-      it('should fail if an object parameter contains additional properties', function() {
+    describe('with the exhaustively flag', function () {
+      it('should fail if an object parameter contains additional properties', function () {
         spy({ foo: 123 }, [{ bar: 'quux' }]);
         return expect(
-          function() {
+          function () {
             expect(spy, 'to have calls exhaustively satisfying', [
-              { args: [{}, [{}]] }
+              { args: [{}, [{}]] },
             ]);
           },
           'to throw',
@@ -2193,14 +2201,14 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when providing the expected calls as a function', function() {
-      it('should succeed', function() {
+    describe('when providing the expected calls as a function', function () {
+      it('should succeed', function () {
         var spy2 = sinon.spy().named('spy2');
         spy2(123, 456);
         new spy('abc', false); // eslint-disable-line no-new, new-cap
         spy(-99, Infinity);
 
-        expect([spy, spy2], 'to have calls satisfying', function() {
+        expect([spy, spy2], 'to have calls satisfying', function () {
           spy2(123, 456);
           new spy('abc', false); // eslint-disable-line no-new, new-cap
           spy(-99, Infinity);
@@ -2209,15 +2217,15 @@ describe('unexpected-sinon', function() {
         expect(spy.callCount, 'to equal', 2);
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         var spy2 = sinon.spy().named('spy2');
         spy2(123, 456, 99);
         spy('abc', true);
         new spy(-99, Infinity); // eslint-disable-line no-new, new-cap
 
         expect(
-          function() {
-            expect([spy, spy2], 'to have calls satisfying', function() {
+          function () {
+            expect([spy, spy2], 'to have calls satisfying', function () {
               spy2(123, 456);
               new spy('abc', false); // eslint-disable-line no-new, new-cap
               spy(-99, Infinity);
@@ -2242,38 +2250,38 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should not fail when the spy has a property getter that throws', function() {
+      it('should not fail when the spy has a property getter that throws', function () {
         Object.defineProperty(spy, 'foo', {
-          get: function() {
+          get: function () {
             throw new Error('oh dear');
-          }
+          },
         });
 
-        expect(spy, 'to have calls satisfying', function() {});
+        expect(spy, 'to have calls satisfying', function () {});
       });
 
-      describe('when passed a sinon sandbox as the subject', function() {
-        it('should succeed', function() {
+      describe('when passed a sinon sandbox as the subject', function () {
+        it('should succeed', function () {
           var sandbox = sinon.createSandbox();
           var spy1 = sandbox.spy().named('spy1');
           var spy2 = sandbox.spy().named('spy2');
           spy1(123);
           spy2(456);
-          return expect(sandbox, 'to have calls satisfying', function() {
+          return expect(sandbox, 'to have calls satisfying', function () {
             spy1(123);
             spy2(456);
           });
         });
 
-        it('should fail with a diff', function() {
+        it('should fail with a diff', function () {
           var sandbox = sinon.createSandbox();
           var spy1 = sandbox.spy().named('spy1');
           var spy2 = sandbox.spy().named('spy2');
           spy1(123);
           spy2(456);
           return expect(
-            function() {
-              return expect(sandbox, 'to have calls satisfying', function() {
+            function () {
+              return expect(sandbox, 'to have calls satisfying', function () {
                 spy1(123);
                 spy2(789);
               });
@@ -2291,12 +2299,12 @@ describe('unexpected-sinon', function() {
         });
       });
 
-      it('should render a spy call missing at the end', function() {
+      it('should render a spy call missing at the end', function () {
         spy('abc', true);
 
         expect(
-          function() {
-            expect(spy, 'to have calls satisfying', function() {
+          function () {
+            expect(spy, 'to have calls satisfying', function () {
               spy('abc', true);
               spy('def', false);
             });
@@ -2311,12 +2319,12 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should render a spy call missing at the beginning', function() {
+      it('should render a spy call missing at the beginning', function () {
         spy('abc', true);
 
         expect(
-          function() {
-            expect(spy, 'to have calls satisfying', function() {
+          function () {
+            expect(spy, 'to have calls satisfying', function () {
               spy('def', false);
               spy('abc', true);
             });
@@ -2331,14 +2339,14 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should render a spy call missing in the middle', function() {
+      it('should render a spy call missing in the middle', function () {
         spy(123, 456);
         spy(234);
         spy(987);
 
         expect(
-          function() {
-            expect(spy, 'to have calls satisfying', function() {
+          function () {
+            expect(spy, 'to have calls satisfying', function () {
               spy(123, 456);
               spy(false);
               spy(234);
@@ -2359,15 +2367,15 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should render the minimal diff when a structurally similar spy call is followed by an extraneous one', function() {
+      it('should render the minimal diff when a structurally similar spy call is followed by an extraneous one', function () {
         spy(123, 456);
         spy({ foo: 123 });
         spy(456);
         spy(987);
 
         expect(
-          function() {
-            expect(spy, 'to have calls satisfying', function() {
+          function () {
+            expect(spy, 'to have calls satisfying', function () {
               spy(123, 456);
               spy({ foo: 456 });
               spy(987);
@@ -2390,13 +2398,13 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should work with expect.it', function() {
+      it('should work with expect.it', function () {
         spy('abc', true);
         spy('abc', false, 123);
 
         expect(
-          function() {
-            expect(spy, 'to have calls satisfying', function() {
+          function () {
+            expect(spy, 'to have calls satisfying', function () {
               spy('abc', expect.it('to be true'));
               spy(
                 'abc',
@@ -2425,25 +2433,25 @@ describe('unexpected-sinon', function() {
         );
       });
 
-      it('should not break while recording when the spied-upon function has side effects', function() {
-        var throwingSpy = sinon.spy(function() {
+      it('should not break while recording when the spied-upon function has side effects', function () {
+        var throwingSpy = sinon.spy(function () {
           throw new Error('Urgh');
         });
         expect(throwingSpy, 'to throw');
         expect(throwingSpy, 'to throw');
 
-        return expect(throwingSpy, 'to have calls satisfying', function() {
+        return expect(throwingSpy, 'to have calls satisfying', function () {
           throwingSpy();
           throwingSpy();
-        }).then(function() {
+        }).then(function () {
           expect(throwingSpy, 'was called twice');
         });
       });
 
-      it('should render the correct diff when the expected spy calls consist of a single entry', function() {
+      it('should render the correct diff when the expected spy calls consist of a single entry', function () {
         return expect(
-          function() {
-            return expect(spy, 'to have calls satisfying', function() {
+          function () {
+            return expect(spy, 'to have calls satisfying', function () {
               spy(123);
             });
           },
@@ -2455,24 +2463,24 @@ describe('unexpected-sinon', function() {
       });
     });
 
-    describe('when asserting whether a call was invoked with the new operator', function() {
-      it('should succeed', function() {
+    describe('when asserting whether a call was invoked with the new operator', function () {
+      it('should succeed', function () {
         new spy(); // eslint-disable-line no-new, new-cap
         spy();
         expect(spy, 'to have calls satisfying', [
           { calledWithNew: true },
-          { calledWithNew: false }
+          { calledWithNew: false },
         ]);
       });
 
-      it('should fail with a diff', function() {
+      it('should fail with a diff', function () {
         new spy(); // eslint-disable-line no-new, new-cap
         spy();
         expect(
-          function() {
+          function () {
             expect(spy, 'to have calls satisfying', [
               { calledWithNew: false },
-              { calledWithNew: true }
+              { calledWithNew: true },
             ]);
           },
           'to throw',
@@ -2486,20 +2494,20 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  describe('spyCall type', function() {
-    describe('to satisfy', function() {
-      describe('with an object with only numerical properties', function() {
-        it('should succeed', function() {
+  describe('spyCall type', function () {
+    describe('to satisfy', function () {
+      describe('with an object with only numerical properties', function () {
+        it('should succeed', function () {
           spy(123);
           spy(456);
           expect(spy.lastCall, 'to satisfy', { 0: 456 });
         });
 
-        it('should fail with a diff', function() {
+        it('should fail with a diff', function () {
           spy(123);
           spy(456);
           expect(
-            function() {
+            function () {
               expect(spy.lastCall, 'to satisfy', { 0: 789 });
             },
             'to throw',
@@ -2512,18 +2520,18 @@ describe('unexpected-sinon', function() {
         });
       });
 
-      describe('with an array', function() {
-        it('should succeed', function() {
+      describe('with an array', function () {
+        it('should succeed', function () {
           spy(123);
           spy(456);
           expect(spy.lastCall, 'to satisfy', [456]);
         });
 
-        it('should fail with a diff', function() {
+        it('should fail with a diff', function () {
           spy(123);
           spy(456);
           expect(
-            function() {
+            function () {
               expect(spy.lastCall, 'to satisfy', [789]);
             },
             'to throw',
@@ -2536,18 +2544,18 @@ describe('unexpected-sinon', function() {
         });
       });
 
-      describe('with an object', function() {
-        it('should succeed', function() {
+      describe('with an object', function () {
+        it('should succeed', function () {
           spy(123);
           spy(456);
           expect(spy.lastCall, 'to satisfy', { args: [456] });
         });
 
-        it('should fail with a diff', function() {
+        it('should fail with a diff', function () {
           spy(123);
           spy(456);
           expect(
-            function() {
+            function () {
               expect(spy.lastCall, 'to satisfy', { args: [789] });
             },
             'to throw',
@@ -2562,20 +2570,20 @@ describe('unexpected-sinon', function() {
     });
   });
 
-  it('should avoid retrieving a property of undefined in the similar function', function() {
+  it('should avoid retrieving a property of undefined in the similar function', function () {
     spy(123);
-    spy(function() {
+    spy(function () {
       return {
-        then: function(fn) {
+        then: function (fn) {
           setTimeout(fn, 1);
-        }
+        },
       };
     });
 
     return expect(
-      function() {
+      function () {
         return expect(spy, 'to have calls satisfying', [
-          { args: [expect.it('when called with', [], 'to be fulfilled')] }
+          { args: [expect.it('when called with', [], 'to be fulfilled')] },
         ]);
       },
       'to error',
@@ -2595,13 +2603,13 @@ describe('unexpected-sinon', function() {
   });
 
   // Regression test for #38
-  it('should work with bounded functions', function() {
-    var obj = { method: function() {} };
+  it('should work with bounded functions', function () {
+    var obj = { method: function () {} };
     obj.method = obj.method.bind(obj);
     sinon.spy(obj, 'method');
     obj.method();
     expect(
-      function() {
+      function () {
         expect(obj.method, 'was called times', 2);
       },
       'to throw',
@@ -2613,17 +2621,17 @@ describe('unexpected-sinon', function() {
 
   // Regression test for:
   // Function has non-object prototype 'undefined' in instanceof check
-  describe('when spying on console methods', function() {
-    beforeEach(function() {
+  describe('when spying on console methods', function () {
+    beforeEach(function () {
       sinon.spy(console, 'error');
     });
 
-    afterEach(function() {
+    afterEach(function () {
       console.error.restore();
     });
 
-    it('should not fail when spying on console methods', function() {
-      expect(console.error, 'to have no calls satisfying', function() {
+    it('should not fail when spying on console methods', function () {
+      expect(console.error, 'to have no calls satisfying', function () {
         console.error('hey');
       });
     });
@@ -2631,11 +2639,11 @@ describe('unexpected-sinon', function() {
 
   // Regression test for:
   // Function has non-object prototype 'undefined' in instanceof check
-  describe('when spying on a bound function', function() {
-    it('should not fail when spying on console methods', function() {
-      var foo = { bar: function() {}.bind({}) }; // eslint-disable-line no-extra-bind
+  describe('when spying on a bound function', function () {
+    it('should not fail when spying on console methods', function () {
+      var foo = { bar: function () {}.bind({}) }; // eslint-disable-line no-extra-bind
       sinon.spy(foo, 'bar');
-      expect(foo.bar, 'to have no calls satisfying', function() {
+      expect(foo.bar, 'to have no calls satisfying', function () {
         foo.bar('hey');
       });
     });
