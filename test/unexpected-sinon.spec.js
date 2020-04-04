@@ -2593,9 +2593,9 @@ describe('unexpected-sinon', function () {
         'spy1(\n' +
         '  function () {\n' +
         '    return {\n' +
-        '      then: function(fn) {\n' +
+        '      then: function (fn) {\n' +
         '        setTimeout(fn, 1);\n' +
-        '      }\n' +
+        '      },\n' +
         '    };\n' +
         '  }\n' +
         '); at theFunction (theFileName:xx:yy)'
