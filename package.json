@@ -17,7 +17,7 @@
     "url": "https://github.com/unexpectedjs/unexpected-sinon"
   },
   "scripts": {
-    "lint": "eslint . && prettier --check '**/*.js'",
+    "lint": "eslint . && prettier --check '**/*.{js,md}'",
     "test": "mocha --require unexpected-markdown test/*.js `find documentation -name '*.md'`",
     "test-headless": "karma start --single-run",
     "test-browser": "serve .",
