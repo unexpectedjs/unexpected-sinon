@@ -47,7 +47,7 @@
     "mocha": "^7.0.0",
     "nyc": "^15.0.0",
     "prettier": "~2.0.2",
-    "puppeteer": "^3.0.0",
+    "puppeteer": "^4.0.1",
     "rsvp": "^4.8.2",
     "serve": "*",
     "sinon": "^9.0.0",
