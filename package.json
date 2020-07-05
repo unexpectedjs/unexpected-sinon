@@ -53,7 +53,7 @@
     "sinon": "^9.0.0",
     "unexpected": "^11.0.0-4",
     "unexpected-documentation-site-generator": "^6.0.0",
-    "unexpected-markdown": "^5.0.0"
+    "unexpected-markdown": "^6.0.0"
   },
   "nyc": {
     "include": [
