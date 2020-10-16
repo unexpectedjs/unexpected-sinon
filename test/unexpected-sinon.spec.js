@@ -2155,6 +2155,38 @@ describe('unexpected-sinon', function () {
       });
     });
 
+    describe('when passed an object defining the call order with numerical properties', function () {
+      it('should succeed', function () {
+        spy(123, { foo: 'bar' });
+        expect(spy, 'to have calls satisfying', {
+          0: { 0: 123, 1: { foo: 'bar' } },
+        });
+      });
+
+      it('should fail with a diff', function () {
+        expect(
+          function () {
+            spy(123, { foo: 'bar' });
+            expect(spy, 'to have calls satisfying', {
+              0: { 0: 123, 1: { foo: 'baz' } },
+            });
+          },
+          'to throw',
+          "expected spy1 to have calls satisfying { 0: { 0: 123, 1: { foo: 'baz' } } }\n" +
+            '\n' +
+            'spy1(\n' +
+            '  123,\n' +
+            '  {\n' +
+            "    foo: 'bar' // should equal 'baz'\n" +
+            '               //\n' +
+            '               // -bar\n' +
+            '               // +baz\n' +
+            '  }\n' +
+            '); at theFunction (theFileName:xx:yy)'
+        );
+      });
+    });
+
     it('should complain if the spy list does not contain a spy that is contained by the spec', function () {
       var spy2 = sinon.spy(function spy2() {
         return 'blah';
