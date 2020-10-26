@@ -1,4 +1,4 @@
-/* global sinon, unexpected */
+/* global expect:true, sinon:false */
 
 // Bogus class to be used with sinon.createStubInstance:
 function MyClass() {
@@ -11,21 +11,22 @@ MyClass.prototype.bar = function () {
   throw new Error('oh no');
 };
 
-unexpected.addAssertion('<any> to inspect as <any>', function (
-  expect,
-  subject,
-  value
-) {
-  expect.errorMode = 'nested';
-  expect(expect.inspect(subject).toString(), 'to satisfy', value);
-});
-
 describe('unexpected-sinon', function () {
-  var expect, spy;
+  expect = expect.clone();
+  expect.output.preferredWidth = 120;
+
+  expect.addAssertion('<any> to inspect as <any>', function (
+    expect,
+    subject,
+    value
+  ) {
+    expect.errorMode = 'nested';
+    expect(expect.inspect(subject).toString(), 'to satisfy', value);
+  });
+
+  var spy;
 
   beforeEach(function () {
-    expect = unexpected.clone();
-    expect.output.preferredWidth = 120;
     spy = sinon.spy().named('spy1');
   });
 
@@ -716,16 +717,21 @@ describe('unexpected-sinon', function () {
           });
 
           it('should dot out the list of contained spies when they exceed expect.output.preferredWidth', function () {
-            expect.output.preferredWidth = 45;
+            var expectWithLimitedWidth = expect.clone();
+            expectWithLimitedWidth.output.preferredWidth = 45;
             var stubInstance = sinon.createStubInstance(MyClass);
             stubInstance.foo(123);
             stubInstance.bar(456);
             stubInstance.foo(123);
             return expect(
               function () {
-                return expect(stubInstance, assertion, function () {
-                  stubInstance.bar(456);
-                });
+                return expectWithLimitedWidth(
+                  stubInstance,
+                  assertion,
+                  function () {
+                    stubInstance.bar(456);
+                  }
+                );
               },
               'to error with',
               `expected MyClass({ foo /* 1 more */ })\n${assertion} bar( 456 );\n` +
@@ -2135,6 +2141,38 @@ describe('unexpected-sinon', function () {
           },
           'to throw',
           "expected spy1 to have calls satisfying [ { 0: 123, 1: { foo: 'baz' } } ]\n" +
+            '\n' +
+            'spy1(\n' +
+            '  123,\n' +
+            '  {\n' +
+            "    foo: 'bar' // should equal 'baz'\n" +
+            '               //\n' +
+            '               // -bar\n' +
+            '               // +baz\n' +
+            '  }\n' +
+            '); at theFunction (theFileName:xx:yy)'
+        );
+      });
+    });
+
+    describe('when passed an object defining the call order with numerical properties', function () {
+      it('should succeed', function () {
+        spy(123, { foo: 'bar' });
+        expect(spy, 'to have calls satisfying', {
+          0: { 0: 123, 1: { foo: 'bar' } },
+        });
+      });
+
+      it('should fail with a diff', function () {
+        expect(
+          function () {
+            spy(123, { foo: 'bar' });
+            expect(spy, 'to have calls satisfying', {
+              0: { 0: 123, 1: { foo: 'baz' } },
+            });
+          },
+          'to throw',
+          "expected spy1 to have calls satisfying { 0: { 0: 123, 1: { foo: 'baz' } } }\n" +
             '\n' +
             'spy1(\n' +
             '  123,\n' +

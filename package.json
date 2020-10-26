@@ -18,12 +18,13 @@
   },
   "scripts": {
     "lint": "eslint . && prettier --check '**/*.{js,md}'",
-    "test": "mocha --require unexpected-markdown test/*.js `find documentation -name '*.md'`",
+    "test": "mocha test/*.spec.js",
     "test-headless": "karma start --single-run",
     "test-browser": "serve .",
+    "test-docs": "evaldown --comment-marker unexpected-markdown --require ./bootstrap-unexpected-markdown.js --validate --reporter spec ./documentation",
     "coverage": "nyc --reporter=lcov --reporter=text npm test",
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
-    "update-examples": "generate-site --require ./bootstrap-unexpected-markdown.js --update-examples",
+    "update-examples": "evaldown --comment-marker unexpected-markdown --require ./bootstrap-unexpected-markdown.js --inplace ./documentation",
     "deploy-site": "deploy-site"
   },
   "main": "./lib/unexpected-sinon.js",
@@ -41,6 +42,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
+    "evaldown": "^1.3.0",
     "karma": "^5.0.1",
     "karma-chrome-launcher": "^3.0.0",
     "karma-mocha": "^2.0.0",
@@ -52,8 +54,7 @@
     "serve": "*",
     "sinon": "^9.0.0",
     "unexpected": "^11.0.0-4",
-    "unexpected-documentation-site-generator": "^6.0.0",
-    "unexpected-markdown": "^5.0.0"
+    "unexpected-documentation-site-generator": "^7.0.1"
   },
   "nyc": {
     "include": [

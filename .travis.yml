@@ -19,6 +19,10 @@ matrix:
       node_js: 12
       env:
         - TARGET=coverage
+    - name: Documentation
+      node_js: 12
+      env:
+        - TARGET=test-docs
     - name: Chrome headless
       node_js: 12
       env:
