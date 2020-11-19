@@ -18,7 +18,7 @@
   },
   "scripts": {
     "lint": "eslint . && prettier --check '**/*.{js,md}'",
-    "test": "mocha test/*.spec.js",
+    "test": "mocha",
     "test-headless": "karma start --single-run",
     "test-browser": "serve .",
     "test-docs": "evaldown --comment-marker unexpected-markdown --require ./bootstrap-unexpected-markdown.js --validate --reporter spec ./documentation",
@@ -46,7 +46,7 @@
     "karma": "^5.0.1",
     "karma-chrome-launcher": "^3.0.0",
     "karma-mocha": "^2.0.0",
-    "mocha": "^7.0.0",
+    "mocha": "^8.2.0",
     "nyc": "^15.0.0",
     "prettier": "~2.1.0",
     "puppeteer": "^5.0.0",

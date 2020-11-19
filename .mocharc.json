@@ -1,0 +1,4 @@
+{
+  "checkLeaks": true,
+  "require": "./bootstrap-unexpected-markdown.js"
+}
