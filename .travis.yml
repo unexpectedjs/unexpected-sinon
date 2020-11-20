@@ -28,6 +28,9 @@ matrix:
       env:
         - TARGET=test-headless
 
+addons:
+  chrome: stable
+
 script: npm run $TARGET
 
 after_success: '<coverage/lcov.info ./node_modules/coveralls/bin/coveralls.js'
