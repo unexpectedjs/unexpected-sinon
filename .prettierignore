@@ -1,7 +1,8 @@
-package.json
-
 /documentation/
 /vendor/
 /.nyc_output/
 /coverage/
 /site-build/
+
+# Don't fight npm i --save
+/package.json
