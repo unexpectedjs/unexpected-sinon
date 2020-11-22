@@ -154,20 +154,9 @@ require(['unexpected', 'unexpected-sinon', 'sinon'], function (unexpected, unexp
 The source for Unexpected can be found on
 [Github](https://github.com/unexpectedjs/unexpected-sinon).
 
-## Release
+## Releases
 
-### 6.0.0
-
-* Introduced
-  [to satisfy](http://unexpectedjs.github.io/assertions/any/to-satisfy/)
-  samantics for
-  [was called with](./assertions/spy/was-called-with/)
-  and
-  [threw](./assertions/spy/was-called-with/). Notice
-  that matching on types by providing the type name no longer works,
-  now it matches on the error message like
-  [to throw](http://unexpectedjs.github.io/assertions/function/to-throw/).
-* Improved the output for failing assertions a lot.
+[Changelog](https://github.com/unexpectedjs/unexpected-sinon/blob/master/CHANGELOG.md)
 
 ## MIT License
 
