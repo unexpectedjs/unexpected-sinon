@@ -34,7 +34,6 @@
     "unexpected": "^10.8.0 || ^11.0.0-4 || ^12.0.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^16.0.0",
