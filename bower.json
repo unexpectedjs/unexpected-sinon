@@ -1,15 +1,9 @@
 {
   "name": "unexpected-sinon",
-  "authors": [
-    "Sune Simonsen <sune@we-knowhow.dk>"
-  ],
+  "authors": ["Sune Simonsen <sune@we-knowhow.dk>"],
   "description": "Extends the Unexpected assertion library with integration for the Sinonjs mocking library",
   "main": "lib/unexpected-sinon.js",
-  "moduleType": [
-    "amd",
-    "globals",
-    "node"
-  ],
+  "moduleType": ["amd", "globals", "node"],
   "keywords": [
     "unexpected",
     "sinon",

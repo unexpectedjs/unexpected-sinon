@@ -15,14 +15,13 @@ describe('unexpected-sinon', function () {
   expect = expect.clone();
   expect.output.preferredWidth = 120;
 
-  expect.addAssertion('<any> to inspect as <any>', function (
-    expect,
-    subject,
-    value
-  ) {
-    expect.errorMode = 'nested';
-    expect(expect.inspect(subject).toString(), 'to satisfy', value);
-  });
+  expect.addAssertion(
+    '<any> to inspect as <any>',
+    function (expect, subject, value) {
+      expect.errorMode = 'nested';
+      expect(expect.inspect(subject).toString(), 'to satisfy', value);
+    }
+  );
 
   var spy;
 
