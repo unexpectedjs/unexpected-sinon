@@ -18,6 +18,18 @@ module.exports = function (config) {
       },
     },
 
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadless', 'ie11'],
+
+    customLaunchers: {
+      ie11: {
+        base: 'BrowserStack',
+        browser: 'IE',
+        browser_version: '11',
+        os: 'Windows',
+        os_version: '7',
+      },
+    },
+
+    reporters: ['dots', 'BrowserStack'],
   });
 };
