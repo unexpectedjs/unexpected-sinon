@@ -1,3 +1,18 @@
+### v11.0.1 (2020-11-28)
+
+#### Pull requests
+
+- [#139](https://github.com/unexpectedjs/unexpected-sinon/pull/139) Upgrade eslint-plugin-standard to version 5.0.0 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+
+#### Commits to master
+
+- [Add the full assortment of standard badges.](https://github.com/unexpectedjs/unexpected-sinon/commit/d32837b33266d1947f595b80a10555897aaffca2) ([Alex J Burke](mailto:alex@alexjeffburke.com))
+- [Add IE11 testing via BrowserStack to the test matrix.](https://github.com/unexpectedjs/unexpected-sinon/commit/80f29b7203186e9fc53c04d0cc2e241e6a3cfdf9) ([Alex J Burke](mailto:alex@alexjeffburke.com))
+- [Restore IE11 support to align again with core and the DOM plugin.](https://github.com/unexpectedjs/unexpected-sinon/commit/a86abcd850894a433e7df8b3261bce22592fb259) ([Alex J Burke](mailto:alex@alexjeffburke.com))
+- [Disable a lint warning prevalent after a recent upgrade.](https://github.com/unexpectedjs/unexpected-sinon/commit/86347c22155c9d7f1a9575d934f1bd14b0a2fc1d) ([Alex J Burke](mailto:alex@alexjeffburke.com))
+- [Switch to GitHub Actions](https://github.com/unexpectedjs/unexpected-sinon/commit/4e89656051ab5ac3c4ee6252d977748c21ec38b5) ([Alex J Burke](mailto:alex@alexjeffburke.com))
+- [+5 more](https://github.com/unexpectedjs/unexpected-sinon/compare/v11.0.0...v11.0.1)
+
 ### v11.0.0 (2020-11-20)
 
 #### Pull requests
