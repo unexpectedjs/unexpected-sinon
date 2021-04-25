@@ -18,6 +18,12 @@ module.exports = function (config) {
       },
     },
 
+    browserStack: {
+      // Attempt to fix timeouts on CI:
+      // https://github.com/karma-runner/karma-browserstack-launcher/pull/168#issuecomment-582373514
+      timeout: 1800,
+    },
+
     browsers: ['ChromeHeadless', 'ie11'],
 
     customLaunchers: {
