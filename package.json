@@ -49,7 +49,7 @@
     "karma-browserstack-launcher": "1.6.0",
     "karma-chrome-launcher": "^3.0.0",
     "karma-mocha": "^2.0.0",
-    "mocha": "^8.2.0",
+    "mocha": "^9.1.0",
     "nyc": "^15.0.0",
     "offline-github-changelog": "^1.7.0",
     "prettier": "^2.2.0",
