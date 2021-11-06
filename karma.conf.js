@@ -4,10 +4,11 @@ module.exports = function (config) {
 
     files: [
       './node_modules/unexpected/unexpected.js',
+      // The latest sinon version that supported IE11:
       './node_modules/sinon9/pkg/sinon.js',
       './lib/unexpected-sinon.js',
       './test/common/browser.js',
-      './test/monkeyPatchSinon9StackFrames.js',
+      './test/monkeyPatchSinonStackFrames.js',
       './test/unexpected-sinon.spec.js',
     ],
 
