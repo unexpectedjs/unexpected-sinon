@@ -6,9 +6,9 @@
 // Use an UMD wrapper so it can be used in both node.js and Phantom.JS
 (function (root, factory) {
   if (typeof exports === 'object') {
-    factory(require('sinon'));
+    factory(require('sinon9'));
   } else if (typeof define === 'function' && define.amd) {
-    define(['sinon'], factory);
+    define(['sinon9'], factory);
   } else {
     factory(root.sinon);
   }
