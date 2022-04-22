@@ -2010,7 +2010,7 @@ describe('unexpected-sinon', function () {
             spy,
             { spy: spy2, args: ['quux'], returned: 'yadda' },
             { spy: obj.die, threw: /cqwecqw/ },
-            { spy: spy, args: ['yadda'] },
+            { spy, args: ['yadda'] },
             spy,
             spy,
           ]);
