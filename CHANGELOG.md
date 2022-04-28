@@ -1,3 +1,25 @@
+### v11.1.0 (2022-04-28)
+
+#### Pull requests
+
+- [#172](https://github.com/unexpectedjs/unexpected-sinon/pull/172) Upgrade eslint-plugin-mocha to version 10.0.1 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+- [#171](https://github.com/unexpectedjs/unexpected-sinon/pull/171) Upgrade sinon to version 12.0.1 ([Andreas Lind](mailto:andreas.lind@workday.com), [depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+- [#170](https://github.com/unexpectedjs/unexpected-sinon/pull/170) Upgrade eslint to version 8.1.0 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+- [#169](https://github.com/unexpectedjs/unexpected-sinon/pull/169) Upgrade eslint-plugin-promise to version 5.1.1 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+- [#159](https://github.com/unexpectedjs/unexpected-sinon/pull/159) Upgrade eslint-plugin-mocha to version 9.0.0 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+- [#155](https://github.com/unexpectedjs/unexpected-sinon/pull/155) Upgrade sinon to version 10.0.1 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+- [#151](https://github.com/unexpectedjs/unexpected-sinon/pull/151) Upgrade karma to version 6.1.2 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+- [#141](https://github.com/unexpectedjs/unexpected-sinon/pull/141) Upgrade eslint-config-prettier to version 7.0.0 ([depfu[bot]](mailto:23717796+depfu[bot]@users.noreply.github.com))
+
+#### Commits to master
+
+- [Update unexpected the dev dep to ^13.0.0, and allow ^13.0.0 as a peer dep](https://github.com/unexpectedjs/unexpected-sinon/commit/df270dc3eb4e1cc1a5f5af487a4b13ff81b97a92) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Disable object-shorthand to unbreak the IE11 browser tests](https://github.com/unexpectedjs/unexpected-sinon/commit/5f155a1e1a94dee959f5bc7fd35f0fb48055664b) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [Revert "eslint --fix ."](https://github.com/unexpectedjs/unexpected-sinon/commit/e7cc5658858dc6441c0284c7208e0078a2c166cb) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [eslint --fix .](https://github.com/unexpectedjs/unexpected-sinon/commit/d375bbc9566aa1357fa147ef39ffc73dcb132406) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [npm i --save-dev eslint-plugin-n eslint-config-standard@latest && npm uninstall eslint-plugin-node eslint-plugin-standard](https://github.com/unexpectedjs/unexpected-sinon/commit/5149e07978dbb72a0e8267df114ef9336030abac) ([Andreas Lind](mailto:andreas.lind@workday.com))
+- [+5 more](https://github.com/unexpectedjs/unexpected-sinon/compare/v11.0.1...v11.1.0)
+
 ### v11.0.1 (2020-11-28)
 
 #### Pull requests
