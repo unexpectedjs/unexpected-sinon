@@ -28,7 +28,7 @@
     "generate-site": "generate-site --require ./bootstrap-unexpected-markdown.js",
     "update-examples": "evaldown --comment-marker unexpected-markdown --require ./bootstrap-unexpected-markdown.js --inplace ./documentation",
     "deploy-site": "deploy-site",
-    "preversion": "offline-github-changelog --next=${npm_package_version} > CHANGELOG.md && git add CHANGELOG.md"
+    "preversion": "offline-github-changelog --next=${npm_new_version} > CHANGELOG.md && git add CHANGELOG.md"
   },
   "main": "./lib/unexpected-sinon.js",
   "peerDependencies": {
